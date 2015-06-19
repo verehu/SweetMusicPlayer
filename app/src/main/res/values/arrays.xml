@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<string-array name="tab_titles">
+   <!--<item>@string/tab_recent</item> -->
+   <item>@string/tab_songs</item>
+   <item>@string/tab_artists</item>
+   <item>@string/tab_albums</item>
+   <!--<item>@string/tab_playlists</item>-->
+   <!--<item>@string/tab_genres</item>-->
+</string-array>
+
+   <integer-array name="sleep_times">
+      <item>10</item>
+      <item>20</item>
+      <item>30</item>
+      <item>60</item>
+      <item>90</item>
+   </integer-array>
+</resources>

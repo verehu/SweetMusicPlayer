@@ -1,0 +1,100 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- define by huwei -->
+    <style name="SweetTheme" parent="Theme.AppCompat.NoActionBar">
+       <!--<item name="android:actionBarStyle">@style/SweetTheme.PurpleActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/SweetTheme.OverFlow</item>
+        <item name="android:windowActionBarOverlay">true</item>-->
+        <!--<item name="android:windowBackground">@drawable/default_bg</item>-->
+        <item name="android:textViewStyle">@style/SweetTheme.TextView</item>
+        <item name="android:buttonStyle">@style/SweetTheme.ButtonStyle</item>
+    </style>
+
+       <!-- default btn -->
+    <style name="default_btn" parent="@android:style/Widget.Holo.Button">
+        <item name="android:background">@drawable/default_btn_bg</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    
+    <!-- actionBar -->
+    <style name="SweetTheme.PurpleActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@drawable/actionbar</item>
+        <item name="android:textColor">@color/actionbar_text</item>
+    </style>
+
+    <style name="SweetTheme.OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+    
+    </style>
+
+    <style name="SweetTheme.TextView" parent="@android:style/Widget.Holo.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="SweetTheme.ButtonStyle" parent="@android:style/Widget.Holo.Button">
+        <item name="android:padding">8dp</item>
+    </style>
+      
+
+
+    <!-- bottom_action_bar -->
+    <style name="BottomActionBarItem">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">@dimen/bottom_action_bar_item_width</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/bottom_action_bar_item_padding_left_right</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <!-- Custom tabs -->
+    <style name="tabs">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/tab_height</item>
+        <item name="android:background">@drawable/tab</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">@dimen/tab_padding_top_bottom</item>
+        <item name="android:paddingLeft">@dimen/tab_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/tab_padding_left_right</item>
+        <item name="android:paddingTop">@dimen/tab_padding_top_bottom</item>
+        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:textSize">@dimen/text_size_micro</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:selectAllOnFocus">false</item>
+    </style>
+
+    <!-- song_listitem -->
+    <style name="song_title">
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="catalog">
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/purple</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="scanbottombar">
+        <item name="android:background">@color/scanbar_back</item>
+    </style>
+    
+   <!--menu-->
+    <style name="item_select_sleeptime">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="lrc_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>

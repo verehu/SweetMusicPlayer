@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- font size -->
+    <dimen name="text_size_micro">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="font_16">16sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">22sp</dimen>
+    
+    <!-- scrollingTabs -->
+    <dimen name="tab_height">40dp</dimen>
+    <dimen name="tab_padding_top_bottom">6dp</dimen>
+    <dimen name="tab_padding_left_right">40dp</dimen>
+    
+    <!-- bottom_action_bar -->
+    <dimen name="bottom_action_bar_height">68dp</dimen>
+    <dimen name="bottom_action_bar_padding_left">12dp</dimen>
+    <dimen name="bottom_action_bar_item_width">36dp</dimen>
+    <dimen name="bottom_action_bar_item_padding_left_right">8dp</dimen>
+    <dimen name="bottom_action_bar_album_art_width_height">45dp</dimen>
+    <dimen name="bottom_action_bar_divider_height">2dp</dimen>
+    <dimen name="bottom_action_bar_info_padding_left">12dp</dimen>
+    <dimen name="bottom_action_bar_item_margin">8dp</dimen>
+   
+    <!-- sidebar -->
+    <dimen name="sidebar_width">20dp</dimen>
+    
+    <!-- scanbottombar -->
+    <dimen name="scanbottombar_height">100dp</dimen>
+</resources>

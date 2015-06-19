@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SweetMusicPlayer</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- tabs title -->
+    <!--<string name="tab_recent">最近</string>-->
+    <string name="tab_songs">歌曲</string>
+    <string name="tab_artists">艺术家</string>
+    <string name="tab_albums">专辑</string>
+    <!--<string name="tab_playlists">播放列表</string>      -->
+    <!--<string name="tab_genres">流派</string>-->
+ <!-- -->
+    <!-- oneBtn_scan -->
+    <string name="oneBtnscan_text">一键扫描</string>
+    
+    <!-- activity main actionbar menu -->
+    <string name="scan_item">扫描音乐</string>
+</resources>

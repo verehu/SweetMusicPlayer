@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="afterDescendants"
+    android:orientation="vertical">
+
+    <!-- 显示字母项 -->
+
+    <TextView
+        android:id="@+id/catalog"
+        style="@style/catalog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="catalog"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/song_item"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/effect_list_item_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical">
+
+        <View
+            android:id="@+id/selected_view"
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@color/purple"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/song_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="song_text"
+
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:id="@+id/artist_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:singleLine="true"
+                android:text="artist_tv"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_micro" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/duration_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="00:00"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
