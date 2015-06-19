@@ -5,3 +5,17 @@
 3，播放本地音乐（MediaPlayer应用，AIDL运用）  
 4，智能匹配本地歌词  
 5，智能加载在线歌词
+
+
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145535.png)
+ 
+ 
+  ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145716.png)
+  
+  
+    ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145716.png)
+    
+    
+      ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145716.png)
+      
+      
