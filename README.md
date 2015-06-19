@@ -10,12 +10,15 @@
  ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145535.png)
  
  
-  ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145716.png)
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145716.png)
   
   
-    ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145716.png)
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145729.png)
     
     
-      ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145716.png)
+![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/ddevice-2015-06-19-145744.png)
+ 
+ 
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145757.png)
       
       
