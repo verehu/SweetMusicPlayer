@@ -21,6 +21,10 @@ public class MusicInfo implements Parcelable {
     private String path;
     private Boolean favorite;
 
+    //------------------- new property
+    private String album ;
+    private Long size ;
+
     public MusicInfo() {
     }
 
@@ -38,6 +42,18 @@ public class MusicInfo implements Parcelable {
         this.favorite = favorite;
     }
 
+
+    /** constructor with special property*/
+    public MusicInfo(Long songId, Long albumId, String title, String artist, Integer duration, String path , String album , Long size) {
+        this.songId = songId;
+        this.albumId = albumId;
+        this.title = title;
+        this.artist = artist;
+        this.duration = duration;
+        this.path = path;
+        this.album = album ;
+        this.size = size ;
+    }
     public Long getSongId() {
         return songId;
     }
@@ -92,6 +108,22 @@ public class MusicInfo implements Parcelable {
 
     public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     /**

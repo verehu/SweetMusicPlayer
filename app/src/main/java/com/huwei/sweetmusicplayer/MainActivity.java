@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         }
     };
 
-
+    //Connect to AIDL service to control music state
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {

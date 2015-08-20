@@ -6,6 +6,7 @@ import java.util.Map;
 /**
  * @author jayce
  * @date 2015/05/24
+ * Add parameter for http request , can only be the kind included in bases[] , or throw exception !
  */
 public class HttpParams {
     Map<String, String> params = new HashMap<>();

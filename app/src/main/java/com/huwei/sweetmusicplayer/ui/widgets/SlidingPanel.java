@@ -57,6 +57,7 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
 
     @Override
     protected void onFinishInflate() {
+        super.onFinishInflate();
         mHandle = findViewById(R.id.bottom_bar);
 
         if (mHandle == null) {
