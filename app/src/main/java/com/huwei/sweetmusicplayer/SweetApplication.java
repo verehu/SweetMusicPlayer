@@ -11,6 +11,8 @@ import com.huwei.sweetmusicplayer.dao.DaoSession;
 
 import org.androidannotations.annotations.EApplication;
 
+import java.security.KeyStore;
+
 
 /**
  * Created by huwei on 15-1-20.
@@ -20,7 +22,8 @@ public class SweetApplication extends Application {
     private static DaoSession daoSession;
     private static RequestQueue mQueue;
     private static Context context;
-
+    /** set the value to decide weather to print debug log , default true in develop*/
+    public static final boolean DEBUG = true ;
     @Override
     public void onCreate() {
         super.onCreate();

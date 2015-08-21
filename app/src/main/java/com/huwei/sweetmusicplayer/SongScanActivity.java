@@ -34,7 +34,7 @@ import java.util.Objects;
 public class SongScanActivity extends BaseActivity {
 
 
-    private static final boolean DEBUG = true ;
+    private static final boolean IS_FAVORITE = false ;
     private List<MusicInfo> musicList = new ArrayList<>() ;
     private Uri contentUri = Media.EXTERNAL_CONTENT_URI;
     private ContentResolver resolver ;
@@ -50,7 +50,6 @@ public class SongScanActivity extends BaseActivity {
     private String sortOrder = Media.DATA ;
 
     private static final int UPDATE_MESSAGE = 0 ;
-    private static final long ALBUM_ID = 1 ;
     private static final int UPDATE_MUSIC_INFO_DURATION = 200 ;
 
     @ViewById
@@ -119,8 +118,7 @@ public class SongScanActivity extends BaseActivity {
                         String artist = cursor.getString(cursor.getColumnIndex(Media.ARTIST));
                         String path = cursor.getString(cursor.getColumnIndex(Media.DATA)) ;
 
-
-                        MusicInfo musicInfo = new MusicInfo( id , albumID , title , artist , duration , path , false ) ;
+                        MusicInfo musicInfo = new MusicInfo( id , albumID , title , artist , duration , path , IS_FAVORITE ) ;
                         musicList.add(musicInfo) ;
                         try {
                             sleep(UPDATE_MUSIC_INFO_DURATION);
@@ -132,7 +130,7 @@ public class SongScanActivity extends BaseActivity {
                         msg.what = UPDATE_MESSAGE ;
                         mHandler.sendMessage(msg) ;
                 }
-
+                //when scan complete , insert .
                 DaoSession daoSession = SweetApplication.getDaoSession() ;
                 MusicInfoDao mifDao = daoSession.getMusicInfoDao() ;
                 // select the music that not in database then insert into the database
@@ -143,7 +141,7 @@ public class SongScanActivity extends BaseActivity {
                         insertCount ++ ;
                     }
                 }
-                if(DEBUG){
+                if(SweetApplication.DEBUG){
                     Log.i("com.cvil.debug" , String.valueOf(insertCount)) ;
                 }
             }
