@@ -3,17 +3,21 @@ package com.huwei.sweetmusicplayer;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore.Audio.Media;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.dao.DaoMaster;
+import com.huwei.sweetmusicplayer.dao.DaoSession;
+import com.huwei.sweetmusicplayer.dao.MusicInfoDao;
 import com.huwei.sweetmusicplayer.models.MusicInfo;
 
 import org.androidannotations.annotations.AfterViews;
@@ -30,7 +34,7 @@ import java.util.Objects;
 public class SongScanActivity extends BaseActivity {
 
 
-
+    private static final boolean DEBUG = true ;
     private List<MusicInfo> musicList = new ArrayList<>() ;
     private Uri contentUri = Media.EXTERNAL_CONTENT_URI;
     private ContentResolver resolver ;
@@ -103,7 +107,6 @@ public class SongScanActivity extends BaseActivity {
         @Override
         public void run() {
             super.run();
-
             Cursor cursor = resolver.query(contentUri , projection , where , null , sortOrder) ;
             if(cursor != null){
                 while (cursor.moveToNext()){
@@ -130,11 +133,19 @@ public class SongScanActivity extends BaseActivity {
                         mHandler.sendMessage(msg) ;
                 }
 
-                DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(SongScanActivity.this,"music",null) ;
-                helper.getReadableDatabase() ;
-
-
-
+                DaoSession daoSession = SweetApplication.getDaoSession() ;
+                MusicInfoDao mifDao = daoSession.getMusicInfoDao() ;
+                // select the music that not in database then insert into the database
+                int insertCount = 0 ;
+                for(MusicInfo musicInfo : musicList){
+                    if(mifDao.load(musicInfo.getSongId()) != null){
+                        daoSession.insert(musicInfo) ;
+                        insertCount ++ ;
+                    }
+                }
+                if(DEBUG){
+                    Log.i("com.cvil.debug" , String.valueOf(insertCount)) ;
+                }
             }
 
 
