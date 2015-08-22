@@ -33,16 +33,14 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.android.support:support-annotations:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.3'
-    compile files('compile-libs/androidannotations-3.2.jar')
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     compile files('libs/greendao-1.3.0-beta-1.jar')
     compile files('libs/commons-lang.jar')
     compile files('libs/dom4j-1.6.1.jar')
     compile 'com.google.code.gson:gson:2.3.1'
-    compile files('libs/androidannotations-api-3.2.jar')
     compile files('libs/android-support-v7-recyclerview.jar')
+    compile files('compile-libs/androidannotations-3.2.jar')
 }
 
 apt {

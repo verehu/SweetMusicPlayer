@@ -11,7 +11,6 @@ import com.huwei.sweetmusicplayer.dao.DaoSession;
 
 import org.androidannotations.annotations.EApplication;
 
-import java.security.KeyStore;
 
 
 /**

@@ -24,6 +24,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,8 +50,12 @@ public class SongScanActivity extends BaseActivity {
     /** sort order*/
     private String sortOrder = Media.DATA ;
 
+    private DaoSession daoSession ;
+    private  MusicInfoDao mifDao ;
+
     private static final int UPDATE_MESSAGE = 0 ;
     private static final int UPDATE_MUSIC_INFO_DURATION = 200 ;
+    private boolean IS_CONTINUE_SCAN = true ;
 
     @ViewById
     TextView scannow_tv;
@@ -66,14 +71,25 @@ public class SongScanActivity extends BaseActivity {
 
             switch (msg.what){
                 case UPDATE_MESSAGE:
+                    int insertCount = 0 ;
                     MusicInfo tempMusic = (MusicInfo) msg.obj ;
-                    songCount ++ ;
-                    scancount_tv.setText(String.valueOf(songCount));
-                    scannow_tv.setText(tempMusic.getTitle() + "--" + tempMusic.getPath());
+                    if(SongScanActivity.this != null){
+                        songCount ++ ;
+                        scancount_tv.setText(String.valueOf(songCount));
+                        scannow_tv.setText(tempMusic.getTitle() + "--" + tempMusic.getPath());
+                                            //insert the music that not into database into database
+                    if(mifDao.load(tempMusic.getSongId()) == null){ daoSession.insert(tempMusic) ;
+                        insertCount ++ ;
+                    }
+                    if(SweetApplication.DEBUG){
+                        Log.i("com.cvil.debug" , String.valueOf(insertCount)) ;
+                    }
 
+                    }else{
+                        break ;
+                    }
                     break ;
             }
-
 
         }
     } ;
@@ -98,17 +114,33 @@ public class SongScanActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         resolver = getContentResolver() ;
+        daoSession = SweetApplication.getDaoSession() ;
+        mifDao = daoSession.getMusicInfoDao() ;
         scanMusicThread = new ScanMusicThread();
         scanMusicThread.start();
     }
-    /**A thread to scan the music in your phone */
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        IS_CONTINUE_SCAN = false ;
+        try {
+            Thread.sleep(UPDATE_MUSIC_INFO_DURATION);//wait for the thread stop
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        scanMusicThread.interrupt();  //stop the thread
+    }
+
+    /** A thread to scan the music in your phone */
     class ScanMusicThread extends  Thread{
         @Override
         public void run() {
             super.run();
+            MusicInfo musicInfo ;
             Cursor cursor = resolver.query(contentUri , projection , where , null , sortOrder) ;
             if(cursor != null){
-                while (cursor.moveToNext()){
+                while (cursor.moveToNext() && IS_CONTINUE_SCAN){
                         String title = cursor.getString(cursor.getColumnIndex(Media.DISPLAY_NAME));
                         String album = cursor.getString(cursor.getColumnIndex(Media.ALBUM));
                         long albumID = cursor.getLong(cursor.getColumnIndex(Media.ALBUM_ID));
@@ -118,10 +150,12 @@ public class SongScanActivity extends BaseActivity {
                         String artist = cursor.getString(cursor.getColumnIndex(Media.ARTIST));
                         String path = cursor.getString(cursor.getColumnIndex(Media.DATA)) ;
 
-                        MusicInfo musicInfo = new MusicInfo( id , albumID , title , artist , duration , path , IS_FAVORITE ) ;
+                        musicInfo = new MusicInfo( id , albumID , title , artist , duration , path , IS_FAVORITE ) ;
                         musicList.add(musicInfo) ;
+
+                    if(mHandler != null && SongScanActivity.this != null){
                         try {
-                            sleep(UPDATE_MUSIC_INFO_DURATION);
+                            Thread.sleep(UPDATE_MUSIC_INFO_DURATION);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -129,26 +163,19 @@ public class SongScanActivity extends BaseActivity {
                         msg.obj = musicInfo ;
                         msg.what = UPDATE_MESSAGE ;
                         mHandler.sendMessage(msg) ;
-                }
-                //when scan complete , insert .
-                DaoSession daoSession = SweetApplication.getDaoSession() ;
-                MusicInfoDao mifDao = daoSession.getMusicInfoDao() ;
-                // select the music that not in database then insert into the database
-                int insertCount = 0 ;
-                for(MusicInfo musicInfo : musicList){
-                    if(mifDao.load(musicInfo.getSongId()) != null){
-                        daoSession.insert(musicInfo) ;
-                        insertCount ++ ;
                     }
                 }
-                if(SweetApplication.DEBUG){
-                    Log.i("com.cvil.debug" , String.valueOf(insertCount)) ;
-                }
+
             }
 
 
         }
+
+
     }
+
+
+
 }
  
  
