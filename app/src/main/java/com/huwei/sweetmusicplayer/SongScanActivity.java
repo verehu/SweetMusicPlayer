@@ -73,18 +73,18 @@ public class SongScanActivity extends BaseActivity {
                 case UPDATE_MESSAGE:
                     int insertCount = 0 ;
                     MusicInfo tempMusic = (MusicInfo) msg.obj ;
-                    if(SongScanActivity.this != null){
+                    if (SongScanActivity.this != null){
                         songCount ++ ;
                         scancount_tv.setText(String.valueOf(songCount));
                         scannow_tv.setText(tempMusic.getTitle() + "--" + tempMusic.getPath());
                                             //insert the music that not into database into database
-                    if(mifDao.load(tempMusic.getSongId()) == null){ daoSession.insert(tempMusic) ;
-                        insertCount ++ ;
-                    }
+                    if(mifDao.load(tempMusic.getSongId()) == null) {
+                        daoSession.insert(tempMusic) ;
+                            insertCount ++ ;
+                        }
                     if(SweetApplication.DEBUG){
-                        Log.i("com.cvil.debug" , String.valueOf(insertCount)) ;
+                         Log.i("com.cvil.debug" , String.valueOf(insertCount)) ;
                     }
-
                     }else{
                         break ;
                     }
