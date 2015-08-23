@@ -123,7 +123,7 @@ public class SongScanActivity extends BaseActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        scanMusicThread.interrupt();  //stop the thread
+        scanMusicThread.interrupt();  //interrupt the thread to stop the work of the thread
     }
 
     /** A thread to scan the music in your phone */
