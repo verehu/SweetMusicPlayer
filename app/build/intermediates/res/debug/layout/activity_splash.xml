@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rr_splash_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="bottom|center_horizontal">
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        
+        
+        android:gravity="center">
+    
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/sweet"/>
+
+    <com.huwei.sweetmusicplayer.ui.widgets.GradientTextProgress
+        android:id="@+id/gtp_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_toRightOf="@+id/logo"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+        android:text="SweetMusicPlayer"/>
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/activity_splash.xml -->

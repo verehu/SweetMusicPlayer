@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/playback">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/playpage_return"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_playpage_return"
+            android:onClick="closeContent"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/playpage_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/playpage_title_tv"
+                android:layout_centerHorizontal="true"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/playpage_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_show_music_queue"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_localsonglist_move" />
+    </LinearLayout>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/dl_music_queue"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.huwei.sweetmusicplayer.ui.widgets.LrcView
+            android:id="@+id/playpage_lrcview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="歌词界面"
+            android:fillViewport="false" />
+
+        <ListView
+            android:id="@+id/lv_music_queue"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@color/background_material_dark"/>
+
+    </android.support.v4.widget.DrawerLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp" >
+
+        <SeekBar
+            android:id="@+id/playpage_progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:maxHeight="1dp"
+            android:minHeight="1dp"
+            android:progressDrawable="@drawable/bg_seekbar"
+            android:thumb="@drawable/progress_bar_playing_thumb" />
+
+        <TextView
+            android:id="@+id/playpage_playtime_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/playpage_duration_tv"
+            android:layout_alignParentLeft="true"
+
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/playpage_duration_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/playpage_progressbar"
+            android:text="00:00" />
+
+        <ToggleButton
+            android:id="@+id/playpage_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/playpage_progressbar"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bt_playpage_play_toggle"
+            android:textOff=""
+            android:textOn="" />
+
+        <Button
+            android:id="@+id/playpage_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/playpage_play"
+            android:layout_alignBottom="@+id/playpage_play"
+            android:layout_toLeftOf="@+id/playpage_duration_tv"
+            android:background="@drawable/bt_playpage_next" />
+
+        <Button
+            android:id="@+id/playpage_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/playpage_play"
+            android:layout_alignBottom="@+id/playpage_play"
+            android:layout_toRightOf="@+id/playpage_playtime_tv"
+            android:background="@drawable/bt_playpage_previous" />
+    </RelativeLayout>
+
+</LinearLayout><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/fragment_playing.xml -->

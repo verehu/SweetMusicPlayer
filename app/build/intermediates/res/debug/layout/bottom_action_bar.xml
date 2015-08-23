@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- height设置有问题 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="68dp"
+    android:layout_gravity="bottom"
+    android:descendantFocusability="afterDescendants"
+    android:focusable="true"
+    android:clickable="false"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/pro_music"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="2dp"
+        android:minHeight="2dp"
+        android:progressDrawable="@drawable/bg_seekbar"
+        style="?android:attr/progressBarStyleHorizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/img_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/img_album_background" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:text=""/>
+
+            <TextView
+                android:id="@+id/tv_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/white"
+                android:text=""/>
+
+        </LinearLayout>
+
+
+        <ToggleButton
+            android:id="@+id/btn_play"
+            style="@style/BottomActionBarItem"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/playtoggle_btn_selector"
+            android:textOff=""
+            android:textOn="" />
+
+        <Button
+            android:id="@+id/btn_next"
+            style="@style/BottomActionBarItem"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/img_button_playcontrolbar_transparent_next_normal" />
+
+    </LinearLayout>
+
+</LinearLayout>
+<!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/bottom_action_bar.xml -->

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--背景图-->
+    <item
+        android:id="@android:id/background"
+        android:drawable="@color/lightgray" />
+
+    <!--第二进度图-->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <solid android:color="@color/holo_purple_light" />
+
+                <size android:height="4dp" />
+
+            </shape>
+
+        </clip>
+    </item>
+
+    <!--&lt;!&ndash;进度颜色&ndash;&gt;-->
+    <!--<item android:id="@android:id/progress" android:drawable="@color/holo_purple_light"/>-->
+
+</layer-list><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/drawable/bg_seekbar.xml -->

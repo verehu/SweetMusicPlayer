@@ -3,7 +3,6 @@ package com.huwei.sweetmusicplayer;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.huwei.sweetmusicplayer.dao.DaoMaster;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
 import com.huwei.sweetmusicplayer.dao.MusicInfoDao;
 import com.huwei.sweetmusicplayer.models.MusicInfo;
@@ -24,12 +22,8 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import java.security.KeyStore;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @EActivity(R.layout.activity_songscan)
 public class SongScanActivity extends BaseActivity {

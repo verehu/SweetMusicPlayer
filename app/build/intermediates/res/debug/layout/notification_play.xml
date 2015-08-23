@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nt_container"
+    android:focusable="true"
+    android:clickable="true"
+    android:background="@color/transparent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ImageView
+        android:id="@+id/img_album"
+        android:layout_width="64.0dip"
+        android:layout_height="64.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8.0dip"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:id="@+id/control_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/button_previous_notification_play"
+            android:layout_width="40.0dip"
+            android:layout_height="64.0dip"
+            android:background="@drawable/xml_background_notification_playcontrol"
+            android:src="@drawable/img_button_notification_play_prev" />
+
+        <FrameLayout
+            android:layout_width="40.0dip"
+            android:layout_height="fill_parent"
+            android:background="@drawable/xml_background_notification_playcontrol">
+
+            <ImageView
+                android:id="@+id/button_play_notification_play"
+                android:layout_width="40.0dip"
+                android:layout_height="64.0dip"
+                android:background="@drawable/xml_background_notification_playcontrol"
+                android:src="@drawable/img_button_notification_play_play" />
+
+            <ImageView
+                android:id="@+id/button_pause_notification_play"
+                android:layout_width="40.0dip"
+                android:layout_height="64.0dip"
+                android:background="@drawable/xml_background_notification_playcontrol"
+                android:src="@drawable/img_button_notification_play_pause" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/button_next_notification_play"
+            android:layout_width="40.0dip"
+            android:layout_height="64.0dip"
+            android:background="@drawable/xml_background_notification_playcontrol"
+            android:src="@drawable/img_button_notification_play_next" />
+
+        <ImageView
+            android:id="@+id/button_exit_notification_play"
+            android:layout_width="36.0dip"
+            android:layout_height="64.0dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_button_notification_exit" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/control_bar"
+        android:layout_toRightOf="@id/img_album">
+
+        <TextView
+            android:id="@+id/title"
+            style="@android:style/android:TextAppearance.StatusBar.EventContent.Title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:fadingEdge="horizontal"
+            android:fadingEdgeLength="8.0dip"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/text"
+            style="@android:style/android:TextAppearance.StatusBar.EventContent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:fadingEdge="horizontal"
+            android:fadingEdgeLength="8.0dip"
+            android:singleLine="true" />
+        
+
+    </RelativeLayout>
+
+
+</RelativeLayout><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/notification_play.xml -->

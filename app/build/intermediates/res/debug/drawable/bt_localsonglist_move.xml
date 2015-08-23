@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/bt_localsonglist_move_press" />
+    <item android:drawable="@drawable/bt_localsonglist_move_nor" />
+</selector><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/drawable/bt_localsonglist_move.xml -->
