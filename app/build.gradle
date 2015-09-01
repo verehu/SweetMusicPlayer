@@ -7,40 +7,45 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '22.0.0'
+    buildToolsVersion "21.1.2"
+
     defaultConfig {
         applicationId "com.huwei.sweetmusicplayer"
-        minSdkVersion 15
+        minSdkVersion 11
         targetSdkVersion 21
     }
+
     compileOptions {
 //        encoding "GBK"
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
     }
-    productFlavors {
-    }
+
+
 }
 
 dependencies {
+    apt fileTree(dir: 'compile-libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
+    compile 'com.mcxiaoke.volley:library:1.0.+'
+    compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.android.support:cardview-v7:21.0.3'
-    compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
-    compile files('libs/greendao-1.3.0-beta-1.jar')
-    compile files('libs/commons-lang.jar')
-    compile files('libs/dom4j-1.6.1.jar')
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile files('libs/android-support-v7-recyclerview.jar')
-    compile files('compile-libs/androidannotations-3.2.jar')
+    compile 'com.android.support:recyclerview-v7:21.+'
+    compile 'com.android.support:cardview-v7:21.+'
+
 }
 
 apt {

@@ -1,6 +1,8 @@
 package com.huwei.sweetmusicplayer.util;
 
+import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.contains.IUrl;
+import com.huwei.sweetmusicplayer.po.SongPlayResp;
 
 /**
  * 使用百度音乐API的工具类
@@ -10,7 +12,7 @@ import com.huwei.sweetmusicplayer.contains.IUrl;
 public class BaiduMusicUtil implements IUrl{
     public static final String SEARCH_CATALOGSUG="baidu.ting.search.catalogSug";
     public static final String SONG_LRC="baidu.ting.song.lry ";
-
+    public static final String SONG_PLAY ="baidu.ting.song.play";
 
 
     /**
@@ -38,4 +40,19 @@ public class BaiduMusicUtil implements IUrl{
         params.add("songid",songid);
         HttpUtil.get(BADDU_MUSIC,params,httpHandler);
     }
+
+    /**
+     * 同步请求歌曲信息
+     * @param songid
+     * @return
+     */
+    public static SongPlayResp querySong(String songid){
+        HttpParams params=new HttpParams();
+        params.add("format","json");
+        params.add("method",SONG_PLAY);
+        params.add("songid",songid);
+        String result = HttpUtil.getSync(BADDU_MUSIC,params);
+        return new Gson().fromJson(result,SongPlayResp.class);
+    }
+
 }

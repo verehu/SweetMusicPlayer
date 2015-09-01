@@ -3,28 +3,21 @@ package com.huwei.sweetmusicplayer;
 
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.fragments.MainFragment;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
 import com.huwei.sweetmusicplayer.services.MusicControlerService;
-import com.huwei.sweetmusicplayer.ui.fragments.PlayingFragment;
+import com.huwei.sweetmusicplayer.fragments.PlayingFragment;
 import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
-import com.huwei.sweetmusicplayer.util.WindowTool;
 
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.*;
 import android.support.v4.app.FragmentManager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
 
@@ -35,35 +28,16 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
     private SlidingPanel mSlidingPanel;
     private PopupWindow pop;
 
-
     private IMusicControlerService musicControler;
     private boolean isServiceBinding;
-    public static final int MSG_CONTROL_PLAY = 0;
+
 
     private FragmentManager manager;
 
     private PlayingFragment playing_fragment;
+    private MainFragment mainFragment;
 
 
-
-    private Handler controlHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_CONTROL_PLAY:
-                    try {
-                        musicControler.play();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-            }
-        }
-    };
-
-    //Connect to AIDL service to control music state
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -94,6 +68,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
 
         setContentView(R.layout.activity_main);
         playing_fragment= (PlayingFragment) manager.findFragmentById(R.id.playing_fragment);
+        mainFragment = (MainFragment) manager.findFragmentById(R.id.main);
 
         initView();
         initReciever();
@@ -104,7 +79,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         super.onStart();
 
         if (!isServiceBinding) {
-            Intent intent = new Intent(this, MusicControlerService.class);
+            Intent intent = new Intent("com.huwei.sweetmusicplayer.services.MusicControlerService");
             startService(intent);
 
             bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
@@ -118,54 +93,6 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         super.onResume();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // TODO Auto-generated method stub
-
-        getMenuInflater().inflate(R.menu.activity_main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
-        switch (item.getItemId()) {
-            case R.id.menu_scan:
-                Intent intent = new Intent();
-                intent.setClass(getBaseContext(), SongScanActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.menu_clock:
-                LayoutInflater inflater = getLayoutInflater();
-                View popRoot = inflater.inflate(R.layout.pop_select_sleeptime, null);
-
-                if (pop == null) {
-                    int aHeight = WindowTool.getActivityHeight(this);
-                    int aWidth = WindowTool.getWidth(this);
-                    pop = new PopupWindow(popRoot, (int) (aWidth * 0.8), ViewGroup.LayoutParams.WRAP_CONTENT, true);  //todo ????popWindow????
-                    //pop = new PopupWindow(popRoot);
-                    pop.setFocusable(true);
-                    pop.setBackgroundDrawable(new BitmapDrawable());
-                    pop.setOutsideTouchable(true);
-                    pop.setTouchable(true);
-                    pop.setTouchInterceptor(new View.OnTouchListener() {
-                        @Override
-                        public boolean onTouch(View view, MotionEvent motionEvent) {
-                            if (motionEvent.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                                pop.dismiss();
-                                return true;
-                            }
-                            return false;
-                        }
-                    });
-                }
-                pop.showAtLocation(mSlidingPanel, Gravity.CENTER, 0, 0);
-                return true;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onDestroy() {
@@ -195,9 +122,11 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
 
     @Override
     public void play() {
-        Message msg = new Message();
-        msg.what = MSG_CONTROL_PLAY;
-        controlHandler.sendMessage(msg);
+        try {
+            musicControler.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -249,7 +178,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
     }
 
     @Override
-    public MusicInfo getNowPlayingSong() {
+    public AbstractMusic getNowPlayingSong() {
         try {
             return musicControler.getNowPlayingSong();
         } catch (RemoteException e) {
@@ -326,6 +255,9 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
 
     private void initView() {
         mSlidingPanel = (SlidingPanel) findViewById(R.id.sp_main);
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//
+//        setSupportActionBar(mToolbar);
     }
 
     private void initReciever() {

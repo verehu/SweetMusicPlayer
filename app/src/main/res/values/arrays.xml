@@ -5,6 +5,7 @@
    <item>@string/tab_songs</item>
    <item>@string/tab_artists</item>
    <item>@string/tab_albums</item>
+   <item>@string/tab_online</item>
    <!--<item>@string/tab_playlists</item>-->
    <!--<item>@string/tab_genres</item>-->
 </string-array>

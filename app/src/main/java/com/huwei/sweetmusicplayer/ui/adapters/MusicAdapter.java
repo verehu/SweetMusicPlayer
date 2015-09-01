@@ -108,13 +108,12 @@ public class MusicAdapter extends BaseAdapter implements SectionIndexer {
 
                 if(listener!=null){
                     listener.onItemClick(position);
+                    notifyDataSetChanged();
                 }
-                notifyDataSetChanged();
             }
         });
 
-		int selectedpos=MusicManager.getInstance().getNowPlayingIndex();
-		if(isListEqual(MusicManager.getInstance().getPlayingList(),list)&&position==selectedpos){
+		if(MusicManager.isIndexNowPLayng(list,position)){
 			mViewHolder.selected_view.setVisibility(View.VISIBLE);
 		}else{
 			mViewHolder.selected_view.setVisibility(View.INVISIBLE);
@@ -123,19 +122,7 @@ public class MusicAdapter extends BaseAdapter implements SectionIndexer {
         return convertView;
     }
 
-    /**
-     * 判断是否为同一个播放列表，都为null判断false，否则比较两者的hashcode
-     * @param list1
-     * @param list2
-     * @return
-     */
-    boolean isListEqual(List list1,List list2){
-        if(list1==null||list2==null){
-            return false;
-        }else{
-            return list1.hashCode()==list2.hashCode();
-        }
-    }
+
 
     final static class ViewHolder {
         TextView song_text;

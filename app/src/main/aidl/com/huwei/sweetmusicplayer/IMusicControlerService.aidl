@@ -1,6 +1,6 @@
 // IPlayingMusicService.aidl
 package com.huwei.sweetmusicplayer;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 
 // Declare any non-default types here with import statements
 
@@ -29,7 +29,7 @@ interface IMusicControlerService {
     
     int getPlayingSongIndex();
     
-    MusicInfo getNowPlayingSong();
+    AbstractMusic getNowPlayingSong();
     
     boolean isForeground();
     

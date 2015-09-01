@@ -15,14 +15,14 @@
 
         <fragment
             android:id="@+id/main"
-            android:name="com.huwei.sweetmusicplayer.ui.fragments.MainFragment_"
+            android:name="com.huwei.sweetmusicplayer.fragments.MainFragment_"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
         <fragment
             android:id="@+id/bottom_bar"
-            android:name="com.huwei.sweetmusicplayer.ui.fragments.BottomActionBarFragment_"
+            android:name="com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_action_bar_height"
             android:descendantFocusability="beforeDescendants" />
@@ -42,7 +42,7 @@
 
         <fragment
             android:id="@+id/playing_fragment"
-            android:name="com.huwei.sweetmusicplayer.ui.fragments.PlayingFragment_"
+            android:name="com.huwei.sweetmusicplayer.fragments.PlayingFragment_"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

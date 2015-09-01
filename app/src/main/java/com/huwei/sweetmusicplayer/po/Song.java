@@ -1,11 +1,21 @@
 package com.huwei.sweetmusicplayer.po;
 
+import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
+
+import java.net.BindException;
+
 /**
  * 百度音乐API返回的Song
+ *
  * @author Jayce
  * @date 2015/6/11
  */
-public class Song {
+public class Song extends AbstractMusic implements ISearchReuslt {
 
     private String songid;
     private String songname;
@@ -14,6 +24,39 @@ public class Song {
     private String yyr_artist;
     private String artistname;
     private String control;
+
+    public Bitrate bitrate;
+    public SongInfo songInfo;
+
+    public static final Parcelable.Creator<Song> CREATOR = new Parcelable.Creator<Song>() {
+
+        @Override
+        public Song createFromParcel(Parcel source) {
+            return new Song(source);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+
+    };
+
+    public Song() {
+
+    }
+
+    public Song(Parcel parcel) {
+        songid = parcel.readString();
+        songname = parcel.readString();
+        encrypted_songid = parcel.readString();
+        has_mv = parcel.readString();
+        yyr_artist = parcel.readString();
+        artistname = parcel.readString();
+        control = parcel.readString();
+        bitrate = parcel.readParcelable(Bitrate.class.getClassLoader());
+        songInfo = parcel.readParcelable(SongInfo.class.getClassLoader());
+    }
 
     public String getSongid() {
         return songid;
@@ -69,5 +112,74 @@ public class Song {
 
     public void setControl(String control) {
         this.control = control;
+    }
+
+    @Override
+    public String getName() {
+        return songname;
+    }
+
+    @Override
+    public SearchResultType getSearchResultType() {
+        return SearchResultType.Song;
+    }
+
+    @Override
+    public Uri getDataSoure() {
+        return Uri.parse(bitrate.getFile_link());
+    }
+
+    @Override
+    public Integer getDuration() {
+        return bitrate!=null?bitrate.getFile_duration()*1000:0;
+    }
+
+    @Override
+    public MusicType getType() {
+        return MusicType.Online;
+    }
+
+    @Override
+    public String getTitle() {
+        return songname;
+    }
+
+    @Override
+    public String getArtist() {
+        return artistname;
+    }
+
+    @Override
+    public String getArtPic() {
+        return songInfo.getPic_premium();
+    }
+
+
+    @Override
+    public Song createFromParcel(Parcel source) {
+        return new Song(source);
+    }
+
+    @Override
+    public Song[] newArray(int size) {
+        return new Song[size];
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(songid);
+        dest.writeString(songname);
+        dest.writeString(encrypted_songid);
+        dest.writeString(has_mv);
+        dest.writeString(yyr_artist);
+        dest.writeString(artistname);
+        dest.writeString(control);
+        dest.writeParcelable(bitrate,flags);
+        dest.writeParcelable(songInfo,flags);
     }
 }

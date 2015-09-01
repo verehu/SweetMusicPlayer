@@ -32,7 +32,7 @@ import java.util.List;
  * @date 2015/06/11
  */
 public class MusicUtils implements IContain{
-    private static final Uri sArtworkUri = Uri
+    public static final Uri sArtworkUri = Uri
             .parse("content://media/external/audio/albumart");
     private static final BitmapFactory.Options sBitmapOptionsCache = new BitmapFactory.Options();
     private static final BitmapFactory.Options sBitmapOptions = new BitmapFactory.Options();
@@ -256,4 +256,8 @@ public class MusicUtils implements IContain{
         }
         return albumInfoList;
     }
+
+//    public static List getArtist(Cursor cursor){
+//        MediaStore.Audio.Artists.ARTIST;
+//    }
 }

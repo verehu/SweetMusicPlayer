@@ -7,8 +7,9 @@
     <!-- tabs title -->
     <!--<string name="tab_recent">最近</string>-->
     <string name="tab_songs">歌曲</string>
-    <string name="tab_artists">艺术家</string>
+    <string name="tab_artists">歌手</string>
     <string name="tab_albums">专辑</string>
+    <string name="tab_online">在线</string>
     <!--<string name="tab_playlists">播放列表</string>      -->
     <!--<string name="tab_genres">流派</string>-->
  <!-- -->
@@ -16,5 +17,15 @@
     <string name="oneBtnscan_text">一键扫描</string>
     
     <!-- activity main actionbar menu -->
-    <string name="scan_item">扫描音乐</string>
+    <string name="menu_item_scan">扫描音乐</string>
+    <string name="menu_item_search">搜索</string>
+    <string name="menu_item_sleep">睡眠</string>
+
+
+    <!--在线音乐部分-->
+    <string name="online_search_text">搜索音乐、歌手</string>
+
+    <!--在线音乐搜索结果页-->
+    <string name="online_search_artist_text">歌手</string>
+    <string name="online_search_album_text">专辑</string>
 </resources>

@@ -1,9 +1,8 @@
 package com.huwei.sweetmusicplayer.datamanager;
 
-import android.content.Intent;
-
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
+
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -14,7 +13,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class MusicManager implements IMusicControl {
     private static MusicManager instance = new MusicManager();
     IMusicControl t;    //被代理的对象
-    private List list;
+    private List<AbstractMusic> list;
 
     ArrayBlockingQueue queue;
 
@@ -28,33 +27,63 @@ public class MusicManager implements IMusicControl {
 
     @Override
     public void play() {
-        t.play();
-    }
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                super.run();
+                t.play();
+//            }
+//        }.start();
 
+    }
 
 
     @Override
     public void pause() {
-        t.pause();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                t.pause();
+            }
+        }.start();
     }
 
     @Override
     public void stop() {
-        t.stop();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                t.stop();
+            }
+        }.start();
     }
 
     @Override
-    public void seekTo(int mesc) {
-        t.seekTo(mesc);
+    public void seekTo(final int mesc) {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                t.seekTo(mesc);
+            }
+        }.start();
     }
 
     @Override
-    public void preparePlayingList(int index,List list) {
-        t.preparePlayingList(index,list);
-        if(this.list!=list){
-            updateMusicQueue();
-            this.list=list;
-        }
+    public void preparePlayingList(final int index, final List<AbstractMusic> list) {
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                super.run();
+                t.preparePlayingList(index, list);
+                if (MusicManager.this.list != list) {
+                    updateMusicQueue();
+                    MusicManager.this.list = list;
+                }
+//            }
+//        }.start();
 
     }
 
@@ -68,9 +97,9 @@ public class MusicManager implements IMusicControl {
     public int getNowPlayingIndex() {
         return t.getNowPlayingIndex();
     }
-    
+
     @Override
-    public MusicInfo getNowPlayingSong() {
+    public AbstractMusic getNowPlayingSong() {
         return t.getNowPlayingSong();
     }
 
@@ -81,17 +110,35 @@ public class MusicManager implements IMusicControl {
 
     @Override
     public void nextSong() {
-        t.nextSong();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                t.nextSong();
+            }
+        }.start();
     }
 
     @Override
     public void preSong() {
-        t.preSong();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                t.preSong();
+            }
+        }.start();
     }
 
     @Override
     public void randomSong() {
-        t.randomSong();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                t.randomSong();
+            }
+        }.start();
     }
 
     @Override
@@ -104,7 +151,34 @@ public class MusicManager implements IMusicControl {
         this.t = t;
     }
 
-    public List getPlayingList(){
+    public List<AbstractMusic> getPlayingList() {
         return list;
+    }
+
+
+    /**
+     * 判断是否为同一个播放列表，都为null判断false，否则比较两者的hashcode
+     *
+     * @param list2
+     * @return
+     */
+    public static boolean isListEqual(List list2) {
+        List list1 = getInstance().getPlayingList();
+        if (list1 == null || list2 == null) {
+            return false;
+        } else {
+            return list1.hashCode() == list2.hashCode();
+        }
+    }
+
+    /**
+     * 判断当前列表的歌曲是不是正在播放的歌曲   1,列表是否是正在播放的列表 2,位置是否在正在播放的列表
+     *
+     * @param list
+     * @param pos
+     * @return
+     */
+    public static boolean isIndexNowPLayng(List list, int pos) {
+        return isListEqual(list) && getInstance().getNowPlayingIndex() == pos;
     }
 }

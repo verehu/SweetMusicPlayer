@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.huwei.sweetmusicplayer"
     xmlns:tools="http://schemas.android.com/tools"
+    package="com.huwei.sweetmusicplayer"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -13,12 +13,12 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.GET_TASKS"/>  
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>  
-    <uses-permission android:name="android.permission.GET_TOP_ACTIVITY_INFO"/>  
-    <uses-permission android:name="android.permission.REORDER_TASKS"/>  
+    <uses-permission android:name="android.permission.GET_TASKS" />  
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />  
+    <uses-permission android:name="android.permission.GET_TOP_ACTIVITY_INFO" />  
+    <uses-permission android:name="android.permission.REORDER_TASKS" />  
 
-<application
+    <application
         android:name=".SweetApplication_"
         android:allowBackup="true"
         android:icon="@drawable/sweet"
@@ -34,25 +34,47 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"    android:launchMode="singleTask">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".OnlineSearchActivity_" />
         </activity>
-        <activity android:name=".SongScanActivity_">
+        <activity android:name=".SongScanActivity_" />
+        <activity android:name=".OnlineSearchActivity_">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/search_online" />
         </activity>
 
         <service
-            android:name=".services.MusicControlerService">
+            android:name=".services.MusicControlerService"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </service>
         <service
             android:name=".services.ShakeService"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.huwei.sweetmusicplayer.services.ShakeService" />
             </intent-filter>
         </service>
-        <receiver android:name=".recievers.BringToFrontReceiver" android:priority = "1000">
-             <intent-filter>            
-                    <action android:name = "com.huwei.action.BringToFront" />
-             </intent-filter>
+
+        <receiver
+            android:name=".recievers.BringToFrontReceiver"
+            android:priority="1000">
+             
+            <intent-filter>            
+                <action android:name="com.huwei.action.BringToFront" />
+                 
+            </intent-filter>
         </receiver>
     </application>
 

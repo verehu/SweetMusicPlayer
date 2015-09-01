@@ -25,10 +25,12 @@ public interface IContain {
     public static String PLAYPRO_EXIT="com.huwei.intent.PLAYPRO_EXIT_ACTION";
     public static final String PLAYBAR_UPDATE="com.huwei.intent.PLAYBAR_UPDATE";        //关于歌曲信息控件的更新
     public static final String CURRENT_UPDATE="com.huwei.intent.DURATION_UPDATE";       //当前状态 有关时间控件的更新
+    public static final String BUFFER_UPDATE="com.huwei.intent.BUFFER_UPDATE";          //在线音乐的缓冲更新
 
 
     public static final String UPTATE_MUISC_QUEUE="com.huwei.intent.UPDATE_MUSIC_QUEUE";
 
 
-
+    //http请求模块统一标签
+    public static final String HTTP = "HTTP";
 }

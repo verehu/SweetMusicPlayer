@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.models.MusicInfo;
 
@@ -27,7 +28,7 @@ import java.util.List;
 @EBean
 public class QueueAdapter extends BaseAdapter{
 
-    private List<MusicInfo> list;
+    private List<AbstractMusic> list;
     @RootContext
     Context context;
     @SystemService
@@ -37,11 +38,11 @@ public class QueueAdapter extends BaseAdapter{
     @ColorRes
     int white;
 
-    public List<MusicInfo> getList() {
+    public List<AbstractMusic> getList() {
         return list;
     }
 
-    public void setList(List<MusicInfo> list) {
+    public void setList(List<AbstractMusic> list) {
         this.list = list;
     }
 

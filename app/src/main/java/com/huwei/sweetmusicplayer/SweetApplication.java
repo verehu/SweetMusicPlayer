@@ -5,9 +5,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.volley.RequestQueue;
+
+
 import com.android.volley.toolbox.Volley;
 import com.huwei.sweetmusicplayer.dao.DaoMaster;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.androidannotations.annotations.EApplication;
 
@@ -21,12 +25,17 @@ public class SweetApplication extends Application {
     private static DaoSession daoSession;
     private static RequestQueue mQueue;
     private static Context context;
+    private static ImageLoader mImageLoader;
+
+
     /** set the value to decide weather to print debug log , default true in develop*/
     public static final boolean DEBUG = true ;
     @Override
     public void onCreate() {
         super.onCreate();
         context=getApplicationContext();
+
+
     }
 
     public static DaoSession getDaoSession(){
@@ -44,5 +53,15 @@ public class SweetApplication extends Application {
             mQueue = Volley.newRequestQueue(context);
         }
         return mQueue;
+    }
+
+    public static ImageLoader getImageLoader(){
+        if(mImageLoader==null){
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+            .build();
+            mImageLoader =ImageLoader.getInstance();
+            mImageLoader.init(config);
+        }
+        return mImageLoader;
     }
 }

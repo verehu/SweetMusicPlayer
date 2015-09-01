@@ -1,53 +1,65 @@
 package com.huwei.sweetmusicplayer.services;
 
 
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.*;
 import android.os.Process;
-import android.provider.MediaStore;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-
 
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
 import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
-import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
-import com.huwei.sweetmusicplayer.util.MusicUtils;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 
+import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
 
-public class MusicControlerService extends Service implements MediaPlayer.OnCompletionListener,IContain{
+/**
+ * 后台控制播放音乐的service
+ */
+public class MusicControlerService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpdateListener, IContain {
     private String TAG = "MusicControlerService";
     private int musicIndex = -1;
     private long lastSongID = -1;
-    private List<MusicInfo> musicList;
-
+    private List<AbstractMusic> musicList;
 
     private MediaPlayer mp;
+
+    RemoteViews reViews;
 
     private boolean isForeground;
 
     public static final int MSG_CURRENT = 0;
+    public static final int MSG_BUFFER_UPDATE = 1;
 
-    public static final String PLAYPRO_EXIT="com.huwei.intent.PLAYPRO_EXIT_ACTION";
-    public static final String NEXTSONG="com.intent.action.NEXTSONG";
-    public static final String PRESONG="com.intent.action.PRESONG";
- 
+    public static final int MSG_NOTICATION_UPDATE = 2;
+
+    public static final String PLAYPRO_EXIT = "com.huwei.intent.PLAYPRO_EXIT_ACTION";
+    public static final String NEXTSONG = "com.intent.action.NEXTSONG";
+    public static final String PRESONG = "com.intent.action.PRESONG";
 
     private Handler handler = new Handler() {
 
@@ -64,18 +76,29 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
                     handler.sendEmptyMessageDelayed(MSG_CURRENT, 500);
                     break;
+                case MSG_BUFFER_UPDATE:
+
+                    intent = new Intent(BUFFER_UPDATE);
+                    int bufferTime = msg.arg1;
+                    Log.i("bufferTime", bufferTime + "");
+                    intent.putExtra("bufferTime", bufferTime);
+                    sendBroadcast(intent);
+                    break;
+                case MSG_NOTICATION_UPDATE:
+                    reViews.setImageViewBitmap(R.id.img_album, (Bitmap) msg.obj);
+                    break;
             }
         }
     };
-    
-    private BroadcastReceiver controlReceiver=new BroadcastReceiver() {
+
+    private BroadcastReceiver controlReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            switch (intent.getAction()){
+            switch (intent.getAction()) {
                 case PLAYPRO_EXIT:
                     stopSelf();
                     stopForeground(true);
-                    
+
                     Process.killProcess(Process.myPid());
                     break;
                 case NEXTSONG:
@@ -84,7 +107,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
-                    
+
                     break;
                 case PRESONG:
                     try {
@@ -110,12 +133,17 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void play() throws RemoteException {
-            if (musicIndex != -1) {
-                MusicInfo music=musicList.get(musicIndex);
-                startPlay(music);
+//            if (musicIndex != -1) {
+//                AbstractMusic music = musicList.get(musicIndex);
+//                startPlay(music);
+//            }
+//
+//            handler.sendEmptyMessage(MSG_CURRENT);
+            //准备播放源，准备后播放
+            Log.i(TAG, "play()");
+            if (!mp.isPlaying()) {
+                mp.start();
             }
-
-            handler.sendEmptyMessage(MSG_CURRENT);
         }
 
         @Override
@@ -134,9 +162,9 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         public void seekTo(int mesc) throws RemoteException {
             mp.seekTo(mesc);
 
-            if(!isPlaying()){
-                play();
-            }
+//            if (!isPlaying()) {
+//                play();
+//            }
         }
 
         @Override
@@ -144,13 +172,16 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             musicIndex = index;
             musicList = list;
 
+            Log.d(TAG, "musicList:" + list + " musicIndex:" + index);
+
             if (musicList == null || musicList.size() == 0) {
                 Toast.makeText(getBaseContext(), "播放列表为空", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            MusicInfo song = musicList.get(musicIndex);
+            AbstractMusic song = musicList.get(musicIndex);
             prepareSong(song);
+
         }
 
         @Override
@@ -164,7 +195,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         }
 
         @Override
-        public MusicInfo getNowPlayingSong() throws RemoteException {
+        public AbstractMusic getNowPlayingSong() throws RemoteException {
             return musicList.get(musicIndex);
         }
 
@@ -175,23 +206,25 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void nextSong() throws RemoteException {
+//            if(musicList!=null) {
             musicIndex = (musicIndex + 1) % musicList.size();
             prepareSong(musicList.get(musicIndex));
-            play();
+//                play();
+//            }
         }
 
         @Override
         public void preSong() throws RemoteException {
             musicIndex = (musicIndex - 1) % musicList.size();
             prepareSong(musicList.get(musicIndex));
-            play();
+//            play();
         }
 
         @Override
         public void randomSong() throws RemoteException {
             musicIndex = new Random().nextInt(musicList.size());
             prepareSong(musicList.get(musicIndex));
-            play();
+//            play();
         }
     };
 
@@ -204,10 +237,18 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             mp.reset();
         }
 
-        mp = new MediaPlayer();
+        mp = getMediaPlayer(getBaseContext());
         mp.setOnCompletionListener(this);
+        mp.setOnBufferingUpdateListener(this);
+        mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                handler.sendEmptyMessage(MSG_CURRENT);
+                mp.start();
+            }
+        });
 
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction(PLAYPRO_EXIT);
         filter.addAction(PRESONG);
         filter.addAction(NEXTSONG);
@@ -222,6 +263,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     @Override
     public boolean onUnbind(Intent intent) {
+        mp.release();
         return super.onUnbind(intent);
     }
 
@@ -235,39 +277,81 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     /**
      * 和上一次操作的歌曲不同，代表新播放的歌曲
+     *
      * @param isNewPlayMusic
      */
     private void updatePlayBar(boolean isNewPlayMusic) {
         Intent intent = new Intent(PLAYBAR_UPDATE);
-        intent.putExtra("isNewPlayMusic",isNewPlayMusic);
+        intent.putExtra("isNewPlayMusic", isNewPlayMusic);
         sendBroadcast(intent);
     }
 
+    /**
+     * 准备音乐并播放
+     *
+     * @param music
+     */
+    private void prepareSong(AbstractMusic music) {
+        //        showMusicPlayerNotification(getResources().getString(R.string.app_name),NT_PLAYBAR_ID,
+//                R.drawable.sweet, music.getAlbumId(),
+//                music.getTitle(), music.getArtist());
+        showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
+                R.drawable.sweet, "",
+                music.getTitle(), music.getArtist(), music);
 
-    private void prepareSong(MusicInfo song) {
+//        updatePlayBar(music.getSongId() != lastSongID);
+        updatePlayBar(true);
+//        lastSongID = music.getSongId();
 
-        mp.reset();
+        if(mp!=null) {
+            mp.reset();
+        }
 
         try {
-            mp.setDataSource(getBaseContext(), Uri.withAppendedPath(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, "" + song.getSongId()));
-            mp.prepare();
+            mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            Log.i(TAG, "datasoure:" + music.getDataSoure());
+            mp.setDataSource(getBaseContext(), music.getDataSoure());
+
+            mp.prepareAsync();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void startPlay(MusicInfo music) {
-        showMusicPlayerNotification(getResources().getString(R.string.app_name),NT_PLAYBAR_ID,
-                R.drawable.sweet, music.getAlbumId(),
-                music.getTitle(), music.getArtist());
-        mp.start();
-        updatePlayBar(music.getSongId() != lastSongID);
-        lastSongID = music.getSongId();
+//    private void startPlay(AbstractMusic music) {
+////        showMusicPlayerNotification(getResources().getString(R.string.app_name),NT_PLAYBAR_ID,
+////                R.drawable.sweet, music.getAlbumId(),
+////                music.getTitle(), music.getArtist());
+//        showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
+//                R.drawable.sweet, 0,
+//                music.getTitle(), music.getArtist());
+//        mp.start();
+//
+////        updatePlayBar(music.getSongId() != lastSongID);
+//        updatePlayBar(true);
+////        lastSongID = music.getSongId();
+//    }
+
+    @Override
+    public void onBufferingUpdate(MediaPlayer mp, int percent) {
+        AbstractMusic music = null;
+        try {
+            music = mBinder.getNowPlayingSong();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        Message msg = Message.obtain();
+        msg.what = MSG_BUFFER_UPDATE;
+        msg.arg1 = percent * music.getDuration() / 100;
+
+        handler.sendMessage(msg);
     }
 
     @Override
     public void onCompletion(MediaPlayer mp) {
         try {
+            Log.i(TAG, "onCompletion");
             mBinder.nextSong();
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -275,56 +359,88 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
     }
 
     void showMusicPlayerNotification(String tickerText, int id,
-                                     int resId, long album_id, String title, String artist) {
-
-
-        RemoteViews reViews = new RemoteViews(getPackageName(), R.layout.notification_play);
+                                     int resId, String picUri, String title, String artist, AbstractMusic music) {
+        if (reViews == null) {
+            reViews = new RemoteViews(getPackageName(), R.layout.notification_play);
+        }
         reViews.setTextViewText(R.id.title, title);
         reViews.setTextViewText(R.id.text, artist);
-        reViews.setImageViewBitmap(R.id.img_album, MusicUtils.getCachedArtwork(getApplicationContext(), album_id,R.drawable.img_album_background));
+
+        reViews.setImageViewResource(R.id.img_album, R.drawable.img_album_background);
+        ImageLoader imageLoader = SweetApplication.getImageLoader();
+        imageLoader.loadImage(music.getArtPic(), new SimpleImageLoadingListener() {
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                super.onLoadingComplete(imageUri, view, loadedImage);
+
+                reViews.setImageViewBitmap(R.id.img_album, loadedImage);
+            }
+        });
+
+        Log.i(TAG, "picUri:" + picUri);
 
 
-        Intent intent=new Intent(getBaseContext(), MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),0,intent,0);
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, intent, 0);
         reViews.setOnClickPendingIntent(R.id.nt_container, pendingIntent);
-
 
         Intent exitIntent = new Intent(PLAYPRO_EXIT);
         PendingIntent exitPendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, exitIntent, 0);
         reViews.setOnClickPendingIntent(R.id.button_exit_notification_play, exitPendingIntent);
-        
-        Intent nextInent=new Intent(NEXTSONG);
+
+        Intent nextInent = new Intent(NEXTSONG);
         PendingIntent nextPendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, nextInent, 0);
         reViews.setOnClickPendingIntent(R.id.button_next_notification_play, nextPendingIntent);
 
-        Intent preInent=new Intent(PRESONG);
+        Intent preInent = new Intent(PRESONG);
         PendingIntent prePendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, preInent, 0);
         reViews.setOnClickPendingIntent(R.id.button_previous_notification_play, prePendingIntent);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
         builder.setContent(reViews).setSmallIcon(resId).setTicker(title).setOngoing(true);
 
-
         startForeground(id, builder.build());
         isForeground = true;
     }
 
-    String getTopActivity(Activity context)
+    static MediaPlayer getMediaPlayer(Context context) {
 
-    {
+        MediaPlayer mediaplayer = new MediaPlayer();
 
-        ActivityManager manager = (ActivityManager)context.getSystemService(ACTIVITY_SERVICE) ;
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.KITKAT) {
+            return mediaplayer;
+        }
 
-        List<ActivityManager.RunningTaskInfo> runningTaskInfos = manager.getRunningTasks(1) ;
+        try {
+            Class<?> cMediaTimeProvider = Class.forName("android.media.MediaTimeProvider");
+            Class<?> cSubtitleController = Class.forName("android.media.SubtitleController");
+            Class<?> iSubtitleControllerAnchor = Class.forName("android.media.SubtitleController$Anchor");
+            Class<?> iSubtitleControllerListener = Class.forName("android.media.SubtitleController$Listener");
 
+            Constructor constructor = cSubtitleController.getConstructor(new Class[]{Context.class, cMediaTimeProvider, iSubtitleControllerListener});
 
-        if(runningTaskInfos != null)
+            Object subtitleInstance = constructor.newInstance(context, null, null);
 
-            return (runningTaskInfos.get(0).topActivity).toString() ;
+            Field f = cSubtitleController.getDeclaredField("mHandler");
 
-        else
+            f.setAccessible(true);
+            try {
+                f.set(subtitleInstance, new Handler());
+            } catch (IllegalAccessException e) {
+                return mediaplayer;
+            } finally {
+                f.setAccessible(false);
+            }
 
-            return null ;
+            Method setsubtitleanchor = mediaplayer.getClass().getMethod("setSubtitleAnchor", cSubtitleController, iSubtitleControllerAnchor);
 
+            setsubtitleanchor.invoke(mediaplayer, subtitleInstance, null);
+            //Log.e("", "subtitle is setted :p");
+        } catch (Exception e) {
+        }
+
+        return mediaplayer;
     }
+
+
 }

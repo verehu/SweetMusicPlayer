@@ -28,7 +28,6 @@ import java.util.List;
 @EActivity(R.layout.activity_songscan)
 public class SongScanActivity extends BaseActivity {
 
-
     private static final boolean IS_FAVORITE = false ;
     private List<MusicInfo> musicList = new ArrayList<>() ;
     private Uri contentUri = Media.EXTERNAL_CONTENT_URI;
@@ -161,15 +160,8 @@ public class SongScanActivity extends BaseActivity {
                 }
 
             }
-
-
         }
-
-
     }
-
-
-
 }
  
  
