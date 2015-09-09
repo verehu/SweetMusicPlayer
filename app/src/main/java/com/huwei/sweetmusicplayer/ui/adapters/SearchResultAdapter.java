@@ -140,9 +140,9 @@ public class SearchResultAdapter extends BaseAdapter {
                 tv_album.setText(mContext.getString(R.string.tab_albums) + ":" + album.getAlbumname());
                 break;
             case Artist:
-                convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_searchresult_album, null);
+                convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_searchresult_artist, null);
                 ImageView iv_artist = (ImageView) convertView.findViewById(R.id.iv_artist);
-                TextView tv_artist = (TextView) convertView.findViewById(R.id.tv_album);
+                TextView tv_artist = (TextView) convertView.findViewById(R.id.tv_artist);
 
                 Artist artist = (Artist) ISearchReuslt;
                 tv_artist.setText(artist.getArtistname());

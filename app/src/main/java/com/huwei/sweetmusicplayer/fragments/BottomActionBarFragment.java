@@ -33,7 +33,7 @@ import org.androidannotations.annotations.ViewById;
 public class BottomActionBarFragment extends Fragment implements IContain {
 
     @ViewById
-    TextView tv_title,tv_artist;
+    TextView tv_title, tv_artist;
     @ViewById
     ToggleButton btn_play;
     @ViewById
@@ -44,12 +44,12 @@ public class BottomActionBarFragment extends Fragment implements IContain {
     ProgressBar pro_music;
 
     @AfterViews
-    void init(){
+    void init() {
         initListener();
         initReciever();
     }
 
-    
+
     protected void initListener() {
         btn_next.setOnClickListener(new View.OnClickListener() {
 
@@ -91,13 +91,14 @@ public class BottomActionBarFragment extends Fragment implements IContain {
             // TODO Auto-generated method stub
             String action = intent.getAction();
 
-            switch (action){
+            switch (action) {
                 case PLAYBAR_UPDATE:
                     pro_music.setMax(MusicManager.getInstance().getNowPlayingSong().getDuration());
-                    updateBottomBarFromService();
+                    AbstractMusic music = intent.getParcelableExtra("newMusic");
+                    updateBottomBarFromService(music);
                     break;
                 case CURRENT_UPDATE:
-                    pro_music.setProgress(intent.getIntExtra("currentTime",0));
+                    pro_music.setProgress(intent.getIntExtra("currentTime", 0));
                     break;
             }
         }
@@ -111,17 +112,17 @@ public class BottomActionBarFragment extends Fragment implements IContain {
         getActivity().unregisterReceiver(receiver);
     }
 
-    void updateBottomBarFromService(){
-        AbstractMusic music = MusicManager.getInstance().getNowPlayingSong();
+    void updateBottomBarFromService(AbstractMusic music) {
+
         if (music != null) {
             tv_title.setText(music.getTitle());
             tv_artist.setText(music.getArtist());
             btn_play.setChecked(MusicManager.getInstance().isPlaying());
 
             ImageLoader imageLoader = SweetApplication.getImageLoader();
-            imageLoader.displayImage(music.getArtPic(),img_album);
+            imageLoader.displayImage(music.getArtPic(), img_album);
 //            img_album.setImageBitmap(MusicUtils.getCachedArtwork(getActivity(), music.getAlbumId(), R.drawable.img_album_background));
         }
-        
+
     }
 }

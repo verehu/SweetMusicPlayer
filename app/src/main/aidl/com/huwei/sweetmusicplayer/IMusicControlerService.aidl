@@ -16,9 +16,9 @@ interface IMusicControlerService {
             double aDouble, String aString);
             
     void play();
-    
+
     void pause();
-    
+
     void stop();
 
     void seekTo(int mesc);

@@ -172,7 +172,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             musicIndex = index;
             musicList = list;
 
-            Log.d(TAG, "musicList:" + list + " musicIndex:" + index);
+            Log.d(TAG, "musicList:" + list + " musicIndex:" + index+"now title:"+((AbstractMusic)list.get(index)).getTitle());
 
             if (musicList == null || musicList.size() == 0) {
                 Toast.makeText(getBaseContext(), "播放列表为空", Toast.LENGTH_LONG).show();
@@ -283,6 +283,14 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
     private void updatePlayBar(boolean isNewPlayMusic) {
         Intent intent = new Intent(PLAYBAR_UPDATE);
         intent.putExtra("isNewPlayMusic", isNewPlayMusic);
+
+        AbstractMusic music = null;
+        try {
+            music = mBinder.getNowPlayingSong();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        intent.putExtra("newMusic",music);
         sendBroadcast(intent);
     }
 
