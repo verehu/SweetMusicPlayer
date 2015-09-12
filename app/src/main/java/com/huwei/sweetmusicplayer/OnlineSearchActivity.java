@@ -40,7 +40,7 @@ import java.util.List;
  */
 @EActivity(R.layout.activity_online_search)
 public class OnlineSearchActivity extends BaseActivity {
-    public static final String TAG="OnlineSearchActivity";
+    public static final String TAG = "OnlineSearchActivity";
 
     @ViewById
     ListView lv_online_search;
@@ -49,7 +49,7 @@ public class OnlineSearchActivity extends BaseActivity {
 
     SearchResultAdapter adapter;
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -66,7 +66,7 @@ public class OnlineSearchActivity extends BaseActivity {
         handleIntent(getIntent());
     }
 
-    void initView(){
+    void initView() {
         adapter = new SearchResultAdapter(mContext);
         lv_online_search.setAdapter(adapter);
 
@@ -75,7 +75,7 @@ public class OnlineSearchActivity extends BaseActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
-    void initListener(){
+    void initListener() {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,13 +86,13 @@ public class OnlineSearchActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ISearchReuslt reuslt = (ISearchReuslt) parent.getItemAtPosition(position);
-                switch (reuslt.getSearchResultType()){
+                switch (reuslt.getSearchResultType()) {
                     case Song:
                         List<AbstractMusic> list = new ArrayList<>();
-                        Log.i(TAG,"song:"+((Song)reuslt).songInfo);
+                        Log.i(TAG, "song:" + ((Song) reuslt).songInfo);
                         list.add((Song) reuslt);
                         //点击当前歌曲，把当前歌曲加入播放队列
-                        MusicManager.getInstance().preparePlayingList(0,list);
+                        MusicManager.getInstance().preparePlayingList(0, list);
 //                        MusicManager.getInstance().play();
 //                        adapter.notifyDataSetInvalidated();
 
@@ -120,34 +120,40 @@ public class OnlineSearchActivity extends BaseActivity {
                 adapter.getData().clear();
 
                 final MusicSearchSug sug = new Gson().fromJson(response, MusicSearchSug.class);
-                for(Album album:sug.getAlbum()){
+                for (Album album : sug.getAlbum()) {
                     adapter.add(album);
                 }
 
-                for(Artist artist:sug.getArtist()){
+                for (Artist artist : sug.getArtist()) {
                     adapter.add(artist);
                 }
 
-                //子线程网络请求
-                new Thread(){
-                    @Override
-                    public void run() {
+                for (Song song : sug.getSong()) {
+                    adapter.add(song);
+                }
 
-                        for (Song song:sug.getSong()){
-                            //同步请求到歌曲信息
-                            SongPlayResp resp = BaiduMusicUtil.querySong(song.getSongid());
-                            if(resp!=null) {
-                                song.bitrate = resp.bitrate;
-                                song.songInfo = resp.songinfo;
+                adapter.notifyDataSetInvalidated();
 
-                                Log.i(TAG,"song add:"+song);
-                                adapter.add(song);
-                            }
-                        }
-
-                        handler.sendEmptyMessage(0);
-                    }
-                }.start();
+//                //子线程网络请求
+//                new Thread(){
+//                    @Override
+//                    public void run() {
+//
+//                        for (Song song:sug.getSong()){
+//                            //同步请求到歌曲信息
+//                            SongPlayResp resp = BaiduMusicUtil.querySong(song.getSongid());
+//                            if(resp!=null) {
+//                                song.bitrate = resp.bitrate;
+//                                song.songInfo = resp.songinfo;
+//
+//                                Log.i(TAG,"song add:"+song);
+//                                adapter.add(song);
+//                            }
+//                        }
+//
+//                        handler.sendEmptyMessage(0);
+//                    }
+//                }.start();
             }
         });
     }

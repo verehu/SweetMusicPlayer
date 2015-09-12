@@ -26,7 +26,10 @@ import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 
+import com.huwei.sweetmusicplayer.po.Song;
+import com.huwei.sweetmusicplayer.po.SongPlayResp;
 import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
+import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
@@ -57,9 +60,12 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     public static final int MSG_NOTICATION_UPDATE = 2;
 
+    public static final int MSG_PLAY = 101;
+
     public static final String PLAYPRO_EXIT = "com.huwei.intent.PLAYPRO_EXIT_ACTION";
     public static final String NEXTSONG = "com.intent.action.NEXTSONG";
     public static final String PRESONG = "com.intent.action.PRESONG";
+
 
     private Handler handler = new Handler() {
 
@@ -86,6 +92,10 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                     break;
                 case MSG_NOTICATION_UPDATE:
                     reViews.setImageViewBitmap(R.id.img_album, (Bitmap) msg.obj);
+                    break;
+                case MSG_PLAY:
+                    AbstractMusic music = (AbstractMusic) msg.obj;
+                    play(music);
                     break;
             }
         }
@@ -143,6 +153,12 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             Log.i(TAG, "play()");
             if (!mp.isPlaying()) {
                 mp.start();
+                Intent intent = new Intent(PLAYBAR_UPDATE);
+                intent.putExtra("isNewPlayMusic", false);
+
+                AbstractMusic music = mBinder.getNowPlayingSong();
+                intent.putExtra("newMusic",music);
+                sendBroadcast(intent);
             }
         }
 
@@ -244,7 +260,12 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             @Override
             public void onPrepared(MediaPlayer mp) {
                 handler.sendEmptyMessage(MSG_CURRENT);
-                mp.start();
+
+                try {
+                    mBinder.play();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -311,6 +332,41 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         updatePlayBar(true);
 //        lastSongID = music.getSongId();
 
+        //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
+        if(music.getType() == AbstractMusic.MusicType.Online) {
+            final Song song = (Song) music;
+            if(!song.hasGetDetailInfo()) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+
+                        //同步请求到歌曲信息
+                            SongPlayResp resp = BaiduMusicUtil.querySong(song.getSongid());
+                            if(resp!=null) {
+                                song.bitrate = resp.bitrate;
+                                song.songInfo = resp.songinfo;
+
+                                Log.i(TAG,"song hasGetDetailInfo:"+song);
+
+                                updatePlayBar(false);
+
+                                Message msg = Message.obtain();
+                                msg.what = MSG_PLAY;
+                                msg.obj = song;
+                                handler.sendMessage(msg);
+                            }
+                    }
+                }.start();
+            }else{
+                play(music);
+            }
+        }else{
+            play(music);
+        }
+    }
+
+    private void play(AbstractMusic music){
         if(mp!=null) {
             mp.reset();
         }

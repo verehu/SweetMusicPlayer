@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
+import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 
 import java.net.BindException;
 
@@ -126,7 +127,8 @@ public class Song extends AbstractMusic implements ISearchReuslt {
 
     @Override
     public Uri getDataSoure() {
-        return Uri.parse(bitrate.getFile_link());
+        String url = bitrate!=null?bitrate.getFile_link(): BaiduMusicUtil.getDownloadUrlBySongId(songid);
+        return Uri.parse(url);
     }
 
     @Override
@@ -149,9 +151,14 @@ public class Song extends AbstractMusic implements ISearchReuslt {
         return artistname;
     }
 
+    //返回""加载默认的图片
     @Override
     public String getArtPic() {
-        return songInfo.getPic_premium();
+        return songInfo!=null?songInfo.getPic_premium():"";
+    }
+
+    public boolean hasGetDetailInfo(){
+        return bitrate!=null||songInfo!=null;
     }
 
 

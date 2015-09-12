@@ -55,4 +55,7 @@ public class BaiduMusicUtil implements IUrl{
         return new Gson().fromJson(result,SongPlayResp.class);
     }
 
+    public static String getDownloadUrlBySongId(String songId){
+        return "http://ting.baidu.com/data/music/links?songIds="+songId;
+    }
 }
