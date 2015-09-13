@@ -2,7 +2,6 @@ package com.huwei.sweetmusicplayer;
 
 import android.app.SearchManager;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
@@ -16,11 +15,10 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
-import com.huwei.sweetmusicplayer.po.Album;
-import com.huwei.sweetmusicplayer.po.Artist;
-import com.huwei.sweetmusicplayer.po.MusicSearchSug;
-import com.huwei.sweetmusicplayer.po.Song;
-import com.huwei.sweetmusicplayer.po.SongPlayResp;
+import com.huwei.sweetmusicplayer.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
+import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.ui.adapters.SearchResultAdapter;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
@@ -119,7 +117,7 @@ public class OnlineSearchActivity extends BaseActivity {
             public void onSuccess(String response) {
                 adapter.getData().clear();
 
-                final MusicSearchSug sug = new Gson().fromJson(response, MusicSearchSug.class);
+                final MusicSearchSugResp sug = new Gson().fromJson(response, MusicSearchSugResp.class);
                 for (Album album : sug.getAlbum()) {
                     adapter.add(album);
                 }

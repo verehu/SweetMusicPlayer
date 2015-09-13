@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.*;
 import android.os.Process;
 import android.support.v4.app.NotificationCompat;
@@ -26,12 +25,11 @@ import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 
-import com.huwei.sweetmusicplayer.po.Song;
-import com.huwei.sweetmusicplayer.po.SongPlayResp;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
 import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.lang.reflect.Constructor;

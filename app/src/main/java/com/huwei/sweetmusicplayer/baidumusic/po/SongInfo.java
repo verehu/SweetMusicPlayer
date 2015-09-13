@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.po;
+package com.huwei.sweetmusicplayer.baidumusic.po;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -11,12 +11,11 @@ import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.models.LrcContent;
-import com.huwei.sweetmusicplayer.po.Lrc;
+import com.huwei.sweetmusicplayer.baidumusic.po.Lrc;
 import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter;
 import com.huwei.sweetmusicplayer.util.LrcUtil;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
-import com.huwei.sweetmusicplayer.po.MusicSearchSug;
-import com.huwei.sweetmusicplayer.po.Song;
+import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener;
 import com.huwei.sweetmusicplayer.ui.widgets.LrcView;
 import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
@@ -373,7 +372,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
                         public void onSuccess(String response) {
                             Log.i(TAG, "SUG JSON:" + response);
 
-                            MusicSearchSug sug = new Gson().fromJson(response, MusicSearchSug.class);
+                            MusicSearchSugResp sug = new Gson().fromJson(response, MusicSearchSugResp.class);
 
                             if (!sug.isValid()) {
                                 playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);

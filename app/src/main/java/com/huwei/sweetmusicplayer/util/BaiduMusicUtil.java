@@ -2,7 +2,7 @@ package com.huwei.sweetmusicplayer.util;
 
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.contains.IUrl;
-import com.huwei.sweetmusicplayer.po.SongPlayResp;
+import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
 
 /**
  * 使用百度音乐API的工具类
@@ -13,7 +13,6 @@ public class BaiduMusicUtil implements IUrl{
     public static final String SEARCH_CATALOGSUG="baidu.ting.search.catalogSug";
     public static final String SONG_LRC="baidu.ting.song.lry ";
     public static final String SONG_PLAY ="baidu.ting.song.play";
-
 
     /**
      * 根据歌名 艺术家 专家搜索歌曲
@@ -55,6 +54,23 @@ public class BaiduMusicUtil implements IUrl{
         return new Gson().fromJson(result,SongPlayResp.class);
     }
 
+    /**
+     * 获取Album详细信息
+     * @param albumId
+     * @param httpHandler
+     */
+    public static void getAlbumDetail(String albumId,HttpHandler httpHandler){
+        HttpParams params = new HttpParams();
+        params.add("albumId",albumId);
+        params.add("type","album");
+        HttpUtil.post(BAIDU_MUSIC_ALBUM,params,httpHandler);
+    }
+
+    /**
+     * 通过歌曲Id获取歌曲下载地址  同在线播放的地址
+     * @param songId
+     * @return
+     */
     public static String getDownloadUrlBySongId(String songId){
         return "http://ting.baidu.com/data/music/links?songIds="+songId;
     }
