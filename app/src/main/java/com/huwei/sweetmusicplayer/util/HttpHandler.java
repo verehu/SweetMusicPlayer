@@ -8,6 +8,7 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.huwei.sweetmusicplayer.baidumusic.resp.BaseResp;
 import com.huwei.sweetmusicplayer.contains.IContain;
 
 /**
@@ -41,6 +42,14 @@ public abstract class HttpHandler implements Response.Listener<String>,Response.
         Log.i(IContain.HTTP,"response:"+response);
 
         onFinish();
+        BaseResp resp = new Gson().fromJson(response,BaseResp.class);
+        if(resp!=null){
+            switch (resp.getError_code()){
+                case BaseResp.ERROR_CODE_ERROR:
+                    onErrorResponse(new VolleyError("ERROR CODE:"+BaseResp.ERROR_CODE_ERROR));
+                    break;
+            }
+        }
         onSuccess(response);
     }
 

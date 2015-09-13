@@ -1,5 +1,7 @@
 package com.huwei.sweetmusicplayer.baidumusic.resp;
 
+import org.apache.http.conn.scheme.PlainSocketFactory;
+
 /**
  * @author Jayce
  * @date 2015/6/13
@@ -7,6 +9,7 @@ package com.huwei.sweetmusicplayer.baidumusic.resp;
 public class BaseResp {
 
     public static final int ERROR_CODE_OK=22000;
+    public static final int ERROR_CODE_ERROR=22001;
     private int error_code;
 
 

@@ -7,6 +7,5 @@ import org.androidannotations.annotations.EActivity;
  * @author jerry
  * @date 2015-09-13
  */
-@EActivity()
 public class AlbumDetailActivity extends BaseActivity{
 }

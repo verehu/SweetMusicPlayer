@@ -28,4 +28,8 @@
     <!--在线音乐搜索结果页-->
     <string name="online_search_artist_text">歌手</string>
     <string name="online_search_album_text">专辑</string>
+
+    <!--专辑详情页面 online-->
+    <string name="albumdetail_left_artist">歌手：</string>
+    <string name="albumdetail_left_pub_date">发行时间：</string>
 </resources>

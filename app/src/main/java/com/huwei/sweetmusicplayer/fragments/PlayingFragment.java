@@ -145,24 +145,24 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     }
 
     @Click(R.id.btn_show_music_queue)
-    void btn_show_music_queueWasClicked(){
-        if(isDrawerOpen()){
-           closeDrawer();
-        }else{
+    void btn_show_music_queueWasClicked() {
+        if (isDrawerOpen()) {
+            closeDrawer();
+        } else {
             openDrawer();
         }
     }
 
-    public void openDrawer(){
+    public void openDrawer() {
         dl_music_queue.openDrawer(Gravity.END);
     }
 
-    public void closeDrawer(){
+    public void closeDrawer() {
         dl_music_queue.closeDrawers();
     }
 
-    public boolean isDrawerOpen(){
-       return dl_music_queue.isDrawerOpen(Gravity.END);
+    public boolean isDrawerOpen() {
+        return dl_music_queue.isDrawerOpen(Gravity.END);
     }
 
 
@@ -176,9 +176,9 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     }
 
 
-    public void updateMusicQueue(){
-        List<AbstractMusic> nowPlayings=MusicManager.getInstance().getPlayingList();
-        if(nowPlayings!=null) {
+    public void updateMusicQueue() {
+        List<AbstractMusic> nowPlayings = MusicManager.getInstance().getPlayingList();
+        if (nowPlayings != null) {
             queueAdapter.setList(nowPlayings);
             lv_music_queue.setAdapter(queueAdapter);
         }
@@ -280,7 +280,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
                     updateLrcView(currentTime);
                     break;
                 case BUFFER_UPDATE:
-                    int bufferTime = intent.getIntExtra("bufferTime",0);
+                    int bufferTime = intent.getIntExtra("bufferTime", 0);
                     if (!mProgressBarLock) playpage_progressbar.setSecondaryProgress(bufferTime);
 
                 case UPTATE_MUISC_QUEUE:
@@ -294,7 +294,8 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
     void loadLrcView() {
         AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
-        List<LrcContent> lrcLists = LrcUtil.loadLrc(song);
+        List<LrcContent> lrcLists = null;
+        lrcLists = LrcUtil.loadLrc(song);
         playpage_lrcview.setLrcLists(lrcLists);
         playpage_lrcview.setLrcState(lrcLists.size() == 0 ? READ_LOC_FAIL : READ_LOC_OK);
     }
@@ -380,39 +381,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
                             }
 
                             List<Song> songList = sug.getSong();
-                            if (songList.size() != 0) {
-                                String songid = songList.get(0).getSongid();
-                                //查询歌词
-                                BaiduMusicUtil.queryLrc(songid, new HttpHandler(getActivity()) {
-                                    @Override
-                                    public void onSuccess(String response) {
-                                        Lrc lrc = new Gson().fromJson(response, Lrc.class);
-
-                                        if (!lrc.isValid()) {
-                                            playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
-                                            return;
-                                        }
-
-                                        List<LrcContent> lrcLists = LrcUtil.parseLrcStr(lrc.getLrcContent());
-                                        // 按时间排序
-                                        Collections.sort(lrcLists, new LrcComparator());
-                                        playpage_lrcview.setLrcLists(lrcLists);
-                                        playpage_lrcview.setLrcState(lrcLists.size() == 0 ? QUERY_ONLINE_NULL : QUERY_ONLINE_OK);
-
-                                        if (lrcLists.size() != 0) {
-                                            LrcUtil.writeLrcToLoc(musicInfo.getTitle(), musicInfo.getArtist(), lrc.getLrcContent());
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        super.onErrorResponse(error);
-                                        playpage_lrcview.setLrcState(QUERY_ONLINE_FAIL);
-                                    }
-                                });
-                            } else {
-                                playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
-                            }
+                            findLrc(songList, 0);
                         }
 
                         @Override
@@ -428,5 +397,48 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         };
         okBtn.setOnClickListener(btnListener);
         cancleBtn.setOnClickListener(btnListener);
+    }
+
+
+
+    private void findLrc(final List<Song> songList,final int index){
+        if (songList.size() == 0) {
+            playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
+           return;
+        }
+        final Song song = songList.get(index);
+        String songid = song.getSongid();
+        BaiduMusicUtil.queryLrc(songid, new HttpHandler(getActivity()) {
+            @Override
+            public void onSuccess(String response) {
+                Lrc lrc = new Gson().fromJson(response, Lrc.class);
+
+                if (!lrc.isValid()) {
+                    playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
+                    return;
+                }
+
+                List<LrcContent> lrcLists = LrcUtil.parseLrcStr(lrc.getLrcContent());
+                // 按时间排序
+                Collections.sort(lrcLists, new LrcComparator());
+                playpage_lrcview.setLrcLists(lrcLists);
+                playpage_lrcview.setLrcState(lrcLists.size() == 0 ? QUERY_ONLINE_NULL : QUERY_ONLINE_OK);
+
+                if (lrcLists.size() != 0) {
+                    LrcUtil.writeLrcToLoc(song.getTitle(), song.getArtist(), lrc.getLrcContent());
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                super.onErrorResponse(error);
+
+                if(index+1<songList.size()) {
+                    findLrc(songList, index + 1);
+                }else{
+                    playpage_lrcview.setLrcState(QUERY_ONLINE_FAIL);
+                }
+            }
+        });
     }
 }
