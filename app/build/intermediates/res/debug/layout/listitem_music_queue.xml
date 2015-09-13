@@ -11,4 +11,4 @@
         android:gravity="center_vertical"
         android:padding="8dp"
         android:text="1.错觉"/>
-</LinearLayout><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/listitem_music_queue.xml -->
+</LinearLayout><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/layout/listitem_music_queue.xml -->

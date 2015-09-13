@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/arrays.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/arrays.xml -->
     <eat-comment/>
     <integer-array name="sleep_times">
       <item>10</item>
@@ -14,10 +14,11 @@
    <item>@string/tab_songs</item>
    <item>@string/tab_artists</item>
    <item>@string/tab_albums</item>
+   <item>@string/tab_online</item>
    <!--<item>@string/tab_playlists</item>-->
    <!--<item>@string/tab_genres</item>-->
 </string-array>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -29,10 +30,10 @@
     <bool name="abc_config_actionMenuItemAllCaps">true</bool>
     <bool name="abc_config_allowActionMenuItemTextWithIcon">false</bool>
     <bool name="abc_config_showMenuShortcutsWhenKeyboardPresent">false</bool>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="_5white">#80000000</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="abc_input_method_navigation_guard">@android:color/black</color>
     <color name="abc_search_url_text_normal">#7fa87f</color>
@@ -40,7 +41,7 @@
     <color name="abc_search_url_text_selected">@android:color/black</color>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="actionbar_text">#838B83</color>
     <color name="aliceblue">#F0F8FF</color>
@@ -48,17 +49,17 @@
     <color name="aqua">#00FFFF</color>
     <color name="aquamarine">#7FFFD4</color>
     <color name="azure">#F0FFFF</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="background_floating_material_dark">#ff424242</color>
     <color name="background_floating_material_light">#ffeeeeee</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="background_material_dark">#ff303030</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="background_material_light">#ffeeeeee</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="beige">#F5F5DC</color>
     <color name="bisque">#FFE4C4</color>
@@ -66,7 +67,7 @@
     <color name="blanchedalmond">#FFEBCD</color>
     <color name="blue">#0000FF</color>
     <color name="blueviolet">#8A2BE2</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
@@ -74,24 +75,24 @@
     <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
     <color name="bright_foreground_material_dark">@android:color/white</color>
     <color name="bright_foreground_material_light">@android:color/black</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="brown">#A52A2A</color>
     <color name="burlywood">#DEB887</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="cadetblue">#5F9EA0</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="cardview_dark_background">#FF202020</color>
     <color name="cardview_light_background">#FFFAFAFA</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="catalog_back">#AA66CC</color>
     <color name="chartreuse">#7FFF00</color>
@@ -122,13 +123,13 @@
     <color name="darkviolet">#9400D3</color>
     <color name="deeppink">#FF1493</color>
     <color name="deepskyblue">#00BFFF</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="dimgray">#696969</color>
     <color name="dimgrey">#696969</color>
@@ -145,13 +146,13 @@
     <color name="green">#008000</color>
     <color name="greenyellow">#ADFF2F</color>
     <color name="grey">#808080</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="hint_foreground_material_dark">@color/bright_foreground_disabled_material_dark</color>
     <color name="hint_foreground_material_light">@color/bright_foreground_disabled_material_light</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="holo_blue_dark">#ff0099cc</color>
     <color name="holo_purple_light">#AA66CC</color>
@@ -183,22 +184,22 @@
     <color name="lime">#00FF00</color>
     <color name="limegreen">#32CD32</color>
     <color name="linen">#FAF0E6</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="link_text_material_dark">@color/material_deep_teal_200</color>
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="magenta">#FF00FF</color>
     <color name="maroon">#800000</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="material_blue_grey_800">#ff37474f</color>
     <color name="material_blue_grey_900">#ff263238</color>
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="mediumaquamarine">#66CDAA</color>
     <color name="mediumblue">#0000CD</color>
@@ -231,7 +232,7 @@
     <color name="pink">#FFC0CB</color>
     <color name="plum">#DDA0DD</color>
     <color name="powderblue">#B0E0E6</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
     <color name="primary_dark_material_light">#ff757575</color>
@@ -241,16 +242,16 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="purple">#9933CC</color>
     <color name="purple_light">#AA66CC</color>
     <color name="red">#FF0000</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="ripple_material_dark">#40ffffff</color>
     <color name="ripple_material_light">#40000000</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="rosybrown">#BC8F8F</color>
     <color name="royalblue">#4169E1</color>
@@ -260,13 +261,13 @@
     <color name="scanbar_back">#99AA66CC </color>
     <color name="seagreen">#2E8B57</color>
     <color name="seashell">#FFF5EE</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="selected_tabtext">#bb000000</color>
     <color name="sienna">#A0522D</color>
@@ -278,11 +279,11 @@
     <color name="snow">#FFFAFA</color>
     <color name="springgreen">#00FF7F</color>
     <color name="steelblue">#4682B4</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="tan">#D2B48C</color>
     <color name="teal">#008080</color>
@@ -320,7 +321,7 @@
     <declare-styleable name="Toolbar"><attr format="reference" name="titleTextAppearance"/><attr format="reference" name="subtitleTextAppearance"/><attr name="title"/><attr name="subtitle"/><attr name="android:gravity"/><attr format="dimension" name="titleMargins"/><attr format="dimension" name="titleMarginStart"/><attr format="dimension" name="titleMarginEnd"/><attr format="dimension" name="titleMarginTop"/><attr format="dimension" name="titleMarginBottom"/><attr name="contentInsetStart"/><attr name="contentInsetEnd"/><attr name="contentInsetLeft"/><attr name="contentInsetRight"/><attr format="dimension" name="maxButtonHeight"/><attr format="reference" name="theme"/><attr format="reference" name="collapseIcon"/><attr format="string" name="collapseContentDescription"/><attr name="popupTheme"/><attr format="reference" name="navigationIcon"/><attr format="string" name="navigationContentDescription"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
     <dimen name="abc_action_bar_default_padding_material">4dp</dimen>
@@ -359,7 +360,7 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="bottom_action_bar_album_art_width_height">45dp</dimen>
     <dimen name="bottom_action_bar_divider_height">2dp</dimen>
@@ -369,12 +370,12 @@
     <dimen name="bottom_action_bar_item_padding_left_right">8dp</dimen>
     <dimen name="bottom_action_bar_item_width">36dp</dimen>
     <dimen name="bottom_action_bar_padding_left">12dp</dimen>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <dimen name="cardview_compat_inset_shadow">1dp</dimen>
     <dimen name="cardview_default_elevation">2dp</dimen>
     <dimen name="cardview_default_radius">2dp</dimen>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -382,7 +383,7 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="font_16">16sp</dimen>
     <dimen name="scanbottombar_height">100dp</dimen>
@@ -394,7 +395,7 @@
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_micro">12sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
@@ -422,16 +423,22 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">SweetMusicPlayer</string>
     <string name="hello_world">Hello world!</string>
+    <string name="menu_item_scan">扫描音乐</string>
+    <string name="menu_item_search">搜索</string>
+    <string name="menu_item_sleep">睡眠</string>
     <string name="oneBtnscan_text">一键扫描</string>
-    <string name="scan_item">扫描音乐</string>
+    <string name="online_search_album_text">专辑</string>
+    <string name="online_search_artist_text">歌手</string>
+    <string name="online_search_text">搜索音乐、歌手</string>
     <string name="tab_albums">专辑</string>
-    <string name="tab_artists">艺术家</string>
+    <string name="tab_artists">歌手</string>
+    <string name="tab_online">在线</string>
     <string name="tab_songs">歌曲</string>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance">
         <item name="android:textColor">?android:textColorPrimary</item>
@@ -1185,7 +1192,7 @@
         <item name="android:scaleType">center</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="BottomActionBarItem">
         <item name="android:background">@android:color/transparent</item>
@@ -1194,7 +1201,7 @@
         <item name="android:padding">@dimen/bottom_action_bar_item_padding_left_right</item>
         <item name="android:layout_gravity">center_vertical</item>
     </style>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="CardView">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
@@ -1210,7 +1217,17 @@
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:popupBackground">?attr/colorPrimary</item>
+        <item name="android:dropDownVerticalOffset">4dip</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+    </style>
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="Platform.AppCompat" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
@@ -1378,21 +1395,19 @@
     <style name="RtlOverlay.Widget.AppCompat.SearchView.MagIcon" parent="android:Widget">
         <item name="android:layout_marginLeft">@dimen/abc_dropdownitem_text_padding_left</item>
     </style>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="SweetTheme" parent="Theme.AppCompat.NoActionBar">
        <!--<item name="android:actionBarStyle">@style/SweetTheme.PurpleActionBar</item>
         <item name="android:actionOverflowButtonStyle">@style/SweetTheme.OverFlow</item>
         <item name="android:windowActionBarOverlay">true</item>-->
         <!--<item name="android:windowBackground">@drawable/default_bg</item>-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
         <item name="android:textViewStyle">@style/SweetTheme.TextView</item>
         <item name="android:buttonStyle">@style/SweetTheme.ButtonStyle</item>
     </style>
     <style name="SweetTheme.ButtonStyle" parent="@android:style/Widget.Holo.Button">
         <item name="android:padding">8dp</item>
-    </style>
-    <style name="SweetTheme.OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
-    
     </style>
     <style name="SweetTheme.PurpleActionBar" parent="@android:style/Widget.Holo.ActionBar">
         <item name="android:background">@drawable/actionbar</item>
@@ -1402,7 +1417,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:singleLine">true</item>
     </style>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>
@@ -1522,7 +1537,7 @@
     <style name="Widget.AppCompat.Spinner.DropDown.ActionBar" parent="Base.Widget.AppCompat.Spinner.DropDown.ActionBar"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="catalog">
         <item name="android:padding">8dp</item>

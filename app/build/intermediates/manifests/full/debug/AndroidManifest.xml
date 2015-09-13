@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="11"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -38,11 +38,29 @@
         <activity
             android:name="com.huwei.sweetmusicplayer.MainActivity"
             android:launchMode="singleTask" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".OnlineSearchActivity_" />
         </activity>
-        <activity android:name="com.huwei.sweetmusicplayer.SongScanActivity_" >
+        <activity android:name="com.huwei.sweetmusicplayer.SongScanActivity_" />
+        <activity android:name="com.huwei.sweetmusicplayer.OnlineSearchActivity_" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/search_online" />
         </activity>
 
-        <service android:name="com.huwei.sweetmusicplayer.services.MusicControlerService" >
+        <service
+            android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </service>
         <service
             android:name="com.huwei.sweetmusicplayer.services.ShakeService"
@@ -59,9 +77,13 @@
             <intent-filter>
             
                 <action android:name="com.huwei.action.BringToFront" />
-             
+                 
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="android.support.v7.widget.TestActivity"
+            android:label="RecyclerViewTestActivity" />
     </application>
 
 </manifest>

@@ -23,4 +23,4 @@
         android:onClick="songscan"
         android:text="@string/oneBtnscan_text" />
 
-</RelativeLayout><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/fragment_songscan_pre.xml -->
+</RelativeLayout><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/layout/fragment_songscan_pre.xml -->

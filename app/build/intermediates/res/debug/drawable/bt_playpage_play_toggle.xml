@@ -3,4 +3,4 @@
     <item android:state_checked="false" android:drawable="@drawable/bt_playpage_play"/>
 	<item android:state_checked="true" android:drawable="@drawable/bt_playpage_pause"/>
 </selector>
-<!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/drawable/bt_playpage_play_toggle.xml -->
+<!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/drawable/bt_playpage_play_toggle.xml -->

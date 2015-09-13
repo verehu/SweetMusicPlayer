@@ -23,4 +23,4 @@
         android:text="专辑"
         style="@style/tabs"
         android:id="@+id/button3" />
-</LinearLayout><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/test.xml -->
+</LinearLayout><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/layout/test.xml -->

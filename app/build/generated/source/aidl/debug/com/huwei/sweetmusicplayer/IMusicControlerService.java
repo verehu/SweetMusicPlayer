@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/aidl/com/huwei/sweetmusicplayer/IMusicControlerService.aidl
+ * Original file: /home/huwei/androidgit/SweetMusicPlayer/app/src/main/aidl/com/huwei/sweetmusicplayer/IMusicControlerService.aidl
  */
 package com.huwei.sweetmusicplayer;
 // Declare any non-default types here with import statements
@@ -132,7 +132,7 @@ return true;
 case TRANSACTION_getNowPlayingSong:
 {
 data.enforceInterface(DESCRIPTOR);
-com.huwei.sweetmusicplayer.models.MusicInfo _result = this.getNowPlayingSong();
+com.huwei.sweetmusicplayer.abstracts.AbstractMusic _result = this.getNowPlayingSong();
 reply.writeNoException();
 if ((_result!=null)) {
 reply.writeInt(1);
@@ -338,17 +338,17 @@ _data.recycle();
 }
 return _result;
 }
-@Override public com.huwei.sweetmusicplayer.models.MusicInfo getNowPlayingSong() throws android.os.RemoteException
+@Override public com.huwei.sweetmusicplayer.abstracts.AbstractMusic getNowPlayingSong() throws android.os.RemoteException
 {
 android.os.Parcel _data = android.os.Parcel.obtain();
 android.os.Parcel _reply = android.os.Parcel.obtain();
-com.huwei.sweetmusicplayer.models.MusicInfo _result;
+com.huwei.sweetmusicplayer.abstracts.AbstractMusic _result;
 try {
 _data.writeInterfaceToken(DESCRIPTOR);
 mRemote.transact(Stub.TRANSACTION_getNowPlayingSong, _data, _reply, 0);
 _reply.readException();
 if ((0!=_reply.readInt())) {
-_result = com.huwei.sweetmusicplayer.models.MusicInfo.CREATOR.createFromParcel(_reply);
+_result = com.huwei.sweetmusicplayer.abstracts.AbstractMusic.CREATOR.createFromParcel(_reply);
 }
 else {
 _result = null;
@@ -448,7 +448,7 @@ public void seekTo(int mesc) throws android.os.RemoteException;
 public void preparePlayingList(int musicIndex, java.util.List list) throws android.os.RemoteException;
 public boolean isPlaying() throws android.os.RemoteException;
 public int getPlayingSongIndex() throws android.os.RemoteException;
-public com.huwei.sweetmusicplayer.models.MusicInfo getNowPlayingSong() throws android.os.RemoteException;
+public com.huwei.sweetmusicplayer.abstracts.AbstractMusic getNowPlayingSong() throws android.os.RemoteException;
 public boolean isForeground() throws android.os.RemoteException;
 public void nextSong() throws android.os.RemoteException;
 public void preSong() throws android.os.RemoteException;

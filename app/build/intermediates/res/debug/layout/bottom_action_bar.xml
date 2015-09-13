@@ -28,10 +28,8 @@
 
         <ImageView
             android:id="@+id/img_album"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_width="66dp"
+            android:layout_height="match_parent"
             android:src="@drawable/img_album_background" />
 
         <LinearLayout
@@ -84,4 +82,4 @@
     </LinearLayout>
 
 </LinearLayout>
-<!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/bottom_action_bar.xml -->
+<!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/layout/bottom_action_bar.xml -->

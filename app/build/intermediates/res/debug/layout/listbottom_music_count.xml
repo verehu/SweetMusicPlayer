@@ -10,4 +10,4 @@
         android:layout_height="30dp"
         android:textSize="@dimen/text_size_micro"
         android:text="0 首歌曲"/>
-</FrameLayout><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/listbottom_music_count.xml -->
+</FrameLayout><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/layout/listbottom_music_count.xml -->

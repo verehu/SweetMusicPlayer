@@ -12,4 +12,4 @@
             <corners android:topLeftRadius="3.0dip" android:topRightRadius="3.0dip" android:bottomLeftRadius="3.0dip" android:bottomRightRadius="3.0dip" />
         </shape>
     </item>
-</selector><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/drawable/effect_list_item_bg.xml -->
+</selector><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/drawable/effect_list_item_bg.xml -->

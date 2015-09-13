@@ -8,4 +8,4 @@
     <item android:drawable="@drawable/tab_selected_pressed_holo" android:state_focused="false" android:state_pressed="true" android:state_selected="true"/>
     <item android:drawable="@drawable/tab_selected_pressed_focused_holo" android:state_focused="true" android:state_pressed="true" android:state_selected="true"/>
 
-</selector><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/drawable/tab.xml -->
+</selector><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/drawable/tab.xml -->

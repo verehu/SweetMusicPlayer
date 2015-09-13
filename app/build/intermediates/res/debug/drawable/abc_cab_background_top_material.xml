@@ -18,4 +18,4 @@
             android:paddingMode="stack">
     <item android:drawable="@drawable/abc_cab_background_internal_bg" />
     <item android:drawable="@drawable/abc_cab_background_top_mtrl_alpha" />
-</layer-list><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/drawable/abc_cab_background_top_material.xml -->
+</layer-list><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/drawable/abc_cab_background_top_material.xml -->

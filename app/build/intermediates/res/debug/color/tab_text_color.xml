@@ -4,4 +4,4 @@
     <item android:state_selected="true" android:color="@color/white" />
     <item android:color="@color/gainsboro" />
 </selector>
-<!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/color/tab_text_color.xml -->
+<!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/color/tab_text_color.xml -->

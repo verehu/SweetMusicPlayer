@@ -1472,3 +1472,831 @@ android.support.v7.widget.Toolbar toolbar;
 17:50:22.685 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
 17:50:22.689 [Daemon worker Thread 4] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 215 ms], [Generate Sources = 79 ms], [Process Annotations = 46 ms], [Validate Annotations = 27 ms], [Extract Annotations = 26 ms], [Find R Classes = 22 ms], [Extract Manifest = 9 ms], 
 17:50:22.689 [Daemon worker Thread 4] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+21:53:03.445 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+21:53:03.553 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+21:53:03.664 [Daemon worker] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+21:53:04.73 [Daemon worker] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+21:53:04.75 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+21:53:04.75 [Daemon worker] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+21:53:04.99 [Daemon worker] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+21:53:04.164 [Daemon worker] INFO  o.a.p.ModelValidator:42 - Validating elements
+21:53:04.164 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+21:53:04.166 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+21:53:04.170 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+21:53:04.175 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+21:53:04.175 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+21:53:04.177 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+21:53:04.189 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+21:53:04.208 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+21:53:04.210 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+21:53:04.216 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+21:53:04.217 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+21:53:04.217 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+21:53:04.219 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+21:53:04.231 [Daemon worker] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+21:53:04.231 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+21:53:04.248 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+21:53:04.274 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment]
+21:53:04.280 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+21:53:04.282 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+21:53:04.286 [Daemon worker] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+21:53:04.296 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+21:53:04.299 [Daemon worker] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+21:53:04.301 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+21:53:04.325 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+21:53:04.343 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+21:53:04.361 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+21:53:04.378 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+21:53:04.395 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+21:53:04.410 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+21:53:04.420 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+21:53:04.430 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+21:53:04.438 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+21:53:04.450 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+21:53:04.461 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+21:53:04.464 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+21:53:04.467 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+21:53:04.470 [Daemon worker] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 916 ms], [Extract Manifest = 412 ms], [Generate Sources = 173 ms], [Extract Annotations = 108 ms], [Find R Classes = 80 ms], [Process Annotations = 76 ms], [Validate Annotations = 57 ms], 
+21:53:04.470 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+22:00:50.669 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+22:00:50.739 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+22:00:50.761 [Daemon worker Thread 2] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+22:00:50.826 [Daemon worker Thread 2] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+22:00:50.827 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+22:00:50.828 [Daemon worker Thread 2] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+22:00:50.843 [Daemon worker Thread 2] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+22:00:50.866 [Daemon worker Thread 2] INFO  o.a.p.ModelValidator:42 - Validating elements
+22:00:50.866 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+22:00:50.867 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+22:00:50.869 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+22:00:50.872 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+22:00:50.873 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+22:00:50.874 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+22:00:50.883 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+22:00:50.885 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+22:00:50.887 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+22:00:50.890 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+22:00:50.890 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+22:00:50.891 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+22:00:50.892 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+22:00:50.900 [Daemon worker Thread 2] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+22:00:50.901 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+22:00:50.912 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+22:00:50.927 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment]
+22:00:50.932 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+22:00:50.933 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+22:00:50.936 [Daemon worker Thread 2] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+22:00:50.943 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+22:00:50.945 [Daemon worker Thread 2] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+22:00:50.946 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+22:00:50.958 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+22:00:50.966 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+22:00:50.974 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+22:00:50.984 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+22:00:50.995 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+22:00:51.4 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+22:00:51.10 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+22:00:51.19 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+22:00:51.25 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+22:00:51.35 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+22:00:51.46 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+22:00:51.48 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+22:00:51.50 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+22:00:51.53 [Daemon worker Thread 2] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 314 ms], [Generate Sources = 110 ms], [Extract Manifest = 68 ms], [Process Annotations = 50 ms], [Find R Classes = 29 ms], [Validate Annotations = 28 ms], [Extract Annotations = 20 ms], 
+22:00:51.53 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+22:08:01.329 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+22:08:01.400 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+22:08:01.451 [Daemon worker Thread 3] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+22:08:01.457 [Daemon worker Thread 3] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+22:08:01.459 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+22:08:01.460 [Daemon worker Thread 3] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+22:08:01.471 [Daemon worker Thread 3] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+22:08:01.518 [Daemon worker Thread 3] INFO  o.a.p.ModelValidator:42 - Validating elements
+22:08:01.518 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+22:08:01.519 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+22:08:01.521 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+22:08:01.524 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+22:08:01.524 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+22:08:01.526 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+22:08:01.533 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+22:08:01.535 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+22:08:01.537 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+22:08:01.540 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+22:08:01.541 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+22:08:01.541 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+22:08:01.542 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+22:08:01.551 [Daemon worker Thread 3] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+22:08:01.552 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+22:08:01.567 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+22:08:01.584 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment]
+22:08:01.592 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+22:08:01.594 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+22:08:01.598 [Daemon worker Thread 3] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+22:08:01.610 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+22:08:01.613 [Daemon worker Thread 3] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+22:08:01.616 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+22:08:01.634 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+22:08:01.643 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+22:08:01.652 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+22:08:01.666 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+22:08:01.681 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+22:08:01.690 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+22:08:01.697 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+22:08:01.705 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+22:08:01.712 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+22:08:01.723 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+22:08:01.734 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+22:08:01.736 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+22:08:01.738 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+22:08:01.741 [Daemon worker Thread 3] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 341 ms], [Generate Sources = 131 ms], [Process Annotations = 67 ms], [Find R Classes = 51 ms], [Extract Annotations = 49 ms], [Validate Annotations = 25 ms], [Extract Manifest = 9 ms], 
+22:08:01.741 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+22:27:24.63 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+22:27:24.120 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+22:27:24.143 [Daemon worker Thread 7] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+22:27:24.150 [Daemon worker Thread 7] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+22:27:24.152 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+22:27:24.153 [Daemon worker Thread 7] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+22:27:24.161 [Daemon worker Thread 7] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+22:27:24.184 [Daemon worker Thread 7] INFO  o.a.p.ModelValidator:42 - Validating elements
+22:27:24.185 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+22:27:24.186 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+22:27:24.189 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+22:27:24.193 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+22:27:24.193 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+22:27:24.196 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+22:27:24.203 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+22:27:24.205 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+22:27:24.207 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+22:27:24.210 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+22:27:24.210 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+22:27:24.211 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+22:27:24.212 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+22:27:24.220 [Daemon worker Thread 7] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+22:27:24.220 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+22:27:24.231 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+22:27:24.245 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MainFragment]
+22:27:24.249 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+22:27:24.250 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+22:27:24.253 [Daemon worker Thread 7] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+22:27:24.259 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+22:27:24.261 [Daemon worker Thread 7] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+22:27:24.262 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+22:27:24.273 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+22:27:24.281 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+22:27:24.290 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+22:27:24.301 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+22:27:24.315 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+22:27:24.323 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+22:27:24.330 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+22:27:24.338 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+22:27:24.345 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+22:27:24.355 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+22:27:24.365 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+22:27:24.367 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+22:27:24.370 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+22:27:24.373 [Daemon worker Thread 7] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 252 ms], [Generate Sources = 113 ms], [Process Annotations = 47 ms], [Validate Annotations = 28 ms], [Extract Annotations = 21 ms], [Find R Classes = 20 ms], [Extract Manifest = 11 ms], 
+22:27:24.373 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+22:37:22.343 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+22:37:22.403 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+22:37:22.425 [Daemon worker Thread 8] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+22:37:22.433 [Daemon worker Thread 8] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+22:37:22.435 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+22:37:22.436 [Daemon worker Thread 8] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+22:37:22.444 [Daemon worker Thread 8] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+22:37:22.467 [Daemon worker Thread 8] INFO  o.a.p.ModelValidator:42 - Validating elements
+22:37:22.468 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+22:37:22.469 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+22:37:22.472 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+22:37:22.475 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+22:37:22.476 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+22:37:22.478 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+22:37:22.486 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+22:37:22.488 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+22:37:22.489 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+22:37:22.492 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+22:37:22.493 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+22:37:22.493 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+22:37:22.494 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+22:37:22.502 [Daemon worker Thread 8] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+22:37:22.502 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+22:37:22.514 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+22:37:22.528 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment]
+22:37:22.533 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+22:37:22.534 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+22:37:22.536 [Daemon worker Thread 8] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+22:37:22.543 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+22:37:22.545 [Daemon worker Thread 8] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+22:37:22.546 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+22:37:22.558 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+22:37:22.566 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+22:37:22.574 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+22:37:22.585 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+22:37:22.599 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+22:37:22.607 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+22:37:22.614 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+22:37:22.623 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+22:37:22.630 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+22:37:22.640 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+22:37:22.651 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+22:37:22.653 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+22:37:22.655 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+22:37:22.658 [Daemon worker Thread 8] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 255 ms], [Generate Sources = 115 ms], [Process Annotations = 48 ms], [Validate Annotations = 28 ms], [Find R Classes = 21 ms], [Extract Annotations = 20 ms], [Extract Manifest = 11 ms], 
+22:37:22.659 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:16:39.714 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:16:40.796 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:16:41.364 [Daemon worker] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:16:41.942 [Daemon worker] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:16:41.945 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:16:41.946 [Daemon worker] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:16:41.974 [Daemon worker] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:16:42.44 [Daemon worker] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:16:42.44 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:16:42.46 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:16:42.52 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:16:42.58 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:16:42.58 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:16:42.61 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:16:42.82 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:16:42.88 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:16:42.99 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:16:42.105 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:16:42.106 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:16:42.107 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:16:42.135 [Daemon worker] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:16:42.160 [Daemon worker] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:16:42.160 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:16:42.196 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:16:42.240 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment]
+23:16:42.250 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:16:42.253 [Daemon worker] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:16:42.269 [Daemon worker] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:16:42.297 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:16:42.311 [Daemon worker] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:16:42.315 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:16:42.361 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:16:42.390 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:16:42.416 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:16:42.440 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:16:42.460 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:16:42.474 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:16:42.485 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:16:42.500 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:16:42.511 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:16:42.529 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:16:42.548 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:16:42.552 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:16:42.555 [Daemon worker] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:16:42.560 [Daemon worker] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 1764 ms], [Extract Manifest = 583 ms], [Extract Annotations = 566 ms], [Generate Sources = 263 ms], [Process Annotations = 161 ms], [Validate Annotations = 93 ms], [Find R Classes = 86 ms], 
+23:16:42.561 [Daemon worker] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:20:02.114 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:20:02.203 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:20:02.232 [Daemon worker Thread 2] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:20:02.238 [Daemon worker Thread 2] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:20:02.240 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:20:02.241 [Daemon worker Thread 2] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:20:02.251 [Daemon worker Thread 2] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:20:02.272 [Daemon worker Thread 2] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:20:02.273 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:20:02.274 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:20:02.277 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:20:02.280 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:20:02.281 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:20:02.283 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:20:02.294 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:20:02.296 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:20:02.298 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:20:02.302 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:20:02.303 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:20:02.303 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:20:02.304 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:20:02.315 [Daemon worker Thread 2] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:20:02.315 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:20:02.329 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+23:20:02.346 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment]
+23:20:02.351 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:20:02.352 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:20:02.354 [Daemon worker Thread 2] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:20:02.363 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:20:02.365 [Daemon worker Thread 2] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:20:02.367 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:20:02.381 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:20:02.392 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:20:02.477 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:20:02.487 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:20:02.499 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:20:02.508 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:20:02.515 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:20:02.524 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:20:02.531 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:20:02.541 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:20:02.552 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:20:02.554 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:20:02.556 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:20:02.559 [Daemon worker Thread 2] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 356 ms], [Generate Sources = 196 ms], [Process Annotations = 58 ms], [Validate Annotations = 33 ms], [Extract Annotations = 26 ms], [Find R Classes = 22 ms], [Extract Manifest = 10 ms], 
+23:20:02.560 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:20:20.740 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:20:20.810 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:20:20.829 [Daemon worker Thread 2] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:20:20.835 [Daemon worker Thread 2] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:20:20.837 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:20:20.838 [Daemon worker Thread 2] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:20:20.844 [Daemon worker Thread 2] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:20:20.863 [Daemon worker Thread 2] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:20:20.864 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:20:20.865 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:20:20.867 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:20:20.870 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:20:20.871 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:20:20.872 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:20:20.880 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:20:20.882 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:20:20.884 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:20:20.886 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:20:20.887 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:20:20.887 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:20:20.888 [Daemon worker Thread 2] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:20:20.896 [Daemon worker Thread 2] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:20:20.896 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:20:20.908 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+23:20:20.922 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment]
+23:20:20.927 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:20:20.928 [Daemon worker Thread 2] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:20:20.931 [Daemon worker Thread 2] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:20:20.939 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:20:20.940 [Daemon worker Thread 2] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:20:20.942 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:20:20.954 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:20:20.962 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:20:20.970 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:20:20.981 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:20:20.992 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:20:21.1 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:20:21.7 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:20:21.17 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:20:21.23 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:20:21.34 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:20:21.44 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:20:21.46 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:20:21.48 [Daemon worker Thread 2] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:20:21.51 [Daemon worker Thread 2] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 241 ms], [Generate Sources = 113 ms], [Process Annotations = 49 ms], [Validate Annotations = 26 ms], [Find R Classes = 18 ms], [Extract Annotations = 17 ms], [Extract Manifest = 9 ms], 
+23:20:21.51 [Daemon worker Thread 2] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:21:53.704 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:21:53.765 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:21:53.815 [Daemon worker Thread 3] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:21:53.822 [Daemon worker Thread 3] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:21:53.824 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:21:53.825 [Daemon worker Thread 3] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:21:53.831 [Daemon worker Thread 3] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:21:53.846 [Daemon worker Thread 3] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:21:53.846 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:21:53.847 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:21:53.849 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:21:53.852 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:21:53.852 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:21:53.853 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:21:53.862 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:21:53.864 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:21:53.866 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:21:53.869 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:21:53.869 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:21:53.870 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:21:53.871 [Daemon worker Thread 3] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:21:53.882 [Daemon worker Thread 3] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:21:53.882 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:21:53.897 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:21:53.910 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment]
+23:21:53.915 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:21:53.916 [Daemon worker Thread 3] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:21:53.919 [Daemon worker Thread 3] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:21:53.927 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:21:53.929 [Daemon worker Thread 3] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:21:53.930 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:21:53.942 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:21:53.951 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:21:53.961 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:21:53.972 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:21:53.986 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:21:53.994 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:21:54.1 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:21:54.10 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:21:54.17 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:21:54.28 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:21:54.39 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:21:54.41 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:21:54.43 [Daemon worker Thread 3] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:21:54.46 [Daemon worker Thread 3] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 281 ms], [Generate Sources = 119 ms], [Process Annotations = 56 ms], [Extract Annotations = 48 ms], [Validate Annotations = 25 ms], [Find R Classes = 15 ms], [Extract Manifest = 10 ms], 
+23:21:54.46 [Daemon worker Thread 3] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:28:38.361 [Daemon worker Thread 4] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:28:38.424 [Daemon worker Thread 4] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:28:38.445 [Daemon worker Thread 4] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:28:38.451 [Daemon worker Thread 4] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:28:38.453 [Daemon worker Thread 4] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:28:38.453 [Daemon worker Thread 4] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:28:38.458 [Daemon worker Thread 4] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:28:38.474 [Daemon worker Thread 4] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:28:38.474 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:28:38.475 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:28:38.477 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:28:38.480 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:28:38.480 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:28:38.482 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:28:38.489 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:28:38.490 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:28:38.492 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:28:38.495 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:28:38.496 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:28:38.497 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:28:38.498 [Daemon worker Thread 4] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:28:38.510 [Daemon worker Thread 4] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:28:38.511 [Daemon worker Thread 4] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:28:38.522 [Daemon worker Thread 4] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+23:28:38.536 [Daemon worker Thread 4] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment]
+23:28:38.540 [Daemon worker Thread 4] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:28:38.541 [Daemon worker Thread 4] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:28:38.544 [Daemon worker Thread 4] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:28:38.550 [Daemon worker Thread 4] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:28:38.552 [Daemon worker Thread 4] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:28:38.553 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:28:38.564 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:28:38.573 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:28:38.581 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:28:38.592 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:28:38.606 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:28:38.614 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:28:38.621 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:28:38.630 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:28:38.638 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:28:38.649 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:28:38.660 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:28:38.662 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:28:38.665 [Daemon worker Thread 4] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:28:38.670 [Daemon worker Thread 4] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 246 ms], [Generate Sources = 120 ms], [Process Annotations = 51 ms], [Validate Annotations = 26 ms], [Extract Annotations = 20 ms], [Find R Classes = 13 ms], [Extract Manifest = 9 ms], 
+23:28:38.670 [Daemon worker Thread 4] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:29:54.446 [Daemon worker Thread 5] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:29:54.513 [Daemon worker Thread 5] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:29:54.532 [Daemon worker Thread 5] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:29:54.540 [Daemon worker Thread 5] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:29:54.542 [Daemon worker Thread 5] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:29:54.544 [Daemon worker Thread 5] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:29:54.552 [Daemon worker Thread 5] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:29:54.570 [Daemon worker Thread 5] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:29:54.571 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:29:54.572 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:29:54.575 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:29:54.578 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:29:54.579 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:29:54.580 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:29:54.588 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:29:54.590 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:29:54.592 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:29:54.595 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:29:54.596 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:29:54.596 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:29:54.597 [Daemon worker Thread 5] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:29:54.606 [Daemon worker Thread 5] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:29:54.606 [Daemon worker Thread 5] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:29:54.618 [Daemon worker Thread 5] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:29:54.632 [Daemon worker Thread 5] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment]
+23:29:54.637 [Daemon worker Thread 5] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:29:54.638 [Daemon worker Thread 5] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:29:54.641 [Daemon worker Thread 5] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:29:54.648 [Daemon worker Thread 5] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:29:54.650 [Daemon worker Thread 5] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:29:54.651 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:29:54.662 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:29:54.671 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:29:54.680 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:29:54.692 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:29:54.703 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:29:54.712 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:29:54.719 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:29:54.728 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:29:54.735 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:29:54.746 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:29:54.757 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:29:54.759 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:29:54.760 [Daemon worker Thread 5] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:29:54.764 [Daemon worker Thread 5] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 251 ms], [Generate Sources = 116 ms], [Process Annotations = 51 ms], [Validate Annotations = 28 ms], [Extract Annotations = 18 ms], [Find R Classes = 18 ms], [Extract Manifest = 11 ms], 
+23:29:54.764 [Daemon worker Thread 5] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:40:36.845 [Daemon worker Thread 6] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:40:36.908 [Daemon worker Thread 6] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:40:36.933 [Daemon worker Thread 6] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:40:36.941 [Daemon worker Thread 6] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:40:36.943 [Daemon worker Thread 6] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:40:36.945 [Daemon worker Thread 6] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:40:36.952 [Daemon worker Thread 6] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:40:36.969 [Daemon worker Thread 6] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:40:36.970 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:40:36.970 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:40:36.973 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:40:36.976 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:40:36.977 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:40:36.978 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:40:36.986 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:40:36.988 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:40:36.989 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:40:36.994 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:40:36.994 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:40:36.995 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:40:36.996 [Daemon worker Thread 6] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:40:37.6 [Daemon worker Thread 6] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:40:37.6 [Daemon worker Thread 6] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:40:37.20 [Daemon worker Thread 6] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+23:40:37.34 [Daemon worker Thread 6] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment]
+23:40:37.39 [Daemon worker Thread 6] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:40:37.41 [Daemon worker Thread 6] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:40:37.45 [Daemon worker Thread 6] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:40:37.55 [Daemon worker Thread 6] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:40:37.57 [Daemon worker Thread 6] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:40:37.59 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:40:37.71 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:40:37.84 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:40:37.96 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:40:37.106 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:40:37.120 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:40:37.129 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:40:37.135 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:40:37.145 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:40:37.152 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:40:37.163 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:40:37.176 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:40:37.178 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:40:37.180 [Daemon worker Thread 6] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:40:37.183 [Daemon worker Thread 6] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 275 ms], [Generate Sources = 128 ms], [Process Annotations = 57 ms], [Validate Annotations = 29 ms], [Extract Annotations = 23 ms], [Find R Classes = 17 ms], [Extract Manifest = 12 ms], 
+23:40:37.183 [Daemon worker Thread 6] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:47:02.283 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:47:02.381 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:47:02.401 [Daemon worker Thread 7] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:47:02.414 [Daemon worker Thread 7] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:47:02.416 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:47:02.417 [Daemon worker Thread 7] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:47:02.423 [Daemon worker Thread 7] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:47:02.463 [Daemon worker Thread 7] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:47:02.463 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:47:02.464 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:47:02.466 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:47:02.468 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:47:02.469 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:47:02.470 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:47:02.478 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:47:02.479 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:47:02.481 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:47:02.483 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:47:02.484 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:47:02.484 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:47:02.485 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:47:02.496 [Daemon worker Thread 7] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:47:02.496 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:47:02.509 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:47:02.525 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment]
+23:47:02.530 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:47:02.531 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:47:02.533 [Daemon worker Thread 7] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:47:02.539 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:47:02.542 [Daemon worker Thread 7] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:47:02.544 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:47:02.557 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:47:02.566 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:47:02.574 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:47:02.588 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:47:02.600 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:47:02.610 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:47:02.617 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:47:02.627 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:47:02.633 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:47:02.644 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:47:02.655 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:47:02.657 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:47:02.660 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:47:02.663 [Daemon worker Thread 7] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 283 ms], [Generate Sources = 124 ms], [Process Annotations = 53 ms], [Find R Classes = 38 ms], [Validate Annotations = 23 ms], [Extract Annotations = 18 ms], [Extract Manifest = 17 ms], 
+23:47:02.664 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:47:52.898 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:47:52.964 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:47:52.983 [Daemon worker Thread 7] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:47:52.997 [Daemon worker Thread 7] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:47:52.998 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:47:52.998 [Daemon worker Thread 7] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:47:53.2 [Daemon worker Thread 7] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:47:53.17 [Daemon worker Thread 7] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:47:53.17 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:47:53.18 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:47:53.20 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:47:53.23 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:47:53.24 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:47:53.25 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:47:53.32 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:47:53.33 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:47:53.35 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:47:53.37 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:47:53.38 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:47:53.38 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:47:53.39 [Daemon worker Thread 7] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:47:53.48 [Daemon worker Thread 7] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:47:53.49 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:47:53.60 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:47:53.72 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:47:53.76 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:47:53.77 [Daemon worker Thread 7] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:47:53.79 [Daemon worker Thread 7] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:47:53.85 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:47:53.87 [Daemon worker Thread 7] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:47:53.89 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:47:53.100 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:47:53.109 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:47:53.118 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:47:53.132 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:47:53.143 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:47:53.152 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:47:53.158 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:47:53.168 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:47:53.175 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:47:53.185 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:47:53.195 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:47:53.197 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:47:53.199 [Daemon worker Thread 7] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:47:53.202 [Daemon worker Thread 7] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 238 ms], [Generate Sources = 117 ms], [Process Annotations = 45 ms], [Validate Annotations = 24 ms], [Extract Annotations = 17 ms], [Extract Manifest = 16 ms], [Find R Classes = 11 ms], 
+23:47:53.202 [Daemon worker Thread 7] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:49:41.537 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:49:41.597 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:49:41.618 [Daemon worker Thread 8] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:49:41.623 [Daemon worker Thread 8] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:49:41.624 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:49:41.625 [Daemon worker Thread 8] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:49:41.630 [Daemon worker Thread 8] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:49:41.643 [Daemon worker Thread 8] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:49:41.643 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:49:41.644 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:49:41.646 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:49:41.648 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:49:41.648 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:49:41.650 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:49:41.657 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:49:41.658 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:49:41.660 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:49:41.664 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:49:41.664 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:49:41.665 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:49:41.665 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:49:41.673 [Daemon worker Thread 8] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:49:41.674 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:49:41.685 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+23:49:41.697 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment]
+23:49:41.701 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:49:41.702 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:49:41.705 [Daemon worker Thread 8] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:49:41.713 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:49:41.714 [Daemon worker Thread 8] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:49:41.716 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:49:41.729 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:49:41.737 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:49:41.745 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:49:41.757 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:49:41.771 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:49:41.780 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:49:41.787 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:49:41.796 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:49:41.802 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:49:41.812 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:49:41.824 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:49:41.827 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:49:41.830 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:49:41.833 [Daemon worker Thread 8] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 236 ms], [Generate Sources = 120 ms], [Process Annotations = 47 ms], [Validate Annotations = 23 ms], [Extract Annotations = 18 ms], [Find R Classes = 12 ms], [Extract Manifest = 7 ms], 
+23:49:41.833 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+23:50:03.344 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+23:50:03.413 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+23:50:03.431 [Daemon worker Thread 8] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+23:50:03.438 [Daemon worker Thread 8] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+23:50:03.439 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+23:50:03.441 [Daemon worker Thread 8] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+23:50:03.450 [Daemon worker Thread 8] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+23:50:03.467 [Daemon worker Thread 8] INFO  o.a.p.ModelValidator:42 - Validating elements
+23:50:03.467 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:50:03.468 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+23:50:03.470 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+23:50:03.473 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+23:50:03.473 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:50:03.475 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+23:50:03.483 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+23:50:03.485 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+23:50:03.487 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+23:50:03.489 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+23:50:03.490 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+23:50:03.492 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+23:50:03.493 [Daemon worker Thread 8] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+23:50:03.503 [Daemon worker Thread 8] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+23:50:03.503 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+23:50:03.518 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+23:50:03.532 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment]
+23:50:03.536 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+23:50:03.538 [Daemon worker Thread 8] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+23:50:03.540 [Daemon worker Thread 8] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+23:50:03.549 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+23:50:03.551 [Daemon worker Thread 8] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+23:50:03.553 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+23:50:03.565 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+23:50:03.574 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+23:50:03.584 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+23:50:03.596 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+23:50:03.608 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+23:50:03.620 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+23:50:03.627 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+23:50:03.637 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+23:50:03.644 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+23:50:03.655 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+23:50:03.668 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+23:50:03.671 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+23:50:03.673 [Daemon worker Thread 8] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+23:50:03.676 [Daemon worker Thread 8] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 263 ms], [Generate Sources = 127 ms], [Process Annotations = 54 ms], [Validate Annotations = 29 ms], [Find R Classes = 16 ms], [Extract Annotations = 15 ms], [Extract Manifest = 10 ms], 
+23:50:03.676 [Daemon worker Thread 8] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+00:09:03.978 [Daemon worker Thread 9] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+00:09:04.42 [Daemon worker Thread 9] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+00:09:04.58 [Daemon worker Thread 9] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+00:09:04.62 [Daemon worker Thread 9] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+00:09:04.63 [Daemon worker Thread 9] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+00:09:04.64 [Daemon worker Thread 9] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+00:09:04.69 [Daemon worker Thread 9] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+00:09:04.82 [Daemon worker Thread 9] INFO  o.a.p.ModelValidator:42 - Validating elements
+00:09:04.82 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+00:09:04.83 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+00:09:04.86 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+00:09:04.88 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+00:09:04.88 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+00:09:04.90 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+00:09:04.98 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+00:09:04.100 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+00:09:04.102 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+00:09:04.104 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+00:09:04.105 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+00:09:04.105 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+00:09:04.106 [Daemon worker Thread 9] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+00:09:04.116 [Daemon worker Thread 9] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+00:09:04.116 [Daemon worker Thread 9] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+00:09:04.130 [Daemon worker Thread 9] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.OnlineSearchActivity, com.huwei.sweetmusicplayer.SongScanActivity]
+00:09:04.142 [Daemon worker Thread 9] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment]
+00:09:04.146 [Daemon worker Thread 9] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+00:09:04.148 [Daemon worker Thread 9] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+00:09:04.150 [Daemon worker Thread 9] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+00:09:04.157 [Daemon worker Thread 9] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+00:09:04.160 [Daemon worker Thread 9] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+00:09:04.161 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+00:09:04.173 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+00:09:04.182 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+00:09:04.190 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+00:09:04.201 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+00:09:04.216 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+00:09:04.226 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+00:09:04.232 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+00:09:04.242 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+00:09:04.249 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+00:09:04.259 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+00:09:04.270 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+00:09:04.272 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+00:09:04.274 [Daemon worker Thread 9] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+00:09:04.278 [Daemon worker Thread 9] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 236 ms], [Generate Sources = 121 ms], [Process Annotations = 51 ms], [Validate Annotations = 25 ms], [Extract Annotations = 15 ms], [Find R Classes = 11 ms], [Extract Manifest = 6 ms], 
+00:09:04.278 [Daemon worker Thread 9] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing
+00:11:37.376 [Daemon worker Thread 10] INFO  o.a.AndroidAnnotationProcessor:84 - Initialize AndroidAnnotations 3.2 with options {androidManifestFile=/home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml}
+00:11:37.444 [Daemon worker Thread 10] INFO  o.a.AndroidAnnotationProcessor:108 - Start processing for 13 annotations on 90 elements
+00:11:37.461 [Daemon worker Thread 10] DEBUG o.a.h.AndroidManifestFinder:98 - AndroidManifest.xml file found with specified path: /home/huwei/androidgit/SweetMusicPlayer/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+00:11:37.467 [Daemon worker Thread 10] WARN  o.a.h.AndroidManifestFinder:252 - A class activity declared in the AndroidManifest.xml cannot be found in the compile path: [android.support.v7.widget.TestActivity]
+00:11:37.468 [Daemon worker Thread 10] INFO  o.a.AndroidAnnotationProcessor:171 - AndroidManifest.xml found: AndroidManifest [applicationPackage=com.huwei.sweetmusicplayer, componentQualifiedNames=[com.huwei.sweetmusicplayer.SplashActivity, com.huwei.sweetmusicplayer.MainActivity, com.huwei.sweetmusicplayer.SongScanActivity_, com.huwei.sweetmusicplayer.OnlineSearchActivity_, com.huwei.sweetmusicplayer.services.MusicControlerService, com.huwei.sweetmusicplayer.services.ShakeService, com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver], permissionQualifiedNames=[android.permission.WRITE_EXTERNAL_STORAGE, android.permission.WAKE_LOCK, android.permission.VIBRATE, android.permission.INTERNET, android.permission.GET_TASKS, android.permission.INTERACT_ACROSS_USERS_FULL, android.permission.GET_TOP_ACTIVITY_INFO, android.permission.REORDER_TASKS], applicationClassName=com.huwei.sweetmusicplayer.SweetApplication_, libraryProject=false, debugabble=false, minSdkVersion=11, maxSdkVersion=-1, targetSdkVersion=21]
+00:11:37.469 [Daemon worker Thread 10] INFO  o.a.r.ProjectRClassFinder:50 - Found project R class: com.huwei.sweetmusicplayer.R
+00:11:37.473 [Daemon worker Thread 10] INFO  o.a.r.AndroidRClassFinder:44 - Found Android class: android.R
+00:11:37.487 [Daemon worker Thread 10] INFO  o.a.p.ModelValidator:42 - Validating elements
+00:11:37.488 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+00:11:37.488 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+00:11:37.491 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment]
+00:11:37.493 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter, com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter]
+00:11:37.494 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+00:11:37.496 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with ViewByIdHandler: [scannow_tv, scancount_tv, scanfinish_btn, toolbar, lv_online_search, toolbar, lv_song, sidebar, dialog, toolbar, rv_album, rv_album, dl_music_queue, btn_show_music_queue, lv_music_queue, tv_title, tv_artist, btn_play, btn_next, img_album, pro_music, toolbar, viewPager, scrollingTabs, tv_sleepinfo, tv_sleep_cancel, ll_sleepbar, img_album, tv_title, tv_numsongs]
+00:11:37.505 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with ClickHandler: [btn_show_music_queueWasClicked(), tv_sleep_cancelWasClicked()]
+00:11:37.506 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [sleep_times]
+00:11:37.508 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with ResHandler: [purple, white]
+00:11:37.510 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with SystemServiceHandler: [inflater, inflater, inflater, inflater]
+00:11:37.511 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with RootContextHanlder: [context, context]
+00:11:37.511 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with BeanHandler: [adapter, adapter, queueAdapter]
+00:11:37.512 [Daemon worker Thread 10] DEBUG o.a.p.ModelValidator:62 - Validating with AfterViewsHandler: [init(), init(), init(), init(), init(), init(), init(), init()]
+00:11:37.523 [Daemon worker Thread 10] INFO  o.a.p.ModelProcessor:69 - Processing root elements
+00:11:37.523 [Daemon worker Thread 10] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EApplicationHandler: [com.huwei.sweetmusicplayer.SweetApplication]
+00:11:37.535 [Daemon worker Thread 10] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EActivityHandler: [com.huwei.sweetmusicplayer.SongScanActivity, com.huwei.sweetmusicplayer.OnlineSearchActivity]
+00:11:37.551 [Daemon worker Thread 10] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EFragmentHandler: [com.huwei.sweetmusicplayer.fragments.MusicFragment, com.huwei.sweetmusicplayer.fragments.ArtistsFragment, com.huwei.sweetmusicplayer.fragments.MainFragment, com.huwei.sweetmusicplayer.fragments.AlbumsFragment, com.huwei.sweetmusicplayer.fragments.SongScanpreFragment, com.huwei.sweetmusicplayer.fragments.OnlineFragment, com.huwei.sweetmusicplayer.fragments.PlayingFragment, com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment]
+00:11:37.555 [Daemon worker Thread 10] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EBeanHandler: [com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter, com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter]
+00:11:37.556 [Daemon worker Thread 10] DEBUG o.a.p.ModelProcessor:160 - Processing root elements EViewGroupHandler: [com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView]
+00:11:37.558 [Daemon worker Thread 10] INFO  o.a.p.ModelProcessor:77 - Processing enclosed elements
+00:11:37.566 [Daemon worker Thread 10] INFO  o.a.AndroidAnnotationProcessor:250 - Number of files generated by AndroidAnnotations: 14
+00:11:37.568 [Daemon worker Thread 10] INFO  o.a.g.ApiCodeGenerator:52 - Writting following API classes in project: []
+00:11:37.569 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_
+00:11:37.580 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.AlbumsFragment_
+00:11:37.589 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.ArtistsFragment_
+00:11:37.597 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_
+00:11:37.608 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MainFragment_
+00:11:37.621 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.MusicFragment_
+00:11:37.632 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.OnlineFragment_
+00:11:37.638 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.PlayingFragment_
+00:11:37.648 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.fragments.SongScanpreFragment_
+00:11:37.655 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.OnlineSearchActivity_
+00:11:37.666 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SongScanActivity_
+00:11:37.677 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.SweetApplication_
+00:11:37.679 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter_
+00:11:37.681 [Daemon worker Thread 10] DEBUG o.a.g.SourceCodewriter:55 - Generating class: com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter_
+00:11:37.684 [Daemon worker Thread 10] INFO  o.a.p.TimeStats:81 - Time measurements: [Whole Processing = 240 ms], [Generate Sources = 118 ms], [Process Annotations = 53 ms], [Validate Annotations = 26 ms], [Extract Annotations = 15 ms], [Find R Classes = 11 ms], [Extract Manifest = 8 ms], 
+00:11:37.684 [Daemon worker Thread 10] INFO  o.a.AndroidAnnotationProcessor:122 - Finish processing

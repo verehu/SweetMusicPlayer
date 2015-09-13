@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!--背景图-->
-    <item
-        android:id="@android:id/background"
-        android:drawable="@color/lightgray" />
+    <item android:id="@android:id/background">
+
+            <shape>
+                <solid android:color="@color/lightgray" />
+
+                <size android:height="8dp" />
+
+            </shape>
+
+    </item>
 
     <!--第二进度图-->
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape>
+                <solid android:color="@color/white" />
+
+                <size android:height="8dp" />
+
+            </shape>
+
+        </clip>
+    </item>
     <item android:id="@android:id/progress">
         <clip>
             <shape>
                 <solid android:color="@color/holo_purple_light" />
 
-                <size android:height="4dp" />
+                <size android:height="8dp" />
 
             </shape>
 
@@ -21,4 +39,4 @@
     <!--&lt;!&ndash;进度颜色&ndash;&gt;-->
     <!--<item android:id="@android:id/progress" android:drawable="@color/holo_purple_light"/>-->
 
-</layer-list><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/drawable/bg_seekbar.xml -->
+</layer-list><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/drawable/bg_seekbar.xml -->

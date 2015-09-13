@@ -27,8 +27,8 @@ public final class QueueAdapter_
 
     private void init_() {
         Resources resources_ = context_.getResources();
-        white = resources_.getColor(color.white);
         purple = resources_.getColor(color.purple);
+        white = resources_.getColor(color.white);
         inflater = ((LayoutInflater) context_.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         context = context_;
     }

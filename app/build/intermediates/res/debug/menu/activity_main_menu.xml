@@ -3,11 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"  >
     <item
         android:id="@+id/menu_scan"
-        android:title="@string/scan_item"
+        android:title="@string/menu_item_scan"
         app:showAsAction="never"/>
     <item
         android:id="@+id/menu_clock"
-        android:title="睡眠"
+        android:title="@string/menu_item_sleep"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:title="@string/menu_item_search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="collapseActionView|ifRoom"  />
 </menu>
-<!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/menu/activity_main_menu.xml -->
+<!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/menu/activity_main_menu.xml -->

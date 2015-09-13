@@ -63,4 +63,4 @@
         android:onClick="sleepPopOperate"
         android:text="自定义"/>
 </LinearLayout>
-<!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/layout/pop_select_sleeptime.xml -->
+<!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/layout/pop_select_sleeptime.xml -->

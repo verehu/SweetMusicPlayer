@@ -4,4 +4,4 @@
     <item android:drawable="@drawable/img_button_playcontrolbar_transparent_play_normal" android:state_checked="false"/>
     <item android:drawable="@drawable/img_button_playcontrolbar_transparent_pause_normal" android:state_checked="true"/>
 
-</selector><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/drawable/playtoggle_btn_selector.xml -->
+</selector><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/drawable/playtoggle_btn_selector.xml -->

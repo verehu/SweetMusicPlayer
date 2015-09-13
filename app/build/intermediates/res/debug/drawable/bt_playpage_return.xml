@@ -5,4 +5,4 @@
     <item android:state_selected="true" android:drawable="@drawable/bt_playpage_button_return_press" />
     <item android:state_focused="true" android:drawable="@drawable/bt_playpage_button_return_press" />
     <item android:drawable="@drawable/bt_playpage_button_return_normal" />
-</selector><!-- From: file:/root/AndroidStudioProjects/SweetMusicPlayer/app/src/main/res/drawable/bt_playpage_return.xml -->
+</selector><!-- From: file:/home/huwei/androidgit/SweetMusicPlayer/app/src/main/res/drawable/bt_playpage_return.xml -->

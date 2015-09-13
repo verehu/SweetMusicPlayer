@@ -90,9 +90,9 @@ public final class AlbumItemView_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        tv_title = ((TextView) hasViews.findViewById(id.tv_title));
         img_album = ((ImageView) hasViews.findViewById(id.img_album));
         tv_numsongs = ((TextView) hasViews.findViewById(id.tv_numsongs));
+        tv_title = ((TextView) hasViews.findViewById(id.tv_title));
     }
 
 }

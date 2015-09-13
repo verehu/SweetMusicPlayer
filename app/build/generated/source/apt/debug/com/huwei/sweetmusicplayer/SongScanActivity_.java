@@ -81,10 +81,10 @@ public final class SongScanActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
+        scanfinish_btn = ((Button) hasViews.findViewById(id.scanfinish_btn));
         scannow_tv = ((TextView) hasViews.findViewById(id.scannow_tv));
         scancount_tv = ((TextView) hasViews.findViewById(id.scancount_tv));
         toolbar = ((Toolbar) hasViews.findViewById(id.toolbar));
-        scanfinish_btn = ((Button) hasViews.findViewById(id.scanfinish_btn));
         init();
     }
 
