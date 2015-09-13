@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.po;
+package com.huwei.sweetmusicplayer.baidumusic.po;
 
 import android.net.Uri;
 import android.os.Parcel;
@@ -7,8 +7,6 @@ import android.os.Parcelable;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
-
-import java.net.BindException;
 
 /**
  * 百度音乐API返回的Song

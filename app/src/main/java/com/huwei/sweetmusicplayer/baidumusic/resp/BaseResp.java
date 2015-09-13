@@ -1,10 +1,10 @@
-package com.huwei.sweetmusicplayer.po;
+package com.huwei.sweetmusicplayer.baidumusic.resp;
 
 /**
  * @author Jayce
  * @date 2015/6/13
  */
-public class Error {
+public class BaseResp {
 
     public static final int ERROR_CODE_OK=22000;
     private int error_code;

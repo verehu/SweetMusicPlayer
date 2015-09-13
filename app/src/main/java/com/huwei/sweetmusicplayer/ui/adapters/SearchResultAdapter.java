@@ -13,10 +13,10 @@ import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.po.Album;
-import com.huwei.sweetmusicplayer.po.Artist;
+import com.huwei.sweetmusicplayer.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
 import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
-import com.huwei.sweetmusicplayer.po.Song;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 

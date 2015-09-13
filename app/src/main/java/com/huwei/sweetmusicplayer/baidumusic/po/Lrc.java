@@ -1,10 +1,12 @@
-package com.huwei.sweetmusicplayer.po;
+package com.huwei.sweetmusicplayer.baidumusic.po;
+
+import com.huwei.sweetmusicplayer.baidumusic.resp.BaseResp;
 
 /**
  * @author Jayce
  * @date 2015/6/12
  */
-public class Lrc extends Error{
+public class Lrc extends BaseResp {
 
 
     private String title;

@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.po;
+package com.huwei.sweetmusicplayer.baidumusic.po;
 
 import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
 

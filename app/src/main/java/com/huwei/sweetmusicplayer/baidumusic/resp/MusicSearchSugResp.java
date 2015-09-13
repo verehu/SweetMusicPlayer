@@ -1,4 +1,9 @@
-package com.huwei.sweetmusicplayer.po;
+package com.huwei.sweetmusicplayer.baidumusic.resp;
+
+import com.huwei.sweetmusicplayer.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.baidumusic.resp.BaseResp;
 
 import java.util.List;
 
@@ -7,7 +12,7 @@ import java.util.List;
  * @author Jayce
  * @date 2015/6/11
  */
-public class MusicSearchSug extends  Error{
+public class MusicSearchSugResp extends BaseResp {
 
     /**
      * Json样例
