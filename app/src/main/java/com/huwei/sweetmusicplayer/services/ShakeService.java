@@ -1,6 +1,5 @@
 package com.huwei.sweetmusicplayer.services;
 
-//import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.ui.listeners.ShakeListener;
  
 

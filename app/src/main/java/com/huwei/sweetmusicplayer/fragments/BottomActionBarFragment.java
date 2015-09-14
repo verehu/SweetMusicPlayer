@@ -15,7 +15,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -31,6 +33,8 @@ import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.bottom_action_bar)
 public class BottomActionBarFragment extends Fragment implements IContain {
+
+    public static final String TAG="BottomActionBarFragment";
 
     @ViewById
     TextView tv_title, tv_artist;
@@ -119,9 +123,17 @@ public class BottomActionBarFragment extends Fragment implements IContain {
             tv_artist.setText(music.getArtist());
             btn_play.setChecked(MusicManager.getInstance().isPlaying());
 
-            ImageLoader imageLoader = SweetApplication.getImageLoader();
-            imageLoader.displayImage(music.getArtPic(), img_album);
+//            ImageLoader imageLoader = SweetApplication.getImageLoader();
+//            imageLoader.displayImage(music.getArtPic(), img_album);
 //            img_album.setImageBitmap(MusicUtils.getCachedArtwork(getActivity(), music.getAlbumId(), R.drawable.img_album_background));
+            music.loadArtPic(new AbstractMusic.OnLoadListener() {
+                @Override
+                public void onSuccessLoad(Bitmap bitmap) {
+                    Log.i(TAG, "onSuccessLoad bitmap:" + bitmap);
+
+                    img_album.setImageBitmap(bitmap);
+                }
+            });
         }
 
     }

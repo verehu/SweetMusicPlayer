@@ -429,17 +429,25 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         reViews.setTextViewText(R.id.text, artist);
 
         reViews.setImageViewResource(R.id.img_album, R.drawable.img_album_background);
-        ImageLoader imageLoader = SweetApplication.getImageLoader();
-        imageLoader.loadImage(music.getArtPic(), new SimpleImageLoadingListener() {
+//        ImageLoader imageLoader = SweetApplication.getImageLoader();
+//        imageLoader.loadImage(music.getArtPic(), new SimpleImageLoadingListener() {
+//            @Override
+//            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                super.onLoadingComplete(imageUri, view, loadedImage);
+//
+//                reViews.setImageViewBitmap(R.id.img_album, loadedImage);
+//            }
+//        });
+        music.loadArtPic(new AbstractMusic.OnLoadListener() {
             @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                super.onLoadingComplete(imageUri, view, loadedImage);
+            public void onSuccessLoad(Bitmap bitmap) {
+                Log.i(TAG,"onSuccessLoad bitmap:"+bitmap);
 
-                reViews.setImageViewBitmap(R.id.img_album, loadedImage);
+                reViews.setImageViewBitmap(R.id.img_album, bitmap);
             }
         });
 
-        Log.i(TAG, "picUri:" + picUri);
+//        Log.i(TAG, "picUri:" + music.getArtPic());
 
 
         Intent intent = new Intent(getBaseContext(), MainActivity.class);

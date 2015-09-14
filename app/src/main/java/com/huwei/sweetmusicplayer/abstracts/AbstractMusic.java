@@ -1,5 +1,6 @@
 package com.huwei.sweetmusicplayer.abstracts;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcelable;
 
@@ -37,7 +38,9 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
      * 获取艺术家图片
      * @return   uri
      */
-    public abstract String getArtPic();
+//    public abstract String getArtPic();
+
+    public abstract void loadArtPic(OnLoadListener loadListener);
 
     /**
      * 获取时间字符串
@@ -51,4 +54,9 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
     public enum MusicType {
         Local, Online
     }
+
+    public interface OnLoadListener{
+        void onSuccessLoad(Bitmap bitmap);
+    }
+
 }

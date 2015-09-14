@@ -1,12 +1,18 @@
 package com.huwei.sweetmusicplayer.baidumusic.po;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+import android.view.View;
 
+import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
  * 百度音乐API返回的Song
@@ -15,6 +21,8 @@ import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
  * @date 2015/6/11
  */
 public class Song extends AbstractMusic implements ISearchReuslt {
+
+    public static final String TAG="Song";
 
     private String songid;
     private String songname;
@@ -150,9 +158,24 @@ public class Song extends AbstractMusic implements ISearchReuslt {
     }
 
     //返回""加载默认的图片
-    @Override
     public String getArtPic() {
-        return songInfo!=null?songInfo.getPic_premium():"";
+        return Uri.parse(songInfo!=null?songInfo.getPic_premium():"").toString();
+    }
+
+    @Override
+    public void loadArtPic(final OnLoadListener loadListener) {
+        ImageLoader imageLoader = SweetApplication.getImageLoader();
+        imageLoader.loadImage(getArtPic(),new SimpleImageLoadingListener(){
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                super.onLoadingComplete(imageUri, view, loadedImage);
+                Log.i(TAG,"onLoadingComplete   --->uri:"+imageUri);
+
+                if(loadListener!=null){
+                    loadListener.onSuccessLoad(loadedImage);
+                }
+            }
+        });
     }
 
     public boolean hasGetDetailInfo(){
