@@ -8,10 +8,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 
+import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.util.CharacterParser;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
 import com.huwei.sweetmusicplayer.util.TimeUtil;
+
+import java.io.File;
 
 /**
  * Entity mapped to table MUSIC_INFO.
@@ -100,7 +103,7 @@ public class MusicInfo extends AbstractMusic {
 
     @Override
     public String getArtPic() {
-        Uri uri= ContentUris.withAppendedId(MusicUtils.sArtworkUri, albumId);
+        Uri uri= Uri.fromFile(new File(MusicUtils.getAlbumArtPath(SweetApplication.context,albumId)));
         return uri.toString();
     }
 

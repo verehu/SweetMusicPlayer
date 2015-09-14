@@ -219,6 +219,22 @@ public class MusicUtils implements IContain{
         return null;
     }
 
+    public static String getAlbumArtPath(Context context,Long albumid) {
+        String strAlbums = "content://media/external/audio/albums";
+        String[] projection = new String[] {android.provider.MediaStore.Audio.AlbumColumns.ALBUM_ART };
+        Cursor cur = context.getContentResolver().query(
+                Uri.parse(strAlbums + "/" + Long.toString(albumid)),
+                projection, null, null, null);
+        String strPath = null;
+        if (cur.getCount() > 0 && cur.getColumnCount() > 0) {
+            cur.moveToNext();
+            strPath = cur.getString(0);
+        }
+        cur.close();
+        cur = null;
+        return strPath;
+    }
+
     public static ArrayList<MusicInfo> getMusicList(Cursor cursor){
         if(cursor==null){
             return null;

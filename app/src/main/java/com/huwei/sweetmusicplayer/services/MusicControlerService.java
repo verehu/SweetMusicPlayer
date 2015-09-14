@@ -439,7 +439,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             }
         });
 
-        Log.i(TAG, "picUri:" + picUri);
+        Log.i(TAG, "picUri:" + music.getArtPic());
 
 
         Intent intent = new Intent(getBaseContext(), MainActivity.class);

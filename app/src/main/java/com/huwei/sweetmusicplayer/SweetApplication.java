@@ -24,7 +24,7 @@ import org.androidannotations.annotations.EApplication;
 public class SweetApplication extends Application {
     private static DaoSession daoSession;
     private static RequestQueue mQueue;
-    private static Context context;
+    public static Context context;
     private static ImageLoader mImageLoader;
 
 
