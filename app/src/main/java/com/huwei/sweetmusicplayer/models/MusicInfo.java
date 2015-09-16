@@ -104,21 +104,21 @@ public class MusicInfo extends AbstractMusic {
         return artist;
     }
 
-//    @Override
-//    public String getArtPic() {
-//        Uri uri= ContentUris.withAppendedId(MusicUtils.sArtworkUri, albumId);
-//
-//        String[] proj = { MediaStore.Images.Media.DATA };
-//        Cursor actualimagecursor = SweetApplication.context.getContentResolver().query(uri, proj, null, null, null);
-//        int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//        actualimagecursor.moveToFirst();
-//
-//
-//        String img_path = actualimagecursor.getString(actual_image_column_index);
-//        File file = new File(img_path+".png");
-//        Uri fileUri = Uri.fromFile(file);
-//        return fileUri.toString();
-//    }
+    @Override
+    public String getArtPic() {
+        Uri uri= ContentUris.withAppendedId(MusicUtils.sArtworkUri, albumId);
+
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor actualimagecursor = SweetApplication.context.getContentResolver().query(uri, proj, null, null, null);
+        int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        actualimagecursor.moveToFirst();
+
+
+        String img_path = actualimagecursor.getString(actual_image_column_index);
+        File file = new File(img_path);
+        Uri fileUri = Uri.fromFile(file);
+        return fileUri.toString();
+    }
 
     @Override
     public void loadArtPic(OnLoadListener loadListener) {

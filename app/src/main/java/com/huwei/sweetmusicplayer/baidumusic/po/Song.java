@@ -159,7 +159,7 @@ public class Song extends AbstractMusic implements ISearchReuslt {
 
     //返回""加载默认的图片
     public String getArtPic() {
-        return Uri.parse(songInfo!=null?songInfo.getPic_premium():"").toString();
+        return Uri.parse(songInfo!=null?songInfo.getPic_small():"").toString();
     }
 
     @Override

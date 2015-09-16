@@ -420,7 +420,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         }
     }
 
-    void showMusicPlayerNotification(String tickerText, int id,
+    void showMusicPlayerNotification(String tickerText,final int id,
                                      int resId, String picUri, String title, String artist, AbstractMusic music) {
         if (reViews == null) {
             reViews = new RemoteViews(getPackageName(), R.layout.notification_play);
@@ -429,25 +429,17 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         reViews.setTextViewText(R.id.text, artist);
 
         reViews.setImageViewResource(R.id.img_album, R.drawable.img_album_background);
-//        ImageLoader imageLoader = SweetApplication.getImageLoader();
-//        imageLoader.loadImage(music.getArtPic(), new SimpleImageLoadingListener() {
+
+//        music.loadArtPic(new AbstractMusic.OnLoadListener() {
 //            @Override
-//            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                super.onLoadingComplete(imageUri, view, loadedImage);
+//            public void onSuccessLoad(Bitmap bitmap) {
+//                Log.i(TAG,"onSuccessLoad bitmap:"+bitmap);
 //
-//                reViews.setImageViewBitmap(R.id.img_album, loadedImage);
+//                reViews.setImageViewBitmap(R.id.img_album, bitmap);
 //            }
 //        });
-        music.loadArtPic(new AbstractMusic.OnLoadListener() {
-            @Override
-            public void onSuccessLoad(Bitmap bitmap) {
-                Log.i(TAG,"onSuccessLoad bitmap:"+bitmap);
 
-                reViews.setImageViewBitmap(R.id.img_album, bitmap);
-            }
-        });
-
-//        Log.i(TAG, "picUri:" + music.getArtPic());
+        Log.i(TAG, "picUri:" + music.getArtPic());
 
 
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -466,11 +458,24 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         PendingIntent prePendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, preInent, 0);
         reViews.setOnClickPendingIntent(R.id.button_previous_notification_play, prePendingIntent);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
         builder.setContent(reViews).setSmallIcon(resId).setTicker(title).setOngoing(true);
 
-        startForeground(id, builder.build());
+
         isForeground = true;
+
+        ImageLoader imageLoader = SweetApplication.getImageLoader();
+//        Bitmap loadedImage = imageLoader.loadImageSync(music.getArtPic());
+//        reViews.setImageViewBitmap(R.id.img_album, loadedImage);
+        imageLoader.loadImage(music.getArtPic(), new SimpleImageLoadingListener() {
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                super.onLoadingComplete(imageUri, view, loadedImage);
+
+                reViews.setImageViewBitmap(R.id.img_album, loadedImage);
+                startForeground(id, builder.build());
+            }
+        });
     }
 
     static MediaPlayer getMediaPlayer(Context context) {
