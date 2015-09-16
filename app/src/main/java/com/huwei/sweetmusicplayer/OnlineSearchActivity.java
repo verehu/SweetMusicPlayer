@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
@@ -95,6 +96,11 @@ public class OnlineSearchActivity extends BaseActivity {
 //                        adapter.notifyDataSetInvalidated();
 
                         finish();
+                        break;
+                    case Album:
+                        Intent intent = new Intent(OnlineSearchActivity.this,AlbumDetailActivity_.class);
+                        intent.putExtra(IntentExtra.EXTRA_ALBUM_ID,((Album)reuslt).getAlbumid());
+                        startActivity(intent);
                         break;
                 }
             }

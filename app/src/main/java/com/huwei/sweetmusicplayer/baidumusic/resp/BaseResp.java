@@ -1,5 +1,6 @@
 package com.huwei.sweetmusicplayer.baidumusic.resp;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 
 /**
@@ -10,16 +11,15 @@ public class BaseResp {
 
     public static final int ERROR_CODE_OK=22000;
     public static final int ERROR_CODE_ERROR=22001;
-    private int error_code;
+    public int error_code;
+    public int errorCode;
 
 
     public int getError_code() {
-        return error_code;
+        return error_code!=0?error_code:errorCode;
     }
 
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
-    }
+
     public boolean isValid(){
         return error_code==0||error_code== ERROR_CODE_OK;
     }

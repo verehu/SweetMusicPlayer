@@ -15,7 +15,8 @@
             android:id="@+id/iv_album"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_margin="20dp" />
+            android:layout_margin="20dp"
+            android:src="@drawable/img_album_background"/>
 
 
         <LinearLayout
@@ -25,12 +26,13 @@
             >
 
             <TextView
+                android:id="@+id/tv_albumname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_16"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="七里香"/>
+                android:text=""/>
 
 
             <LinearLayout
@@ -44,16 +46,19 @@
                     android:text="@string/albumdetail_left_artist"/>
 
                 <TextView
+                    android:id="@+id/tv_artist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="周杰伦"/>
+                    android:text=""/>
 
                 </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_pub_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="发行时间：2004.8.3"/>
+                android:text="发行时间：2004.8.3"
+                android:visibility="visible"/>
 
             </LinearLayout>
 </LinearLayout>

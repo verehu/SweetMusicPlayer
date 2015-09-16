@@ -63,7 +63,7 @@ public class BaiduMusicUtil implements IUrl{
         HttpParams params = new HttpParams();
         params.add("albumId",albumId);
         params.add("type","album");
-        HttpUtil.post(BAIDU_MUSIC_ALBUM,params,httpHandler);
+        HttpUtil.get(BAIDU_MUSIC_ALBUM,params,httpHandler);
     }
 
     /**
