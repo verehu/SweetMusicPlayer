@@ -12,11 +12,13 @@ import android.widget.TextView;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
-import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
-import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
+import com.huwei.sweetmusicplayer.baidumusic.po.Album2;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song2;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
+import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 
@@ -33,32 +35,32 @@ public class SearchResultAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    private List<ISearchReuslt> data = new ArrayList<>();
+    private List<IQueryReuslt> data = new ArrayList<>();
     List<AbstractMusic> songs = new ArrayList<>();
 
     private boolean isFisrtSong;
 
     ImageLoader imageLoader = SweetApplication.getImageLoader();
 
-    private ISearchReuslt.SearchResultType lastType = ISearchReuslt.SearchResultType.None;
+    private IQueryReuslt.QueryType lastType = IQueryReuslt.QueryType.None;
 
     public SearchResultAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public void add(ISearchReuslt iSearchReuslt) {
+    public void add(IQueryReuslt iSearchReuslt) {
         data.add(iSearchReuslt);
 
-        if (iSearchReuslt instanceof Song) {
-            songs.add((Song) iSearchReuslt);
+        if (iSearchReuslt instanceof Song2) {
+            songs.add((Song2) iSearchReuslt);
         }
 
     }
 
-    public void addALl(List<ISearchReuslt> add) {
+    public void addALl(List  add) {
         data.addAll(add);
 
-        for (ISearchReuslt iSearchReuslt : data) {
+        for (IQueryReuslt iSearchReuslt : data) {
 
                 if (iSearchReuslt instanceof AbstractMusic) {
                     songs.add((AbstractMusic) iSearchReuslt);
@@ -68,7 +70,7 @@ public class SearchResultAdapter extends BaseAdapter {
     }
 
 
-    public List<ISearchReuslt> getData() {
+    public List<IQueryReuslt> getData() {
         return data;
     }
 
@@ -76,7 +78,7 @@ public class SearchResultAdapter extends BaseAdapter {
         return songs;
     }
 
-    public void setData(List<ISearchReuslt> data) {
+    public void setData(List<IQueryReuslt> data) {
         this.data = data;
     }
 
@@ -100,8 +102,8 @@ public class SearchResultAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
 
-        ISearchReuslt ISearchReuslt = (ISearchReuslt) getItem(position);
-        ISearchReuslt.SearchResultType type = ISearchReuslt.getSearchResultType();
+        IQueryReuslt ISearchReuslt = (IQueryReuslt) getItem(position);
+        IQueryReuslt.QueryType type = ISearchReuslt.getSearchResultType();
         switch (type) {
             case Song:
                 if (type != lastType || convertView == null || convertView.getTag() == null) {
@@ -119,8 +121,8 @@ public class SearchResultAdapter extends BaseAdapter {
                 }
 
                 Song song = (Song) ISearchReuslt;
-                viewHolder.tv_songname.setText(song.getName());
-                viewHolder.tv_info.setText(song.getArtistname());
+                viewHolder.tv_songname.setText(song.title);
+                viewHolder.tv_info.setText(song.author);
 
                 if(MusicManager.isIndexNowPLayng(data, position)){
                     viewHolder.selected_view.setVisibility(View.VISIBLE);
@@ -135,9 +137,9 @@ public class SearchResultAdapter extends BaseAdapter {
                 TextView tv_album = (TextView) convertView.findViewById(R.id.tv_album);
 
                 Album album = (Album) ISearchReuslt;
-                imageLoader.displayImage(album.getArtistpic(), iv_album);
+                imageLoader.displayImage(album.pic_small, iv_album);
 
-                tv_album.setText(mContext.getString(R.string.tab_albums) + ":" + album.getAlbumname());
+                tv_album.setText(mContext.getString(R.string.tab_albums) + ":" + album.title);
                 break;
             case Artist:
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_searchresult_artist, null);

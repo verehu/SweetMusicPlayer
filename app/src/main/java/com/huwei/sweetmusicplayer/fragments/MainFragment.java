@@ -45,7 +45,7 @@ import org.androidannotations.annotations.res.IntArrayRes;
 @EFragment(R.layout.fragment_main)
 public class MainFragment extends BaseFragment implements IMusicViewTypeContain {
 
-    @ViewById
+    @ViewById(R.id.actionbar)
     Toolbar toolbar;
     @ViewById
     ViewPager viewPager;

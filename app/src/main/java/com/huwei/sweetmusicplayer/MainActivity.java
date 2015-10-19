@@ -67,6 +67,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         manager=getSupportFragmentManager();
 
         setContentView(R.layout.activity_main);
+
         playing_fragment= (PlayingFragment) manager.findFragmentById(R.id.playing_fragment);
         mainFragment = (MainFragment) manager.findFragmentById(R.id.main);
 

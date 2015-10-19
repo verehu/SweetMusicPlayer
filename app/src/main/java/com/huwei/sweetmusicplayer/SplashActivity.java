@@ -99,7 +99,7 @@ public class SplashActivity extends Activity {
 
 
 //	public void loadSongFromSQL(){
-//		Cursor cursor=  getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, SweetMPContains.MEDIAINFO, null, null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
+//		Cursor cursor=  getContentResolver().querySug(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, SweetMPContains.MEDIAINFO, null, null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
 //
 //		cursor.moveToFirst();
 //

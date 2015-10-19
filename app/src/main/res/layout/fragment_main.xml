@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
 <include
+
     layout="@layout/layout_actionbar"/>
 
     <LinearLayout

@@ -50,7 +50,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/search_online" />
         </activity>
-        <activity android:name=".AlbumDetailActivity_"/>
+        <activity android:name=".AlbumInfoActivity_"/>
 
         <service
             android:name=".services.MusicControlerService"

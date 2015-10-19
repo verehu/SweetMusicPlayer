@@ -62,15 +62,32 @@ public class HttpUtil {
      * @param params
      * @param handler
      */
-    public static void get(String url, final HttpParams params, final HttpHandler handler) {
+    public static void get(String url, final HttpParams params, final HttpHandler handler){
+        get(url,params,handler,false);
+    }
+
+    /**
+     * 封装的get请求
+     * @param url
+     * @param params
+     * @param handler
+     * @param isWindowsUserAgent 是否设置为IE WINDOWS 的userAgent   对于百度音乐API的某些接口需要特殊处理
+     */
+    public static void get(String url, final HttpParams params, final HttpHandler handler, final boolean isWindowsUserAgent) {
         url=handleurl(url);
+        url=addParamsToUrl(url,params); //拼接参数
 
         RequestQueue mQueue = SweetApplication.getQueue();
-        StringRequest request = new StringRequest(Request.Method.GET,addParamsToUrl(url,params),handler,handler){
+        StringRequest request = new StringRequest(Request.Method.GET,url,handler,handler){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> headers=new HashMap<>();
                 headers.put("Content-Type","text/html; charset=utf-8");
+
+                if(isWindowsUserAgent){
+                    headers.put("User-Agent","User-Agent:Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;");
+                }
+
                 return headers;
             }
         };

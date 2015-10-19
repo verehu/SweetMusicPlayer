@@ -22,10 +22,10 @@ import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song2;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 
-import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
 import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
@@ -332,7 +332,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
         if(music.getType() == AbstractMusic.MusicType.Online) {
-            final Song song = (Song) music;
+            final Song2 song = (Song2) music;
             if(!song.hasGetDetailInfo()) {
                 new Thread() {
                     @Override

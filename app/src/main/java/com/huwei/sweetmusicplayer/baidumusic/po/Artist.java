@@ -1,13 +1,13 @@
 package com.huwei.sweetmusicplayer.baidumusic.po;
 
-import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
+import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 
 /**
  * 百度音乐API中的Artist
  * @author Jayce
  * @date 2015/6/11
  */
-public class Artist implements ISearchReuslt {
+public class Artist implements IQueryReuslt {
     /**
      * Json 样例
      *  {"artistid":"1454","artistname":"\u6797\u5ba5\u5609","artistpic":"http:\/\/musicdata.baidu.com\/data2\/pic\/116050828\/116050828.jpg","yyr_artist":"0"}
@@ -55,7 +55,7 @@ public class Artist implements ISearchReuslt {
     }
 
     @Override
-    public SearchResultType getSearchResultType() {
-        return SearchResultType.Artist;
+    public QueryType getSearchResultType() {
+        return QueryType.Artist;
     }
 }

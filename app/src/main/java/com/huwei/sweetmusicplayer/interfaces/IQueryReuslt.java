@@ -5,8 +5,8 @@ package com.huwei.sweetmusicplayer.interfaces;
  * @author jayce
  * @date 2015/08/18
  */
-public interface ISearchReuslt {
-    public enum SearchResultType{
+public interface IQueryReuslt {
+    public enum QueryType {
         None,Song,Album,Artist
     }
 
@@ -14,5 +14,5 @@ public interface ISearchReuslt {
     public abstract String getName();
 
     //抽象一个公共的方法显示type
-    public abstract SearchResultType getSearchResultType();
+    public abstract QueryType getSearchResultType();
 }

@@ -5,6 +5,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.R;
 //import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song2;
 import com.huwei.sweetmusicplayer.comparator.LrcComparator;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
@@ -15,7 +16,6 @@ import com.huwei.sweetmusicplayer.baidumusic.po.Lrc;
 import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter;
 import com.huwei.sweetmusicplayer.util.LrcUtil;
 import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener;
 import com.huwei.sweetmusicplayer.ui.widgets.LrcView;
 import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
@@ -362,7 +362,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
                     dialog.dismiss();
 
                     //搜索歌曲
-                    BaiduMusicUtil.query(musicEt.getText().toString().split("\\(")[0] + " " + artistEt.getText().toString(), new HttpHandler(getActivity()) {
+                    BaiduMusicUtil.querySug(musicEt.getText().toString().split("\\(")[0] + " " + artistEt.getText().toString(), new HttpHandler(getActivity()) {
                         @Override
                         public void onStart() {
                             super.onStart();
@@ -380,7 +380,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
                                 return;
                             }
 
-                            List<Song> songList = sug.getSong();
+                            List<Song2> songList = sug.song;
                             findLrc(songList, 0);
                         }
 
@@ -401,12 +401,12 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
 
 
-    private void findLrc(final List<Song> songList,final int index){
+    private void findLrc(final List<Song2> songList,final int index){
         if (songList.size() == 0) {
             playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
            return;
         }
-        final Song song = songList.get(index);
+        final Song2 song = songList.get(index);
         String songid = song.getSongid();
         BaiduMusicUtil.queryLrc(songid, new HttpHandler(getActivity()) {
             @Override

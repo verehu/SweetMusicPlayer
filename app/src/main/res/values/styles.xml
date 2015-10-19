@@ -9,6 +9,7 @@
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
         <item name="android:textViewStyle">@style/SweetTheme.TextView</item>
         <item name="android:buttonStyle">@style/SweetTheme.ButtonStyle</item>
+        <!--<item name="android:background">@color/bg_common</item>-->
     </style>
 
        <!-- default btn -->

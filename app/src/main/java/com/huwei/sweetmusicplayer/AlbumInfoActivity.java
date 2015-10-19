@@ -3,11 +3,14 @@ package com.huwei.sweetmusicplayer;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.baidumusic.po.AlbumDetail;
+import com.huwei.sweetmusicplayer.baidumusic.po.AlbumInfo;
 import com.huwei.sweetmusicplayer.baidumusic.resp.AlbumDetailResp;
+import com.huwei.sweetmusicplayer.baidumusic.resp.GetAlbumInfoResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
@@ -24,13 +27,15 @@ import org.androidannotations.annotations.ViewById;
  * @date 2015-09-13
  */
 @EActivity(R.layout.activity_album_detail)
-public class AlbumDetailActivity extends BaseActivity {
+public class AlbumInfoActivity extends BaseActivity {
     @ViewById
     ImageView iv_album;
     @ViewById
     TextView tv_albumname, tv_artist, tv_pub_date;
-    @ViewById
+    @ViewById(R.id.actionbar)
     Toolbar toolbar;
+    @ViewById
+    ListView lv_albuminfo;
 
     String albumId;
 
@@ -60,15 +65,16 @@ public class AlbumDetailActivity extends BaseActivity {
     }
 
     private void getAlubmInfo(){
-        BaiduMusicUtil.getAlbumDetail(albumId,new HttpHandler(this) {
+        BaiduMusicUtil.getAlbumInfo(albumId, new HttpHandler(this) {
             @Override
             public void onSuccess(String response) {
-                AlbumDetailResp resp = new Gson().fromJson(response,AlbumDetailResp.class);
-                AlbumDetail album = resp.data;
-                if(album!=null){
-                    mImageLoader.displayImage(album.getAlbumPicSmall(),iv_album);
-                    tv_albumname.setText(album.getAlbumName());
-                    tv_artist.setText(album.getArtistName());
+                GetAlbumInfoResp resp = new Gson().fromJson(response, GetAlbumInfoResp.class);
+                AlbumInfo album = resp.getAlbumInfo();
+                if (album != null) {
+                    mImageLoader.displayImage(album.getPic_big(), iv_album);
+                    tv_albumname.setText(album.getTitle());
+                    tv_artist.setText(album.getAuthor());
+                    tv_pub_date.setText(album.getPublishtime());
                 }
             }
         });

@@ -13,13 +13,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.baidumusic.po.Album2;
+import com.huwei.sweetmusicplayer.baidumusic.po.QueryResult;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song2;
+import com.huwei.sweetmusicplayer.baidumusic.resp.QueryMergeResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
-import com.huwei.sweetmusicplayer.baidumusic.po.Album;
-import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
-import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 import com.huwei.sweetmusicplayer.ui.adapters.SearchResultAdapter;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
@@ -41,9 +41,12 @@ import java.util.List;
 public class OnlineSearchActivity extends BaseActivity {
     public static final String TAG = "OnlineSearchActivity";
 
+    private int pageNo = 1;
+    private int pageSize = 50;
+
     @ViewById
     ListView lv_online_search;
-    @ViewById
+    @ViewById(R.id.actionbar)
     Toolbar toolbar;
 
     SearchResultAdapter adapter;
@@ -84,22 +87,21 @@ public class OnlineSearchActivity extends BaseActivity {
         lv_online_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ISearchReuslt reuslt = (ISearchReuslt) parent.getItemAtPosition(position);
+                IQueryReuslt reuslt = (IQueryReuslt) parent.getItemAtPosition(position);
                 switch (reuslt.getSearchResultType()) {
                     case Song:
                         List<AbstractMusic> list = new ArrayList<>();
-                        Log.i(TAG, "song:" + ((Song) reuslt).songInfo);
-                        list.add((Song) reuslt);
+                        Log.i(TAG, "song:" + ((Song2) reuslt).songInfo);
+                        list.add((Song2) reuslt);
                         //点击当前歌曲，把当前歌曲加入播放队列
                         MusicManager.getInstance().preparePlayingList(0, list);
-//                        MusicManager.getInstance().play();
-//                        adapter.notifyDataSetInvalidated();
+
 
                         finish();
                         break;
                     case Album:
-                        Intent intent = new Intent(OnlineSearchActivity.this,AlbumDetailActivity_.class);
-                        intent.putExtra(IntentExtra.EXTRA_ALBUM_ID,((Album)reuslt).getAlbumid());
+                        Intent intent = new Intent(OnlineSearchActivity.this,AlbumInfoActivity_.class);
+                        intent.putExtra(IntentExtra.EXTRA_ALBUM_ID,((Album2)reuslt).getAlbumid());
                         startActivity(intent);
                         break;
                 }
@@ -118,46 +120,32 @@ public class OnlineSearchActivity extends BaseActivity {
     }
 
     void doQuery(String query) {
-        BaiduMusicUtil.query(query, new HttpHandler(mContext) {
+        //todo暂时只搜索 1-50个  后续加入下拉刷新列表
+        BaiduMusicUtil.queryMerge(query, pageNo, pageSize, new HttpHandler(mContext) {
             @Override
             public void onSuccess(String response) {
                 adapter.getData().clear();
 
-                final MusicSearchSugResp sug = new Gson().fromJson(response, MusicSearchSugResp.class);
-                for (Album album : sug.getAlbum()) {
-                    adapter.add(album);
-                }
+                final QueryMergeResp sug = new Gson().fromJson(response, QueryMergeResp.class);
+                QueryResult result = sug.result;
 
-                for (Artist artist : sug.getArtist()) {
-                    adapter.add(artist);
-                }
+                if(result!=null){
 
-                for (Song song : sug.getSong()) {
-                    adapter.add(song);
+                    if(result.song_info!=null){
+                        adapter.addALl(result.song_info.song_list);
+                    }
+
+                    Log.d(TAG,"album_list:"+result.album_info.album_list);
+
+                    if(result.album_info!=null){
+                        adapter.addALl(result.album_info.album_list);
+                    }
+
+                    //todo 后续加入其他类型
                 }
 
                 adapter.notifyDataSetInvalidated();
 
-//                //子线程网络请求
-//                new Thread(){
-//                    @Override
-//                    public void run() {
-//
-//                        for (Song song:sug.getSong()){
-//                            //同步请求到歌曲信息
-//                            SongPlayResp resp = BaiduMusicUtil.querySong(song.getSongid());
-//                            if(resp!=null) {
-//                                song.bitrate = resp.bitrate;
-//                                song.songInfo = resp.songinfo;
-//
-//                                Log.i(TAG,"song add:"+song);
-//                                adapter.add(song);
-//                            }
-//                        }
-//
-//                        handler.sendEmptyMessage(0);
-//                    }
-//                }.start();
             }
         });
     }
