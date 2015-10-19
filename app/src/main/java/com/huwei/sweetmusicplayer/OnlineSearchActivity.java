@@ -130,15 +130,13 @@ public class OnlineSearchActivity extends BaseActivity {
                 QueryResult result = sug.result;
 
                 if(result!=null){
+                    //先加入专辑
+                    if(result.album_info!=null){
+                        adapter.addALl(result.album_info.album_list);
+                    }
 
                     if(result.song_info!=null){
                         adapter.addALl(result.song_info.song_list);
-                    }
-
-                    Log.d(TAG,"album_list:"+result.album_info.album_list);
-
-                    if(result.album_info!=null){
-                        adapter.addALl(result.album_info.album_list);
                     }
 
                     //todo 后续加入其他类型

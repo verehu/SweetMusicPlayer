@@ -59,14 +59,6 @@ public class SearchResultAdapter extends BaseAdapter {
 
     public void addALl(List  add) {
         data.addAll(add);
-
-        for (IQueryReuslt iSearchReuslt : data) {
-
-                if (iSearchReuslt instanceof AbstractMusic) {
-                    songs.add((AbstractMusic) iSearchReuslt);
-                }
-
-        }
     }
 
 
