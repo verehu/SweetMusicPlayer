@@ -71,10 +71,10 @@ public class AlbumInfoActivity extends BaseActivity {
                 GetAlbumInfoResp resp = new Gson().fromJson(response, GetAlbumInfoResp.class);
                 AlbumInfo album = resp.getAlbumInfo();
                 if (album != null) {
-                    mImageLoader.displayImage(album.getPic_big(), iv_album);
-                    tv_albumname.setText(album.getTitle());
-                    tv_artist.setText(album.getAuthor());
-                    tv_pub_date.setText(album.getPublishtime());
+                    mImageLoader.displayImage(album.pic_big, iv_album);
+                    tv_albumname.setText(album.title);
+                    tv_artist.setText("歌手："+album.author);
+                    tv_pub_date.setText("发行时间："+album.publishtime);
                 }
             }
         });

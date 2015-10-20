@@ -16,14 +16,13 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="20dp"
-            android:src="@drawable/img_album_background"/>
+            android:src="@drawable/img_album_background" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_albumname"
@@ -32,36 +31,24 @@
                 android:textSize="@dimen/font_16"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text=""/>
+                android:text="" />
 
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
+                android:text="" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/albumdetail_left_artist"/>
-
-                <TextView
-                    android:id="@+id/tv_artist"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""/>
-
-                </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_pub_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="发行时间：2004.8.3"
-                android:visibility="visible"/>
+                android:visibility="visible" />
 
-            </LinearLayout>
-</LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lv_albuminfo"

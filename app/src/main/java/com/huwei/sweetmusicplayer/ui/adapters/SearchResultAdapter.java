@@ -1,6 +1,7 @@
 package com.huwei.sweetmusicplayer.ui.adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,7 +132,7 @@ public class SearchResultAdapter extends BaseAdapter {
                 Album album = (Album) ISearchReuslt;
                 imageLoader.displayImage(album.pic_small, iv_album);
 
-                tv_album.setText(mContext.getString(R.string.tab_albums) + ":" + album.title);
+                tv_album.setText(Html.fromHtml(mContext.getString(R.string.tab_albums) + ":" + album.title));
                 break;
             case Artist:
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_searchresult_artist, null);
