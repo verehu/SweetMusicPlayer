@@ -12,11 +12,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
-import com.huwei.sweetmusicplayer.baidumusic.po.Album2;
 import com.huwei.sweetmusicplayer.baidumusic.po.QueryResult;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song2;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+
 import com.huwei.sweetmusicplayer.baidumusic.resp.QueryMergeResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
@@ -42,13 +44,16 @@ import java.util.List;
 public class OnlineSearchActivity extends BaseActivity {
     public static final String TAG = "OnlineSearchActivity";
 
+    private int total = 0;;
     private int pageNo = 1;
     private int pageSize = 50;
 
     @ViewById
-    ListView lv_online_search;
+    PullToRefreshListView lv_online_search;
     @ViewById(R.id.actionbar)
     Toolbar toolbar;
+
+    private String mQuery;
 
     SearchResultAdapter adapter;
 
@@ -72,6 +77,7 @@ public class OnlineSearchActivity extends BaseActivity {
     void initView() {
         adapter = new SearchResultAdapter(mContext);
         lv_online_search.setAdapter(adapter);
+        lv_online_search.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,8 +98,8 @@ public class OnlineSearchActivity extends BaseActivity {
                 switch (reuslt.getSearchResultType()) {
                     case Song:
                         List<AbstractMusic> list = new ArrayList<>();
-                        Log.i(TAG, "song:" + ((Song2) reuslt).songInfo);
-                        list.add((Song2) reuslt);
+                        Log.i(TAG, "song:" + ((Song) reuslt).songInfo);
+                        list.add((Song) reuslt);
                         //点击当前歌曲，把当前歌曲加入播放队列
                         MusicManager.getInstance().preparePlayingList(0, list);
 
@@ -101,49 +107,73 @@ public class OnlineSearchActivity extends BaseActivity {
                         finish();
                         break;
                     case Album:
-                        Intent intent = new Intent(OnlineSearchActivity.this,AlbumInfoActivity_.class);
-                        intent.putExtra(IntentExtra.EXTRA_ALBUM_ID,((Album)reuslt).album_id);
+                        Intent intent = new Intent(OnlineSearchActivity.this, AlbumInfoActivity_.class);
+                        intent.putExtra(IntentExtra.EXTRA_ALBUM_ID, ((Album) reuslt).album_id);
                         startActivity(intent);
                         break;
                 }
+            }
+        });
+        lv_online_search.setOnRefreshListener(new PullToRefreshBase.OnLoadUpListener<ListView>() {
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+                pageNo++;
+                doQuery();
             }
         });
     }
 
     void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            setTitle(query);
-            doQuery(query);
+            mQuery = intent.getStringExtra(SearchManager.QUERY);
+            setTitle(mQuery);
 
-            Toast.makeText(mContext, query, Toast.LENGTH_SHORT).show();
+            doQuery();
+            Toast.makeText(mContext, mQuery, Toast.LENGTH_SHORT).show();
         }
     }
 
-    void doQuery(String query) {
+    void doQuery() {
         //todo暂时只搜索 1-50个  后续加入下拉刷新列表
-        BaiduMusicUtil.queryMerge(query, pageNo, pageSize, new HttpHandler(mContext) {
+        BaiduMusicUtil.queryMerge(mQuery, pageNo, pageSize, new HttpHandler(mContext) {
             @Override
             public void onSuccess(String response) {
-                adapter.getData().clear();
+                //todo 暂时先加两种
+
 
                 final QueryMergeResp sug = new Gson().fromJson(response, QueryMergeResp.class);
                 QueryResult result = sug.result;
 
-                if(result!=null){
+                if (result != null) {
                     //先加入专辑
-                    if(result.album_info!=null){
+                    if (result.album_info != null) {
+                        if(pageNo==1) {
+                            total += result.album_info.total;
+                        }
                         adapter.addALl(result.album_info.album_list);
                     }
 
-                    if(result.song_info!=null){
+                    if (result.song_info != null) {
+                        if(pageNo==1) {
+                            total += result.song_info.total;
+                        }
                         adapter.addALl(result.song_info.song_list);
                     }
 
                     //todo 后续加入其他类型
+
+                    Log.i(TAG,"pageNO:"+pageNo+"    pageSize:"+pageSize+"   total:"+total);
+                    if (pageNo >= total / pageSize + 1) {
+                        Log.i(TAG,"onRefreshComplete");
+
+                        lv_online_search.onRefreshComplete();
+                        lv_online_search.setMode(PullToRefreshBase.Mode.DISABLED);
+                        Toast.makeText(mContext,"已没更多内容!",Toast.LENGTH_LONG).show();
+                    }
                 }
 
-                adapter.notifyDataSetInvalidated();
+
+                adapter.notifyDataSetChanged();
 
             }
         });

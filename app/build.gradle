@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.huwei.sweetmusicplayer"
-        minSdkVersion 11
+        minSdkVersion 8
         targetSdkVersion 21
     }
 
@@ -39,14 +39,16 @@ android {
 
 dependencies {
     apt fileTree(dir: 'compile-libs', include: ['*.jar'])
+    compile project(':pull_to_refresh_library')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.+'
     compile 'com.android.support:cardview-v7:21.+'
+    compile 'com.android.support:support-v4:21.0.3'
+
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
 }
 
 apt {

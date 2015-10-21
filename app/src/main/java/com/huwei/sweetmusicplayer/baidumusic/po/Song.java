@@ -1,12 +1,16 @@
 package com.huwei.sweetmusicplayer.baidumusic.po;
 
+import android.net.Uri;
+
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
+import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 
 /**
  * @author jayce
  * @date 2015/10/20
  */
-public class Song implements IQueryReuslt {
+public class Song extends AbstractMusic implements IQueryReuslt {
 
     /**
      * content :
@@ -76,5 +80,36 @@ public class Song implements IQueryReuslt {
     @Override
     public QueryType getSearchResultType() {
         return QueryType.Song;
+    }
+
+    @Override
+    public Uri getDataSoure() {
+        String url = BaiduMusicUtil.getDownloadUrlBySongId(song_id);
+        return Uri.parse(url);
+    }
+
+    @Override
+    public Integer getDuration() {
+        return bitrate!=null?bitrate.getFile_duration()*1000:0;
+    }
+
+    @Override
+    public MusicType getType() {
+        return MusicType.Online;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String getArtist() {
+        return author;
+    }
+
+    //返回""加载默认的图片
+    public String getArtPic() {
+        return p;
     }
 }
