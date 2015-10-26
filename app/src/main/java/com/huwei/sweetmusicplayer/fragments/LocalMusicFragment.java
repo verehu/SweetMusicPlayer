@@ -1,16 +1,5 @@
 package com.huwei.sweetmusicplayer.fragments;
 
-import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
-import com.huwei.sweetmusicplayer.ui.adapters.MusicAdapter;
-import com.huwei.sweetmusicplayer.ui.listeners.OnTouchingLetterChangedListener;
-import com.huwei.sweetmusicplayer.ui.widgets.SideBar;
-import com.huwei.sweetmusicplayer.util.MusicUtils;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
+import com.huwei.sweetmusicplayer.models.MusicInfo;
+import com.huwei.sweetmusicplayer.ui.adapters.MusicAdapter;
+import com.huwei.sweetmusicplayer.ui.listeners.OnTouchingLetterChangedListener;
+import com.huwei.sweetmusicplayer.ui.widgets.SideBar;
+import com.huwei.sweetmusicplayer.util.MusicUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -33,8 +33,8 @@ import java.util.List;
  * 装载音乐的fragment容器
  */
 @EFragment(R.layout.fragment_localmusic)
-public class MusicFragment extends BaseFragment implements IContain, IMusicViewTypeContain{
-    public static final String TAG="MusicFragment";
+public class LocalMusicFragment extends BaseFragment implements IContain, IMusicViewTypeContain{
+    public static final String TAG="LocalMusicFragment";
 
     private MusicAdapter mMusicAdapter;
 

@@ -14,6 +14,7 @@ public class BaiduMusicUtil implements IUrl {
     public static final String SEARCH_CATALOGSUG = "baidu.ting.search.catalogSug";
     public static final String SONG_LRC = "baidu.ting.song.lry ";
     public static final String SONG_PLAY = "baidu.ting.song.play";
+    public static final String GET_SONGINFO="baidu.ting.song.getInfos";
     public static final String GET_ALBUMINFO = "baidu.ting.album.getAlbumInfo";
     public static final String QUERY_MERGE = "baidu.ting.search.merge";
 
@@ -42,6 +43,10 @@ public class BaiduMusicUtil implements IUrl {
         params.add("data_source", 0);
         params.add("use_cluster", 1);
         HttpUtil.get(BADDU_MUSIC, params, httpHandler);
+    }
+
+    public static void getSongInfo(String songId,HttpHandler httpHandler){
+
     }
 
     /**

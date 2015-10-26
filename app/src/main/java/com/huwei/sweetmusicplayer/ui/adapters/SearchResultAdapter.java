@@ -17,7 +17,7 @@ import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album2;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song2;
+
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
@@ -54,8 +54,8 @@ public class SearchResultAdapter extends BaseAdapter {
     public void add(IQueryReuslt iSearchReuslt) {
         data.add(iSearchReuslt);
 
-        if (iSearchReuslt instanceof Song2) {
-            songs.add((Song2) iSearchReuslt);
+        if (iSearchReuslt instanceof Song) {
+            songs.add((Song) iSearchReuslt);
         }
 
     }

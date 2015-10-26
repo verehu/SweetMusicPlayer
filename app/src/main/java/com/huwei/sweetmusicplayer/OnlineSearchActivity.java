@@ -98,7 +98,7 @@ public class OnlineSearchActivity extends BaseActivity {
                 switch (reuslt.getSearchResultType()) {
                     case Song:
                         List<AbstractMusic> list = new ArrayList<>();
-                        Log.i(TAG, "song:" + ((Song) reuslt).songInfo);
+//                        Log.i(TAG, "song:" + ((Song) reuslt).songInfo);
                         list.add((Song) reuslt);
                         //点击当前歌曲，把当前歌曲加入播放队列
                         MusicManager.getInstance().preparePlayingList(0, list);

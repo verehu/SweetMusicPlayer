@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
  * @author Jayce
  * @date 2015/6/11
  */
+@Deprecated
 public class Song2 extends AbstractMusic implements IQueryReuslt {
 
     public static final String TAG="Song";

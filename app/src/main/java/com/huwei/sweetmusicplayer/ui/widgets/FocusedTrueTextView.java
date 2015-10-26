@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import org.dom4j.Text;
+
 
 /**
  * 默认返回Focused 为True的TextView
