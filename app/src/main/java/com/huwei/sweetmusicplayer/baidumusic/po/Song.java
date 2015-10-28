@@ -1,12 +1,24 @@
 package com.huwei.sweetmusicplayer.baidumusic.po;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Parcel;
+import android.util.Log;
+import android.view.View;
+
+import com.huwei.sweetmusicplayer.SweetApplication;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
+import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
  * @author jayce
  * @date 2015/10/20
  */
-public class Song implements IQueryReuslt {
+public class Song extends AbstractMusic implements IQueryReuslt {
+    public static final String TAG="Song";
 
     /**
      * content :
@@ -68,6 +80,12 @@ public class Song implements IQueryReuslt {
     public int data_source;
     public int cluster_id;
 
+    public Bitrate bitrate;
+    public SongInfo songInfo;
+
+    public Song() {
+    }
+
     @Override
     public String getName() {
         return title;
@@ -76,5 +94,132 @@ public class Song implements IQueryReuslt {
     @Override
     public QueryType getSearchResultType() {
         return QueryType.Song;
+    }
+
+    @Override
+    public Uri getDataSoure() {
+        String url = BaiduMusicUtil.getDownloadUrlBySongId(song_id);
+        return Uri.parse(url);
+    }
+
+    @Override
+    public Integer getDuration() {
+        return bitrate != null ? bitrate.getFile_duration() * 1000 : 0;
+    }
+
+    @Override
+    public MusicType getType() {
+        return MusicType.Online;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String getArtist() {
+        return author;
+    }
+
+    //返回""加载默认的图片
+    public String getArtPic() {
+        return Uri.parse(songInfo!=null?songInfo.getPic_small():"").toString();
+    }
+
+    @Override
+    public void loadArtPic(final OnLoadListener loadListener) {
+        ImageLoader imageLoader = SweetApplication.getImageLoader();
+        imageLoader.loadImage(getArtPic(),new SimpleImageLoadingListener(){
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                super.onLoadingComplete(imageUri, view, loadedImage);
+                Log.i(TAG, "onLoadingComplete   --->uri:" + imageUri);
+
+                if(loadListener!=null){
+                    loadListener.onSuccessLoad(loadedImage);
+                }
+            }
+        });
+    }
+
+    public boolean hasGetDetailInfo(){
+        return bitrate!=null||songInfo!=null;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.content);
+        dest.writeString(this.copy_type);
+        dest.writeString(this.toneid);
+        dest.writeString(this.info);
+        dest.writeString(this.all_rate);
+        dest.writeInt(this.resource_type);
+        dest.writeInt(this.relate_status);
+        dest.writeInt(this.has_mv_mobile);
+        dest.writeString(this.song_id);
+        dest.writeString(this.title);
+        dest.writeString(this.ting_uid);
+        dest.writeString(this.author);
+        dest.writeString(this.album_id);
+        dest.writeString(this.album_title);
+        dest.writeInt(this.is_first_publish);
+        dest.writeInt(this.havehigh);
+        dest.writeInt(this.charge);
+        dest.writeInt(this.has_mv);
+        dest.writeInt(this.learn);
+        dest.writeString(this.song_source);
+        dest.writeString(this.piao_id);
+        dest.writeString(this.korean_bb_song);
+        dest.writeString(this.resource_type_ext);
+        dest.writeString(this.artist_id);
+        dest.writeString(this.all_artist_id);
+        dest.writeString(this.lrclink);
+        dest.writeInt(this.data_source);
+        dest.writeInt(this.cluster_id);
+    }
+
+    protected Song(Parcel in) {
+        this.content = in.readString();
+        this.copy_type = in.readString();
+        this.toneid = in.readString();
+        this.info = in.readString();
+        this.all_rate = in.readString();
+        this.resource_type = in.readInt();
+        this.relate_status = in.readInt();
+        this.has_mv_mobile = in.readInt();
+        this.song_id = in.readString();
+        this.title = in.readString();
+        this.ting_uid = in.readString();
+        this.author = in.readString();
+        this.album_id = in.readString();
+        this.album_title = in.readString();
+        this.is_first_publish = in.readInt();
+        this.havehigh = in.readInt();
+        this.charge = in.readInt();
+        this.has_mv = in.readInt();
+        this.learn = in.readInt();
+        this.song_source = in.readString();
+        this.piao_id = in.readString();
+        this.korean_bb_song = in.readString();
+        this.resource_type_ext = in.readString();
+        this.artist_id = in.readString();
+        this.all_artist_id = in.readString();
+        this.lrclink = in.readString();
+        this.data_source = in.readInt();
+        this.cluster_id = in.readInt();
+    }
+
+    public Song createFromParcel(Parcel source) {
+        return new Song(source);
+    }
+
+    public Song[] newArray(int size) {
+        return new Song[size];
     }
 }

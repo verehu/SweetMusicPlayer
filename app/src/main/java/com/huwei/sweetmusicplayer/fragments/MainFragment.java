@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -202,7 +201,7 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
         // add tab_songs
         Bundle bundle = new Bundle();
         bundle.putInt(MUSIC_SHOW_TYPE, SHOW_MUSIC);
-        MusicFragment musicFragment = new MusicFragment_();
+        LocalMusicFragment musicFragment = new LocalMusicFragment_();
         musicFragment.setArguments(bundle);
         mPagerAdapter.addFragment(musicFragment);
         // add tab_artists

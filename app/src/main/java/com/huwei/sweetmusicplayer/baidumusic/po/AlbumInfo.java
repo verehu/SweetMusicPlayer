@@ -45,241 +45,32 @@ public class AlbumInfo implements Parcelable {
      * pic_s1000 : http://musicdata.baidu.com/data2/pic/115430787/115430787.jpg
      */
 
-    private String album_id;
-    private String author;
-    private String title;
-    private String publishcompany;
-    private String prodcompany;
-    private String country;
-    private String language;
-    private String songs_total;
-    private String info;
-    private String styles;
-    private String style_id;
-    private String publishtime;
-    private String artist_ting_uid;
-    private String all_artist_ting_uid;
-    private String gender;
-    private String area;
-    private String pic_small;
-    private String pic_big;
-    private String hot;
-    private int favorites_num;
-    private int recommend_num;
-    private String artist_id;
-    private String all_artist_id;
-    private String pic_radio;
-    private String pic_s500;
-    private String pic_s1000;
-
-
-    public void setAlbum_id(String album_id) {
-        this.album_id = album_id;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPublishcompany(String publishcompany) {
-        this.publishcompany = publishcompany;
-    }
-
-    public void setProdcompany(String prodcompany) {
-        this.prodcompany = prodcompany;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public void setSongs_total(String songs_total) {
-        this.songs_total = songs_total;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public void setStyles(String styles) {
-        this.styles = styles;
-    }
-
-    public void setStyle_id(String style_id) {
-        this.style_id = style_id;
-    }
-
-    public void setPublishtime(String publishtime) {
-        this.publishtime = publishtime;
-    }
-
-    public void setArtist_ting_uid(String artist_ting_uid) {
-        this.artist_ting_uid = artist_ting_uid;
-    }
-
-    public void setAll_artist_ting_uid(String all_artist_ting_uid) {
-        this.all_artist_ting_uid = all_artist_ting_uid;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public void setPic_small(String pic_small) {
-        this.pic_small = pic_small;
-    }
-
-    public void setPic_big(String pic_big) {
-        this.pic_big = pic_big;
-    }
-
-    public void setHot(String hot) {
-        this.hot = hot;
-    }
-
-    public void setFavorites_num(int favorites_num) {
-        this.favorites_num = favorites_num;
-    }
-
-    public void setRecommend_num(int recommend_num) {
-        this.recommend_num = recommend_num;
-    }
-
-    public void setArtist_id(String artist_id) {
-        this.artist_id = artist_id;
-    }
-
-    public void setAll_artist_id(String all_artist_id) {
-        this.all_artist_id = all_artist_id;
-    }
-
-    public void setPic_radio(String pic_radio) {
-        this.pic_radio = pic_radio;
-    }
-
-    public void setPic_s500(String pic_s500) {
-        this.pic_s500 = pic_s500;
-    }
-
-    public void setPic_s1000(String pic_s1000) {
-        this.pic_s1000 = pic_s1000;
-    }
-
-    public String getAlbum_id() {
-        return album_id;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getPublishcompany() {
-        return publishcompany;
-    }
-
-    public String getProdcompany() {
-        return prodcompany;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public String getSongs_total() {
-        return songs_total;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public String getStyles() {
-        return styles;
-    }
-
-    public String getStyle_id() {
-        return style_id;
-    }
-
-    public String getPublishtime() {
-        return publishtime;
-    }
-
-    public String getArtist_ting_uid() {
-        return artist_ting_uid;
-    }
-
-    public String getAll_artist_ting_uid() {
-        return all_artist_ting_uid;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public String getPic_small() {
-        return pic_small;
-    }
-
-    public String getPic_big() {
-        return pic_big;
-    }
-
-    public String getHot() {
-        return hot;
-    }
-
-    public int getFavorites_num() {
-        return favorites_num;
-    }
-
-    public int getRecommend_num() {
-        return recommend_num;
-    }
-
-    public String getArtist_id() {
-        return artist_id;
-    }
-
-    public String getAll_artist_id() {
-        return all_artist_id;
-    }
-
-    public String getPic_radio() {
-        return pic_radio;
-    }
-
-    public String getPic_s500() {
-        return pic_s500;
-    }
-
-    public String getPic_s1000() {
-        return pic_s1000;
-    }
+    public String album_id;
+    public String author;
+    public String title;
+    public String publishcompany;
+    public String prodcompany;
+    public String country;
+    public String language;
+    public String songs_total;
+    public String info;
+    public String styles;
+    public String style_id;
+    public String publishtime;
+    public String artist_ting_uid;
+    public String all_artist_ting_uid;
+    public String gender;
+    public String area;
+    public String pic_small;
+    public String pic_big;
+    public String hot;
+    public int favorites_num;
+    public int recommend_num;
+    public String artist_id;
+    public String all_artist_id;
+    public String pic_radio;
+    public String pic_s500;
+    public String pic_s1000;
 
     @Override
     public int describeContents() {

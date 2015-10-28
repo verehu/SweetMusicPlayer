@@ -1,6 +1,8 @@
 package com.huwei.sweetmusicplayer.ui.adapters;
 
 import android.content.Context;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album2;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song2;
+
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
@@ -32,6 +34,7 @@ import java.util.List;
  * @date 2015/08/18
  */
 public class SearchResultAdapter extends BaseAdapter {
+    public static final String TAG="SearchResultAdapter";
 
     private Context mContext;
 
@@ -51,14 +54,16 @@ public class SearchResultAdapter extends BaseAdapter {
     public void add(IQueryReuslt iSearchReuslt) {
         data.add(iSearchReuslt);
 
-        if (iSearchReuslt instanceof Song2) {
-            songs.add((Song2) iSearchReuslt);
+        if (iSearchReuslt instanceof Song) {
+            songs.add((Song) iSearchReuslt);
         }
 
     }
 
     public void addALl(List  add) {
         data.addAll(add);
+
+        Log.i(TAG,"dataSize:"+data.size());
     }
 
 
@@ -131,7 +136,7 @@ public class SearchResultAdapter extends BaseAdapter {
                 Album album = (Album) ISearchReuslt;
                 imageLoader.displayImage(album.pic_small, iv_album);
 
-                tv_album.setText(mContext.getString(R.string.tab_albums) + ":" + album.title);
+                tv_album.setText(Html.fromHtml(mContext.getString(R.string.tab_albums) + ":" + album.title));
                 break;
             case Artist:
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_searchresult_artist, null);

@@ -8,7 +8,7 @@
  
         layout="@layout/layout_actionbar" />
 
-    <ListView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_online_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

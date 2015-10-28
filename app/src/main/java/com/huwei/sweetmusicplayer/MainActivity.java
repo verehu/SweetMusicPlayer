@@ -1,25 +1,24 @@
 package com.huwei.sweetmusicplayer;
 
 
-import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.fragments.MainFragment;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
-import com.huwei.sweetmusicplayer.services.MusicControlerService;
-import com.huwei.sweetmusicplayer.fragments.PlayingFragment;
-import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
-
-
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.*;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.PopupWindow;
 
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.fragments.MainFragment;
+import com.huwei.sweetmusicplayer.fragments.PlayingFragment;
+import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
+import com.huwei.sweetmusicplayer.services.MusicControlerService;
+import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
 
 import java.util.List;
 
@@ -83,7 +82,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
             Intent intent = new Intent("com.huwei.sweetmusicplayer.services.MusicControlerService");
             startService(intent);
 
-            bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+            bindService(intent, mConnection,BIND_AUTO_CREATE);
         }
 
 

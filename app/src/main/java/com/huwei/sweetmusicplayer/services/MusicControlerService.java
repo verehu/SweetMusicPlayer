@@ -10,8 +10,11 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.*;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
 import android.os.Process;
+import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
@@ -22,11 +25,10 @@ import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song2;
-import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
+import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -332,7 +334,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
         if(music.getType() == AbstractMusic.MusicType.Online) {
-            final Song2 song = (Song2) music;
+            final Song song = (Song) music;
             if(!song.hasGetDetailInfo()) {
                 new Thread() {
                     @Override
@@ -340,7 +342,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                         super.run();
 
                         //同步请求到歌曲信息
-                            SongPlayResp resp = BaiduMusicUtil.querySong(song.getSongid());
+                            SongPlayResp resp = BaiduMusicUtil.querySong(song.song_id);
                             if(resp!=null) {
                                 song.bitrate = resp.bitrate;
                                 song.songInfo = resp.songinfo;

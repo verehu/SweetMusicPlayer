@@ -7,6 +7,7 @@ import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
  * @author Jayce
  * @date 2015/6/11
  */
+@Deprecated
 public class Album2 implements IQueryReuslt {
     /**
      * Json样列

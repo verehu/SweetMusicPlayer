@@ -1,11 +1,5 @@
 package com.huwei.sweetmusicplayer.fragments;
 
-import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
-import com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter;
-import com.huwei.sweetmusicplayer.ui.adapters.RecyclerViewAdapterBase;
-import com.huwei.sweetmusicplayer.util.MusicUtils;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +8,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
+import com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter;
+import com.huwei.sweetmusicplayer.ui.adapters.RecyclerViewAdapterBase;
+import com.huwei.sweetmusicplayer.util.MusicUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -42,7 +41,7 @@ public class AlbumsFragment extends Fragment implements IMusicViewTypeContain{
             public void onItemClick(View view, int position) {
 //                Toast.makeText(getActivity(),"OnClick:"+position,Toast.LENGTH_LONG).show();
                 FragmentTransaction transaction=fragmentManager.beginTransaction();
-                MusicFragment musicFragment=new MusicFragment_();
+                LocalMusicFragment musicFragment=new LocalMusicFragment_();
                 Bundle bundle=new Bundle();
                 bundle.putInt(MUSIC_SHOW_TYPE,SHOW_MUSIC_BY_ALBUM);
                 bundle.putLong("album_id",adapter.getData().get(position).getAlbumId());
