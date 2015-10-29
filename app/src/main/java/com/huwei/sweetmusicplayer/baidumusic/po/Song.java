@@ -112,7 +112,7 @@ public class Song extends AbstractMusic implements IQueryReuslt {
 
     @Override
     public Uri getDataSoure() {
-        String url = BaiduMusicUtil.getDownloadUrlBySongId(song_id);
+        String url = bitrate!=null?bitrate.getFile_link(): BaiduMusicUtil.getDownloadUrlBySongId(song_id);
         return Uri.parse(url);
     }
 
