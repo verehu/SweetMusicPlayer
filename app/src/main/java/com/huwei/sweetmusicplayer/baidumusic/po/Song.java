@@ -3,6 +3,7 @@ package com.huwei.sweetmusicplayer.baidumusic.po;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
@@ -83,6 +84,19 @@ public class Song extends AbstractMusic implements IQueryReuslt {
     public Bitrate bitrate;
     public SongInfo songInfo;
 
+    public static final Parcelable.Creator<Song> CREATOR = new Parcelable.Creator<Song>() {
+
+        @Override
+        public Song createFromParcel(Parcel source) {
+            return new Song(source);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
+    
     public Song() {
     }
 

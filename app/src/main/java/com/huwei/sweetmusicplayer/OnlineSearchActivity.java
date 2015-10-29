@@ -44,7 +44,8 @@ import java.util.List;
 public class OnlineSearchActivity extends BaseActivity {
     public static final String TAG = "OnlineSearchActivity";
 
-    private int total = 0;;
+    private int total = 0;
+    ;
     private int pageNo = 1;
     private int pageSize = 50;
 
@@ -147,14 +148,14 @@ public class OnlineSearchActivity extends BaseActivity {
                 if (result != null) {
                     //先加入专辑
                     if (result.album_info != null) {
-                        if(pageNo==1) {
+                        if (pageNo == 1) {
                             total += result.album_info.total;
                         }
                         adapter.addALl(result.album_info.album_list);
                     }
 
                     if (result.song_info != null) {
-                        if(pageNo==1) {
+                        if (pageNo == 1) {
                             total += result.song_info.total;
                         }
                         adapter.addALl(result.song_info.song_list);
@@ -162,19 +163,17 @@ public class OnlineSearchActivity extends BaseActivity {
 
                     //todo 后续加入其他类型
 
-                    Log.i(TAG,"pageNO:"+pageNo+"    pageSize:"+pageSize+"   total:"+total);
+                    Log.i(TAG, "pageNO:" + pageNo + "    pageSize:" + pageSize + "   total:" + total);
                     if (pageNo >= total / pageSize + 1) {
-                        Log.i(TAG,"onRefreshComplete");
+                        Log.i(TAG, "onRefreshComplete");
 
                         lv_online_search.onRefreshComplete();
                         lv_online_search.setMode(PullToRefreshBase.Mode.DISABLED);
-                        Toast.makeText(mContext,"已没更多内容!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "已没更多内容!", Toast.LENGTH_LONG).show();
                     }
                 }
 
-
                 adapter.notifyDataSetChanged();
-
             }
         });
     }

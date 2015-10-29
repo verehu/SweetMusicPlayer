@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.PopupWindow;
 
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            Log.i(TAG,"onServiceConnected");
             isServiceBinding = true;
             musicControler = IMusicControlerService.Stub.asInterface(iBinder);
 
@@ -72,20 +74,17 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
 
         initView();
         initReciever();
+
+        if (!isServiceBinding) {
+            Log.i(TAG,"start binding service");
+            Intent intent = new Intent(this,MusicControlerService.class);
+            bindService(intent, mConnection,BIND_AUTO_CREATE);
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (!isServiceBinding) {
-            Intent intent = new Intent("com.huwei.sweetmusicplayer.services.MusicControlerService");
-            startService(intent);
-
-            bindService(intent, mConnection,BIND_AUTO_CREATE);
-        }
-
-
     }
 
     @Override

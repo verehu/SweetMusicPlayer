@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 
 import com.huwei.sweetmusicplayer.SweetApplication;
@@ -29,6 +30,19 @@ public class MusicInfo extends AbstractMusic {
     private Integer duration;
     private String path;
     private Boolean favorite;
+
+    public static final Parcelable.Creator<MusicInfo> CREATOR = new Parcelable.Creator<MusicInfo>() {
+
+        @Override
+        public MusicInfo createFromParcel(Parcel source) {
+            return new MusicInfo(source);
+        }
+
+        @Override
+        public MusicInfo[] newArray(int size) {
+            return new MusicInfo[size];
+        }
+    };
 
     //------------------- new property
     private String album ;
@@ -95,13 +109,14 @@ public class MusicInfo extends AbstractMusic {
         String[] proj = { MediaStore.Images.Media.DATA };
         Cursor actualimagecursor = SweetApplication.context.getContentResolver().query(uri, proj, null, null, null);
         int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        actualimagecursor.moveToFirst();
 
-
-        String img_path = actualimagecursor.getString(actual_image_column_index);
-        File file = new File(img_path);
-        Uri fileUri = Uri.fromFile(file);
-        return fileUri.toString();
+        if(actualimagecursor.moveToFirst()) {
+            String img_path = actualimagecursor.getString(actual_image_column_index);
+            File file = new File(img_path);
+            Uri fileUri = Uri.fromFile(file);
+            return fileUri.toString();
+        }
+        return "";
     }
 
     @Override

@@ -33,4 +33,6 @@ public interface IContain {
 
     //http请求模块统一标签
     public static final String HTTP = "HTTP";
+
+    public static final String DEFAULT_PIC="default";
 }

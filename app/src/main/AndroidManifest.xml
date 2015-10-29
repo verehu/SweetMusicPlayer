@@ -53,8 +53,8 @@
         <activity android:name=".AlbumInfoActivity_"/>
 
         <service
-            android:name=".services.MusicControlerService"
-           >
+            android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"
+            android:process=":remote">
             <intent-filter>
                 <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"/>
                 <category android:name="android.intent.category.DEFAULT" />

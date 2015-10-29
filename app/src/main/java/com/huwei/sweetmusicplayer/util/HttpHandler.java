@@ -39,7 +39,7 @@ public abstract class HttpHandler implements Response.Listener<String>,Response.
 
     @Override
     public void onResponse(String response) {
-        Log.i(IContain.HTTP,"response:"+response);
+//        Log.i(IContain.HTTP,"response:"+response);
 
         onFinish();
         BaseResp resp = new Gson().fromJson(response,BaseResp.class);

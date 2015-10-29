@@ -279,6 +279,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     @Override
     public IBinder onBind(Intent intent) {
+        Log.i(TAG,"mBinder:"+mBinder);
         return mBinder;
     }
 
