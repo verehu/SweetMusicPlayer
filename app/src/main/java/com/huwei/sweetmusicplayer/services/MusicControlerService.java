@@ -143,12 +143,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void play() throws RemoteException {
-//            if (musicIndex != -1) {
-//                AbstractMusic music = musicList.get(musicIndex);
-//                startPlay(music);
-//            }
-//
-//            handler.sendEmptyMessage(MSG_CURRENT);
             //准备播放源，准备后播放
             Log.i(TAG, "play()");
             if (!mp.isPlaying()) {
@@ -177,10 +171,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         @Override
         public void seekTo(int mesc) throws RemoteException {
             mp.seekTo(mesc);
-
-//            if (!isPlaying()) {
-//                play();
-//            }
         }
 
         @Override
@@ -222,25 +212,20 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void nextSong() throws RemoteException {
-//            if(musicList!=null) {
             musicIndex = (musicIndex + 1) % musicList.size();
             prepareSong(musicList.get(musicIndex));
-//                play();
-//            }
         }
 
         @Override
         public void preSong() throws RemoteException {
             musicIndex = (musicIndex - 1) % musicList.size();
             prepareSong(musicList.get(musicIndex));
-//            play();
         }
 
         @Override
         public void randomSong() throws RemoteException {
             musicIndex = new Random().nextInt(musicList.size());
             prepareSong(musicList.get(musicIndex));
-//            play();
         }
     };
 
@@ -346,11 +331,11 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                             SongPlayResp resp = BaiduMusicUtil.querySong(song.song_id);
                             if(resp!=null) {
                                 song.bitrate = resp.bitrate;
-                                song.songInfo = resp.songinfo;
+                                song.songinfo = resp.songinfo;
 
                                 Log.i(TAG,"song hasGetDetailInfo:"+song);
 
-                                updatePlayBar(false);
+                                updatePlayBar(true);
 
                                 Message msg = Message.obtain();
                                 msg.what = MSG_PLAY;

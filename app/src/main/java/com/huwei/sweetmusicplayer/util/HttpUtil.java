@@ -11,9 +11,7 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.contains.IContain;
 
-
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -92,7 +90,7 @@ public class HttpUtil {
             }
         };
 
-        Log.i(IContain.HTTP,"request get url:"+url+"\n"+new Gson().toJson(params.getParams()));
+        Log.i(IContain.HTTP,"request get url:"+url);
 
         mQueue.add(request);
         mQueue.start();
@@ -108,6 +106,9 @@ public class HttpUtil {
     public static String getSync(String url, final HttpParams params){
         RequestFuture<String> future = RequestFuture.newFuture();
 
+        url=handleurl(url);
+        url=addParamsToUrl(url,params); //拼接参数
+
         RequestQueue mQueue = SweetApplication.getQueue();
         StringRequest request = new StringRequest(addParamsToUrl(url, params),future,future){
             @Override
@@ -118,7 +119,7 @@ public class HttpUtil {
             }
         };
 
-        Log.i(IContain.HTTP,"request getSync url:"+url+"\n"+new Gson().toJson(params.getParams()));
+        Log.i(IContain.HTTP,"request getSync url:"+url);
 
         mQueue.add(request);
         mQueue.start();

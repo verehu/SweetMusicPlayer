@@ -3,7 +3,6 @@ package com.huwei.sweetmusicplayer.baidumusic.po;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
@@ -82,21 +81,8 @@ public class Song extends AbstractMusic implements IQueryReuslt {
     public int cluster_id;
 
     public Bitrate bitrate;
-    public SongInfo songInfo;
+    public SongInfo songinfo;
 
-    public static final Parcelable.Creator<Song> CREATOR = new Parcelable.Creator<Song>() {
-
-        @Override
-        public Song createFromParcel(Parcel source) {
-            return new Song(source);
-        }
-
-        @Override
-        public Song[] newArray(int size) {
-            return new Song[size];
-        }
-    };
-    
     public Song() {
     }
 
@@ -138,7 +124,7 @@ public class Song extends AbstractMusic implements IQueryReuslt {
 
     //返回""加载默认的图片
     public String getArtPic() {
-        return Uri.parse(songInfo!=null?songInfo.getPic_small():"").toString();
+        return Uri.parse(songinfo !=null? songinfo.getPic_small():"").toString();
     }
 
     @Override
@@ -158,7 +144,16 @@ public class Song extends AbstractMusic implements IQueryReuslt {
     }
 
     public boolean hasGetDetailInfo(){
-        return bitrate!=null||songInfo!=null;
+        return bitrate!=null|| songinfo !=null;
+    }
+
+
+    public Song createFromParcel(Parcel source) {
+        return new Song(source);
+    }
+
+    public Song[] newArray(int size) {
+        return new Song[size];
     }
 
     @Override
@@ -196,6 +191,8 @@ public class Song extends AbstractMusic implements IQueryReuslt {
         dest.writeString(this.lrclink);
         dest.writeInt(this.data_source);
         dest.writeInt(this.cluster_id);
+        dest.writeParcelable(this.bitrate, 0);
+        dest.writeParcelable(this.songinfo, 0);
     }
 
     protected Song(Parcel in) {
@@ -227,13 +224,17 @@ public class Song extends AbstractMusic implements IQueryReuslt {
         this.lrclink = in.readString();
         this.data_source = in.readInt();
         this.cluster_id = in.readInt();
+        this.bitrate = in.readParcelable(Bitrate.class.getClassLoader());
+        this.songinfo = in.readParcelable(SongInfo.class.getClassLoader());
     }
 
-    public Song createFromParcel(Parcel source) {
-        return new Song(source);
-    }
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        public Song createFromParcel(Parcel source) {
+            return new Song(source);
+        }
 
-    public Song[] newArray(int size) {
-        return new Song[size];
-    }
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
 }
