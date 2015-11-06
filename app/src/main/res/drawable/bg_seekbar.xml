@@ -27,7 +27,7 @@
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <solid android:color="@color/holo_purple_light" />
+                <solid android:color="@color/primary" />
 
                 <size android:height="8dp" />
 

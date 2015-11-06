@@ -3,7 +3,7 @@
     android:id="@+id/ll_pop_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/scanbar_back"
+    android:background="@color/primary"
     android:orientation="vertical">
 
     <TextView

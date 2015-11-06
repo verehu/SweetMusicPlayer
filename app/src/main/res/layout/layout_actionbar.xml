@@ -10,5 +10,5 @@
         android:layout_height="?attr/actionBarSize"
         android:fitsSystemWindows="true"
         android:clipToPadding="true"
-        android:background="@color/purple"/>
+        android:background="@color/primary"/>
 </merge>

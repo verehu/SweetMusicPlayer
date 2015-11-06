@@ -8,7 +8,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple"
+        android:background="@color/primary"
         android:layout_width="match_parent" />
 
 
@@ -46,7 +46,7 @@
         android:layout_height="80.0dip"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/holo_purple_light"
+        android:textColor="@color/primary"
         android:textSize="30.0dip"
         android:visibility="invisible" />
 

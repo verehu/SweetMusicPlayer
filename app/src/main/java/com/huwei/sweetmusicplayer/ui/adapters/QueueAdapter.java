@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
@@ -34,7 +33,7 @@ public class QueueAdapter extends BaseAdapter{
     @SystemService
     LayoutInflater inflater;
     @ColorRes
-    int purple;
+    int primary;
     @ColorRes
     int white;
 
@@ -74,7 +73,7 @@ public class QueueAdapter extends BaseAdapter{
         viewHolder.tv_title.setText(list.get(position).getTitle());
 
         if(MusicManager.getInstance().getNowPlayingIndex()==position){
-            viewHolder.tv_title.setTextColor(purple);
+            viewHolder.tv_title.setTextColor(primary);
         }else{
             viewHolder.tv_title.setTextColor(white);
         }

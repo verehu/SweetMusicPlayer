@@ -40,7 +40,7 @@ public class BaseActivity extends ActionBarActivity {
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
         //使StatusBarTintView 和 actionbar的颜色保持一致，风格统一。
-        tintManager.setStatusBarTintResource(R.color.purple);
+        tintManager.setStatusBarTintResource(R.color.primary);
         // 设置状态栏的文字颜色
         tintManager.setStatusBarDarkMode(true, this);
 

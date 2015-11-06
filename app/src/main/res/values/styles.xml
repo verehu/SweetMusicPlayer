@@ -6,26 +6,27 @@
         <item name="android:actionOverflowButtonStyle">@style/SweetTheme.OverFlow</item>
         <item name="android:windowActionBarOverlay">true</item>-->
         <!--<item name="android:windowBackground">@drawable/default_bg</item>-->
-        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <!--<item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>-->
         <item name="android:textViewStyle">@style/SweetTheme.TextView</item>
         <item name="android:buttonStyle">@style/SweetTheme.ButtonStyle</item>
-        <!--<item name="android:background">@color/bg_common</item>-->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@color/white</item>
     </style>
 
        <!-- default btn -->
-    <style name="default_btn" parent="@android:style/Widget.Holo.Button">
-        <item name="android:background">@drawable/default_btn_bg</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-    
-    <!-- actionBar -->
-    <style name="SweetTheme.PurpleActionBar" parent="@android:style/Widget.Holo.ActionBar">
-        <item name="android:background">@drawable/actionbar</item>
-        <item name="android:textColor">@color/actionbar_text</item>
-    </style>
+    <!--<style name="default_btn" parent="@android:style/Widget.Holo.Button">-->
+        <!--<item name="android:background">@drawable/default_btn_bg</item>-->
+        <!--<item name="android:textColor">@color/white</item>-->
+    <!--</style>-->
+    <!-- -->
+    <!--&lt;!&ndash; actionBar &ndash;&gt;-->
+    <!--<style name="SweetTheme.PurpleActionBar" parent="@android:style/Widget.Holo.ActionBar">-->
+        <!--<item name="android:background">@drawable/actionbar</item>-->
+        <!--<item name="android:textColor">@color/actionbar_text</item>-->
+    <!--</style>-->
 
     <!--溢出菜单样式 -->
-    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.Light.PopupMenu.Overflow">
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
         <item name="overlapAnchor">false</item>
         <item name="android:dropDownWidth">wrap_content</item>
         <item name="android:paddingRight">5dp</item>
@@ -34,12 +35,12 @@
         <item name="android:dropDownHorizontalOffset">0dip</item>
     </style>
 
-    <style name="SweetTheme.TextView" parent="@android:style/Widget.Holo.TextView">
-        <item name="android:textColor">@color/white</item>
+    <style name="SweetTheme.TextView" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textColor">@color/primary_text</item>
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="SweetTheme.ButtonStyle" parent="@android:style/Widget.Holo.Button">
+    <style name="SweetTheme.ButtonStyle" parent="Widget.AppCompat.Light.ActionButton">
         <item name="android:padding">8dp</item>
     </style>
       
@@ -80,12 +81,12 @@
 
     <style name="catalog">
         <item name="android:padding">8dp</item>
-        <item name="android:textColor">@color/purple</item>
+        <item name="android:textColor">@color/primary</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="scanbottombar">
-        <item name="android:background">@color/scanbar_back</item>
+        <item name="android:background">@color/primary</item>
     </style>
     
    <!--menu-->

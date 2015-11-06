@@ -90,7 +90,7 @@ public class SplashActivity extends Activity {
         }
         rr_splash_container.setBackgroundDrawable(getResources().getDrawable(resID));
         gtp_appname.setMaxValue(maxValue);
-        gtp_appname.setProColorInt(getResources().getColor(R.color.holo_purple_light));
+        gtp_appname.setProColorInt(getResources().getColor(R.color.primary));
 
         //loadSongFromSQL();
         FileUtil.createDir(LrcUtil.lrcRootPath);
