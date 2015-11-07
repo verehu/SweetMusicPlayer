@@ -7,10 +7,17 @@
         <item name="android:windowActionBarOverlay">true</item>-->
         <!--<item name="android:windowBackground">@drawable/default_bg</item>-->
         <!--<item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>-->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:windowBackground">@color/fa</item>
+        <item name="android:textColorPrimary">@color/white</item>
+
         <item name="android:textViewStyle">@style/SweetTheme.TextView</item>
         <item name="android:buttonStyle">@style/SweetTheme.ButtonStyle</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:background">@color/white</item>
+
+        <!--menu-->
+        <item name="searchViewStyle">@style/Widget.AppCompat.SearchView</item>
     </style>
 
        <!-- default btn -->
@@ -35,9 +42,25 @@
         <item name="android:dropDownHorizontalOffset">0dip</item>
     </style>
 
-    <style name="SweetTheme.TextView" parent="Widget.AppCompat.AutoCompleteTextView">
+    <style name="SweetTheme.TextView" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textColor">@color/primary_text</item>
         <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="secondTextView">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="textViewWhite" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/primary_text_white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="secondTextViewWhite">
+        <item name="android:textColor">@color/secondary_text_white</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="SweetTheme.ButtonStyle" parent="Widget.AppCompat.Light.ActionButton">
@@ -80,7 +103,7 @@
     </style>
 
     <style name="catalog">
-        <item name="android:padding">8dp</item>
+        <!--<item name="android:padding">8dp</item>-->
         <item name="android:textColor">@color/primary</item>
         <item name="android:textStyle">bold</item>
     </style>

@@ -3,12 +3,13 @@
 <!-- height设置有问题 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="68dp"
+    android:layout_height="56dp"
     android:layout_gravity="bottom"
     android:descendantFocusability="afterDescendants"
     android:focusable="true"
     android:clickable="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/_2c">
 
     <ProgressBar
         android:id="@+id/pro_music"
@@ -48,7 +49,8 @@
                 android:ellipsize="end"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:text=""/>
+                android:text=""
+                style="@style/textViewWhite"/>
 
             <TextView
                 android:id="@+id/tv_artist"
@@ -57,7 +59,8 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textColor="@color/white"
-                android:text=""/>
+                android:text=""
+                style="@style/secondTextViewWhite"/>
 
         </LinearLayout>
 

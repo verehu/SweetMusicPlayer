@@ -16,6 +16,9 @@
     <!-- non selected tab text -->
     <color name="unselected_tabtext">#77000000</color>
 
+    <color name="fa">#fafafa</color>
+    <color name="_2c">#2c2c2c</color>
+
     <color name="primary">#9C27B0</color>
     <color name="primary_dark">#7B1FA2</color>
     <color name="primary_light">#E1BEE7</color>
@@ -24,4 +27,9 @@
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
+
+    <color name="secondary_text_white">#E0BEE6</color>
+    <color name="primary_text_white">#fdfdfe</color>
+
+    <color name="indicator">#ff5722</color>
 </resources>

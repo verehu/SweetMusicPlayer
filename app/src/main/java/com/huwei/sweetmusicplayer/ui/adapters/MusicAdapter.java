@@ -1,10 +1,5 @@
 package com.huwei.sweetmusicplayer.ui.adapters;
 
-import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.comparator.MusicInfoComparator;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
+import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.comparator.MusicInfoComparator;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.models.MusicInfo;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -113,10 +112,10 @@ public class MusicAdapter extends BaseAdapter implements SectionIndexer {
             }
         });
 
-		if(MusicManager.isIndexNowPLayng(list,position)){
+		if(MusicManager.isIndexNowPLayng(list, position)){
 			mViewHolder.selected_view.setVisibility(View.VISIBLE);
 		}else{
-			mViewHolder.selected_view.setVisibility(View.INVISIBLE);
+			mViewHolder.selected_view.setVisibility(View.GONE);
 		}
 
         return convertView;

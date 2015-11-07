@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -26,8 +27,6 @@ import com.huwei.sweetmusicplayer.SongScanActivity_;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
 import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
 import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter;
-import com.huwei.sweetmusicplayer.ui.adapters.ScrollingTabsAdapter;
-import com.huwei.sweetmusicplayer.ui.widgets.ScrollableTabView;
 import com.huwei.sweetmusicplayer.util.TimeUtil;
 
 import org.androidannotations.annotations.AfterViews;
@@ -49,7 +48,7 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     @ViewById
     ViewPager viewPager;
     @ViewById
-    ScrollableTabView scrollingTabs;
+    TabLayout tabs;
     @ViewById
     TextView tv_sleepinfo, tv_sleep_cancel;
     @ViewById
@@ -175,7 +174,6 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     }
 
 
-
     private void initMenu(Menu menu) {
         SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
         SearchManager searchManager = (SearchManager) mActivity.getSystemService(Context.SEARCH_SERVICE);
@@ -194,13 +192,22 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
 
     private void initPager() {
         PagerAdapter mPagerAdapter = new PagerAdapter(
-                getActivity().getSupportFragmentManager());
+                getActivity().getSupportFragmentManager()){
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return getResources().getStringArray(R.array.tab_titles)[position];
+            }
+        };
 
         // add tabs_recent
 //        mPagerAdapter.addFragment(new RecentlyAddedFragment());
         // add tab_songs
         Bundle bundle = new Bundle();
         bundle.putInt(MUSIC_SHOW_TYPE, SHOW_MUSIC);
+
+        String tabs_str[] = getResources().getStringArray(R.array.tab_titles);
+
         LocalMusicFragment musicFragment = new LocalMusicFragment_();
         musicFragment.setArguments(bundle);
         mPagerAdapter.addFragment(musicFragment);
@@ -217,17 +224,11 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
 
         viewPager.setAdapter(mPagerAdapter);
 
-        initScrollableTabs(viewPager);
+        tabs.setupWithViewPager(viewPager);
+
+        tabs.setTabsFromPagerAdapter(mPagerAdapter);
     }
 
-    private void initScrollableTabs(ViewPager mViewPager) {
-        // TODO Auto-generated method stub
-
-        ScrollingTabsAdapter mScrollingTabsAdapter = new ScrollingTabsAdapter(
-                getActivity());
-        scrollingTabs.setAdapter(mScrollingTabsAdapter);
-        scrollingTabs.setViewPager(mViewPager);
-    }
 
     public void setSleepBarVisiable(boolean flag) {
         int visiblity = flag ? View.VISIBLE : View.GONE;

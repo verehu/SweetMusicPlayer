@@ -10,19 +10,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
-import com.huwei.sweetmusicplayer.baidumusic.po.Album2;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song;
-
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +120,7 @@ public class SearchResultAdapter extends BaseAdapter {
                 if(MusicManager.isIndexNowPLayng(data, position)){
                     viewHolder.selected_view.setVisibility(View.VISIBLE);
                 }else{
-                    viewHolder.selected_view.setVisibility(View.INVISIBLE);
+                    viewHolder.selected_view.setVisibility(View.GONE);
                 }
 
                 break;

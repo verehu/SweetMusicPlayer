@@ -2,43 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@color/background_material_dark">
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary"
-        android:layout_width="match_parent" />
+        android:background="@color/primary" />
 
+    <ListView
+        android:id="@+id/lv_song"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="8dp"
+        android:scrollbars="none" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:paddingTop="8dp">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal" >
-
-            <ListView
-                android:id="@+id/lv_song"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scrollbars="none" />
-
-            <com.huwei.sweetmusicplayer.ui.widgets.SideBar
-                android:id="@+id/sidebar"
-                android:layout_width="@dimen/sidebar_width"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </RelativeLayout>
+    <com.huwei.sweetmusicplayer.ui.widgets.SideBar
+        android:id="@+id/sidebar"
+        android:layout_width="@dimen/sidebar_width"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/dialog"

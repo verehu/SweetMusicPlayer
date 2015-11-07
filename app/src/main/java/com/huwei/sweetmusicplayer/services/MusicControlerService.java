@@ -144,13 +144,15 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         @Override
         public void play() throws RemoteException {
             //准备播放源，准备后播放
-            Log.i(TAG, "play()");
+            AbstractMusic music = mBinder.getNowPlayingSong();
+            Log.i(TAG, "play()->"+music.getTitle());
             if (!mp.isPlaying()) {
+                Log.i(TAG, "Enterplay()");
                 mp.start();
                 Intent intent = new Intent(PLAYBAR_UPDATE);
                 intent.putExtra("isNewPlayMusic", false);
 
-                AbstractMusic music = mBinder.getNowPlayingSong();
+                music = mBinder.getNowPlayingSong();
                 intent.putExtra("newMusic",music);
                 sendBroadcast(intent);
             }
@@ -244,6 +246,8 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                Log.i(TAG,"onPrepared");
+
                 handler.sendEmptyMessage(MSG_CURRENT);
 
                 try {

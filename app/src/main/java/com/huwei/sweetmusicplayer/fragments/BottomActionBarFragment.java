@@ -1,20 +1,10 @@
 package com.huwei.sweetmusicplayer.fragments;
 
 
-import com.huwei.sweetmusicplayer.R;
-//import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-
 import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -27,9 +17,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+
+//import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 
 @EFragment(R.layout.bottom_action_bar)
 public class BottomActionBarFragment extends Fragment implements IContain {

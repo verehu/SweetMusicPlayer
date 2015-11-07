@@ -11,8 +11,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 
+import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.util.BitmapUtil;
 import com.huwei.sweetmusicplayer.util.CharacterParser;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
 
@@ -253,6 +255,10 @@ public class MusicInfo extends AbstractMusic {
             super.onPostExecute(bitmap);
 
             if(onLoadListener!=null){
+                if(bitmap==null){
+                    bitmap = BitmapUtil.drawableToBitamp(SweetApplication.context.getResources().getDrawable(R.drawable.img_album_background));
+                }
+
                 onLoadListener.onSuccessLoad(bitmap);
             }
 

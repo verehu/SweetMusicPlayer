@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:descendantFocusability="afterDescendants"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
     <!-- 显示字母项 -->
@@ -12,8 +12,8 @@
         style="@style/catalog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="catalog"
-        android:visibility="gone" />
+        android:layout_marginLeft="16sp"
+        android:text="catalog" />
 
     <LinearLayout
         android:id="@+id/song_item"
@@ -24,52 +24,147 @@
         android:focusable="true"
         android:gravity="center_vertical">
 
-        <View
-            android:id="@+id/selected_view"
-            android:layout_width="8dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@color/primary"
-            android:visibility="invisible" />
+        <!--<View-->
+        <!--android:id="@+id/selected_view"-->
+        <!--android:layout_width="8dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:background="@color/primary"-->
+        <!--android:visibility="gone" />-->
+
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="8dp"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16sp"
+            android:layout_marginRight="16sp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/song_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="song_text"
 
-                android:textSize="@dimen/font_16" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingRight="8dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/artist_tv"
+                <TextView
+                    android:id="@+id/song_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="song_text"
+                    android:textSize="@dimen/font_16" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+
+                <TextView
+                    android:id="@+id/artist_tv"
+                    style="@style/secondTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="artist_tv" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="4dp"
-                android:singleLine="true"
-                android:text="artist_tv"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_micro" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/selected_view"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/playing_icon"
+                    android:layout_gravity="right"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/duration_tv"
+                    style="@style/secondTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="00:00" />
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/duration_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="00:00"
-            android:textColor="@color/white" />
+        <!--<RelativeLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical">-->
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/song_title"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:ellipsize="end"-->
+        <!--android:singleLine="true"-->
+        <!--android:text="song_text"-->
+        <!--android:textSize="@dimen/font_16" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/selected_view"-->
+        <!--android:layout_width="16dp"-->
+        <!--android:layout_height="16dp"-->
+        <!--android:src="@drawable/playing_icon" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/artist_tv"-->
+        <!--style="@style/secondTextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:singleLine="true"-->
+        <!--android:text="artist_tv" />-->
+
+        <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_weight="1" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/duration_tv"-->
+        <!--style="@style/secondTextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:text="00:00" />-->
+
+        <!--</LinearLayout>-->
+        <!--</RelativeLayout>-->
 
 
     </LinearLayout>
