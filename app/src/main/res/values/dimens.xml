@@ -13,7 +13,7 @@
     <dimen name="tab_padding_left_right">40dp</dimen>
     
     <!-- bottom_action_bar -->
-    <dimen name="bottom_action_bar_height">68dp</dimen>
+    <dimen name="bottom_action_bar_height">60dp</dimen>
     <dimen name="bottom_action_bar_padding_left">12dp</dimen>
     <dimen name="bottom_action_bar_item_width">36dp</dimen>
     <dimen name="bottom_action_bar_item_padding_left_right">8dp</dimen>

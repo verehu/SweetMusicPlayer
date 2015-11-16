@@ -2,16 +2,13 @@ package com.huwei.sweetmusicplayer;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.huwei.sweetmusicplayer.ui.SystemBarTintManager;
 
 
 /**
@@ -20,7 +17,7 @@ import com.huwei.sweetmusicplayer.ui.SystemBarTintManager;
  * @author Jayce
  * @date 2015/6/19
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends AppCompatActivity {
     protected Context mContext;
     private boolean hasAdjustActionBar;
 
@@ -32,24 +29,25 @@ public class BaseActivity extends ActionBarActivity {
 
         mContext = this;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //状态栏透明 需要在创建SystemBarTintManager 之前调用。
-            setTranslucentStatus(true);
-        }
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        //使StatusBarTintView 和 actionbar的颜色保持一致，风格统一。
-        tintManager.setStatusBarTintResource(R.color.primary);
-        // 设置状态栏的文字颜色
-        tintManager.setStatusBarDarkMode(true, this);
-
-        tintManager.setStatusBarAlpha(80);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            //状态栏透明 需要在创建SystemBarTintManager 之前调用。
+//            setTranslucentStatus(true);
+//        }
+//        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+//        tintManager.setStatusBarTintEnabled(true);
+//        //使StatusBarTintView 和 actionbar的颜色保持一致，风格统一。
+//        tintManager.setStatusBarTintResource(R.color.primary_dark);
+//
+//        // 设置状态栏的文字颜色
+//        tintManager.setStatusBarDarkMode(true, this);
+//
+//        tintManager.setStatusBarAlpha(60);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        adjustActionBarHeight();
+//        adjustActionBarHeight();
     }
 
     @TargetApi(19)

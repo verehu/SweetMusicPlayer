@@ -1,29 +1,6 @@
 package com.huwei.sweetmusicplayer.fragments;
 
 
-import com.android.volley.VolleyError;
-import com.google.gson.Gson;
-import com.huwei.sweetmusicplayer.R;
-//import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.comparator.LrcComparator;
-import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.models.LrcContent;
-import com.huwei.sweetmusicplayer.baidumusic.po.Lrc;
-import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter;
-import com.huwei.sweetmusicplayer.util.LrcUtil;
-import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
-import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener;
-import com.huwei.sweetmusicplayer.ui.widgets.LrcView;
-import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
-import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
-import com.huwei.sweetmusicplayer.util.HttpHandler;
-import com.huwei.sweetmusicplayer.util.TimeUtil;
-
-
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -44,11 +21,33 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.baidumusic.po.Lrc;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
+import com.huwei.sweetmusicplayer.comparator.LrcComparator;
+import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.models.LrcContent;
+import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter;
+import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener;
+import com.huwei.sweetmusicplayer.ui.widgets.LrcView;
+import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
+import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
+import com.huwei.sweetmusicplayer.util.HttpHandler;
+import com.huwei.sweetmusicplayer.util.LrcUtil;
+import com.huwei.sweetmusicplayer.util.TimeUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -60,6 +59,8 @@ import org.androidannotations.annotations.ViewById;
 import java.util.Collections;
 import java.util.List;
 
+//import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+
 @EFragment
 public class PlayingFragment extends Fragment implements IContain, OnLrcSearchClickListener, ILrcStateContain {
     private static final String TAG = "PlayingFragment";
@@ -70,8 +71,8 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     private TextView playpage_playtime_tv;
     private TextView playpage_duration_tv;
     private SeekBar playpage_progressbar;
-    private Button playpage_next_btn;
-    private Button playpage_previous_btn;
+    private ImageView playpage_next_btn;
+    private ImageView playpage_previous_btn;
     private ToggleButton playpage_play_btn;
     private LrcView playpage_lrcview;
 
@@ -117,8 +118,8 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         playpage_playtime_tv = (TextView) root.findViewById(R.id.playpage_playtime_tv);
         playpage_duration_tv = (TextView) root.findViewById(R.id.playpage_duration_tv);
         playpage_progressbar = (SeekBar) root.findViewById(R.id.playpage_progressbar);
-        playpage_next_btn = (Button) root.findViewById(R.id.playpage_next);
-        playpage_previous_btn = (Button) root.findViewById(R.id.playpage_previous);
+        playpage_next_btn = (ImageView) root.findViewById(R.id.playpage_next);
+        playpage_previous_btn = (ImageView) root.findViewById(R.id.playpage_previous);
         playpage_play_btn = (ToggleButton) root.findViewById(R.id.playpage_play);
         playpage_lrcview = (LrcView) root.findViewById(R.id.playpage_lrcview);
 

@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
@@ -153,7 +154,9 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
             public void onItemClick(int position) {
                 long time = System.currentTimeMillis();
                 MusicManager.getInstance().preparePlayingList(position, mMusicAdapter.getList());
-                Log.i(TAG,"time used:"+(System.currentTimeMillis() - time));
+                Log.i(TAG, "time used:" + (System.currentTimeMillis() - time));
+
+                Log.i(TAG,"clicked music:"+((AbstractMusic)mMusicAdapter.getList().get(position)).getTitle());
 
 //                MusicManager.getInstance().play();
             }

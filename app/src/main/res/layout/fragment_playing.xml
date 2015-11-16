@@ -12,9 +12,9 @@
 
         <Button
             android:id="@+id/playpage_return"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bt_playpage_return"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bt_playpage_button_return_press"
             android:onClick="closeContent"/>
 
         <RelativeLayout
@@ -29,7 +29,7 @@
                 android:layout_below="@+id/playpage_title_tv"
                 android:layout_centerHorizontal="true"
                 android:text="Small Text"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                style="@style/secondTextViewWhite" />
 
             <TextView
                 android:id="@+id/playpage_title_tv"
@@ -38,14 +38,14 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:text="Medium Text"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                style="@style/textViewWhite" />
         </RelativeLayout>
 
         <Button
             android:id="@+id/btn_show_music_queue"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bt_localsonglist_move" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bt_localsonglist_move_press" />
     </LinearLayout>
 
     <android.support.v4.widget.DrawerLayout
@@ -90,17 +90,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/playpage_duration_tv"
+            android:layout_marginLeft="16dp"
             android:layout_alignParentLeft="true"
-
-            android:text="00:00" />
+            android:text="00:00"
+            style="@style/secondTextViewWhite" />
 
         <TextView
             android:id="@+id/playpage_duration_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/playpage_progressbar"
-            android:text="00:00" />
+            android:text="00:00"
+            style="@style/secondTextViewWhite" />
 
         <ToggleButton
             android:id="@+id/playpage_play"
@@ -112,20 +115,18 @@
             android:textOff=""
             android:textOn="" />
 
-        <Button
+        <ImageView
             android:id="@+id/playpage_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/playpage_play"
             android:layout_alignBottom="@+id/playpage_play"
             android:layout_toLeftOf="@+id/playpage_duration_tv"
-            android:background="@drawable/bt_playpage_next" />
+            android:src="@drawable/bt_playpage_next" />
 
-        <Button
+        <ImageView
             android:id="@+id/playpage_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/playpage_play"
             android:layout_alignBottom="@+id/playpage_play"
             android:layout_toRightOf="@+id/playpage_playtime_tv"
             android:background="@drawable/bt_playpage_previous" />
