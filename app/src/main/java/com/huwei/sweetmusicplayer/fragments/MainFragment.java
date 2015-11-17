@@ -124,47 +124,47 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
                     case R.id.menu_search:
 //                        mActivity.onSearchRequested();
                         break;
-                    case R.id.menu_scan:
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(), SongScanActivity_.class);
-                        startActivity(intent);
-                        return true;
-                    case R.id.menu_clock:
-                        final String[] mItems = new String[sleep_times.length];
-                        for (int i = 0; i < mItems.length; i++)
-                            mItems[i] = sleep_times[i] + "分钟";
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setTitle("请设置自动关闭的时间");
-                        builder.setItems(mItems, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
-                                    case 0:
-                                        sleeptime = 10 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 1:
-                                        sleeptime = 20 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 2:
-                                        sleeptime = 30 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 3:
-                                        sleeptime = 60 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 4:
-                                        sleeptime = 90 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                }
-                                Toast.makeText(getActivity(), mItems[which], Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        builder.create().show();
-                        return true;
+//                    case R.id.menu_scan:
+//                        Intent intent = new Intent();
+//                        intent.setClass(getActivity(), SongScanActivity_.class);
+//                        startActivity(intent);
+//                        return true;
+//                    case R.id.menu_clock:
+//                        final String[] mItems = new String[sleep_times.length];
+//                        for (int i = 0; i < mItems.length; i++)
+//                            mItems[i] = sleep_times[i] + "分钟";
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                        builder.setTitle("请设置自动关闭的时间");
+//                        builder.setItems(mItems, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                switch (which) {
+//                                    case 0:
+//                                        sleeptime = 10 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 1:
+//                                        sleeptime = 20 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 2:
+//                                        sleeptime = 30 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 3:
+//                                        sleeptime = 60 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 4:
+//                                        sleeptime = 90 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                }
+//                                Toast.makeText(getActivity(), mItems[which], Toast.LENGTH_LONG).show();
+//                            }
+//                        });
+//                        builder.create().show();
+//                        return true;
                     default:
                         break;
                 }
