@@ -83,13 +83,12 @@ public class BaiduMusicUtil implements IUrl {
      * @param songid
      * @return
      */
-    public static SongPlayResp querySong(String songid) {
+    public static void querySong(String songid,HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
         params.add("format", "json");
         params.add("method", SONG_PLAY);
         params.add("songid", songid);
-        String result = HttpUtil.getSync(BADDU_MUSIC, params);
-        return new Gson().fromJson(result, SongPlayResp.class);
+        HttpUtil.get(BADDU_MUSIC, params,httpHandler);
     }
 
     /**

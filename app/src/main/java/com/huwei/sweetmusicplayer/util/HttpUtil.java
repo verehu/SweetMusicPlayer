@@ -50,7 +50,7 @@ public class HttpUtil {
         Log.i(IContain.HTTP,"request post url:"+url+"\n"+new Gson().toJson(params.getParams()));
 
         mQueue.add(request);
-        mQueue.start();
+//        mQueue.start();
         notifyHandlerStart(handler);
     }
 
@@ -93,7 +93,7 @@ public class HttpUtil {
         Log.i(IContain.HTTP,"request get url:"+url);
 
         mQueue.add(request);
-        mQueue.start();
+//        mQueue.start();
         notifyHandlerStart(handler);
     }
 
@@ -122,7 +122,7 @@ public class HttpUtil {
         Log.i(IContain.HTTP,"request getSync url:"+url);
 
         mQueue.add(request);
-        mQueue.start();
+//        mQueue.start();
 
         String response = null;
         try {
@@ -184,11 +184,11 @@ public class HttpUtil {
         }
         String spaceStr=url.replaceAll(" ", "%20");
 
-        try {
-            return new String(spaceStr.getBytes(),"ISO-8859-1");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            return new String(spaceStr.getBytes(),"ISO-8859-1");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
         return spaceStr;
     }
 

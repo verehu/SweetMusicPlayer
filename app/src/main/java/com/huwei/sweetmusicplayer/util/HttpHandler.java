@@ -8,6 +8,7 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.baidumusic.resp.BaseResp;
 import com.huwei.sweetmusicplayer.contains.IContain;
 
@@ -20,6 +21,10 @@ public abstract class HttpHandler implements Response.Listener<String>,Response.
     public static final String TAG="HttpHandler";
 
     private Context context;
+
+    public HttpHandler(){
+        this.context = SweetApplication.context;
+    }
 
     public HttpHandler(Context context) {
         this.context = context;

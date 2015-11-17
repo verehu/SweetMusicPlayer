@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
 import com.huwei.sweetmusicplayer.R;
@@ -31,6 +32,7 @@ import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
+import com.huwei.sweetmusicplayer.util.HttpHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
@@ -145,7 +147,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         public void play() throws RemoteException {
             //准备播放源，准备后播放
             AbstractMusic music = mBinder.getNowPlayingSong();
-            Log.i(TAG, "play()->"+music.getTitle());
+            Log.i(TAG, "play()->" + music.getTitle());
             if (!mp.isPlaying()) {
                 Log.i(TAG, "Enterplay()");
                 mp.start();
@@ -153,7 +155,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                 intent.putExtra("isNewPlayMusic", false);
 
                 music = mBinder.getNowPlayingSong();
-                intent.putExtra("newMusic",music);
+                intent.putExtra("newMusic", music);
                 sendBroadcast(intent);
             }
         }
@@ -180,7 +182,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             musicIndex = index;
             musicList = list;
 
-            Log.d(TAG, "musicList:" + list + " musicIndex:" + index+"now title:"+((AbstractMusic)list.get(index)).getTitle());
+            Log.d(TAG, "musicList:" + list + " musicIndex:" + index + "now title:" + ((AbstractMusic) list.get(index)).getTitle());
 
             if (musicList == null || musicList.size() == 0) {
                 Toast.makeText(getBaseContext(), "播放列表为空", Toast.LENGTH_LONG).show();
@@ -246,7 +248,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                Log.i(TAG,"onPrepared");
+                Log.i(TAG, "onPrepared");
 
                 handler.sendEmptyMessage(MSG_CURRENT);
 
@@ -268,7 +270,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(TAG,"mBinder:"+mBinder);
+        Log.i(TAG, "mBinder:" + mBinder);
         return mBinder;
     }
 
@@ -301,7 +303,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        intent.putExtra("newMusic",music);
+        intent.putExtra("newMusic", music);
         sendBroadcast(intent);
     }
 
@@ -323,41 +325,42 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 //        lastSongID = music.getSongId();
 
         //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
-        if(music.getType() == AbstractMusic.MusicType.Online) {
+        if (music.getType() == AbstractMusic.MusicType.Online) {
             final Song song = (Song) music;
-            if(!song.hasGetDetailInfo()) {
-                new Thread() {
+            if (!song.hasGetDetailInfo()) {
+
+                //同步请求到歌曲信息
+                BaiduMusicUtil.querySong(song.song_id, new HttpHandler() {
                     @Override
-                    public void run() {
-                        super.run();
+                    public void onSuccess(String response) {
+                        SongPlayResp resp = new Gson().fromJson(response,SongPlayResp.class);
+                        if(resp!=null) {
+                            song.bitrate = resp.bitrate;
+                            song.songinfo = resp.songinfo;
 
-                        //同步请求到歌曲信息
-                            SongPlayResp resp = BaiduMusicUtil.querySong(song.song_id);
-                            if(resp!=null) {
-                                song.bitrate = resp.bitrate;
-                                song.songinfo = resp.songinfo;
+                            Log.i(TAG,"song hasGetDetailInfo:"+song);
 
-                                Log.i(TAG,"song hasGetDetailInfo:"+song);
+                            updatePlayBar(true);
 
-                                updatePlayBar(true);
-
-                                Message msg = Message.obtain();
-                                msg.what = MSG_PLAY;
-                                msg.obj = song;
-                                handler.sendMessage(msg);
-                            }
+                            Message msg = Message.obtain();
+                            msg.what = MSG_PLAY;
+                            msg.obj = song;
+                            handler.sendMessage(msg);
+                        }
                     }
-                }.start();
-            }else{
+                });
+
+
+            } else {
                 play(music);
             }
-        }else{
+        } else {
             play(music);
         }
     }
 
-    private void play(AbstractMusic music){
-        if(mp!=null) {
+    private void play(AbstractMusic music) {
+        if (mp != null) {
             mp.reset();
         }
 
@@ -412,7 +415,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         }
     }
 
-    void showMusicPlayerNotification(String tickerText,final int id,
+    void showMusicPlayerNotification(String tickerText, final int id,
                                      int resId, String picUri, String title, String artist, AbstractMusic music) {
         if (reViews == null) {
             reViews = new RemoteViews(getPackageName(), R.layout.notification_play);
