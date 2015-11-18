@@ -285,6 +285,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         stopForeground(true);
         isForeground = false;
 
+        unregisterReceiver(controlReceiver);
         super.onDestroy();
     }
 

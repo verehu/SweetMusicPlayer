@@ -27,9 +27,9 @@ public class BaiduMusicUtil implements IUrl {
     public static void querySug(String keyword, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
         params.add("format", "json");
-        params.add("method", SEARCH_CATALOGSUG);
-        params.add("query", keyword);
-        HttpUtil.get(BADDU_MUSIC, params, httpHandler);
+//        params.add("method", SEARCH_CATALOGSUG);
+        params.add("word", keyword);
+        HttpUtil.get(BAIDU_MUSIC_SUG, params, httpHandler);
     }
 
     public static void queryMerge(String keyword, int pageno, int pageSize, HttpHandler httpHandler) {
