@@ -151,9 +151,9 @@ public class HttpUtil {
         }
 
         //自动在地址末尾添加"/"
-        if(!url.endsWith("/")){
-            url+="/";
-        }
+//        if(!url.endsWith("/")){
+//            url+="/";
+//        }
         return url;
     }
 

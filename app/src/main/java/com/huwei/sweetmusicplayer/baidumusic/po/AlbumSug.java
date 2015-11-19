@@ -3,12 +3,11 @@ package com.huwei.sweetmusicplayer.baidumusic.po;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 
 /**
- * 百度音乐API中的Album
+ * 百度音乐API中的Album的SUG
  * @author Jayce
  * @date 2015/6/11
  */
-@Deprecated
-public class Album2 implements IQueryReuslt {
+public class AlbumSug implements IQueryReuslt {
     /**
      * Json样列
      * "album":[{"albumid":"183906","albumname":"\u4e03\u91cc\u9999(\u53f0\u6e7e\u6b63\u5f0f\u7248)","artistname":"\u5468\u6770\u4f26","artistpic":"http:\/\/a.hiphotos.baidu.com\/ting\/pic\/item\/3b292df5e0fe9925ff46084536a85edf8db17158.jpg"}]

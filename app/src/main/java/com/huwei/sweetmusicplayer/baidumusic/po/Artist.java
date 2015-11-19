@@ -3,55 +3,37 @@ package com.huwei.sweetmusicplayer.baidumusic.po;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 
 /**
- * 百度音乐API中的Artist
- * @author Jayce
- * @date 2015/6/11
+ * 百度音乐中的歌手
+ * @author jerry
+ * @version 4.6
+ * @date 2015-11-19
  */
 public class Artist implements IQueryReuslt {
     /**
-     * Json 样例
-     *  {"artistid":"1454","artistname":"\u6797\u5ba5\u5609","artistpic":"http:\/\/musicdata.baidu.com\/data2\/pic\/116050828\/116050828.jpg","yyr_artist":"0"}
+     * artist_id : 73336538
+     * author : <em>千古</em>留名
+     * ting_uid : 110941978
+     * avatar_middle :
+     * album_num : 0
+     * song_num : 4
+     * country : 中国
+     * artist_desc :
+     * artist_source : yyr
      */
-    private String artistid;
-    private String artistname;
-    private String artistpic;
-    private String yyr_artist;
 
-    public String getArtistid() {
-        return artistid;
-    }
-
-    public void setArtistid(String artistid) {
-        this.artistid = artistid;
-    }
-
-    public String getArtistname() {
-        return artistname;
-    }
-
-    public void setArtistname(String artistname) {
-        this.artistname = artistname;
-    }
-
-    public String getArtistpic() {
-        return artistpic;
-    }
-
-    public void setArtistpic(String artistpic) {
-        this.artistpic = artistpic;
-    }
-
-    public String getYyr_artist() {
-        return yyr_artist;
-    }
-
-    public void setYyr_artist(String yyr_artist) {
-        this.yyr_artist = yyr_artist;
-    }
+    public String artist_id;
+    public String author;
+    public String ting_uid;
+    public String avatar_middle;
+    public int album_num;
+    public int song_num;
+    public String country;
+    public String artist_desc;
+    public String artist_source;
 
     @Override
     public String getName() {
-        return artistname;
+        return author;
     }
 
     @Override

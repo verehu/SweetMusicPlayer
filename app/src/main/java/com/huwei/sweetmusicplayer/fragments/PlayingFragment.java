@@ -34,6 +34,7 @@ import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Lrc;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.baidumusic.po.SongSug;
 import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
 import com.huwei.sweetmusicplayer.comparator.LrcComparator;
 import com.huwei.sweetmusicplayer.contains.IContain;
@@ -58,8 +59,6 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.Collections;
 import java.util.List;
-
-//import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 
 @EFragment
 public class PlayingFragment extends Fragment implements IContain, OnLrcSearchClickListener, ILrcStateContain {
@@ -381,7 +380,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
                                 return;
                             }
 
-                            List<Song> songList = sug.song;
+                            List<SongSug> songList = sug.song;
                             findLrc(songList, 0);
                         }
 
@@ -402,13 +401,13 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
 
 
-    private void findLrc(final List<Song> songList,final int index){
+    private void findLrc(final List<SongSug> songList,final int index){
         if (songList.size() == 0) {
             playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
            return;
         }
-        final Song song = songList.get(index);
-        String songid = song.song_id;
+        final SongSug song = songList.get(index);
+        String songid = song.getSongid();
         BaiduMusicUtil.queryLrc(songid, new HttpHandler(getActivity()) {
             @Override
             public void onSuccess(String response) {

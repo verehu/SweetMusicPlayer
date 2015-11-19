@@ -15,13 +15,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
- * 百度音乐API返回的Song
+ * 百度音乐API返回的Song的SUG （搜索歌曲建议）
  *
  * @author Jayce
  * @date 2015/6/11
  */
-@Deprecated
-public class Song2 extends AbstractMusic implements IQueryReuslt {
+public class SongSug extends AbstractMusic implements IQueryReuslt {
 
     public static final String TAG="Song";
 
@@ -36,25 +35,25 @@ public class Song2 extends AbstractMusic implements IQueryReuslt {
     public Bitrate bitrate;
     public SongInfo songInfo;
 
-    public static final Parcelable.Creator<Song2> CREATOR = new Parcelable.Creator<Song2>() {
+    public static final Parcelable.Creator<SongSug> CREATOR = new Parcelable.Creator<SongSug>() {
 
         @Override
-        public Song2 createFromParcel(Parcel source) {
-            return new Song2(source);
+        public SongSug createFromParcel(Parcel source) {
+            return new SongSug(source);
         }
 
         @Override
-        public Song2[] newArray(int size) {
-            return new Song2[size];
+        public SongSug[] newArray(int size) {
+            return new SongSug[size];
         }
 
     };
 
-    public Song2() {
+    public SongSug() {
 
     }
 
-    public Song2(Parcel parcel) {
+    public SongSug(Parcel parcel) {
         songid = parcel.readString();
         songname = parcel.readString();
         encrypted_songid = parcel.readString();
@@ -185,13 +184,13 @@ public class Song2 extends AbstractMusic implements IQueryReuslt {
 
 
     @Override
-    public Song2 createFromParcel(Parcel source) {
-        return new Song2(source);
+    public SongSug createFromParcel(Parcel source) {
+        return new SongSug(source);
     }
 
     @Override
-    public Song2[] newArray(int size) {
-        return new Song2[size];
+    public SongSug[] newArray(int size) {
+        return new SongSug[size];
     }
 
     @Override

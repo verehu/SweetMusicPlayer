@@ -1,4 +1,6 @@
-package com.huwei.sweetmusicplayer.baidumusic.po;
+package com.huwei.sweetmusicplayer.baidumusic.group;
+
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 
 import java.util.List;
 

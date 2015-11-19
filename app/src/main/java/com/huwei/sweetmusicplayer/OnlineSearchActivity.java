@@ -2,8 +2,6 @@ package com.huwei.sweetmusicplayer;
 
 import android.app.SearchManager;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -57,15 +55,6 @@ public class OnlineSearchActivity extends BaseActivity {
     private String mQuery;
 
     SearchResultAdapter adapter;
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            adapter.notifyDataSetInvalidated();
-        }
-    };
 
     @AfterViews
     void init() {
@@ -141,27 +130,31 @@ public class OnlineSearchActivity extends BaseActivity {
             public void onSuccess(String response) {
                 //todo 暂时先加两种
 
-
                 final QueryMergeResp sug = new Gson().fromJson(response, QueryMergeResp.class);
                 QueryResult result = sug.result;
 
                 if (result != null) {
-                    //先加入专辑
+                    //加入歌手
+                    if(result.artist_info !=null){
+                        if(pageNo == 1){
+                            total += result.artist_info.total;
+                        }
+                        adapter.addAll(result.artist_info.artist_list);
+                    }
+                    //加入专辑
                     if (result.album_info != null) {
                         if (pageNo == 1) {
                             total += result.album_info.total;
                         }
-                        adapter.addALl(result.album_info.album_list);
+                        adapter.addAll(result.album_info.album_list);
                     }
-
+                    //加入歌曲
                     if (result.song_info != null) {
                         if (pageNo == 1) {
                             total += result.song_info.total;
                         }
-                        adapter.addALl(result.song_info.song_list);
+                        adapter.addAll(result.song_info.song_list);
                     }
-
-                    //todo 后续加入其他类型
 
                     Log.i(TAG, "pageNO:" + pageNo + "    pageSize:" + pageSize + "   total:" + total);
                     if (pageNo >= total / pageSize + 1) {
