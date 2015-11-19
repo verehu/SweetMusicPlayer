@@ -301,8 +301,8 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     }
 
     void updateLrcView(int currentTime) {
-
-        if (SlidingPanel.mTracking) return;
+//
+//        if (SlidingPanel.mTracking) return;
 
         int tempIndex = playpage_lrcview.getIndexByLrcTime(currentTime);
         if (tempIndex != playpage_lrcview.getIndex()) {
