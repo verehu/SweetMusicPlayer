@@ -117,7 +117,7 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_search:
-//                        mActivity.onSearchRequested();
+//                        mAct.onSearchRequested();
                         break;
 //                    case R.id.menu_scan:
 //                        Intent intent = new Intent();
@@ -171,8 +171,8 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
 
     private void initMenu(Menu menu) {
         SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-        SearchManager searchManager = (SearchManager) mActivity.getSystemService(Context.SEARCH_SERVICE);
-        ComponentName componentName = new ComponentName(mActivity, OnlineSearchActivity_.class);
+        SearchManager searchManager = (SearchManager) mAct.getSystemService(Context.SEARCH_SERVICE);
+        ComponentName componentName = new ComponentName(mAct, OnlineSearchActivity_.class);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
         searchView.setIconifiedByDefault(true);
 

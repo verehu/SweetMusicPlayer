@@ -21,7 +21,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 /**
- * 专辑详情页面
+ * 在线 专辑详情页面
  *
  * @author jerry
  * @date 2015-09-13

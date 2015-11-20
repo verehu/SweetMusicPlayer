@@ -24,13 +24,13 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
 
     public static final String TAG="Song";
 
-    private String songid;
-    private String songname;
-    private String encrypted_songid;
-    private String has_mv;
-    private String yyr_artist;
-    private String artistname;
-    private String control;
+    public String songid;
+    public String songname;
+    public String encrypted_songid;
+    public String has_mv;
+    public String yyr_artist;
+    public String artistname;
+    public String control;
 
     public Bitrate bitrate;
     public SongInfo songInfo;
@@ -62,8 +62,8 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
         artistname = parcel.readString();
         control = parcel.readString();
         bitrate = parcel.readParcelable(Bitrate.class.getClassLoader());
-        songInfo = parcel.readParcelable(SongInfo.class.getClassLoader());
-    }
+    songInfo = parcel.readParcelable(SongInfo.class.getClassLoader());
+}
 
     public String getSongid() {
         return songid;

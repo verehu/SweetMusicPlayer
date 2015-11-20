@@ -60,6 +60,10 @@ import org.androidannotations.annotations.ViewById;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ *
+ *  播放界面
+ */
 @EFragment
 public class PlayingFragment extends Fragment implements IContain, OnLrcSearchClickListener, ILrcStateContain {
     private static final String TAG = "PlayingFragment";
@@ -407,7 +411,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
            return;
         }
         final SongSug song = songList.get(index);
-        String songid = song.getSongid();
+        String songid = song.songid;
         BaiduMusicUtil.queryLrc(songid, new HttpHandler(getActivity()) {
             @Override
             public void onSuccess(String response) {
