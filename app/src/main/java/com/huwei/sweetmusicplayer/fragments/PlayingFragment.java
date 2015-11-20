@@ -61,8 +61,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
- *  播放界面
+ * 播放界面
  */
 @EFragment
 public class PlayingFragment extends Fragment implements IContain, OnLrcSearchClickListener, ILrcStateContain {
@@ -404,11 +403,10 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     }
 
 
-
-    private void findLrc(final List<SongSug> songList,final int index){
-        if (songList.size() == 0) {
+    private void findLrc(final List<SongSug> songList, final int index) {
+        if (songList != null && songList.size() == 0) {
             playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
-           return;
+            return;
         }
         final SongSug song = songList.get(index);
         String songid = song.songid;
@@ -437,9 +435,9 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
             public void onErrorResponse(VolleyError error) {
                 super.onErrorResponse(error);
 
-                if(index+1<songList.size()) {
+                if (index + 1 < songList.size()) {
                     findLrc(songList, index + 1);
-                }else{
+                } else {
                     playpage_lrcview.setLrcState(QUERY_ONLINE_FAIL);
                 }
             }
