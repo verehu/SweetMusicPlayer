@@ -131,7 +131,7 @@ public class ScrollableTabView extends LinearLayout//HorizontalScrollView
 		
 		int x=l-this.getWidth()/2+w/2;
 		
-//		smoothScrollTo(x, this.getScrollY());
+//		scrollTo(x, this.getScrollY());
 	}
 
 	@Override
