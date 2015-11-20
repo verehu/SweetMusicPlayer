@@ -2,17 +2,25 @@ package com.huwei.sweetmusicplayer.ui.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 
 /**
+ * 可以平滑滚动的LinearLayout
+ *
  * @author jayce
  * @date 2015/11/20
  */
-public class SmoothScrollLinearLayout extends LinearLayout{
+public class SmoothScrollLinearLayout extends LinearLayout {
 
     private Scroller mScroller;
     private int mHeight;
+
+    private boolean mExpanded = false;  //是否展开
 
     private static final int ANIMATION_DURATION = 1000;   //  从底部到上面需要1s
     public static final int DURATION = 1500;   //满屏滑动时间
@@ -35,6 +43,29 @@ public class SmoothScrollLinearLayout extends LinearLayout{
 
         mHeight = getMeasuredHeight();
     }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+
+        updateExpanded(t);
+    }
+
+    /**
+     * 更新mExpanded状态
+     */
+    private void updateExpanded(int t) {
+        if (t == 0) {
+            mExpanded = true;
+        } else if(t == - mHeight){
+            mExpanded = false;
+        }
+    }
+
+    public boolean isExpanded() {
+        return mExpanded;
+    }
+
     //    //调用此方法滚动到目标位置
     public void smoothScrollTo(int fx, int fy) {
         int dx = fx - getScrollX();
