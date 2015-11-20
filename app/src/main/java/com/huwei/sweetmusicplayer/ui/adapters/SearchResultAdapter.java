@@ -15,6 +15,7 @@ import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
+import com.huwei.sweetmusicplayer.baidumusic.po.ArtistSug;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
@@ -56,7 +57,7 @@ public class SearchResultAdapter extends BaseAdapter {
 
     }
 
-    public void addALl(List  add) {
+    public void addAll(List add) {
         data.addAll(add);
 
         Log.i(TAG,"dataSize:"+data.size());
@@ -140,11 +141,11 @@ public class SearchResultAdapter extends BaseAdapter {
                 TextView tv_artist = (TextView) convertView.findViewById(R.id.tv_artist);
 
                 Artist artist = (Artist) ISearchReuslt;
-                tv_artist.setText(artist.getArtistname());
+                tv_artist.setText(artist.getName());
 
-                imageLoader.displayImage(artist.getArtistpic(), iv_artist);
+                imageLoader.displayImage(artist.avatar_middle, iv_artist);
 
-                tv_artist.setText(mContext.getString(R.string.tab_artists) + ":" + artist.getArtistname());
+                tv_artist.setText(mContext.getString(R.string.tab_artists) + ":" + artist.author);
                 break;
         }
         lastType = type;

@@ -2,9 +2,9 @@ package com.huwei.sweetmusicplayer.baidumusic.po;
 
 
 
-import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
-
-import java.util.List;
+import com.huwei.sweetmusicplayer.baidumusic.group.Album_info;
+import com.huwei.sweetmusicplayer.baidumusic.group.Artist_info;
+import com.huwei.sweetmusicplayer.baidumusic.group.Song_info;
 
 /**
  * @author jayce
@@ -23,5 +23,5 @@ public class QueryResult {
     public int rqt_type;
     public Song_info song_info;
     public Album_info album_info;
-
+    public Artist_info artist_info;
 }
