@@ -1,11 +1,8 @@
 package com.huwei.sweetmusicplayer.fragments;
 
-import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,11 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.huwei.sweetmusicplayer.OnlineSearchActivity_;
 import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.SongScanActivity_;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
 import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
 import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter;
@@ -124,47 +119,47 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
                     case R.id.menu_search:
 //                        mActivity.onSearchRequested();
                         break;
-                    case R.id.menu_scan:
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(), SongScanActivity_.class);
-                        startActivity(intent);
-                        return true;
-                    case R.id.menu_clock:
-                        final String[] mItems = new String[sleep_times.length];
-                        for (int i = 0; i < mItems.length; i++)
-                            mItems[i] = sleep_times[i] + "分钟";
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setTitle("请设置自动关闭的时间");
-                        builder.setItems(mItems, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
-                                    case 0:
-                                        sleeptime = 10 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 1:
-                                        sleeptime = 20 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 2:
-                                        sleeptime = 30 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 3:
-                                        sleeptime = 60 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 4:
-                                        sleeptime = 90 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                }
-                                Toast.makeText(getActivity(), mItems[which], Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        builder.create().show();
-                        return true;
+//                    case R.id.menu_scan:
+//                        Intent intent = new Intent();
+//                        intent.setClass(getActivity(), SongScanActivity_.class);
+//                        startActivity(intent);
+//                        return true;
+//                    case R.id.menu_clock:
+//                        final String[] mItems = new String[sleep_times.length];
+//                        for (int i = 0; i < mItems.length; i++)
+//                            mItems[i] = sleep_times[i] + "分钟";
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                        builder.setTitle("请设置自动关闭的时间");
+//                        builder.setItems(mItems, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                switch (which) {
+//                                    case 0:
+//                                        sleeptime = 10 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 1:
+//                                        sleeptime = 20 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 2:
+//                                        sleeptime = 30 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 3:
+//                                        sleeptime = 60 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 4:
+//                                        sleeptime = 90 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                }
+//                                Toast.makeText(getActivity(), mItems[which], Toast.LENGTH_LONG).show();
+//                            }
+//                        });
+//                        builder.create().show();
+//                        return true;
                     default:
                         break;
                 }
