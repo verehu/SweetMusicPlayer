@@ -3,7 +3,10 @@ package com.huwei.sweetmusicplayer.util;
 import android.R.integer;
 import android.util.Log;
 
- 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class TimeUtil {
 
@@ -58,5 +61,16 @@ public class TimeUtil {
 		
 		millTime=(min*60+second)*1000+mill*10;
 		return millTime;
+	}
+
+	public static String getCurrentTime(String format) {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.getDefault());
+		String currentTime = sdf.format(date);
+		return currentTime;
+	}
+
+	public static String getCurrentTime() {
+		return getCurrentTime("yyyy-MM-dd  HH:mm:ss");
 	}
 }
