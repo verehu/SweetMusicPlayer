@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,8 +35,8 @@ import java.util.List;
  * 装载音乐的fragment容器
  */
 @EFragment(R.layout.fragment_localmusic)
-public class LocalMusicFragment extends BaseFragment implements IContain, IMusicViewTypeContain{
-    public static final String TAG="LocalMusicFragment";
+public class LocalMusicFragment extends BaseFragment implements IContain, IMusicViewTypeContain {
+    public static final String TAG = "LocalMusicFragment";
 
     private MusicAdapter mMusicAdapter;
 
@@ -49,7 +50,7 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
     Toolbar toolbar;
 
     private boolean isABC;  //是否显示ABC视图
-    private int showtype=-1;
+    private int showtype = -1;
 
     @SystemService
     LayoutInflater inflater;
@@ -66,10 +67,11 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
     };
 
     @AfterViews
-    void init(){
+    void init() {
         initParams();
         initToolBar();
         showSldingBar();
+        initView();
         showMusicList();
     }
 
@@ -87,8 +89,8 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
         getActivity().unregisterReceiver(receiver);
     }
 
-    void initToolBar(){
-        switch (showtype){
+    void initToolBar() {
+        switch (showtype) {
             case SHOW_MUSIC:
                 toolbar.setVisibility(View.GONE);
                 break;
@@ -106,20 +108,20 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
         }
     }
 
-    void initParams(){
+    void initParams() {
         showtype = getArguments().getInt(MUSIC_SHOW_TYPE);
-        switch (showtype){
+        switch (showtype) {
             case SHOW_MUSIC:
-                isABC=true;
+                isABC = true;
                 break;
             case SHOW_MUSIC_BY_ALBUM:
-                isABC=false;
+                isABC = false;
                 break;
         }
     }
 
-    void showSldingBar(){
-        if(isABC){
+    void showSldingBar() {
+        if (isABC) {
             sidebar.setTextView(dialog);
             sidebar.setOnTouchingLetterChangedListener(new OnTouchingLetterChangedListener() {
 
@@ -132,13 +134,41 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
                     }
                 }
             });
-        }else {
+        } else {
             sidebar.setVisibility(View.INVISIBLE);
         }
     }
 
+    void initView() {
+        lv_song.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (view.getCount() != 0) {
+                    if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                        dialog.setVisibility(View.VISIBLE);
+                    } else {
+                        lv_song.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.setVisibility(View.GONE);
+                            }
+                        },100);
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                MusicInfo musicInfo = (MusicInfo) lv_song.getItemAtPosition(firstVisibleItem);
+                if (dialog != null && musicInfo != null) {
+                    dialog.setText(musicInfo.getKeyofTitle());
+                }
+            }
+        });
+    }
+
     public void showMusicList() {
-        List<MusicInfo> musicInfoList=null;
+        List<MusicInfo> musicInfoList = null;
         switch (showtype) {
             case SHOW_MUSIC:
                 musicInfoList = MusicUtils.queryMusic(getActivity());
@@ -148,7 +178,7 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
                 musicInfoList = MusicUtils.queryMusicByAlbumId(getArguments().getLong("album_id"));
                 break;
         }
-        mMusicAdapter = new MusicAdapter(getActivity(),musicInfoList,isABC);
+        mMusicAdapter = new MusicAdapter(getActivity(), musicInfoList, isABC);
         mMusicAdapter.setOnItemClickListener(new MusicAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -156,16 +186,16 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
                 MusicManager.getInstance().preparePlayingList(position, mMusicAdapter.getList());
                 Log.i(TAG, "time used:" + (System.currentTimeMillis() - time));
 
-                Log.i(TAG,"clicked music:"+((AbstractMusic)mMusicAdapter.getList().get(position)).getTitle());
+                Log.i(TAG, "clicked music:" + ((AbstractMusic) mMusicAdapter.getList().get(position)).getTitle());
 
 //                MusicManager.getInstance().play();
             }
         });
         lv_song.setAdapter(mMusicAdapter);
 
-        View footer=inflater.inflate(R.layout.listbottom_music_count,null);
-        TextView tv_music_count= (TextView) footer.findViewById(R.id.tv_music_count);
-        tv_music_count.setText(mMusicAdapter.getCount()+" 首歌曲");
+        View footer = inflater.inflate(R.layout.listbottom_music_count, null);
+        TextView tv_music_count = (TextView) footer.findViewById(R.id.tv_music_count);
+        tv_music_count.setText(mMusicAdapter.getCount() + " 首歌曲");
         lv_song.addFooterView(footer);
     }
 }

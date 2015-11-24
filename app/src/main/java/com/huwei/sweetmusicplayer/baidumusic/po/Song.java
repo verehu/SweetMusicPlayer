@@ -13,6 +13,9 @@ import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author jayce
  * @date 2015/10/20
@@ -237,4 +240,12 @@ public class Song extends AbstractMusic implements IQueryReuslt {
             return new Song[size];
         }
     };
+
+    public static List<AbstractMusic> getAbstractMusicList(List<Song> songList){
+        List<AbstractMusic> list = new ArrayList<>();
+        for(Song song:songList){
+            list.add(song);
+        }
+        return list;
+    }
 }

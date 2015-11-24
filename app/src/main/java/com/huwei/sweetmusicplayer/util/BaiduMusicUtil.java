@@ -1,8 +1,6 @@
 package com.huwei.sweetmusicplayer.util;
 
-import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.contains.IUrl;
-import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
 
 /**
  * 使用百度音乐API的工具类
@@ -56,6 +54,7 @@ public class BaiduMusicUtil implements IUrl {
      * @param albumId
      * @param httpHandler
      */
+
     public static void getAlbumInfo(String albumId, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
         params.add("format", "json");
@@ -79,7 +78,7 @@ public class BaiduMusicUtil implements IUrl {
     }
 
     /**
-     * 同步请求歌曲信息
+     * 请求歌曲信息
      *
      * @param songid
      * @return
@@ -98,6 +97,7 @@ public class BaiduMusicUtil implements IUrl {
      * @param albumId
      * @param httpHandler
      */
+    @Deprecated
     public static void getAlbumDetail(String albumId, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
         params.add("albumId", albumId);
