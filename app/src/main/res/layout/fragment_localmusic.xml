@@ -34,7 +34,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="@color/primary_text_white"
-            android:background="@color/primary"
+            android:background="@drawable/bg_letter"
             android:textSize="24sp"
             android:visibility="gone" />
 
