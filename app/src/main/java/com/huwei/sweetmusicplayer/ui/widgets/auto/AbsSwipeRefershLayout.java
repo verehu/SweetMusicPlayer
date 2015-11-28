@@ -5,7 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 
 /**
- * 为了屏蔽一些方法
+ * 涓轰簡灞忚斀涓�浜涙柟娉曠殑鎶借薄
  * @author jerry
  * @date 2015-11-23
  */

@@ -17,7 +17,6 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -25,7 +24,6 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
 import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
@@ -33,8 +31,6 @@ import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -314,16 +310,12 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
      * @param music
      */
     private void prepareSong(AbstractMusic music) {
-        //        showMusicPlayerNotification(getResources().getString(R.string.app_name),NT_PLAYBAR_ID,
-//                R.drawable.sweet, music.getAlbumId(),
-//                music.getTitle(), music.getArtist());
-        showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
-                R.drawable.sweet, "",
-                music.getTitle(), music.getArtist(), music);
 
-//        updatePlayBar(music.getSongId() != lastSongID);
+
+
+
         updatePlayBar(true);
-//        lastSongID = music.getSongId();
+
 
         //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
         if (music.getType() == AbstractMusic.MusicType.Online) {
@@ -347,15 +339,25 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                             msg.what = MSG_PLAY;
                             msg.obj = song;
                             handler.sendMessage(msg);
+
+                            showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
+                                    R.drawable.sweet, "",
+                                    song.getTitle(), song.getArtist(), song);
                         }
                     }
                 });
 
 
             } else {
+                showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
+                        R.drawable.sweet, "",
+                        music.getTitle(), music.getArtist(), music);
                 play(music);
             }
         } else {
+            showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
+                    R.drawable.sweet, "",
+                    music.getTitle(), music.getArtist(), music);
             play(music);
         }
     }
@@ -375,20 +377,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             e.printStackTrace();
         }
     }
-
-//    private void startPlay(AbstractMusic music) {
-////        showMusicPlayerNotification(getResources().getString(R.string.app_name),NT_PLAYBAR_ID,
-////                R.drawable.sweet, music.getAlbumId(),
-////                music.getTitle(), music.getArtist());
-//        showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
-//                R.drawable.sweet, 0,
-//                music.getTitle(), music.getArtist());
-//        mp.start();
-//
-////        updatePlayBar(music.getSongId() != lastSongID);
-//        updatePlayBar(true);
-////        lastSongID = music.getSongId();
-//    }
 
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
@@ -426,18 +414,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         reViews.setImageViewResource(R.id.img_album, R.drawable.img_album_background);
 
-//        music.loadArtPic(new AbstractMusic.OnLoadListener() {
-//            @Override
-//            public void onSuccessLoad(Bitmap bitmap) {
-//                Log.i(TAG,"onSuccessLoad bitmap:"+bitmap);
-//
-//                reViews.setImageViewBitmap(R.id.img_album, bitmap);
-//            }
-//        });
-
-        Log.i(TAG, "picUri:" + music.getArtPic());
-
-
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, intent, 0);
         reViews.setOnClickPendingIntent(R.id.nt_container, pendingIntent);
@@ -460,16 +436,15 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         isForeground = true;
 
-        ImageLoader imageLoader = SweetApplication.getImageLoader();
-//        Bitmap loadedImage = imageLoader.loadImageSync(music.getArtPic());
-//        reViews.setImageViewBitmap(R.id.img_album, loadedImage);
-        imageLoader.loadImage(music.getArtPic(), new SimpleImageLoadingListener() {
+        music.loadArtPic(new AbstractMusic.OnLoadListener() {
             @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                super.onLoadingComplete(imageUri, view, loadedImage);
+            public void onSuccessLoad(Bitmap bitmap) {
+                Log.i(TAG,"onSuccessLoad bitmap:"+bitmap);
 
-                reViews.setImageViewBitmap(R.id.img_album, loadedImage);
-                startForeground(id, builder.build());
+                if(reViews!=null) {
+                    reViews.setImageViewBitmap(R.id.img_album, bitmap);
+                    startForeground(id, builder.build());
+                }
             }
         });
     }

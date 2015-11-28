@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 
+import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.dao.AlbumInfoDao;
@@ -19,8 +20,6 @@ import com.huwei.sweetmusicplayer.dao.MusicInfoDao;
 import com.huwei.sweetmusicplayer.models.AlbumInfo;
 import com.huwei.sweetmusicplayer.models.MusicInfo;
 
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -134,42 +133,43 @@ public class MusicUtils implements IContain{
         }
     }
 
-    public static Bitmap getCachedArtwork(Context context,long album_id,int defaultResId){
-        BitmapDrawable bd= (BitmapDrawable) context.getResources().getDrawable(defaultResId);
-        return getCachedArtwork(context,album_id,bd.getBitmap());
-    }
-    /**
-     * 获取艺术家图片
-     * @param context
-     * @param album_id
-     * @param defaultBitmap
-     * @return
-     */
-    public static Bitmap getCachedArtwork(Context context,long album_id,
-                                          Bitmap defaultBitmap){
-        Bitmap bitmap=null;
-        synchronized(sArtCache){
-            bitmap = sArtCache.get(album_id);
-        }
-        if(context==null){
-            return defaultBitmap;
-        }
-        if(bitmap==null){
-            int w = defaultBitmap.getWidth();
-            int h = defaultBitmap.getHeight();
-            bitmap=getArtworkQuick(context,album_id,w,h);
-                synchronized (sArtCache){
-                        sArtCache.put(album_id, bitmap);
-                }
-        }
-        return bitmap == null?defaultBitmap:bitmap;
-    }
+//    public static Bitmap getCachedArtwork(Context context,long album_id,int defaultResId){
+//        BitmapDrawable bd= (BitmapDrawable) context.getResources().getDrawable(defaultResId);
+//        return getCachedArtwork(context,album_id,bd.getBitmap());
+//    }
+//    /**
+//     * 获取艺术家图片
+//     * @param context
+//     * @param album_id
+//     * @param defaultBitmap
+//     * @return
+//     */
+//    public static Bitmap getCachedArtwork(Context context,long album_id,
+//                                          Bitmap defaultBitmap){
+//        Bitmap bitmap=null;
+//        synchronized(sArtCache){
+//            bitmap = sArtCache.get(album_id);
+//        }
+//        if(context==null){
+//            return defaultBitmap;
+//        }
+//        if(bitmap==null){
+//            int w = defaultBitmap.getWidth();
+//            int h = defaultBitmap.getHeight();
+//            bitmap=getArtworkQuick(context,album_id,w,h);
+//                synchronized (sArtCache){
+//                        sArtCache.put(album_id, bitmap);
+//                }
+//        }
+//        return bitmap == null?defaultBitmap:bitmap;
+//    }
 
     public static Bitmap getArtworkQuick(Context context,long album_id){
-        return getArtworkQuick(context,album_id,72,72);  //默认尺寸
+        BitmapDrawable bd= (BitmapDrawable) context.getResources().getDrawable(R.drawable.img_album_background);
+        return getArtworkQuick(context,album_id,72,72,bd.getBitmap());  //默认尺寸
     }
 
-    public static Bitmap getArtworkQuick(Context context,long album_id,int w,int h){
+    public static Bitmap getArtworkQuick(Context context,long album_id,int w,int h, Bitmap defaultBitmap){
         w-=1;
         ContentResolver res=context.getContentResolver();
         Uri uri= ContentUris.withAppendedId(sArtworkUri,album_id);
@@ -207,7 +207,7 @@ public class MusicUtils implements IContain{
                 }
 
                 return b;
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }finally {
                 if(fd!=null){
@@ -220,7 +220,7 @@ public class MusicUtils implements IContain{
             }
 
         }
-        return null;
+        return defaultBitmap;
     }
 
     public static String getAlbumArtPath(Context context,Long albumid) {
