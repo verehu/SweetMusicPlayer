@@ -154,7 +154,7 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         reverseAnimation.setFillAfter(true);
 
         inflater = LayoutInflater.from(context);
-        footer = inflater.inflate(R.layout.listview_footer, null);
+        footer = inflater.inflate(R.layout.pull_to_refresh_footer, null);
         loadFull = (TextView) footer.findViewById(R.id.loadFull);
         noData = (TextView) footer.findViewById(R.id.noData);
         more = (TextView) footer.findViewById(R.id.more);
@@ -218,10 +218,10 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
             more.setVisibility(View.VISIBLE);
             noData.setVisibility(View.GONE);
         } else {
-            loadFull.setVisibility(View.GONE);
+            loadFull.setVisibility(View.VISIBLE);
             loading.setVisibility(View.GONE);
             more.setVisibility(View.GONE);
-            noData.setVisibility(View.VISIBLE);
+            noData.setVisibility(View.GONE);
         }
     }
 
