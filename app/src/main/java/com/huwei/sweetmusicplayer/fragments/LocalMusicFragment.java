@@ -140,31 +140,33 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
     }
 
     void initView() {
-        lv_song.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (view.getCount() != 0) {
-                    if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-                        dialog.setVisibility(View.VISIBLE);
-                    } else {
-                        lv_song.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialog.setVisibility(View.GONE);
-                            }
-                        },100);
+        if(isABC) {
+            lv_song.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+                    if (view.getCount() != 0) {
+                        if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                            dialog.setVisibility(View.VISIBLE);
+                        } else {
+                            lv_song.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    dialog.setVisibility(View.GONE);
+                                }
+                            }, 100);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                MusicInfo musicInfo = (MusicInfo) lv_song.getItemAtPosition(firstVisibleItem);
-                if (dialog != null && musicInfo != null) {
-                    dialog.setText(musicInfo.getKeyofTitle());
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    MusicInfo musicInfo = (MusicInfo) lv_song.getItemAtPosition(firstVisibleItem);
+                    if (dialog != null && musicInfo != null) {
+                        dialog.setText(musicInfo.getKeyofTitle());
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     public void showMusicList() {
