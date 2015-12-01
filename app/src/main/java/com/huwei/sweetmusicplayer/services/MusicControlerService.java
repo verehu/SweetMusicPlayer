@@ -439,7 +439,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         }
 
         mNotification.icon = R.drawable.sweet;
-        mNotification.tickerText = title + " " +artist;
+        mNotification.tickerText = title + "-" +artist;
         mNotification.when = System.currentTimeMillis();
         mNotification.flags  = Notification.FLAG_NO_CLEAR;
         mNotification.contentView = reViews;

@@ -1,6 +1,9 @@
 package com.huwei.sweetmusicplayer;
 
+import android.graphics.Bitmap;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +19,8 @@ import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -32,9 +37,10 @@ import java.util.List;
  */
 @EActivity(R.layout.activity_album_detail)
 public class AlbumInfoActivity extends BaseActivity {
-    @ViewById
+
+    private View mHeaderView;
+
     ImageView iv_album;
-    @ViewById
     TextView tv_albumname, tv_artist, tv_pub_date;
     @ViewById(R.id.actionbar)
     Toolbar toolbar;
@@ -54,6 +60,7 @@ public class AlbumInfoActivity extends BaseActivity {
         albumId = getIntent().getStringExtra(IntentExtra.EXTRA_ALBUM_ID);
 
         initToolBar();
+        initHeaderView();
         initView();
     }
 
@@ -71,7 +78,16 @@ public class AlbumInfoActivity extends BaseActivity {
         });
     }
 
+    void initHeaderView(){
+        mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.listheader_albumdetail,null);
+        iv_album = (ImageView) mHeaderView.findViewById(R.id.iv_album);
+        tv_albumname = (TextView) mHeaderView.findViewById(R.id.tv_albumname);
+        tv_artist = (TextView) mHeaderView.findViewById(R.id.tv_artist);
+        tv_pub_date = (TextView) mHeaderView.findViewById(R.id.tv_pub_date);
+    }
+
     void initView() {
+        lv_albuminfo.addHeaderView(mHeaderView);
         lv_albuminfo.setRefreshEnable(false);
         lv_albuminfo.setOnLoadListener(new IPullRefershBase.OnLoadListener() {
             @Override
@@ -95,7 +111,27 @@ public class AlbumInfoActivity extends BaseActivity {
                 AlbumDetailResp resp = new Gson().fromJson(response, AlbumDetailResp.class);
                 AlbumInfo albumDetail = resp.albumInfo;
                 if (albumDetail != null) {
-                    mImageLoader.displayImage(albumDetail.pic_big, iv_album);
+                    mImageLoader.displayImage(albumDetail.pic_big, iv_album ,new ImageLoadingListener() {
+                        @Override
+                        public void onLoadingStarted(String imageUri, View view) {
+//                            handleAlbumBackgroundColor(BitmapUtil.drawableToBitamp(iv_album.getDrawable()));
+                        }
+
+                        @Override
+                        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+                        }
+
+                        @Override
+                        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                            handleAlbumBackgroundColor(loadedImage);
+                        }
+
+                        @Override
+                        public void onLoadingCancelled(String imageUri, View view) {
+
+                        }
+                    });
                     tv_albumname.setText(albumDetail.title);
                     tv_artist.setText("歌手：" + albumDetail.author);
                     tv_pub_date.setText("发行时间：" + albumDetail.publishtime);
@@ -111,5 +147,21 @@ public class AlbumInfoActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void handleAlbumBackgroundColor(Bitmap bitmap){
+        Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
+            /**
+             * 提取完之后的回调方法
+             */
+            @Override
+            public void onGenerated(Palette palette) {
+                Palette.Swatch vibrant = palette.getVibrantSwatch();
+                if(vibrant!=null) {
+                    mHeaderView.setBackgroundColor(vibrant.getPopulation());
+                }
+            }
+        });
+
     }
 }
