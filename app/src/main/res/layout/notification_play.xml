@@ -14,7 +14,8 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8.0dip"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_album_background"/>
 
     <LinearLayout
         android:id="@+id/control_bar"

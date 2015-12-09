@@ -104,8 +104,8 @@ public class MusicInfo extends AbstractMusic {
         return artist;
     }
 
-    @Override
-    public String getArtPic() {
+
+    private String getArtPic() {
         Uri uri= ContentUris.withAppendedId(MusicUtils.sArtworkUri, albumId);
 
         String[] proj = { MediaStore.Images.Media.DATA };

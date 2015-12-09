@@ -1,57 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/layout_actionbar" />
-
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/actionbar"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:orientation="horizontal">
+        android:layout_height="56dp"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="true"
+        android:background="@color/transparent"/>
 
-        <ImageView
-            android:id="@+id/iv_album"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/img_album_background" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_albumname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_16"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:text="" />
-
-
-            <TextView
-                android:id="@+id/tv_artist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="" />
-
-
-            <TextView
-                android:id="@+id/tv_pub_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <ListView
+    <com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView
         android:id="@+id/lv_albuminfo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
-</LinearLayout>
+        android:layout_height="match_parent"/>
+</RelativeLayout>

@@ -1,7 +1,6 @@
 package com.huwei.sweetmusicplayer.baidumusic.resp;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.http.conn.scheme.PlainSocketFactory;
+
 
 /**
  * @author Jayce

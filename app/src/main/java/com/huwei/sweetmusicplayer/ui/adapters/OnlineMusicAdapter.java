@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class OnlineMusicAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_online_music, null);
@@ -54,11 +55,19 @@ public class OnlineMusicAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }
 
-        Song song = (Song) getItem(position);
+        final Song song = (Song) getItem(position);
 
         viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_song.setText(song.title);
         viewHolder.tv_artist.setText(song.author);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(songList));
+                MusicManager.getInstance().play();
+            }
+        });
 
         return convertView;
     }

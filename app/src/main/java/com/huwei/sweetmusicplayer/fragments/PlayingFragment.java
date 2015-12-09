@@ -33,7 +33,6 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Lrc;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.po.SongSug;
 import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
 import com.huwei.sweetmusicplayer.comparator.LrcComparator;
@@ -44,7 +43,6 @@ import com.huwei.sweetmusicplayer.models.LrcContent;
 import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter;
 import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener;
 import com.huwei.sweetmusicplayer.ui.widgets.LrcView;
-import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 import com.huwei.sweetmusicplayer.util.LrcUtil;
@@ -404,7 +402,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
 
     private void findLrc(final List<SongSug> songList, final int index) {
-        if (songList != null && songList.size() == 0) {
+        if (songList == null || songList.size() == 0) {
             playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
             return;
         }

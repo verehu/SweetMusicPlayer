@@ -34,12 +34,16 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
 
     public abstract String getArtist();
 
-    /**
-     * 获取艺术家图片
-     * @return   uri
-     */
-    public abstract String getArtPic();
+//    /**
+//     * 获取艺术家图片
+//     * @return   uri
+//     */
+//    public abstract String getArtPic();
 
+    /**
+     * 加载艺术家图片  上面的方法废弃
+     * @param loadListener
+     */
     public abstract void loadArtPic(OnLoadListener loadListener);
 
     /**

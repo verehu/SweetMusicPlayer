@@ -2,35 +2,26 @@
 
     <!-- define by huwei -->
     <style name="SweetTheme" parent="Theme.AppCompat.NoActionBar">
-       <!--<item name="android:actionBarStyle">@style/SweetTheme.PurpleActionBar</item>
-        <item name="android:actionOverflowButtonStyle">@style/SweetTheme.OverFlow</item>
-        <item name="android:windowActionBarOverlay">true</item>-->
-        <!--<item name="android:windowBackground">@drawable/default_bg</item>-->
-        <!--<item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>-->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:windowBackground">@color/fa</item>
+        <item name="android:windowBackground">@color/f1f3f4</item>
         <item name="android:textColorPrimary">@color/white</item>
 
         <item name="android:textViewStyle">@style/SweetTheme.TextView</item>
         <item name="android:buttonStyle">@style/SweetTheme.ButtonStyle</item>
-        <item name="android:windowContentOverlay">@null</item>
+
+
+        <!-- Panel attributes -->
+        <!--<item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_light</item>-->
+        <!--<item name="panelMenuListTheme">@style/Theme.AppCompat.CompactMenu</item>-->
+
+        <!--<item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Subhead</item>-->
+        <!--<item name="textAppearanceListItemSmall">@style/TextAppearance.AppCompat.Subhead</item>-->
+
 
         <!--menu-->
         <item name="searchViewStyle">@style/Widget.AppCompat.SearchView</item>
     </style>
-
-       <!-- default btn -->
-    <!--<style name="default_btn" parent="@android:style/Widget.Holo.Button">-->
-        <!--<item name="android:background">@drawable/default_btn_bg</item>-->
-        <!--<item name="android:textColor">@color/white</item>-->
-    <!--</style>-->
-    <!-- -->
-    <!--&lt;!&ndash; actionBar &ndash;&gt;-->
-    <!--<style name="SweetTheme.PurpleActionBar" parent="@android:style/Widget.Holo.ActionBar">-->
-        <!--<item name="android:background">@drawable/actionbar</item>-->
-        <!--<item name="android:textColor">@color/actionbar_text</item>-->
-    <!--</style>-->
 
     <!--溢出菜单样式 -->
     <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
@@ -78,25 +69,6 @@
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 
-    <!-- Custom tabs -->
-    <style name="tabs">
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">@dimen/tab_height</item>
-        <item name="android:background">@drawable/tab</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingBottom">@dimen/tab_padding_top_bottom</item>
-        <item name="android:paddingLeft">@dimen/tab_padding_left_right</item>
-        <item name="android:paddingRight">@dimen/tab_padding_left_right</item>
-        <item name="android:paddingTop">@dimen/tab_padding_top_bottom</item>
-        <item name="android:textColor">@color/tab_text_color</item>
-        <item name="android:textSize">@dimen/text_size_micro</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:focusable">true</item>
-        <item name="android:focusableInTouchMode">false</item>
-        <item name="android:selectAllOnFocus">false</item>
-    </style>
-
     <!-- song_listitem -->
     <style name="song_title">
         <item name="android:layout_margin">8dp</item>
@@ -128,5 +100,12 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="customProgressBar" parent="@android:style/Widget.ProgressBar.Small">
+        <!--<item name="android:indeterminateDrawable">@drawable/custom_progress_bar</item>-->
+        <item name="android:layout_width">21dip</item>
+        <item name="android:layout_height">21dip</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 </resources>

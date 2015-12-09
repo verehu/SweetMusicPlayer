@@ -13,6 +13,11 @@ import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
+import org.apache.commons.lang.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author jayce
  * @date 2015/10/20
@@ -123,20 +128,22 @@ public class Song extends AbstractMusic implements IQueryReuslt {
     }
 
     //返回""加载默认的图片
-    public String getArtPic() {
+    private String getArtPic() {
         return Uri.parse(songinfo !=null? songinfo.getPic_small():"").toString();
     }
 
     @Override
     public void loadArtPic(final OnLoadListener loadListener) {
+        Log.i(TAG, "loadArtPic   --->uri:" + getArtPic());
         ImageLoader imageLoader = SweetApplication.getImageLoader();
         imageLoader.loadImage(getArtPic(),new SimpleImageLoadingListener(){
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                 super.onLoadingComplete(imageUri, view, loadedImage);
-                Log.i(TAG, "onLoadingComplete   --->uri:" + imageUri);
 
-                if(loadListener!=null){
+
+                if(loadListener!=null && StringUtils.isNotEmpty(imageUri)){
+                    Log.i(TAG, "onSuccessLoad   --->uri:" + imageUri);
                     loadListener.onSuccessLoad(loadedImage);
                 }
             }
@@ -237,4 +244,12 @@ public class Song extends AbstractMusic implements IQueryReuslt {
             return new Song[size];
         }
     };
+
+    public static List<AbstractMusic> getAbstractMusicList(List<Song> songList){
+        List<AbstractMusic> list = new ArrayList<>();
+        for(Song song:songList){
+            list.add(song);
+        }
+        return list;
+    }
 }

@@ -120,9 +120,7 @@ public class BottomActionBarFragment extends Fragment implements IContain {
             tv_artist.setText(music.getArtist());
             btn_play.setChecked(MusicManager.getInstance().isPlaying());
 
-//            ImageLoader imageLoader = SweetApplication.getImageLoader();
-//            imageLoader.displayImage(music.getArtPic(), img_album);
-//            img_album.setImageBitmap(MusicUtils.getCachedArtwork(getActivity(), music.getAlbumId(), R.drawable.img_album_background));
+
             music.loadArtPic(new AbstractMusic.OnLoadListener() {
                 @Override
                 public void onSuccessLoad(Bitmap bitmap) {

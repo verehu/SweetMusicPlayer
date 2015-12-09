@@ -1,6 +1,8 @@
 package com.huwei.sweetmusicplayer.services;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -25,7 +27,6 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
 import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
@@ -33,8 +34,6 @@ import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -53,6 +52,8 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     private MediaPlayer mp;
 
+    NotificationManager mNoticationManager;
+    Notification mNotification;
     RemoteViews reViews;
 
     private boolean isForeground;
@@ -67,6 +68,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
     public static final String PLAYPRO_EXIT = "com.huwei.intent.PLAYPRO_EXIT_ACTION";
     public static final String NEXTSONG = "com.intent.action.NEXTSONG";
     public static final String PRESONG = "com.intent.action.PRESONG";
+    public static final String PLAY_OR_PASUE ="com.intent.action.PLAY_OR_PASUE";
 
 
     private Handler handler = new Handler() {
@@ -109,7 +111,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             switch (intent.getAction()) {
                 case PLAYPRO_EXIT:
                     stopSelf();
-                    stopForeground(true);
+                    mNoticationManager.cancel(NT_PLAYBAR_ID);
 
                     Process.killProcess(Process.myPid());
                     break;
@@ -124,6 +126,22 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                 case PRESONG:
                     try {
                         mBinder.preSong();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case PLAY_OR_PASUE:
+                    try {
+                        if(mBinder.isPlaying()){
+                            //暂停
+
+                            mBinder.pause();
+                        }else{
+                            //播放
+
+                            mBinder.play();
+                        }
+
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
@@ -145,6 +163,12 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void play() throws RemoteException {
+            reViews.setViewVisibility(R.id.button_play_notification_play, View.GONE);
+            reViews.setViewVisibility(R.id.button_pause_notification_play, View.VISIBLE);
+
+            mNoticationManager.notify(NT_PLAYBAR_ID,mNotification);
+
+
             //准备播放源，准备后播放
             AbstractMusic music = mBinder.getNowPlayingSong();
             Log.i(TAG, "play()->" + music.getTitle());
@@ -162,6 +186,11 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void pause() throws RemoteException {
+            reViews.setViewVisibility(R.id.button_play_notification_play, View.VISIBLE);
+            reViews.setViewVisibility(R.id.button_pause_notification_play, View.GONE);
+
+            mNoticationManager.notify(NT_PLAYBAR_ID,mNotification);
+
             mp.pause();
             updatePlayBar(false);
             handler.removeMessages(MSG_CURRENT);
@@ -191,7 +220,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
             AbstractMusic song = musicList.get(musicIndex);
             prepareSong(song);
-
         }
 
         @Override
@@ -237,6 +265,9 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
     public void onCreate() {
         super.onCreate();
 
+        mNoticationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        mNotification = new Notification();
+
         if (mp != null) {
             mp.release();
             mp.reset();
@@ -264,6 +295,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         filter.addAction(PLAYPRO_EXIT);
         filter.addAction(PRESONG);
         filter.addAction(NEXTSONG);
+        filter.addAction(PLAY_OR_PASUE);
         filter.addAction(BringToFrontReceiver.ACTION_BRING_TO_FRONT);
         registerReceiver(controlReceiver, filter);
     }
@@ -314,16 +346,9 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
      * @param music
      */
     private void prepareSong(AbstractMusic music) {
-        //        showMusicPlayerNotification(getResources().getString(R.string.app_name),NT_PLAYBAR_ID,
-//                R.drawable.sweet, music.getAlbumId(),
-//                music.getTitle(), music.getArtist());
-        showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
-                R.drawable.sweet, "",
-                music.getTitle(), music.getArtist(), music);
-
-//        updatePlayBar(music.getSongId() != lastSongID);
         updatePlayBar(true);
-//        lastSongID = music.getSongId();
+
+        showMusicPlayerNotification(music);
 
         //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
         if (music.getType() == AbstractMusic.MusicType.Online) {
@@ -347,11 +372,11 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                             msg.what = MSG_PLAY;
                             msg.obj = song;
                             handler.sendMessage(msg);
+
+                            updateArtistView(song);
                         }
                     }
                 });
-
-
             } else {
                 play(music);
             }
@@ -375,20 +400,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             e.printStackTrace();
         }
     }
-
-//    private void startPlay(AbstractMusic music) {
-////        showMusicPlayerNotification(getResources().getString(R.string.app_name),NT_PLAYBAR_ID,
-////                R.drawable.sweet, music.getAlbumId(),
-////                music.getTitle(), music.getArtist());
-//        showMusicPlayerNotification(getResources().getString(R.string.app_name), NT_PLAYBAR_ID,
-//                R.drawable.sweet, 0,
-//                music.getTitle(), music.getArtist());
-//        mp.start();
-//
-////        updatePlayBar(music.getSongId() != lastSongID);
-//        updatePlayBar(true);
-////        lastSongID = music.getSongId();
-//    }
 
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
@@ -416,27 +427,27 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         }
     }
 
-    void showMusicPlayerNotification(String tickerText, final int id,
-                                     int resId, String picUri, String title, String artist, AbstractMusic music) {
+    /**
+     * 在通知栏显示音乐播放信息
+     * @param music
+     */
+    void showMusicPlayerNotification(AbstractMusic music) {
+        String title = music.getTitle();
+        String artist = music.getArtist();
         if (reViews == null) {
             reViews = new RemoteViews(getPackageName(), R.layout.notification_play);
         }
+
+        mNotification.icon = R.drawable.sweet;
+        mNotification.tickerText = title + "-" +artist;
+        mNotification.when = System.currentTimeMillis();
+        mNotification.flags  = Notification.FLAG_NO_CLEAR;
+        mNotification.contentView = reViews;
+
         reViews.setTextViewText(R.id.title, title);
         reViews.setTextViewText(R.id.text, artist);
 
         reViews.setImageViewResource(R.id.img_album, R.drawable.img_album_background);
-
-//        music.loadArtPic(new AbstractMusic.OnLoadListener() {
-//            @Override
-//            public void onSuccessLoad(Bitmap bitmap) {
-//                Log.i(TAG,"onSuccessLoad bitmap:"+bitmap);
-//
-//                reViews.setImageViewBitmap(R.id.img_album, bitmap);
-//            }
-//        });
-
-        Log.i(TAG, "picUri:" + music.getArtPic());
-
 
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, intent, 0);
@@ -454,22 +465,30 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         PendingIntent prePendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, preInent, 0);
         reViews.setOnClickPendingIntent(R.id.button_previous_notification_play, prePendingIntent);
 
+        Intent playInent = new Intent(PLAY_OR_PASUE);
+        PendingIntent playPendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, playInent, 0);
+        reViews.setOnClickPendingIntent(R.id.button_play_notification_play, playPendingIntent);
+        reViews.setOnClickPendingIntent(R.id.button_pause_notification_play, playPendingIntent);
+
+
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
-        builder.setContent(reViews).setSmallIcon(resId).setTicker(title).setOngoing(true);
+        builder.setContent(reViews).setSmallIcon(NT_PLAYBAR_ID).setTicker(title).setOngoing(true);
 
+        updateArtistView(music);
 
-        isForeground = true;
+        mNoticationManager.notify(NT_PLAYBAR_ID,mNotification);
+    }
 
-        ImageLoader imageLoader = SweetApplication.getImageLoader();
-//        Bitmap loadedImage = imageLoader.loadImageSync(music.getArtPic());
-//        reViews.setImageViewBitmap(R.id.img_album, loadedImage);
-        imageLoader.loadImage(music.getArtPic(), new SimpleImageLoadingListener() {
+    void updateArtistView(AbstractMusic music){
+        music.loadArtPic(new AbstractMusic.OnLoadListener() {
             @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                super.onLoadingComplete(imageUri, view, loadedImage);
+            public void onSuccessLoad(Bitmap bitmap) {
+                Log.i(TAG,"onSuccessLoad bitmap:"+bitmap);
 
-                reViews.setImageViewBitmap(R.id.img_album, loadedImage);
-                startForeground(id, builder.build());
+                if(reViews!=null) {
+                    reViews.setImageViewBitmap(R.id.img_album, bitmap);
+                    mNoticationManager.notify(NT_PLAYBAR_ID,mNotification);
+                }
             }
         });
     }

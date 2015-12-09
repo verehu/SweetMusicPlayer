@@ -10,27 +10,34 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary" />
 
-    <ListView
-        android:id="@+id/lv_song"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="8dp"
-        android:scrollbars="none" />
+        android:layout_height="match_parent">
 
-    <com.huwei.sweetmusicplayer.ui.widgets.SideBar
-        android:id="@+id/sidebar"
-        android:layout_width="@dimen/sidebar_width"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        <ListView
+            android:id="@+id/lv_song"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="8dp"
+            android:scrollbars="none" />
 
-    <TextView
-        android:id="@+id/dialog"
-        android:layout_width="80.0dip"
-        android:layout_height="80.0dip"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/primary"
-        android:textSize="30.0dip"
-        android:visibility="invisible" />
+        <com.huwei.sweetmusicplayer.ui.widgets.SideBar
+            android:id="@+id/sidebar"
+            android:layout_width="@dimen/sidebar_width"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/dialog"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/primary_text_white"
+            android:background="@drawable/bg_letter"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 </LinearLayout>
