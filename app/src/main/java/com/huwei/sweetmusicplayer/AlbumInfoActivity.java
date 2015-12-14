@@ -1,7 +1,7 @@
 package com.huwei.sweetmusicplayer;
 
 import android.graphics.Bitmap;
-import android.support.v7.graphics.Palette;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +17,16 @@ import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
+import com.huwei.sweetmusicplayer.util.FastBlur;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ import java.util.List;
 public class AlbumInfoActivity extends BaseActivity {
 
     private View mHeaderView;
+    private ImageView iv_bg;
 
     ImageView iv_album;
     TextView tv_albumname, tv_artist, tv_pub_date;
@@ -78,8 +82,9 @@ public class AlbumInfoActivity extends BaseActivity {
         });
     }
 
-    void initHeaderView(){
-        mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.listheader_albumdetail,null);
+    void initHeaderView() {
+        mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.listheader_albumdetail, null);
+        iv_bg = (ImageView) mHeaderView.findViewById(R.id.iv_bg);
         iv_album = (ImageView) mHeaderView.findViewById(R.id.iv_album);
         tv_albumname = (TextView) mHeaderView.findViewById(R.id.tv_albumname);
         tv_artist = (TextView) mHeaderView.findViewById(R.id.tv_artist);
@@ -111,10 +116,10 @@ public class AlbumInfoActivity extends BaseActivity {
                 AlbumDetailResp resp = new Gson().fromJson(response, AlbumDetailResp.class);
                 AlbumInfo albumDetail = resp.albumInfo;
                 if (albumDetail != null) {
-                    mImageLoader.displayImage(albumDetail.pic_big, iv_album ,new ImageLoadingListener() {
+                    mImageLoader.displayImage(albumDetail.pic_big, iv_album, new ImageLoadingListener() {
                         @Override
                         public void onLoadingStarted(String imageUri, View view) {
-//                            handleAlbumBackgroundColor(BitmapUtil.drawableToBitamp(iv_album.getDrawable()));
+//                            genBlurBitmap(BitmapUtil.drawableToBitamp(iv_album.getDrawable()));
                         }
 
                         @Override
@@ -124,7 +129,7 @@ public class AlbumInfoActivity extends BaseActivity {
 
                         @Override
                         public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                            handleAlbumBackgroundColor(loadedImage);
+                            genBlurBitmap(loadedImage);
                         }
 
                         @Override
@@ -149,19 +154,23 @@ public class AlbumInfoActivity extends BaseActivity {
         });
     }
 
-    private void handleAlbumBackgroundColor(Bitmap bitmap){
-        Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
-            /**
-             * 提取完之后的回调方法
-             */
-            @Override
-            public void onGenerated(Palette palette) {
-                Palette.Swatch vibrant = palette.getVibrantSwatch();
-                if(vibrant!=null) {
-                    mHeaderView.setBackgroundColor(vibrant.getPopulation());
-                }
-            }
-        });
+    /**
+     * 生成模糊的图片
+     * @param bitmap
+     */
+    @Background
+    void genBlurBitmap(Bitmap bitmap) {
+//        Palette palette = Palette.generate(bitmap);
+//        Palette.Swatch vibrant = palette.getVibrantSwatch();
+//        if(vibrant!=null) {
+//            mHeaderView.setBackgroundColor(vibrant.getRgb());
+//        }
+        Bitmap outBitmap = FastBlur.doBlur(bitmap, 50, false);
+        onGetBlurBitmap(outBitmap);
+    }
 
+    @UiThread
+    void onGetBlurBitmap(Bitmap bitmap){
+        iv_bg.setImageBitmap(bitmap);
     }
 }
