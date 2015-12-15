@@ -8,7 +8,5 @@
         android:id="@+id/actionbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:fitsSystemWindows="true"
-        android:clipToPadding="true"
         android:background="@color/primary"/>
 </merge>

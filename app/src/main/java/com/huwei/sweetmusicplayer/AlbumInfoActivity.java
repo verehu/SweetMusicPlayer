@@ -1,10 +1,11 @@
 package com.huwei.sweetmusicplayer;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -95,6 +96,7 @@ public class AlbumInfoActivity extends BaseActivity {
         lv_albuminfo.addHeaderView(mHeaderView);
         lv_albuminfo.setRefreshEnable(false);
         lv_albuminfo.setOnLoadListener(new IPullRefershBase.OnLoadListener() {
+
             @Override
             public void onLoad() {
                 getAlbumInfo();

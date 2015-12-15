@@ -4,18 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
     <com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView
         android:id="@+id/lv_albuminfo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/actionbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:fitsSystemWindows="true"
-        android:clipToPadding="true"
         android:background="@color/transparent"/>
 </RelativeLayout>

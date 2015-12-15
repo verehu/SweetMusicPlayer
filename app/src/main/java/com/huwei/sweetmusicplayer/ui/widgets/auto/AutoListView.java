@@ -23,7 +23,7 @@ import com.huwei.sweetmusicplayer.util.TimeUtil;
  * @author SunnyCoffee
  * @version 1.0
  * @create 2013-10-24
- * @desc 自定义Listview　下拉刷新,上拉加载更多
+ * @desc 自定义Listview　下拉刷新,上拉加载更多   默认去掉分割线
  */
 
 public class AutoListView extends ListView implements OnScrollListener, IPullRefershBase {
@@ -171,6 +171,11 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         measureView(header);
         headerContentHeight = header.getMeasuredHeight();
         topPadding(-headerContentHeight);
+
+        //默认设置header无分割线
+        setHeaderDividersEnabled(false);
+        setDividerHeight(0);
+
         this.addHeaderView(header);
         this.addFooterView(footer);
         this.setOnScrollListener(this);
@@ -236,6 +241,20 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         this.scrollState = scrollState;
         ifNeedLoad(view, scrollState);
     }
+
+//    /**
+//     * 保证第二个HeaderView和第一个没有空隙   因为下拉刷新view占据了第一个view
+//     *
+//     * @param v
+//     */
+//    @Override
+//    public void addHeaderView(View v) {
+//        super.addHeaderView(v);
+//
+//        if (getHeaderViewsCount() == 2) {
+//            topPadding(v,0);
+//        }
+//    }
 
     // 根据listview滑动的状态判断是否需要加载更多
     private void ifNeedLoad(AbsListView view, int scrollState) {
@@ -326,9 +345,13 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
 
     // 调整header的大小。其实调整的只是距离顶部的高度。
     private void topPadding(int topPadding) {
-        header.setPadding(header.getPaddingLeft(), topPadding,
-                header.getPaddingRight(), header.getPaddingBottom());
-        header.invalidate();
+        topPadding(header, topPadding);
+    }
+
+    private void topPadding(View view, int topPadding) {
+        view.setPadding(view.getPaddingLeft(), topPadding,
+                view.getPaddingRight(), view.getPaddingBottom());
+        view.invalidate();
     }
 
     /**
