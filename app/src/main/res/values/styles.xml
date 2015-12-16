@@ -1,12 +1,16 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- define by huwei -->
-    <style name="SweetTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="SweetTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="android:windowBackground">@color/f1f3f4</item>
-        <item name="android:textColorPrimary">@color/white</item>
-
+        <item name="android:textColorPrimary">@color/primary_text_white</item>
+        <item name="android:textColorSecondary">@color/secondary_text_white</item>
         <item name="android:textViewStyle">@style/SweetTheme.TextView</item>
         <item name="android:buttonStyle">@style/SweetTheme.ButtonStyle</item>
 
@@ -57,7 +61,6 @@
     <style name="SweetTheme.ButtonStyle" parent="Widget.AppCompat.Light.ActionButton">
         <item name="android:padding">8dp</item>
     </style>
-      
 
 
     <!-- bottom_action_bar -->
@@ -83,8 +86,8 @@
     <style name="scanbottombar">
         <item name="android:background">@color/primary</item>
     </style>
-    
-   <!--menu-->
+
+    <!--menu-->
     <style name="item_select_sleeptime">
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingTop">10dp</item>

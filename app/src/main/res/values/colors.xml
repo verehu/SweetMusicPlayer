@@ -29,7 +29,7 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
 
-    <color name="secondary_text_white">#F5F5F5</color>
+    <color name="secondary_text_white">@color/abc_secondary_text_material_dark</color>
     <color name="primary_text_white">#fdfdfe</color>
 
     <color name="indicator">#ff5722</color>

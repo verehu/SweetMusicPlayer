@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.huwei.sweetmusicplayer"
-        minSdkVersion 8
+        minSdkVersion 11
         targetSdkVersion 23
     }
 

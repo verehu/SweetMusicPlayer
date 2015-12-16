@@ -7,6 +7,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/actionbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/primary"/>
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/primary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 </merge>
