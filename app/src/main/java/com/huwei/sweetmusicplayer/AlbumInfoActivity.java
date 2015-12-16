@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.huwei.sweetmusicplayer.baidumusic.po.AlbumInfo;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.AlbumDetailResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
@@ -106,6 +108,13 @@ public class AlbumInfoActivity extends BaseActivity {
 
         mMusicAdapter = new OnlineMusicAdapter(mContext, songList);
         lv_albuminfo.setAdapter(mMusicAdapter);
+        lv_albuminfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(songList));
+                MusicManager.getInstance().play();
+            }
+        });
     }
 
     /**

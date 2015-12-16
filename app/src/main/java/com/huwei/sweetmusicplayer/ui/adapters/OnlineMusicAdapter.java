@@ -61,13 +61,13 @@ public class OnlineMusicAdapter extends BaseAdapter {
         viewHolder.tv_song.setText(song.title);
         viewHolder.tv_artist.setText(song.author);
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(songList));
-                MusicManager.getInstance().play();
-            }
-        });
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(songList));
+//                MusicManager.getInstance().play();
+//            }
+//        });
 
         return convertView;
     }
