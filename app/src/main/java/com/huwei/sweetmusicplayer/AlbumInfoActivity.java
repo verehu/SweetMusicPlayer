@@ -1,11 +1,11 @@
 package com.huwei.sweetmusicplayer;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +17,7 @@ import com.huwei.sweetmusicplayer.baidumusic.resp.AlbumDetailResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
+import com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
@@ -52,6 +53,8 @@ public class AlbumInfoActivity extends BaseActivity {
     @ViewById(R.id.actionbar)
     Toolbar toolbar;
     @ViewById
+    GradientToolbar gtoolbar;
+    @ViewById
     AutoListView lv_albuminfo;
 
     String albumId;
@@ -70,6 +73,15 @@ public class AlbumInfoActivity extends BaseActivity {
         initHeaderView();
         initView();
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+
+
 
     void initToolBar() {
         setSupportActionBar(toolbar);
@@ -92,6 +104,11 @@ public class AlbumInfoActivity extends BaseActivity {
         tv_albumname = (TextView) mHeaderView.findViewById(R.id.tv_albumname);
         tv_artist = (TextView) mHeaderView.findViewById(R.id.tv_artist);
         tv_pub_date = (TextView) mHeaderView.findViewById(R.id.tv_pub_date);
+
+
+        gtoolbar.bindListView(lv_albuminfo);
+
+        gtoolbar.setGradientHeight(mHeaderView.getHeight() - gtoolbar.getHeight());
     }
 
     void initView() {
@@ -167,6 +184,7 @@ public class AlbumInfoActivity extends BaseActivity {
 
     /**
      * 生成模糊的图片
+     *
      * @param bitmap
      */
     @Background
@@ -181,7 +199,8 @@ public class AlbumInfoActivity extends BaseActivity {
     }
 
     @UiThread
-    void onGetBlurBitmap(Bitmap bitmap){
+    void onGetBlurBitmap(Bitmap bitmap) {
         iv_bg.setImageBitmap(bitmap);
+        gtoolbar.setToolbarBg(bitmap);
     }
 }

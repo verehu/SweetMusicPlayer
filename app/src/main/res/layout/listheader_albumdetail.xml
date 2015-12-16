@@ -35,19 +35,22 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:text=""
-                android:textSize="@dimen/font_16" />
+                android:textSize="@dimen/font_16"
+                style="@style/textViewWhite"/>
 
             <TextView
                 android:id="@+id/tv_artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text=""
+                style="@style/secondTextViewWhite"/>
 
             <TextView
                 android:id="@+id/tv_pub_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible" />
+                android:visibility="visible"
+                style="@style/secondTextViewWhite"/>
 
         </LinearLayout>
     </LinearLayout>

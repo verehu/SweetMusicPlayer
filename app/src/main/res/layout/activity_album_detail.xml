@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView
         android:id="@+id/lv_albuminfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/actionbar"
+    <com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar
+        android:id="@+id/gtoolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/transparent"/>
+        android:layout_height="?android:attr/actionBarSize"/>
 </RelativeLayout>
