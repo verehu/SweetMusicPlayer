@@ -256,7 +256,7 @@ public class MusicInfo extends AbstractMusic {
 
             if(onLoadListener!=null){
                 if(bitmap==null){
-                    bitmap = BitmapUtil.drawableToBitamp(SweetApplication.context.getResources().getDrawable(R.drawable.img_album_background));
+                    bitmap = BitmapUtil.drawable2bitamp(SweetApplication.context.getResources().getDrawable(R.drawable.img_album_background));
                 }
 
                 onLoadListener.onSuccessLoad(bitmap);

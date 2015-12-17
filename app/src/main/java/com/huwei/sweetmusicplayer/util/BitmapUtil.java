@@ -10,8 +10,12 @@ import android.graphics.drawable.Drawable;
  */
 public class BitmapUtil {
 
-    public static Bitmap drawableToBitamp(Drawable drawable) {
+    public static Bitmap drawable2bitamp(Drawable drawable) {
         BitmapDrawable bd = (BitmapDrawable) drawable;
         return bd.getBitmap();
+    }
+
+    public static Drawable bitmap2drawable(Bitmap bitmap) {
+        return new BitmapDrawable(bitmap);
     }
 }

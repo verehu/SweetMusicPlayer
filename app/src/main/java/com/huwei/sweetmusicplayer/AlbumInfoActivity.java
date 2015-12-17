@@ -1,8 +1,6 @@
 package com.huwei.sweetmusicplayer;
 
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,15 +72,6 @@ public class AlbumInfoActivity extends BaseActivity {
         initView();
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-
-
-
     void initToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -107,8 +96,7 @@ public class AlbumInfoActivity extends BaseActivity {
 
 
         gtoolbar.bindListView(lv_albuminfo);
-
-        gtoolbar.setGradientHeight(mHeaderView.getHeight() - gtoolbar.getHeight());
+        gtoolbar.bindHeaderView(mHeaderView);
     }
 
     void initView() {
@@ -147,7 +135,7 @@ public class AlbumInfoActivity extends BaseActivity {
                     mImageLoader.displayImage(albumDetail.pic_big, iv_album, new ImageLoadingListener() {
                         @Override
                         public void onLoadingStarted(String imageUri, View view) {
-//                            genBlurBitmap(BitmapUtil.drawableToBitamp(iv_album.getDrawable()));
+//                            genBlurBitmap(BitmapUtil.drawable2bitamp(iv_album.getDrawable()));
                         }
 
                         @Override
@@ -168,11 +156,14 @@ public class AlbumInfoActivity extends BaseActivity {
                     tv_albumname.setText(albumDetail.title);
                     tv_artist.setText("歌手：" + albumDetail.author);
                     tv_pub_date.setText("发行时间：" + albumDetail.publishtime);
+
+                    gtoolbar.setGradientTitle(albumDetail.title);
                 }
 
                 List<Song> data = resp.songlist;
                 if (data != null) {
                     songList.clear();
+
                     songList.addAll(data);
                     mMusicAdapter.notifyDataSetInvalidated();
 
