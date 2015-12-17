@@ -185,7 +185,7 @@ public class AlbumInfoActivity extends BaseActivity {
 //        if(vibrant!=null) {
 //            mHeaderView.setBackgroundColor(vibrant.getRgb());
 //        }
-        Bitmap outBitmap = FastBlur.doBlur(bitmap, 50, false);
+        Bitmap outBitmap = FastBlur.doBlur(bitmap, 80, false);
         onGetBlurBitmap(outBitmap);
     }
 

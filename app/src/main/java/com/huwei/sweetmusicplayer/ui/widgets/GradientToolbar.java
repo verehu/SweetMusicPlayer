@@ -127,14 +127,13 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
                     mToolbar.setTitle("专辑");
                 }
 
-
-
-                mIv_toolbarBg.setAlpha(1);
                 if (mToolbarBgDrawable != null) {
                     Log.i(TAG, "setBitmap");
                     mToolbarBgDrawable.mutate().setAlpha((int) (ALPHA * alpha));
                     mIv_toolbarBg.setImageDrawable(mToolbarBgDrawable);
                 }
+
+                mHeaderView.setAlpha(1-alpha);
                 Log.i(TAG, offsetY + ":" + mGradientHeight + " = toolbar bg alpha:" + alpha);
             }
         }
