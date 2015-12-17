@@ -126,6 +126,11 @@ public class MusicInfo extends AbstractMusic {
         new LoadArtPicTask(loadListener).execute(albumId);
     }
 
+    @Override
+    public void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener) {
+        loadArtPic(loadListener);
+    }
+
     public void setArtist(String artist) {
         this.artist = artist;
     }

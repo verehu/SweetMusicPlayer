@@ -127,16 +127,39 @@ public class Song extends AbstractMusic implements IQueryReuslt {
         return author;
     }
 
-    //返回""加载默认的图片
-    private String getArtPic() {
-        return Uri.parse(songinfo !=null? songinfo.getPic_small():"").toString();
+    @Override
+    public void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener) {
+        String uri="";
+        switch (picSizeType){
+            case SMALL:
+                uri = Uri.parse(songinfo !=null? songinfo.getPic_small():"").toString();
+                break;
+            case BIG:
+                uri = Uri.parse(songinfo !=null? songinfo.getPic_big():"").toString();
+                break;
+            case PREIUM:
+                uri = Uri.parse(songinfo !=null? songinfo.getPic_premium():"").toString();
+                break;
+            case HUGE:
+                uri = Uri.parse(songinfo !=null? songinfo.getPic_huge():"").toString();
+                break;
+        }
+        loadArtPic(uri,loadListener);
     }
 
+    /**
+     * 默认加载samll
+     * @param loadListener
+     */
     @Override
     public void loadArtPic(final OnLoadListener loadListener) {
-        Log.i(TAG, "loadArtPic   --->uri:" + getArtPic());
+        loadArtPic(PicSizeType.SMALL,loadListener);
+    }
+
+    private void loadArtPic(String artUri,final OnLoadListener loadListener){
+        Log.i(TAG, "loadArtPic   --->uri:" + artUri);
         ImageLoader imageLoader = SweetApplication.getImageLoader();
-        imageLoader.loadImage(getArtPic(),new SimpleImageLoadingListener(){
+        imageLoader.loadImage(artUri,new SimpleImageLoadingListener(){
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                 super.onLoadingComplete(imageUri, view, loadedImage);
@@ -149,6 +172,8 @@ public class Song extends AbstractMusic implements IQueryReuslt {
             }
         });
     }
+
+
 
     public boolean hasGetDetailInfo(){
         return bitrate!=null|| songinfo !=null;

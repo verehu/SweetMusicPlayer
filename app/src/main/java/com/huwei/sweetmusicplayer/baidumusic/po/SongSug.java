@@ -178,6 +178,11 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
         });
     }
 
+    @Override
+    public void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener) {
+
+    }
+
     public boolean hasGetDetailInfo(){
         return bitrate!=null||songInfo!=null;
     }

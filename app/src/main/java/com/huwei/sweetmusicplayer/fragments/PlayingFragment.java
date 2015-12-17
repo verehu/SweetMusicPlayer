@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -39,11 +40,13 @@ import com.huwei.sweetmusicplayer.comparator.LrcComparator;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.helper.BlurHelper;
 import com.huwei.sweetmusicplayer.models.LrcContent;
 import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter;
 import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener;
 import com.huwei.sweetmusicplayer.ui.widgets.LrcView;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
+import com.huwei.sweetmusicplayer.util.BitmapUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 import com.huwei.sweetmusicplayer.util.LrcUtil;
 import com.huwei.sweetmusicplayer.util.TimeUtil;
@@ -76,12 +79,17 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     private ToggleButton playpage_play_btn;
     private LrcView playpage_lrcview;
 
+    private View mRootView;
+    
     @ViewById
     DrawerLayout dl_music_queue;
     @ViewById
     Button btn_show_music_queue;
     @ViewById
     ListView lv_music_queue;
+
+    @Bean
+    BlurHelper mBlurHelper;
 
     private IntentFilter intentFilter;
 
@@ -110,18 +118,18 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // TODO Auto-generated method stub
-        View root = inflater.inflate(R.layout.fragment_playing, null);
+        mRootView = inflater.inflate(R.layout.fragment_playing, null);
 
-        playpage_return_btn = (Button) root.findViewById(R.id.playpage_return);
-        playpage_title_tv = (TextView) root.findViewById(R.id.playpage_title_tv);
-        playpage_artist_tv = (TextView) root.findViewById(R.id.playpage_artist);
-        playpage_playtime_tv = (TextView) root.findViewById(R.id.playpage_playtime_tv);
-        playpage_duration_tv = (TextView) root.findViewById(R.id.playpage_duration_tv);
-        playpage_progressbar = (SeekBar) root.findViewById(R.id.playpage_progressbar);
-        playpage_next_btn = (ImageView) root.findViewById(R.id.playpage_next);
-        playpage_previous_btn = (ImageView) root.findViewById(R.id.playpage_previous);
-        playpage_play_btn = (ToggleButton) root.findViewById(R.id.playpage_play);
-        playpage_lrcview = (LrcView) root.findViewById(R.id.playpage_lrcview);
+        playpage_return_btn = (Button) mRootView.findViewById(R.id.playpage_return);
+        playpage_title_tv = (TextView) mRootView.findViewById(R.id.playpage_title_tv);
+        playpage_artist_tv = (TextView) mRootView.findViewById(R.id.playpage_artist);
+        playpage_playtime_tv = (TextView) mRootView.findViewById(R.id.playpage_playtime_tv);
+        playpage_duration_tv = (TextView) mRootView.findViewById(R.id.playpage_duration_tv);
+        playpage_progressbar = (SeekBar) mRootView.findViewById(R.id.playpage_progressbar);
+        playpage_next_btn = (ImageView) mRootView.findViewById(R.id.playpage_next);
+        playpage_previous_btn = (ImageView) mRootView.findViewById(R.id.playpage_previous);
+        playpage_play_btn = (ToggleButton) mRootView.findViewById(R.id.playpage_play);
+        playpage_lrcview = (LrcView) mRootView.findViewById(R.id.playpage_lrcview);
 
         initListener();
 
@@ -129,7 +137,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
         mScreenWidth = metric.widthPixels;
 
-        return root;
+        return mRootView;
     }
 
     @AfterViews
@@ -167,13 +175,26 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     }
 
 
-    public void UpdateTopData() {
+    public void UpdateSongInfoView() {
         AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
         playpage_title_tv.setText(song.getTitle());
         playpage_artist_tv.setText(song.getArtist());
 
         playpage_duration_tv.setText(song.getDurationStr());
         playpage_progressbar.setMax(song.getDuration());
+
+        //加载模糊背景图
+//        song.loadArtPic(AbstractMusic.PicSizeType.HUGE, new AbstractMusic.OnLoadListener() {
+//            @Override
+//            public void onSuccessLoad(Bitmap bitmap) {
+//                mBlurHelper.blurBitmap(bitmap, 200, new BlurHelper.OnGenerateBitmapCallback() {
+//                    @Override
+//                    public void onGenerateBitmap(Bitmap bitmap) {
+//                        mRootView.setBackgroundDrawable(BitmapUtil.bitmap2drawable(bitmap));
+//                    }
+//                });
+//            }
+//        });
     }
 
 
@@ -269,7 +290,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
                     boolean isNewPlayMusic = intent.getBooleanExtra("isNewPlayMusic", false);
                     if (isNewPlayMusic) {
-                        UpdateTopData();
+                        UpdateSongInfoView();
                         loadLrcView();
                     }
                     break;

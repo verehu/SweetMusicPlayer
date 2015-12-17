@@ -42,15 +42,20 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
 
     /**
      * 加载艺术家图片  上面的方法废弃
+     *
      * @param loadListener
      */
     public abstract void loadArtPic(OnLoadListener loadListener);
 
+
+    public abstract void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener);
+
     /**
      * 获取时间字符串
+     *
      * @return
      */
-    public String getDurationStr(){
+    public String getDurationStr() {
         return TimeUtil.mill2mmss(getDuration());
     }
 
@@ -59,8 +64,14 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
         Local, Online
     }
 
-    public interface OnLoadListener{
+    public interface OnLoadListener {
         void onSuccessLoad(Bitmap bitmap);
     }
 
+    /**
+     * PIC 尺寸枚举
+     */
+    public enum PicSizeType {
+        SMALL, BIG, PREIUM, HUGE
+    }
 }
