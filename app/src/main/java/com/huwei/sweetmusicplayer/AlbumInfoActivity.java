@@ -14,6 +14,7 @@ import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.AlbumDetailResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.helper.BlurHelper;
 import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
 import com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
@@ -27,6 +28,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -45,6 +47,9 @@ public class AlbumInfoActivity extends BaseActivity {
 
     private View mHeaderView;
     private ImageView iv_bg;
+
+    @Bean
+    BlurHelper mBlurHelper;
 
     ImageView iv_album;
     TextView tv_albumname, tv_artist, tv_pub_date;
@@ -145,7 +150,13 @@ public class AlbumInfoActivity extends BaseActivity {
 
                         @Override
                         public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                            genBlurBitmap(loadedImage);
+                            mBlurHelper.blurBitmap(loadedImage, 80, new BlurHelper.OnGenerateBitmapCallback() {
+                                @Override
+                                public void onGenerateBitmap(Bitmap bitmap) {
+                                    iv_bg.setImageBitmap(bitmap);
+                                    gtoolbar.setToolbarBg(bitmap);
+                                }
+                            });
                         }
 
                         @Override
@@ -180,11 +191,6 @@ public class AlbumInfoActivity extends BaseActivity {
      */
     @Background
     void genBlurBitmap(Bitmap bitmap) {
-//        Palette palette = Palette.generate(bitmap);
-//        Palette.Swatch vibrant = palette.getVibrantSwatch();
-//        if(vibrant!=null) {
-//            mHeaderView.setBackgroundColor(vibrant.getRgb());
-//        }
         Bitmap outBitmap = FastBlur.doBlur(bitmap, 80, false);
         onGetBlurBitmap(outBitmap);
     }
