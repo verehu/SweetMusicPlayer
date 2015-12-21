@@ -173,7 +173,10 @@ public class Song extends AbstractMusic implements IQueryReuslt {
         });
     }
 
-
+    @Override
+    public int blurValueOfPlaying() {
+        return 80;
+    }
 
     public boolean hasGetDetailInfo(){
         return bitrate!=null|| songinfo !=null;

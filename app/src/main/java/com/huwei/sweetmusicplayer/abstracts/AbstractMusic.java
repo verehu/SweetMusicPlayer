@@ -51,6 +51,12 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
     public abstract void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener);
 
     /**
+     * 专辑图片高斯模糊值
+     * @return
+     */
+    public abstract int blurValueOfPlaying();
+
+    /**
      * 获取时间字符串
      *
      * @return
@@ -58,7 +64,6 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
     public String getDurationStr() {
         return TimeUtil.mill2mmss(getDuration());
     }
-
 
     public enum MusicType {
         Local, Online

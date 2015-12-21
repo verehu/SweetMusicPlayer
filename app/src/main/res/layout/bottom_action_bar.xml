@@ -27,9 +27,9 @@
         android:orientation="horizontal">
 
 
-        <ImageView
+        <com.huwei.sweetmusicplayer.ui.widgets.SquareWrapWImageView
             android:id="@+id/img_album"
-            android:layout_width="66dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/img_album_background" />
 

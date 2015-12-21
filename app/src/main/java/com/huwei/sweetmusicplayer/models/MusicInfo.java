@@ -47,8 +47,8 @@ public class MusicInfo extends AbstractMusic {
     };
 
     //------------------- new property
-    private String album ;
-    private Long size ;
+    private String album;
+    private Long size;
 
     public MusicInfo() {
 
@@ -65,17 +65,20 @@ public class MusicInfo extends AbstractMusic {
     }
 
 
-    /** constructor with special property*/
-    public MusicInfo(Long songId, Long albumId, String title, String artist, Integer duration, String path , String album , Long size) {
+    /**
+     * constructor with special property
+     */
+    public MusicInfo(Long songId, Long albumId, String title, String artist, Integer duration, String path, String album, Long size) {
         this.songId = songId;
         this.albumId = albumId;
         this.title = title;
         this.artist = artist;
         this.duration = duration;
         this.path = path;
-        this.album = album ;
-        this.size = size ;
+        this.album = album;
+        this.size = size;
     }
+
     public Long getSongId() {
         return songId;
     }
@@ -106,13 +109,13 @@ public class MusicInfo extends AbstractMusic {
 
 
     private String getArtPic() {
-        Uri uri= ContentUris.withAppendedId(MusicUtils.sArtworkUri, albumId);
+        Uri uri = ContentUris.withAppendedId(MusicUtils.sArtworkUri, albumId);
 
-        String[] proj = { MediaStore.Images.Media.DATA };
+        String[] proj = {MediaStore.Images.Media.DATA};
         Cursor actualimagecursor = SweetApplication.context.getContentResolver().query(uri, proj, null, null, null);
         int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 
-        if(actualimagecursor.moveToFirst()) {
+        if (actualimagecursor.moveToFirst()) {
             String img_path = actualimagecursor.getString(actual_image_column_index);
             File file = new File(img_path);
             Uri fileUri = Uri.fromFile(file);
@@ -123,12 +126,17 @@ public class MusicInfo extends AbstractMusic {
 
     @Override
     public void loadArtPic(OnLoadListener loadListener) {
-        new LoadArtPicTask(loadListener).execute(albumId);
+        new LoadArtPicTask(loadListener, PicSizeType.SMALL).execute(albumId);
     }
 
     @Override
     public void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener) {
-        loadArtPic(loadListener);
+        new LoadArtPicTask(loadListener, picSizeType).execute(albumId);
+    }
+
+    @Override
+    public int blurValueOfPlaying() {
+        return 120;
     }
 
     public void setArtist(String artist) {
@@ -176,30 +184,30 @@ public class MusicInfo extends AbstractMusic {
     }
 
     /**
-     *
      * define by myself
      */
-    public static final Byte ISFAVORITE=1;
-    public static final Byte NOTFAVORITE=0;
+    public static final Byte ISFAVORITE = 1;
+    public static final Byte NOTFAVORITE = 0;
 
-    public MusicInfo(Parcel parcel){
+    public MusicInfo(Parcel parcel) {
         super();
 
-        this.songId=parcel.readLong();
-        this.albumId=parcel.readLong();
-        this.title=parcel.readString();
+        this.songId = parcel.readLong();
+        this.albumId = parcel.readLong();
+        this.title = parcel.readString();
         this.artist = parcel.readString();
         this.duration = parcel.readInt();
         this.path = parcel.readString();
-        this.favorite = parcel.readByte()==ISFAVORITE;
+        this.favorite = parcel.readByte() == ISFAVORITE;
     }
 
 
     /**
      * 获取title的首字母
+     *
      * @return
      */
-    public String getKeyofTitle(){
+    public String getKeyofTitle() {
         return CharacterParser.getFirstUpperLetter(title);
     }
 
@@ -218,7 +226,6 @@ public class MusicInfo extends AbstractMusic {
         dest.writeString(path);
         dest.writeByte(favorite ? ISFAVORITE : NOTFAVORITE);
     }
-
 
 
     @Override
@@ -241,29 +248,26 @@ public class MusicInfo extends AbstractMusic {
         return new MusicInfo[size];
     }
 
-    private class LoadArtPicTask extends AsyncTask<Long,Void,Bitmap>{
-
+    private class LoadArtPicTask extends AsyncTask<Long, Void, Bitmap> {
+        PicSizeType picSizeType;
         OnLoadListener onLoadListener;
 
-        private LoadArtPicTask(OnLoadListener onLoadListener) {
+        public LoadArtPicTask(OnLoadListener onLoadListener, PicSizeType picSizeType) {
+            this.picSizeType = picSizeType;
             this.onLoadListener = onLoadListener;
         }
 
         @Override
         protected Bitmap doInBackground(Long... params) {
             long albumId = params[0];
-            return MusicUtils.getArtworkQuick(SweetApplication.context,albumId);
+            return MusicUtils.getArtworkQuick(SweetApplication.context, albumId, picSizeType);
         }
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
 
-            if(onLoadListener!=null){
-                if(bitmap==null){
-                    bitmap = BitmapUtil.drawable2bitamp(SweetApplication.context.getResources().getDrawable(R.drawable.img_album_background));
-                }
-
+            if (onLoadListener != null) {
                 onLoadListener.onSuccessLoad(bitmap);
             }
 

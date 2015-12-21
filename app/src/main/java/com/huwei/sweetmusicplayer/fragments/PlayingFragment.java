@@ -80,7 +80,9 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     private LrcView playpage_lrcview;
 
     private View mRootView;
-    
+
+    @ViewById
+    ImageView iv_playing_bg;
     @ViewById
     DrawerLayout dl_music_queue;
     @ViewById
@@ -176,25 +178,26 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
 
     public void UpdateSongInfoView() {
-        AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
+        final AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
         playpage_title_tv.setText(song.getTitle());
         playpage_artist_tv.setText(song.getArtist());
 
         playpage_duration_tv.setText(song.getDurationStr());
         playpage_progressbar.setMax(song.getDuration());
 
+        iv_playing_bg.setImageBitmap(null);
         //加载模糊背景图
-//        song.loadArtPic(AbstractMusic.PicSizeType.HUGE, new AbstractMusic.OnLoadListener() {
-//            @Override
-//            public void onSuccessLoad(Bitmap bitmap) {
-//                mBlurHelper.blurBitmap(bitmap, 200, new BlurHelper.OnGenerateBitmapCallback() {
-//                    @Override
-//                    public void onGenerateBitmap(Bitmap bitmap) {
-//                        mRootView.setBackgroundDrawable(BitmapUtil.bitmap2drawable(bitmap));
-//                    }
-//                });
-//            }
-//        });
+        song.loadArtPic(AbstractMusic.PicSizeType.HUGE, new AbstractMusic.OnLoadListener() {
+            @Override
+            public void onSuccessLoad(Bitmap bitmap) {
+                mBlurHelper.blurBitmap(bitmap, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {
+                    @Override
+                    public void onGenerateBitmap(Bitmap bitmap) {
+                        iv_playing_bg.setImageBitmap(bitmap);
+                    }
+                });
+            }
+        });
     }
 
 
@@ -207,12 +210,8 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     }
 
     public void initListener() {
-
-
         playpage_progressbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-
             int pro;
-
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -323,9 +322,6 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     }
 
     void updateLrcView(int currentTime) {
-//
-//        if (SlidingPanel.mTracking) return;
-
         int tempIndex = playpage_lrcview.getIndexByLrcTime(currentTime);
         if (tempIndex != playpage_lrcview.getIndex()) {
             playpage_lrcview.setIndex(tempIndex);

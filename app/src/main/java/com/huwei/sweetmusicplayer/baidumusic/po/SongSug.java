@@ -183,6 +183,11 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
 
     }
 
+    @Override
+    public int blurValueOfPlaying() {
+        return 0;
+    }
+
     public boolean hasGetDetailInfo(){
         return bitrate!=null||songInfo!=null;
     }
