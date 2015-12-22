@@ -10,6 +10,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -75,6 +76,8 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
 
     private OnRefreshListener onRefreshListener;
     private OnLoadListener onLoadListener;
+    private AdapterView.OnItemClickListener mOnItemClickListener;
+    private AdapterView.OnItemClickListener mOnItemNoneClickListener;
 
     public AutoListView(Context context) {
         super(context);
@@ -111,6 +114,19 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
     public void setOnLoadListener(OnLoadListener onLoadListener) {
         this.loadEnable = true;
         this.onLoadListener = onLoadListener;
+    }
+
+    public void setOnItemClickListener(AdapterView.OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
+    /**
+     * 没有header和footer的监听
+     *
+     * @param listener
+     */
+    public void setOnItemNoneClickListener(AdapterView.OnItemClickListener listener) {
+        this.mOnItemNoneClickListener = listener;
     }
 
     public boolean isLoadEnable() {
@@ -179,6 +195,25 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         this.addHeaderView(header);
         this.addFooterView(footer);
         this.setOnScrollListener(this);
+        super.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (mOnItemClickListener != null) {
+                    mOnItemNoneClickListener.onItemClick(parent, view, position, id);
+                }
+
+                if (mOnItemNoneClickListener != null) {
+                    int pos = position - getHeaderViewsCount();
+                    if (pos > getChildCount() - getHeaderViewsCount() - getFooterViewsCount()) {
+                        pos = getChildCount() - getHeaderViewsCount() - getFooterViewsCount();
+                    } else if (pos < 0) {
+                        pos = 0;
+                    }
+                    mOnItemNoneClickListener.onItemClick(parent, view, pos, id);
+                }
+            }
+        });
     }
 
     public void onRefresh() {

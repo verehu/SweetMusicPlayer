@@ -20,17 +20,14 @@ import com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
-import com.huwei.sweetmusicplayer.util.FastBlur;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -118,7 +115,7 @@ public class AlbumInfoActivity extends BaseActivity {
 
         mMusicAdapter = new OnlineMusicAdapter(mContext, songList);
         lv_albuminfo.setAdapter(mMusicAdapter);
-        lv_albuminfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv_albuminfo.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(songList));
@@ -182,22 +179,5 @@ public class AlbumInfoActivity extends BaseActivity {
                 }
             }
         });
-    }
-
-    /**
-     * 生成模糊的图片
-     *
-     * @param bitmap
-     */
-    @Background
-    void genBlurBitmap(Bitmap bitmap) {
-        Bitmap outBitmap = FastBlur.doBlur(bitmap, 80, false);
-        onGetBlurBitmap(outBitmap);
-    }
-
-    @UiThread
-    void onGetBlurBitmap(Bitmap bitmap) {
-        iv_bg.setImageBitmap(bitmap);
-        gtoolbar.setToolbarBg(bitmap);
     }
 }
