@@ -52,6 +52,7 @@
                 android:resource="@xml/search_online" />
         </activity>
         <activity android:name=".AlbumInfoActivity_"/>
+        <activity android:name=".ArtistInfoActivity_"/>
 
         <service
             android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"

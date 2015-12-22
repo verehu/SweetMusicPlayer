@@ -39,7 +39,7 @@ import java.util.List;
  * @author jerry
  * @date 2015-09-13
  */
-@EActivity(R.layout.activity_album_detail)
+@EActivity(R.layout.activity_album_info)
 public class AlbumInfoActivity extends BaseActivity {
 
     private View mHeaderView;

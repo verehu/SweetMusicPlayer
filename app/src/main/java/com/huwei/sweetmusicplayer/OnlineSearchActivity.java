@@ -14,6 +14,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
 import com.huwei.sweetmusicplayer.baidumusic.po.QueryResult;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 
@@ -86,6 +87,10 @@ public class OnlineSearchActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 IQueryReuslt reuslt = (IQueryReuslt) parent.getItemAtPosition(position);
                 switch (reuslt.getSearchResultType()) {
+                    case Artist:
+                        Artist artist = (Artist)reuslt;
+                        startActivity(ArtistInfoActivity.getStartActIntent(OnlineSearchActivity.this,artist.ting_uid,artist.artist_id));
+                        break;
                     case Song:
                         List<AbstractMusic> list = new ArrayList<>();
 //                        Log.i(TAG, "song:" + ((Song) reuslt).songinfo);

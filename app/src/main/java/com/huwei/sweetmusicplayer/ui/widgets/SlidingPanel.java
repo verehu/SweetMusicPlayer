@@ -267,8 +267,10 @@ public class SlidingPanel extends FrameLayout implements GestureDetector.OnGestu
      */
     public void scrollTo(int fY) {
         if (fY < 0) {
+            Log.i(TAG,"open");
             mContent.scrollTo(0, 0);
         } else if (fY > mContentRangeBottom) {
+            Log.i(TAG,"close");
             mContent.scrollTo(0, -mContentRangeBottom);
         } else {
             mContent.scrollTo(0, -fY);

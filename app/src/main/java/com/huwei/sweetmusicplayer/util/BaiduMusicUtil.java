@@ -9,10 +9,15 @@ import com.huwei.sweetmusicplayer.contains.IUrl;
  * @date 2015/6/11
  */
 public class BaiduMusicUtil implements IUrl {
+    public static final int PAGESIZE = 20;
+
     public static final String SEARCH_CATALOGSUG = "baidu.ting.search.catalogSug";
     public static final String SONG_LRC = "baidu.ting.song.lry ";
     public static final String SONG_PLAY = "baidu.ting.song.play";
-    public static final String GET_SONGINFO="baidu.ting.song.getInfos";
+    public static final String GET_SONGINFO = "baidu.ting.song.getInfos";
+    public static final String GET_ARTISTINFO = "baidu.ting.artist.getinfo";    //获取歌手信息
+    public static final String GET_ARTISTSONGLIST = "baidu.ting.artist.getSongList"; //获取歌手的歌曲列表
+    public static final String GET_ARTISTALUBMLIST = "baidu.ting.artist.getAlbumList";   //获取歌手的专辑列表;
     public static final String GET_ALBUMINFO = "baidu.ting.album.getAlbumInfo";
     public static final String QUERY_MERGE = "baidu.ting.search.merge";
 
@@ -26,9 +31,9 @@ public class BaiduMusicUtil implements IUrl {
         HttpParams params = new HttpParams();
         params.add("format", "json");
         params.add("method", SEARCH_CATALOGSUG);
-        params.add("from","android");
+        params.add("from", "android");
         params.add("query", keyword);
-        HttpUtil.get(BADDU_MUSIC, params, httpHandler);
+        HttpUtil.get(BAIDU_MUSIC, params, httpHandler);
     }
 
     public static void queryMerge(String keyword, int pageno, int pageSize, HttpHandler httpHandler) {
@@ -41,10 +46,10 @@ public class BaiduMusicUtil implements IUrl {
         params.add("type", -1);
         params.add("data_source", 0);
         params.add("use_cluster", 1);
-        HttpUtil.get(BADDU_MUSIC, params, httpHandler);
+        HttpUtil.get(BAIDU_MUSIC, params, httpHandler);
     }
 
-    public static void getSongInfo(String songId,HttpHandler httpHandler){
+    public static void getSongInfo(String songId, HttpHandler httpHandler) {
 
     }
 
@@ -60,7 +65,7 @@ public class BaiduMusicUtil implements IUrl {
         params.add("format", "json");
         params.add("method", GET_ALBUMINFO);
         params.add("album_id", albumId);
-        HttpUtil.get(BADDU_MUSIC, params, httpHandler);
+        HttpUtil.get(BAIDU_MUSIC, params, httpHandler);
     }
 
 
@@ -74,7 +79,7 @@ public class BaiduMusicUtil implements IUrl {
         params.add("format", "json");
         params.add("method", SONG_LRC);
         params.add("songid", songid);
-        HttpUtil.get(BADDU_MUSIC, params, httpHandler);
+        HttpUtil.get(BAIDU_MUSIC, params, httpHandler);
     }
 
     /**
@@ -83,12 +88,12 @@ public class BaiduMusicUtil implements IUrl {
      * @param songid
      * @return
      */
-    public static void querySong(String songid,HttpHandler httpHandler) {
+    public static void querySong(String songid, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
         params.add("format", "json");
         params.add("method", SONG_PLAY);
         params.add("songid", songid);
-        HttpUtil.get(BADDU_MUSIC, params,httpHandler);
+        HttpUtil.get(BAIDU_MUSIC, params, httpHandler);
     }
 
     /**
@@ -103,6 +108,38 @@ public class BaiduMusicUtil implements IUrl {
         params.add("albumId", albumId);
         params.add("type", "album");
         HttpUtil.get(BAIDU_MUSIC_ALBUM, params, httpHandler, true);
+    }
+
+    /**
+     * 获取歌手信息
+     *
+     * @param tinguid
+     * @param artistid
+     * @param httpHandler
+     */
+    public static void getArtistInfo(String ting_uid, String artist_id, HttpHandler httpHandler) {
+        HttpParams params = new HttpParams();
+        params.add("tinguid", ting_uid);
+        params.add("artistid", artist_id);
+        params.add("method", GET_ARTISTINFO);
+        HttpUtil.get(BAIDU_MUSIC, params, httpHandler, true);
+    }
+
+    /**
+     * 获取歌手页面的  歌曲列表
+     * @param ting_uid
+     * @param artist_id
+     * @param pageNo
+     * @param httpHandler
+     */
+    public static void getArtistSongList(String ting_uid, String artist_id, int pageNo, HttpHandler httpHandler) {
+        HttpParams params = new HttpParams();
+        params.add("tinguid", ting_uid);
+        params.add("artistid", artist_id);
+        params.add("offset", pageNo * PAGESIZE);
+        params.add("limits",PAGESIZE);
+        params.add("method", GET_ARTISTSONGLIST);
+        HttpUtil.get(BAIDU_MUSIC, params, httpHandler, true);
     }
 
     /**
