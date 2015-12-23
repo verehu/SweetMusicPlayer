@@ -29,9 +29,10 @@ public class BlurHelper {
         Bitmap outBitmap = FastBlur.doBlur(originBitmap, radius, false);
 
         onGenerateBitmap(outBitmap, callback);
-        if (originBitmap != null) {
-            originBitmap.recycle();
-        }
+        //todo 不急着回收原图
+//        if (originBitmap != null) {
+//            originBitmap.recycle();
+//        }
     }
 
     public interface OnGenerateBitmapCallback {
