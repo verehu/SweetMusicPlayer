@@ -134,7 +134,7 @@ public class AlbumInfoActivity extends BaseActivity {
                 AlbumDetailResp resp = new Gson().fromJson(response, AlbumDetailResp.class);
                 AlbumInfo albumDetail = resp.albumInfo;
                 if (albumDetail != null) {
-                    mImageLoader.displayImage(albumDetail.pic_big, iv_album, new ImageLoadingListener() {
+                    mImageLoader.loadImage(albumDetail.pic_big, new ImageLoadingListener() {
                         @Override
                         public void onLoadingStarted(String imageUri, View view) {
 //                            genBlurBitmap(BitmapUtil.drawable2bitamp(iv_album.getDrawable()));
@@ -147,6 +147,7 @@ public class AlbumInfoActivity extends BaseActivity {
 
                         @Override
                         public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                            iv_album.setImageBitmap(loadedImage);
                             mBlurHelper.blurBitmap(loadedImage, 80, new BlurHelper.OnGenerateBitmapCallback() {
                                 @Override
                                 public void onGenerateBitmap(Bitmap bitmap) {

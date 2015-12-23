@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AdapterView;
 
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.baidumusic.po.ArtistInfo;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.ArtistSongListResp;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
 import com.huwei.sweetmusicplayer.ui.views.ArtistInfoView;
 import com.huwei.sweetmusicplayer.ui.views.ArtistInfoView_;
@@ -20,7 +21,6 @@ import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 
-import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -121,6 +121,13 @@ public class ArtistInfoActivity extends BaseActivity {
             }
         });
         lv_songs_album.onLoad();
+        lv_songs_album.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(mSongList));
+                MusicManager.getInstance().play();
+            }
+        });
     }
 
     void getArtistInfo() {

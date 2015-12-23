@@ -81,7 +81,7 @@ public class ArtistInfoView extends FrameLayout {
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    mBlurHelper.blurBitmap(loadedImage, 80, new BlurHelper.OnGenerateBitmapCallback() {
+                    mBlurHelper.blurBitmap(loadedImage, 100, new BlurHelper.OnGenerateBitmapCallback() {
                         @Override
                         public void onGenerateBitmap(Bitmap bitmap) {
                             iv_bg.setImageBitmap(bitmap);
