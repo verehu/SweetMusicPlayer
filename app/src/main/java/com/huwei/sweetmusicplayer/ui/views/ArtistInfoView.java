@@ -68,7 +68,7 @@ public class ArtistInfoView extends FrameLayout {
         if (artistInfo != null) {
             tv_artist.setText(artistInfo.name);
             tv_country.setText(artistInfo.country + "歌手");
-            mImageLoader.displayImage(artistInfo.avatar_s500, iv_bg, new ImageLoadingListener() {
+            mImageLoader.loadImage(artistInfo.avatar_s500, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
 //                            genBlurBitmap(BitmapUtil.drawable2bitamp(iv_album.getDrawable()));
@@ -95,6 +95,7 @@ public class ArtistInfoView extends FrameLayout {
 
                 }
             });
+            gtoolbar.setGradientTitle(artistInfo.name);
         }
     }
 }

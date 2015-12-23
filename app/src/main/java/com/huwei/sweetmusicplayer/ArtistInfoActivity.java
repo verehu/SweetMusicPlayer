@@ -101,6 +101,7 @@ public class ArtistInfoActivity extends BaseActivity {
         mMusicAdapter = new OnlineMusicAdapter(mContext, mSongList);
         lv_songs_album.setAdapter(mMusicAdapter);
 
+        lv_songs_album.setRefreshEnable(false);
         lv_songs_album.setOnLoadListener(new IPullRefershBase.OnLoadListener() {
             @Override
             public void onLoad() {
@@ -109,7 +110,7 @@ public class ArtistInfoActivity extends BaseActivity {
                     public void onSuccess(String response) {
                         ArtistSongListResp resp = new Gson().fromJson(response, ArtistSongListResp.class);
                         if (resp != null) {
-                            mSongPageNo ++ ;
+                            mSongPageNo++;
                             mSongList.addAll(resp.songlist);
                             mMusicAdapter.notifyDataSetChanged();
 
@@ -119,6 +120,7 @@ public class ArtistInfoActivity extends BaseActivity {
                 });
             }
         });
+        lv_songs_album.onLoad();
     }
 
     void getArtistInfo() {
