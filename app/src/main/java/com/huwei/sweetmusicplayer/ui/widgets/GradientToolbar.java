@@ -25,7 +25,7 @@ import org.apache.commons.lang.StringUtils;
  * @author jerry
  * @date 2015-12-16
  */
-public class GradientToolbar extends FrameLayout implements AbsListView.OnScrollListener {
+public class GradientToolbar extends FrameLayout implements AbsListView.OnScrollListener, View.OnScrollChangeListener {
     public static final String TAG = "GradientToolbar";
 
     public static final int ALPHA = 255;
@@ -97,6 +97,16 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
         }
     }
 
+    /**
+     * 绑定ScrollView
+     * @param view
+     */
+    public void bindScrollView(VerticalScrollView view) {
+        if (view != null) {
+            view.setOnScrollChangeListener(this);
+        }
+    }
+
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -104,6 +114,15 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        adjustHeaderViewAndTitle();
+    }
+
+    @Override
+    public void onScrollChange(View view, int i, int i2, int i3, int i4) {
+        adjustHeaderViewAndTitle();
+    }
+
+    private void adjustHeaderViewAndTitle() {
         if (mHeaderView != null) {
             mGradientHeight = mHeaderView.getMeasuredHeight() - getMeasuredHeight();
             if (mGradientHeight > 0 && mIv_toolbarBg != null) {
@@ -140,4 +159,6 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
             }
         }
     }
+
+
 }

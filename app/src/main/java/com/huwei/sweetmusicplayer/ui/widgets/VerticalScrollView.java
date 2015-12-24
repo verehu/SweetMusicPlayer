@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ScrollView;
 
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
@@ -22,6 +20,8 @@ public class VerticalScrollView extends ScrollView {
 
     private GestureDetector mGestureDetector;
     private AutoListView mChildAutoListView;    //子控件
+
+    private OnScrollChangeListener mScrollViewListener;
 
     public VerticalScrollView(Context context) {
         this(context, null);
@@ -44,6 +44,10 @@ public class VerticalScrollView extends ScrollView {
         this.mChildAutoListView = autoListView;
     }
 
+    public void setOnScrollChangeListener(OnScrollChangeListener listener) {
+        mScrollViewListener = listener;
+    }
+
     /**
      * 监听垂直手势并且拦截
      */
@@ -62,10 +66,20 @@ public class VerticalScrollView extends ScrollView {
         int offsetY = getScrollY() + getHeight() - getChildAt(0).getHeight();
         Log.i(TAG, "offsetY:" + offsetY);
 
+        if (mScrollViewListener != null) {
+            mScrollViewListener.onScrollChanged(this, l, t, oldl, oldt);
+        }
+
         if (offsetY == 0) {
             if (mChildAutoListView != null) {
                 mChildAutoListView.ifNeedLoad();
             }
         }
+    }
+
+    public interface OnScrollChangeListener {
+
+        void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy);
+
     }
 }

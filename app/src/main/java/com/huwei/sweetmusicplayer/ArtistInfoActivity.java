@@ -14,10 +14,8 @@ import com.huwei.sweetmusicplayer.baidumusic.resp.ArtistSongListResp;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
 import com.huwei.sweetmusicplayer.ui.views.ArtistInfoView;
-import com.huwei.sweetmusicplayer.ui.views.ArtistInfoView_;
 import com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar;
 import com.huwei.sweetmusicplayer.ui.widgets.VerticalScrollView;
-import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.CompatScrollViewAutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
@@ -94,8 +92,8 @@ public class ArtistInfoActivity extends BaseActivity {
     }
 
     void initListViewHeader() {
-//        gtoolbar.bindListView(lv_songs_album);
-//        gtoolbar.bindHeaderView(mHeaderView);
+        gtoolbar.bindScrollView(mScrollView);
+        gtoolbar.bindHeaderView(mHeaderView);
         mScrollView.bindAutoListView(lv_songs_album);
     }
 
