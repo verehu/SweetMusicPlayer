@@ -1,6 +1,7 @@
 package com.huwei.sweetmusicplayer.ui.widgets.auto;
 
 /**
+ * Ë¢ÐÂ½Ó¿Ú
  * @author jerry
  * @date 2015-11-23
  */

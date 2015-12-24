@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.util.BitmapUtil;
@@ -19,6 +20,8 @@ import com.huwei.sweetmusicplayer.util.BitmapUtil;
 import org.apache.commons.lang.StringUtils;
 
 /**
+ * 渐变Toolbar
+ *
  * @author jerry
  * @date 2015-12-16
  */
@@ -59,7 +62,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
         mToolbar = (Toolbar) findViewById(R.id.actionbar);
     }
 
-    void initData(){
+    void initData() {
         mToolbar.setTitle("专辑");
     }
 
@@ -94,7 +97,6 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
         }
     }
 
-
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -120,10 +122,10 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
                     mToolbar.setTitle("专辑");
                 } else if (alpha >= 1) {
                     alpha = 1;
-                    if(StringUtils.isNotEmpty(mGradientTitle)) {
+                    if (StringUtils.isNotEmpty(mGradientTitle)) {
                         mToolbar.setTitle(mGradientTitle);
                     }
-                }else{
+                } else {
                     mToolbar.setTitle("专辑");
                 }
 
@@ -133,7 +135,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
                     mIv_toolbarBg.setImageDrawable(mToolbarBgDrawable);
                 }
 
-                mHeaderView.setAlpha(1-alpha);
+                mHeaderView.setAlpha(1 - alpha);
                 Log.i(TAG, offsetY + ":" + mGradientHeight + " = toolbar bg alpha:" + alpha);
             }
         }

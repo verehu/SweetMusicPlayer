@@ -16,7 +16,9 @@ import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
 import com.huwei.sweetmusicplayer.ui.views.ArtistInfoView;
 import com.huwei.sweetmusicplayer.ui.views.ArtistInfoView_;
 import com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar;
+import com.huwei.sweetmusicplayer.ui.widgets.VerticalScrollView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
+import com.huwei.sweetmusicplayer.ui.widgets.auto.CompatScrollViewAutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
@@ -41,13 +43,15 @@ public class ArtistInfoActivity extends BaseActivity {
     public static final String TINGUID = "tinguid";
 
     @ViewById
-    AutoListView lv_songs_album;
+    CompatScrollViewAutoListView lv_songs_album;
     @ViewById
     GradientToolbar gtoolbar;
     @ViewById(R.id.actionbar)
     Toolbar toolbar;
-
+    @ViewById(R.id.view_artist_info)
     ArtistInfoView mHeaderView;
+    @ViewById(R.id.view_scroll_container)
+    VerticalScrollView mScrollView;
 
     private OnlineMusicAdapter mMusicAdapter;
     private List<Song> mSongList = new ArrayList<>();
@@ -90,11 +94,9 @@ public class ArtistInfoActivity extends BaseActivity {
     }
 
     void initListViewHeader() {
-        mHeaderView = ArtistInfoView_.build(mContext);
-        lv_songs_album.addHeaderView(mHeaderView);
-
-        gtoolbar.bindListView(lv_songs_album);
-        gtoolbar.bindHeaderView(mHeaderView);
+//        gtoolbar.bindListView(lv_songs_album);
+//        gtoolbar.bindHeaderView(mHeaderView);
+        mScrollView.bindAutoListView(lv_songs_album);
     }
 
     void initListView() {

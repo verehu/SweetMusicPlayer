@@ -2,6 +2,7 @@ package com.huwei.sweetmusicplayer.ui.widgets.auto;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +29,8 @@ import com.huwei.sweetmusicplayer.util.TimeUtil;
  */
 
 public class AutoListView extends ListView implements OnScrollListener, IPullRefershBase {
+
+    public static final String TAG = "AutoListView";
 
     // 区分当前操作是刷新还是加载
     public static final int REFRESH = 0;
@@ -268,11 +271,13 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem,
                          int visibleItemCount, int totalItemCount) {
+        Log.i(TAG, "firstVisibleItem:" + firstVisibleItem + "state:" + state);
         this.firstVisibleItem = firstVisibleItem;
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
+        Log.i(TAG, "onScrollStateChanged:" + scrollState);
         this.scrollState = scrollState;
         ifNeedLoad(view, scrollState);
     }
@@ -305,6 +310,16 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
                 isLoading = true;
             }
         } catch (Exception e) {
+        }
+    }
+
+    /**
+     * 对外 ScrollView 兼容的上拉加载
+     */
+    public void ifNeedLoad() {
+        if (!isLoading && !isLoadFull) {
+            onLoad();
+            isLoading = true;
         }
     }
 
@@ -397,6 +412,7 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
      *
      * @param resultSize
      */
+    @Deprecated
     public void setResultSize(int resultSize) {
         if (resultSize == 0) {
             isLoadFull = true;
@@ -479,6 +495,4 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         }
         child.measure(childWidthSpec, childHeightSpec);
     }
-
-
 }

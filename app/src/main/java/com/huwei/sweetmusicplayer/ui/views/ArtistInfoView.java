@@ -45,8 +45,6 @@ public class ArtistInfoView extends FrameLayout {
 
     public static final int HEIGHT_DP = 196;
 
-    private int mSongPageNo;
-
     public ArtistInfoView(Context context) {
         this(context, null);
     }

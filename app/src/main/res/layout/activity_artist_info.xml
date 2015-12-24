@@ -4,13 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView
-        android:id="@+id/lv_songs_album"
+    <com.huwei.sweetmusicplayer.ui.widgets.VerticalScrollView
+        android:id="@+id/view_scroll_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.huwei.sweetmusicplayer.ui.views.ArtistInfoView_
+                android:id="@+id/view_artist_info"
+                android:layout_width="match_parent"
+                android:layout_height="196dp"/>
+
+            <com.huwei.sweetmusicplayer.ui.widgets.auto.CompatScrollViewAutoListView
+                android:id="@+id/lv_songs_album"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </com.huwei.sweetmusicplayer.ui.widgets.VerticalScrollView>
 
     <com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar
         android:id="@+id/gtoolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"/>
+        android:layout_height="?android:attr/actionBarSize" />
 </RelativeLayout>
