@@ -40,8 +40,7 @@ public class ArtistInfoActivity extends BaseActivity {
     public static final String ARTISTID = "artist_id";
     public static final String TINGUID = "tinguid";
 
-    @ViewById
-    CompatScrollViewAutoListView lv_songs_album;
+
     @ViewById
     GradientToolbar gtoolbar;
     @ViewById(R.id.actionbar)
@@ -51,8 +50,7 @@ public class ArtistInfoActivity extends BaseActivity {
     @ViewById(R.id.view_scroll_container)
     VerticalScrollView mScrollView;
 
-    private OnlineMusicAdapter mMusicAdapter;
-    private List<Song> mSongList = new ArrayList<>();
+
 
     private String ting_uid;
     private String artist_id;
@@ -98,36 +96,7 @@ public class ArtistInfoActivity extends BaseActivity {
     }
 
     void initListView() {
-        mMusicAdapter = new OnlineMusicAdapter(mContext, mSongList);
-        lv_songs_album.setAdapter(mMusicAdapter);
 
-        lv_songs_album.setRefreshEnable(false);
-        lv_songs_album.setOnLoadListener(new IPullRefershBase.OnLoadListener() {
-            @Override
-            public void onLoad() {
-                BaiduMusicUtil.getArtistSongList(ting_uid, artist_id, mSongPageNo, new HttpHandler() {
-                    @Override
-                    public void onSuccess(String response) {
-                        ArtistSongListResp resp = new Gson().fromJson(response, ArtistSongListResp.class);
-                        if (resp != null) {
-                            mSongPageNo++;
-                            mSongList.addAll(resp.songlist);
-                            mMusicAdapter.notifyDataSetChanged();
-
-                            lv_songs_album.onLoadComplete(resp.hasmore());
-                        }
-                    }
-                });
-            }
-        });
-        lv_songs_album.onLoad();
-        lv_songs_album.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(mSongList));
-                MusicManager.getInstance().play();
-            }
-        });
     }
 
     void getArtistInfo() {

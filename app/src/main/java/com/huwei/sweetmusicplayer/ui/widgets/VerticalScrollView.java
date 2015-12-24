@@ -78,8 +78,6 @@ public class VerticalScrollView extends ScrollView {
     }
 
     public interface OnScrollChangeListener {
-
         void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy);
-
     }
 }

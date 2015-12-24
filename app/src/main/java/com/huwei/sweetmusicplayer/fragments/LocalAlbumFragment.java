@@ -20,7 +20,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_albums)
-public class AlbumsFragment extends Fragment implements IMusicViewTypeContain{
+public class LocalAlbumFragment extends Fragment implements IMusicViewTypeContain{
     @ViewById
     RecyclerView rv_album;
 

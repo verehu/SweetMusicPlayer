@@ -207,7 +207,7 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
         musicFragment.setArguments(bundle);
         mPagerAdapter.addFragment(musicFragment);
         // add tab_artists
-        mPagerAdapter.addFragment(new ArtistsFragment());
+        mPagerAdapter.addFragment(new LocalArtistFragment());
         // add tab_albums
         mPagerAdapter.addFragment(new AlbumsFragment_());
         //add tab_online
