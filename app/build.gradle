@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 // This does not break the build when Android Studio is missing the JRebel for Android plugin.
-apply plugin: 'com.zeroturnaround.jrebel.android'
+//apply plugin: 'com.zeroturnaround.jrebel.android'
 apply plugin: 'android-apt'
 
 //tasks.withType(JavaCompile) {
 //    options.encoding ="GBK"
 //}
+
 
 android {
     compileSdkVersion 23
@@ -37,8 +38,14 @@ android {
 
 }
 
+repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+def AAVersion = '4.0-SNAPSHOT' // change this to your desired version, for example the latest stable: 3.3.2
 dependencies {
-    apt fileTree(dir: 'compile-libs', include: ['*.jar'])
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile project(':pull_to_refresh_library')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.mcxiaoke.volley:library:1.0.+'

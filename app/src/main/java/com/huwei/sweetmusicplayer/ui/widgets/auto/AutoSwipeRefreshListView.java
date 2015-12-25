@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
- * 带谷歌下拉刷新的AutoListView
+ * 甯﹁胺姝屼笅鎷夊埛鏂扮殑AutoListView
  * @author jerry
  * @date 2015-11-23
  */

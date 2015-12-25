@@ -1,7 +1,7 @@
 package com.huwei.sweetmusicplayer.ui.widgets.auto;
 
 /**
- * ˢ�½ӿ�
+ * 刷新接口
  * @author jerry
  * @date 2015-11-23
  */

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -17,10 +18,18 @@
             <com.huwei.sweetmusicplayer.ui.views.ArtistInfoView_
                 android:id="@+id/view_artist_info"
                 android:layout_width="match_parent"
-                android:layout_height="196dp"/>
+                android:layout_height="196dp" />
 
-            <com.huwei.sweetmusicplayer.ui.widgets.auto.CompatScrollViewAutoListView
-                android:id="@+id/lv_songs_album"
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary"
+                app:tabIndicatorColor="@color/primary_text_white"
+                app:tabTextColor="@color/secondary_text_white"/>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

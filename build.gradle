@@ -2,9 +2,10 @@
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url 'https://repos.zeroturnaround.com/nexus/content/repositories/zt-public-releases'
-        }
+        mavenCentral()
+//        maven {
+//            url 'https://repos.zeroturnaround.com/nexus/content/repositories/zt-public-releases'
+//        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
@@ -13,12 +14,13 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
 
-        classpath 'com.zeroturnaround.jrebel.android:jr-android-gradle:0.9+'
+//        classpath 'com.zeroturnaround.jrebel.android:jr-android-gradle:0.9+'
     }
 }
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
     }
 }
 
