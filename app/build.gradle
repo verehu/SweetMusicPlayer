@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.huwei.sweetmusicplayer"
-        minSdkVersion 11
+        minSdkVersion 8
         targetSdkVersion 23
     }
 
@@ -56,7 +56,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
-    compile 'com.android.support:palette-v7:23.1.1'
 }
 
 apt {

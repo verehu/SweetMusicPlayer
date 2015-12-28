@@ -79,10 +79,10 @@ public class ArtistInfoView extends FrameLayout {
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    iv_bg.setImageBitmap(loadedImage);
                     mBlurHelper.blurBitmap(loadedImage, 100, new BlurHelper.OnGenerateBitmapCallback() {
                         @Override
                         public void onGenerateBitmap(Bitmap bitmap) {
-                            iv_bg.setImageBitmap(bitmap);
                             gtoolbar.setToolbarBg(bitmap);
                         }
                     });

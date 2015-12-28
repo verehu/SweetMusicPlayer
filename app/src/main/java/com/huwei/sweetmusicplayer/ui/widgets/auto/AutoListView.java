@@ -137,7 +137,14 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
     }
 
     public void setRefreshEnable(boolean refreshEnable) {
-        this.refreshEnable = refreshEnable;
+        if (this.refreshEnable != refreshEnable) {
+            this.refreshEnable = refreshEnable;
+            if (refreshEnable) {
+                addHeaderView(header);
+            } else {
+                removeHeaderView(header);
+            }
+        }
     }
 
     // 这里的开启或者关闭加载更多，并不支持动态调整
@@ -191,9 +198,10 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         headerContentHeight = header.getMeasuredHeight();
         topPadding(-headerContentHeight);
 
-        //默认设置header无分割线
-        setHeaderDividersEnabled(false);
-        setDividerHeight(0);
+        //todo
+//        //默认设置header无分割线
+//        setHeaderDividersEnabled(false);
+//        setDividerHeight(0);
 
         this.addHeaderView(header);
         this.addFooterView(footer);
@@ -281,20 +289,6 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         this.scrollState = scrollState;
         ifNeedLoad(view, scrollState);
     }
-
-//    /**
-//     * 保证第二个HeaderView和第一个没有空隙   因为下拉刷新view占据了第一个view
-//     *
-//     * @param v
-//     */
-//    @Override
-//    public void addHeaderView(View v) {
-//        super.addHeaderView(v);
-//
-//        if (getHeaderViewsCount() == 2) {
-//            topPadding(v,0);
-//        }
-//    }
 
     // 根据listview滑动的状态判断是否需要加载更多
     private void ifNeedLoad(AbsListView view, int scrollState) {
