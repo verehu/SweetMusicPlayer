@@ -15,7 +15,7 @@ import com.huwei.sweetmusicplayer.baidumusic.resp.AlbumDetailResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.helper.BlurHelper;
-import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
+import com.huwei.sweetmusicplayer.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
@@ -59,7 +59,7 @@ public class AlbumInfoActivity extends BaseActivity {
 
     String albumId;
 
-    private OnlineMusicAdapter mMusicAdapter;
+    private SongAdapter mMusicAdapter;
     private List<Song> songList = new ArrayList<>();
 
     private ImageLoader mImageLoader;
@@ -113,7 +113,7 @@ public class AlbumInfoActivity extends BaseActivity {
         });
         lv_albuminfo.onLoad();
 
-        mMusicAdapter = new OnlineMusicAdapter(mContext, songList);
+        mMusicAdapter = new SongAdapter(mContext, songList);
         lv_albuminfo.setAdapter(mMusicAdapter);
         lv_albuminfo.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 
 import java.util.List;
 
@@ -19,12 +18,12 @@ import java.util.List;
  * @author jerry
  * @date 2015-11-20
  */
-public class OnlineMusicAdapter extends BaseAdapter {
+public class SongAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<Song> songList;
 
-    public OnlineMusicAdapter(Context context, List<Song> songList) {
+    public SongAdapter(Context context, List<Song> songList) {
         this.mContext = context;
         this.songList = songList;
     }

@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.ArtistSongListResp;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.ui.adapters.OnlineMusicAdapter;
+import com.huwei.sweetmusicplayer.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
@@ -26,7 +26,7 @@ import java.util.List;
 @EFragment
 public class AlbumListFragment extends BaseScrollTabFragment{
 
-    private OnlineMusicAdapter mMusicAdapter;
+    private SongAdapter mMusicAdapter;
     private List<Song> mSongList = new ArrayList<>();
 
     @FragmentArg
@@ -36,7 +36,7 @@ public class AlbumListFragment extends BaseScrollTabFragment{
 
     @AfterViews
     void init() {
-        mMusicAdapter = new OnlineMusicAdapter(mAct, mSongList);
+        mMusicAdapter = new SongAdapter(mAct, mSongList);
         mAutoListView.setAdapter(mMusicAdapter);
 
         mAutoListView.setRefreshEnable(false);

@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
-import com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter;
+import com.huwei.sweetmusicplayer.ui.adapters.LocAlbumAdapter;
 import com.huwei.sweetmusicplayer.ui.adapters.RecyclerViewAdapterBase;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
 
@@ -26,7 +26,7 @@ public class LocalArtistFragment extends Fragment implements IMusicViewTypeConta
 	RecyclerView rv_album;
 
 	@Bean
-	AlbumAdapter adapter;
+    LocAlbumAdapter adapter;
 
 	FragmentManager fragmentManager;
 
