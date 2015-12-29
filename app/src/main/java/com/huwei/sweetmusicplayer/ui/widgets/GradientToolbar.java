@@ -89,21 +89,12 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
     }
 
     /**
-     * 绑定ListView
+     * 绑定ListView  直接调用adjustHeaderViewAndTitle()
      */
+    @Deprecated
     public void bindListView(ListView view) {
         if (view != null) {
             view.setOnScrollListener(this);
-        }
-    }
-
-    /**
-     * 绑定ScrollView
-     * @param view
-     */
-    public void bindScrollView(VerticalScrollView view) {
-        if (view != null) {
-            view.setOnScrollChangeListener(this);
         }
     }
 
@@ -117,7 +108,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
         adjustHeaderViewAndTitle();
     }
 
-    private void adjustHeaderViewAndTitle() {
+    public void adjustHeaderViewAndTitle() {
         if (mHeaderView != null) {
             mGradientHeight = mHeaderView.getMeasuredHeight() - getMeasuredHeight();
             if (mGradientHeight > 0 && mIv_toolbarBg != null) {

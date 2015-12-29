@@ -3,20 +3,20 @@ package com.huwei.sweetmusicplayer;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+
 
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.baidumusic.po.ArtistInfo;
 import com.huwei.sweetmusicplayer.fragments.AlbumListFragment_;
 import com.huwei.sweetmusicplayer.fragments.BaseScrollTabFragment;
 import com.huwei.sweetmusicplayer.fragments.SongListFragment_;
+import com.huwei.sweetmusicplayer.interfaces.IAdjustListView;
 import com.huwei.sweetmusicplayer.interfaces.IListViewScroll;
 import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter;
 import com.huwei.sweetmusicplayer.ui.views.ArtistInfoView;
@@ -84,7 +84,7 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
         initMeasure();
         initViewPager();
         intTab();
-        initBinding();
+        initGToolBar();
         getArtistInfo();
     }
 
@@ -104,7 +104,9 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
 
     void initMeasure() {
         mHeaderFlow.measure(View.MeasureSpec.makeMeasureSpec(SweetApplication.mScreenWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        mLimitHeight = mArtistInfoView.getMeasuredHeight();
+        gtoolbar.measure(View.MeasureSpec.makeMeasureSpec(SweetApplication.mScreenWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        mLimitHeight = mHeaderFlow.getMeasuredHeight() - gtoolbar.getMeasuredHeight();
+        Log.i(TAG, "mHeaderFlow:" + mHeaderFlow.getMeasuredHeight() + " gtoolbar.getMeasuredHeight():"+gtoolbar.getMeasuredHeight()+"   mLimitHeight:" + mLimitHeight);
     }
 
     void initViewPager() {
@@ -127,12 +129,11 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
     }
 
     void intTab() {
-        mTab.setTabsFromPagerAdapter(mPagerAdapter);
+        mTab.setupWithViewPager(mViewPager);
     }
 
-    void initBinding() {
+    void initGToolBar() {
         gtoolbar.bindHeaderView(mArtistInfoView);
-//        mScrollView.bindAutoListView(lv_songs_album);
     }
 
 
@@ -150,6 +151,10 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
                 if (mTabAlbum != null) {
                     mTabAlbum.setText("专辑(" + artistInfo.albums_total + ")");
                 }
+
+                if (artistInfo != null) {
+                    gtoolbar.setGradientTitle(artistInfo.name);
+                }
             }
         });
     }
@@ -158,19 +163,22 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
     void onPageSelected(int position) {
         // Something Here
         Log.i(TAG, "viewPager position:" + position);
+
+        IAdjustListView iAdjustListView = (IAdjustListView) mPagerAdapter.getItem(position);
+        iAdjustListView.adjustListView(getOffestY());
     }
 
     @Override
     public void scrollY(int scrollY) {
-        Log.i(TAG, "locY:" + scrollY);
-
         int topY = mHeaderFlow.getTop();
+        Log.i(TAG, "-scrollY:" + scrollY + "    topY:"+topY);
         ViewHelper.setTranslationY(mHeaderFlow, -scrollY - topY);
+        gtoolbar.adjustHeaderViewAndTitle();
     }
 
     public int getOffestY() {
-        int paddingHeight = (int) (mHeaderFlow.getTop() + mHeaderFlow.getMeasuredHeight());
-        Log.i(TAG, "paddingHeight:" + paddingHeight + "getTop:" + mHeaderFlow.getTop());
+        int paddingHeight = (int) (mHeaderFlow.getTranslationY() + mHeaderFlow.getMeasuredHeight());
+        Log.i(TAG, "paddingHeight:" + paddingHeight + "mHeaderFlow.getTranslationY():" + mHeaderFlow.getTranslationY());
         return paddingHeight;
     }
 }

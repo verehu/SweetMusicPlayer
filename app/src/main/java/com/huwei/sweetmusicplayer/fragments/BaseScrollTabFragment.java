@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 
-import com.huwei.sweetmusicplayer.ArtistInfoActivity;
 import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
-import com.huwei.sweetmusicplayer.interfaces.IGetBindAutoListView;
+import com.huwei.sweetmusicplayer.interfaces.IAdjustListView;
 import com.huwei.sweetmusicplayer.interfaces.IListViewScroll;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 
@@ -19,7 +18,7 @@ import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
  * @author jerry
  * @date 2015-12-28
  */
-public class BaseScrollTabFragment extends BaseFragment implements IGetBindAutoListView {
+public class BaseScrollTabFragment extends BaseFragment implements IAdjustListView {
     protected AutoListView mAutoListView;
     protected IListViewScroll mIListViewScroll;
     protected int mPageNo;
@@ -57,8 +56,8 @@ public class BaseScrollTabFragment extends BaseFragment implements IGetBindAutoL
         blankView.setLayoutParams(layoutParams);
 
         mAutoListView.addHeaderView(blankView);
-        //设置滚动的位置
-        mAutoListView.setSelectionFromTop(1, ((ArtistInfoActivity)mAct).getOffestY());
+//        //设置滚动的位置
+//        mAutoListView.setSelectionFromTop(1, ((ArtistInfoActivity)mAct).getOffestY());
 
         mAutoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -78,11 +77,11 @@ public class BaseScrollTabFragment extends BaseFragment implements IGetBindAutoL
                         } else {
                             scrollY = -child0.getTop() + (firstVisibleItem - 1) * child0.getHeight() + mPaddingTopHeight;
                         }
-                        Log.i(TAG, "scrollY:" + scrollY);
+
                         if (scrollY > mlowLimitHeight) {
                             scrollY = mlowLimitHeight;
                         }
-
+                        Log.i(TAG, "scrollY:" + scrollY);
                         mIListViewScroll.scrollY(scrollY);
 
                         Log.i(TAG, "child0.getTop():" + child0.getTop() + "flowHeight:" + mPaddingTopHeight);
@@ -93,10 +92,10 @@ public class BaseScrollTabFragment extends BaseFragment implements IGetBindAutoL
         return mAutoListView;
     }
 
-
-
     @Override
-    public AutoListView getAutoListView() {
-        return mAutoListView;
+    public void adjustListView(int offsetY) {
+        if (mAutoListView != null) {
+            mAutoListView.setSelectionFromTop(mAutoListView.getHeaderViewsCount(),offsetY);
+        }
     }
 }
