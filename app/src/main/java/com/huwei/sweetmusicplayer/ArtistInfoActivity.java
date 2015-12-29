@@ -105,8 +105,8 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
     void initMeasure() {
         mHeaderFlow.measure(View.MeasureSpec.makeMeasureSpec(SweetApplication.mScreenWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         gtoolbar.measure(View.MeasureSpec.makeMeasureSpec(SweetApplication.mScreenWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        mLimitHeight = mHeaderFlow.getMeasuredHeight() - gtoolbar.getMeasuredHeight();
-        Log.i(TAG, "mHeaderFlow:" + mHeaderFlow.getMeasuredHeight() + " gtoolbar.getMeasuredHeight():"+gtoolbar.getMeasuredHeight()+"   mLimitHeight:" + mLimitHeight);
+        mLimitHeight = mArtistInfoView.getMeasuredHeight() - gtoolbar.getMeasuredHeight();
+        Log.i(TAG, "mArtistInfoView:" + mArtistInfoView.getMeasuredHeight() + " gtoolbar.getMeasuredHeight():" + gtoolbar.getMeasuredHeight() + "   mLimitHeight:" + mLimitHeight);
     }
 
     void initViewPager() {
@@ -170,9 +170,11 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
 
     @Override
     public void scrollY(int scrollY) {
-        int topY = mHeaderFlow.getTop();
-        Log.i(TAG, "-scrollY:" + scrollY + "    topY:"+topY);
-        ViewHelper.setTranslationY(mHeaderFlow, -scrollY - topY);
+        float translationY = mHeaderFlow.getTranslationY();
+        Log.i(TAG, "-scrollY:" + scrollY + "    translationY:" + translationY);
+        if (translationY != -scrollY) {
+            ViewHelper.setTranslationY(mHeaderFlow, -scrollY);
+        }
         gtoolbar.adjustHeaderViewAndTitle();
     }
 

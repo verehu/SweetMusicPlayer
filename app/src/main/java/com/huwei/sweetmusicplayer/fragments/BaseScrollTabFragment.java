@@ -1,5 +1,6 @@
 package com.huwei.sweetmusicplayer.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -56,8 +57,6 @@ public class BaseScrollTabFragment extends BaseFragment implements IAdjustListVi
         blankView.setLayoutParams(layoutParams);
 
         mAutoListView.addHeaderView(blankView);
-//        //设置滚动的位置
-//        mAutoListView.setSelectionFromTop(1, ((ArtistInfoActivity)mAct).getOffestY());
 
         mAutoListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -92,6 +91,7 @@ public class BaseScrollTabFragment extends BaseFragment implements IAdjustListVi
         return mAutoListView;
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void adjustListView(int offsetY) {
         if (mAutoListView != null) {

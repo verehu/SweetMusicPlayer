@@ -81,6 +81,7 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
     private OnLoadListener onLoadListener;
     private AdapterView.OnItemClickListener mOnItemClickListener;
     private AdapterView.OnItemClickListener mOnItemNoneClickListener;
+    private OnScrollListener mExtraOnScrollListener;
 
     public AutoListView(Context context) {
         super(context);
@@ -105,6 +106,11 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         loading.setVisibility(View.VISIBLE);
         more.setVisibility(View.VISIBLE);
         noData.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setOnScrollListener(OnScrollListener l) {
+        this.mExtraOnScrollListener = l;
     }
 
     // 下拉刷新监听
@@ -205,7 +211,7 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
 
         this.addHeaderView(header);
         this.addFooterView(footer);
-        this.setOnScrollListener(this);
+        super.setOnScrollListener(this);
         super.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -281,6 +287,10 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
                          int visibleItemCount, int totalItemCount) {
         Log.i(TAG, "firstVisibleItem:" + firstVisibleItem + "state:" + state);
         this.firstVisibleItem = firstVisibleItem;
+
+        if (mExtraOnScrollListener != null) {
+            mExtraOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+        }
     }
 
     @Override
@@ -288,6 +298,10 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         Log.i(TAG, "onScrollStateChanged:" + scrollState);
         this.scrollState = scrollState;
         ifNeedLoad(view, scrollState);
+
+        if (mExtraOnScrollListener != null) {
+            mExtraOnScrollListener.onScrollStateChanged(view, scrollState);
+        }
     }
 
     // 根据listview滑动的状态判断是否需要加载更多
