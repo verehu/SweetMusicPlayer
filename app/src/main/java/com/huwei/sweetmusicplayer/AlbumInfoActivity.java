@@ -1,5 +1,7 @@
 package com.huwei.sweetmusicplayer;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -122,6 +124,12 @@ public class AlbumInfoActivity extends BaseActivity {
                 MusicManager.getInstance().play();
             }
         });
+    }
+
+    public static Intent getStartActInent(Context from, String albumId) {
+        Intent intent = new Intent(from, AlbumInfoActivity_.class);
+        intent.putExtra(IntentExtra.EXTRA_ALBUM_ID, albumId);
+        return intent;
     }
 
     /**

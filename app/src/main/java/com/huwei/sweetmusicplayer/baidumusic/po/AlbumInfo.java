@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * 专辑信息
+ * 专辑详细信息
  *
  * @author jayce
  * @date 2015/10/10

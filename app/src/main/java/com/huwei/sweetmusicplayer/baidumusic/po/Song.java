@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 歌曲简略信息
  * @author jayce
  * @date 2015/10/20
  */

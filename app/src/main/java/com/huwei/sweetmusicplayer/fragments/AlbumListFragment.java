@@ -4,10 +4,10 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.google.gson.Gson;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.baidumusic.resp.ArtistSongListResp;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.ui.adapters.SongAdapter;
+import com.huwei.sweetmusicplayer.AlbumInfoActivity;
+import com.huwei.sweetmusicplayer.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.baidumusic.resp.ArtistAlbumListResp;
+import com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
@@ -24,10 +24,10 @@ import java.util.List;
  * @date 2015/12/24
  */
 @EFragment
-public class AlbumListFragment extends BaseScrollTabFragment{
+public class AlbumListFragment extends BaseScrollTabFragment {
 
-    private SongAdapter mMusicAdapter;
-    private List<Song> mSongList = new ArrayList<>();
+    private AlbumAdapter mAlbumAdapter;
+    private List<Album> mAlbumList = new ArrayList<>();
 
     @FragmentArg
     String ting_uid;
@@ -36,21 +36,21 @@ public class AlbumListFragment extends BaseScrollTabFragment{
 
     @AfterViews
     void init() {
-        mMusicAdapter = new SongAdapter(mAct, mSongList);
-        mAutoListView.setAdapter(mMusicAdapter);
+        mAlbumAdapter = new AlbumAdapter(mAct, mAlbumList);
+        mAutoListView.setAdapter(mAlbumAdapter);
 
         mAutoListView.setRefreshEnable(false);
         mAutoListView.setOnLoadListener(new IPullRefershBase.OnLoadListener() {
             @Override
             public void onLoad() {
-                BaiduMusicUtil.getArtistSongList(ting_uid, artist_id, 2, new HttpHandler() {
+                BaiduMusicUtil.getAritistAlbumList(ting_uid, artist_id, mPageNo, new HttpHandler() {
                     @Override
                     public void onSuccess(String response) {
-                        ArtistSongListResp resp = new Gson().fromJson(response, ArtistSongListResp.class);
-                        if (resp != null) {
+                        ArtistAlbumListResp resp = new Gson().fromJson(response, ArtistAlbumListResp.class);
+                        if (resp != null && resp.albumlist!=null) {
                             mPageNo++;
-                            mSongList.addAll(resp.songlist);
-                            mMusicAdapter.notifyDataSetChanged();
+                            mAlbumList.addAll(resp.albumlist);
+                            mAlbumAdapter.notifyDataSetChanged();
 
                             mAutoListView.onLoadComplete(resp.hasmore());
                         }
@@ -62,8 +62,10 @@ public class AlbumListFragment extends BaseScrollTabFragment{
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(mSongList));
-                MusicManager.getInstance().play();
+                Album album = mAlbumList.get(position);
+                if (album != null) {
+                    startActivity(AlbumInfoActivity.getStartActInent(mAct, album.album_id));
+                }
             }
         });
     }

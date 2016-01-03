@@ -13,7 +13,7 @@ import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import java.util.List;
 
 /**
- * 在线音乐的适配器
+ * 在线音乐列表的适配器
  *
  * @author jerry
  * @date 2015-11-20
@@ -59,15 +59,6 @@ public class SongAdapter extends BaseAdapter {
         viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_song.setText(song.title);
         viewHolder.tv_artist.setText(song.author);
-
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(songList));
-//                MusicManager.getInstance().play();
-//            }
-//        });
-
         return convertView;
     }
 

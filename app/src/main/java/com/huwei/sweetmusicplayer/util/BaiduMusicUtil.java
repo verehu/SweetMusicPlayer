@@ -142,6 +142,16 @@ public class BaiduMusicUtil implements IUrl {
         HttpUtil.get(BAIDU_MUSIC, params, httpHandler, true);
     }
 
+    public static void getAritistAlbumList(String ting_uid, String artist_id, int pageNo, HttpHandler httpHandler){
+        HttpParams params = new HttpParams();
+        params.add("tinguid", ting_uid);
+        params.add("artistid", artist_id);
+        params.add("offset", pageNo * PAGESIZE);
+        params.add("limits",PAGESIZE);
+        params.add("method", GET_ARTISTALUBMLIST);
+        HttpUtil.get(BAIDU_MUSIC, params, httpHandler, true);
+    }
+
     /**
      * 通过歌曲Id获取歌曲下载地址  同在线播放的地址
      *

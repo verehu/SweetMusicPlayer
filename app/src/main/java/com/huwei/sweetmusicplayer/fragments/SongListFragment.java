@@ -49,7 +49,7 @@ public class SongListFragment extends BaseScrollTabFragment  {
                     @Override
                     public void onSuccess(String response) {
                         ArtistSongListResp resp = new Gson().fromJson(response, ArtistSongListResp.class);
-                        if (resp != null) {
+                        if (resp != null && resp.songlist!=null) {
                             mPageNo++;
                             mSongList.addAll(resp.songlist);
                             mMusicAdapter.notifyDataSetChanged();
