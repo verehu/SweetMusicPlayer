@@ -12,5 +12,5 @@
     <com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar
         android:id="@+id/gtoolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"/>
+        android:layout_height="attr/actionBarSize"/>
 </RelativeLayout>

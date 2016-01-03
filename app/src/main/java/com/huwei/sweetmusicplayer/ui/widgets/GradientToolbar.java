@@ -63,7 +63,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
     }
 
     void initData() {
-        mToolbar.setTitle("专辑");
+
     }
 
     /**
