@@ -1,5 +1,8 @@
 package com.huwei.sweetmusicplayer.baidumusic.po;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 
 /**
@@ -7,7 +10,7 @@ import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
  * @author jayce
  * @date 2015/10/20
  */
-public class Album implements IQueryReuslt{
+public class Album implements IQueryReuslt, Parcelable {
 
 
     /**
@@ -48,17 +51,17 @@ public class Album implements IQueryReuslt{
     public int songs_total;
     public String info;
     public String styles;
-    public Object style_id;
+    public String style_id;
     public String publishtime;
     public String artist_ting_uid;
-    public Object all_artist_ting_uid;
-    public Object gender;
-    public Object area;
+    public String all_artist_ting_uid;
+    public String gender;
+    public String area;
     public String pic_small;
     public String pic_big;
     public int hot;
-    public Object favorites_num;
-    public Object recommend_num;
+    public int favorites_num;
+    public int recommend_num;
     public String artist_id;
     public String all_artist_id;
     public String pic_radio;
@@ -73,4 +76,79 @@ public class Album implements IQueryReuslt{
     public QueryType getSearchResultType() {
         return QueryType.Album;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.album_id);
+        dest.writeString(this.author);
+        dest.writeString(this.title);
+        dest.writeString(this.publishcompany);
+        dest.writeString(this.prodcompany);
+        dest.writeString(this.country);
+        dest.writeString(this.language);
+        dest.writeInt(this.songs_total);
+        dest.writeString(this.info);
+        dest.writeString(this.styles);
+        dest.writeString(this.style_id);
+        dest.writeString(this.publishtime);
+        dest.writeString(this.artist_ting_uid);
+        dest.writeString(this.all_artist_ting_uid);
+        dest.writeString(this.gender);
+        dest.writeString(this.area);
+        dest.writeString(this.pic_small);
+        dest.writeString(this.pic_big);
+        dest.writeInt(this.hot);
+        dest.writeInt(this.favorites_num);
+        dest.writeInt(this.recommend_num);
+        dest.writeString(this.artist_id);
+        dest.writeString(this.all_artist_id);
+        dest.writeString(this.pic_radio);
+        dest.writeString(this.pic_s180);
+    }
+
+    public Album() {
+    }
+
+    protected Album(Parcel in) {
+        this.album_id = in.readString();
+        this.author = in.readString();
+        this.title = in.readString();
+        this.publishcompany = in.readString();
+        this.prodcompany = in.readString();
+        this.country = in.readString();
+        this.language = in.readString();
+        this.songs_total = in.readInt();
+        this.info = in.readString();
+        this.styles = in.readString();
+        this.style_id = in.readString();
+        this.publishtime = in.readString();
+        this.artist_ting_uid = in.readString();
+        this.all_artist_ting_uid = in.readString();
+        this.gender = in.readString();
+        this.area = in.readString();
+        this.pic_small = in.readString();
+        this.pic_big = in.readString();
+        this.hot = in.readInt();
+        this.favorites_num = in.readInt();
+        this.recommend_num = in.readInt();
+        this.artist_id = in.readString();
+        this.all_artist_id = in.readString();
+        this.pic_radio = in.readString();
+        this.pic_s180 = in.readString();
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        public Album createFromParcel(Parcel source) {
+            return new Album(source);
+        }
+
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
 }

@@ -20,7 +20,7 @@ public class QueryResult {
 
     public String query;
     public String syn_words;
-    public int rqt_type;
+    public int rqt_type;    //专辑3 歌手2 歌曲1
     public Song_info song_info;
     public Album_info album_info;
     public Artist_info artist_info;
