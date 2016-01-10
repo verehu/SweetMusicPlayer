@@ -34,6 +34,7 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Lrc;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.po.SongSug;
 import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
 import com.huwei.sweetmusicplayer.comparator.LrcComparator;
@@ -46,7 +47,6 @@ import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter;
 import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener;
 import com.huwei.sweetmusicplayer.ui.widgets.LrcView;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
-import com.huwei.sweetmusicplayer.util.BitmapUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 import com.huwei.sweetmusicplayer.util.LrcUtil;
 import com.huwei.sweetmusicplayer.util.TimeUtil;
@@ -114,6 +114,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         intentFilter.addAction(CURRENT_UPDATE);
         intentFilter.addAction(UPTATE_MUISC_QUEUE);
         intentFilter.addAction(BUFFER_UPDATE);
+        intentFilter.addAction(PLAY_STATUS_UPDATE);
     }
 
     @Override
@@ -184,20 +185,6 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
         playpage_duration_tv.setText(song.getDurationStr());
         playpage_progressbar.setMax(song.getDuration());
-
-        iv_playing_bg.setImageBitmap(null);
-        //加载模糊背景图
-        song.loadArtPic(AbstractMusic.PicSizeType.HUGE, new AbstractMusic.OnLoadListener() {
-            @Override
-            public void onSuccessLoad(Bitmap bitmap) {
-                mBlurHelper.blurBitmap(bitmap, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {
-                    @Override
-                    public void onGenerateBitmap(Bitmap bitmap) {
-                        iv_playing_bg.setImageBitmap(bitmap);
-                    }
-                });
-            }
-        });
     }
 
 
@@ -284,14 +271,17 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
             String action = intent.getAction();
 
             switch (action) {
+                case PLAY_STATUS_UPDATE:
+                    boolean isPlaying = intent.getBooleanExtra("isPlaying", false);
+                    playpage_play_btn.setChecked(!isPlaying);
+                    break;
                 case PLAYBAR_UPDATE:
-                    playpage_play_btn.setChecked(MusicManager.getInstance().isPlaying());
-
                     boolean isNewPlayMusic = intent.getBooleanExtra("isNewPlayMusic", false);
-                    if (isNewPlayMusic) {
-                        UpdateSongInfoView();
+                    if(isNewPlayMusic){
+                        initMusicView();
                         loadLrcView();
                     }
+                    UpdateSongInfoView();
                     break;
                 case CURRENT_UPDATE:
                     int currentTime = intent.getIntExtra("currentTime", 0);
@@ -312,10 +302,29 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
     };
 
+    void initMusicView(){
+        final AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
+        iv_playing_bg.setImageBitmap(null);
+        //加载模糊背景图
+        song.loadArtPic(AbstractMusic.PicSizeType.HUGE, new AbstractMusic.OnLoadListener() {
+            @Override
+            public void onSuccessLoad(Bitmap bitmap) {
+                mBlurHelper.blurBitmap(bitmap, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {
+                    @Override
+                    public void onGenerateBitmap(Bitmap bitmap) {
+                        iv_playing_bg.setImageBitmap(bitmap);
+                    }
+                });
+            }
+        });
+    }
 
     void loadLrcView() {
         AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
         List<LrcContent> lrcLists = null;
+        if(song instanceof Song){
+            loadLrcBySongId((Song) song);
+        }
         lrcLists = LrcUtil.loadLrc(song);
         playpage_lrcview.setLrcLists(lrcLists);
         playpage_lrcview.setLrcState(lrcLists.size() == 0 ? READ_LOC_FAIL : READ_LOC_OK);
@@ -457,5 +466,38 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
                 }
             }
         });
+    }
+
+    //加载网络歌曲歌词
+    private void loadLrcBySongId(final Song song){
+        if(song!=null) {
+            BaiduMusicUtil.queryLrc(song.song_id, new HttpHandler(getActivity()) {
+                @Override
+                public void onSuccess(String response) {
+                    Lrc lrc = new Gson().fromJson(response, Lrc.class);
+
+                    if (!lrc.isValid()) {
+                        playpage_lrcview.setLrcState(QUERY_ONLINE_NULL);
+                        return;
+                    }
+
+                    List<LrcContent> lrcLists = LrcUtil.parseLrcStr(lrc.getLrcContent());
+                    // 按时间排序
+                    Collections.sort(lrcLists, new LrcComparator());
+                    playpage_lrcview.setLrcLists(lrcLists);
+                    playpage_lrcview.setLrcState(lrcLists.size() == 0 ? QUERY_ONLINE_NULL : QUERY_ONLINE_OK);
+
+                    if (lrcLists.size() != 0) {
+                        LrcUtil.writeLrcToLoc(song.getTitle(), song.getArtist(), lrc.getLrcContent());
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    super.onErrorResponse(error);
+                    playpage_lrcview.setLrcState(QUERY_ONLINE_FAIL);
+                }
+            });
+        }
     }
 }

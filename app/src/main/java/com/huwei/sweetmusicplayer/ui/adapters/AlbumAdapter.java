@@ -62,6 +62,7 @@ public class AlbumAdapter extends BaseAdapter {
         final Album album = (Album) getItem(position);
         viewHolder = (ViewHolder) convertView.getTag();
 
+        //todo 设置默认图片
         imageLoader.displayImage(album.pic_small, viewHolder.iv_album);
 
         viewHolder.tv_album.setText(Html.fromHtml(mContext.getString(R.string.tab_albums) + ":" + album.title));

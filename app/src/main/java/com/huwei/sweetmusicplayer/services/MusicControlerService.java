@@ -167,20 +167,15 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             reViews.setViewVisibility(R.id.button_pause_notification_play, View.VISIBLE);
 
             mNoticationManager.notify(NT_PLAYBAR_ID,mNotification);
-
+            updatePlayStaute(true);
 
             //准备播放源，准备后播放
             AbstractMusic music = mBinder.getNowPlayingSong();
+
             Log.i(TAG, "play()->" + music.getTitle());
             if (!mp.isPlaying()) {
                 Log.i(TAG, "Enterplay()");
                 mp.start();
-                Intent intent = new Intent(PLAYBAR_UPDATE);
-                intent.putExtra("isNewPlayMusic", false);
-
-                music = mBinder.getNowPlayingSong();
-                intent.putExtra("newMusic", music);
-                sendBroadcast(intent);
             }
         }
 
@@ -192,8 +187,9 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             mNoticationManager.notify(NT_PLAYBAR_ID,mNotification);
 
             mp.pause();
-            updatePlayBar(false);
             handler.removeMessages(MSG_CURRENT);
+
+            updatePlayStaute(false);
         }
 
         @Override
@@ -330,13 +326,13 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         Intent intent = new Intent(PLAYBAR_UPDATE);
         intent.putExtra("isNewPlayMusic", isNewPlayMusic);
 
-        AbstractMusic music = null;
-        try {
-            music = mBinder.getNowPlayingSong();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        intent.putExtra("newMusic", music);
+        sendBroadcast(intent);
+    }
+
+    private void updatePlayStaute(boolean isPlaying){
+        Intent intent = new Intent(PLAY_STATUS_UPDATE);
+        intent.putExtra("isPlaying", isPlaying);
+
         sendBroadcast(intent);
     }
 
@@ -346,9 +342,8 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
      * @param music
      */
     private void prepareSong(AbstractMusic music) {
-        updatePlayBar(true);
-
         showMusicPlayerNotification(music);
+        updatePlayBar(true);
 
         //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
         if (music.getType() == AbstractMusic.MusicType.Online) {
@@ -366,7 +361,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
                             Log.i(TAG,"song hasGetDetailInfo:"+song);
 
-                            updatePlayBar(true);
+                            updatePlayBar(false);
 
                             Message msg = Message.obtain();
                             msg.what = MSG_PLAY;
