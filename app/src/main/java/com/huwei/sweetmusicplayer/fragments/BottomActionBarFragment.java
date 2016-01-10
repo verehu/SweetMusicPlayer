@@ -96,7 +96,7 @@ public class BottomActionBarFragment extends Fragment implements IContain {
             switch (action) {
                 case PLAY_STATUS_UPDATE:
                     boolean isPlaying = intent.getBooleanExtra("isPlaying", false);
-                    btn_play.setChecked(!isPlaying);
+                    btn_play.setChecked(MusicManager.getInstance().isPlaying());
                     break;
                 case PLAYBAR_UPDATE:
                     pro_music.setMax(MusicManager.getInstance().getNowPlayingSong().getDuration());

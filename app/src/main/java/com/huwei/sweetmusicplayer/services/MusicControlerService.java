@@ -167,7 +167,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             reViews.setViewVisibility(R.id.button_pause_notification_play, View.VISIBLE);
 
             mNoticationManager.notify(NT_PLAYBAR_ID,mNotification);
-            updatePlayStaute(true);
+
 
             //准备播放源，准备后播放
             AbstractMusic music = mBinder.getNowPlayingSong();
@@ -176,6 +176,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             if (!mp.isPlaying()) {
                 Log.i(TAG, "Enterplay()");
                 mp.start();
+                updatePlayStaute(true);
             }
         }
 
@@ -343,7 +344,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
      */
     private void prepareSong(AbstractMusic music) {
         showMusicPlayerNotification(music);
-        updatePlayBar(true);
+        updatePlayBar(!music.isOnlineMusic());
 
         //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
         if (music.getType() == AbstractMusic.MusicType.Online) {
@@ -361,7 +362,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
                             Log.i(TAG,"song hasGetDetailInfo:"+song);
 
-                            updatePlayBar(false);
+                            updatePlayBar(true);
 
                             Message msg = Message.obtain();
                             msg.what = MSG_PLAY;

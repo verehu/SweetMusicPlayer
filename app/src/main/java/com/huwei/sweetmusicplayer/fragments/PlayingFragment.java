@@ -273,13 +273,13 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
             switch (action) {
                 case PLAY_STATUS_UPDATE:
                     boolean isPlaying = intent.getBooleanExtra("isPlaying", false);
-                    playpage_play_btn.setChecked(!isPlaying);
+                    playpage_play_btn.setChecked(MusicManager.getInstance().isPlaying());
                     break;
                 case PLAYBAR_UPDATE:
                     boolean isNewPlayMusic = intent.getBooleanExtra("isNewPlayMusic", false);
                     if(isNewPlayMusic){
-                        initMusicView();
                         loadLrcView();
+                        initMusicView();
                     }
                     UpdateSongInfoView();
                     break;
