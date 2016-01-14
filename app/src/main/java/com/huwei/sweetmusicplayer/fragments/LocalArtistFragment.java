@@ -19,6 +19,9 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * 本地音乐的Artist列表页面
+ */
 @EFragment(R.layout.fragment_artists)
 public class LocalArtistFragment extends Fragment implements IMusicViewTypeContain{
 
@@ -34,7 +37,7 @@ public class LocalArtistFragment extends Fragment implements IMusicViewTypeConta
 	void init(){
 		fragmentManager=getActivity().getSupportFragmentManager();
 
-		adapter.setData(MusicUtils.queryAlbum(getActivity()));
+		adapter.setData(MusicUtils.queryAlbumList(getActivity()));
 		rv_album.setLayoutManager(new LinearLayoutManager(getActivity()));
 		rv_album.setAdapter(adapter);
 		adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {

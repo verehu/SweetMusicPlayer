@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
@@ -17,9 +16,11 @@ import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.dao.AlbumInfoDao;
+import com.huwei.sweetmusicplayer.dao.ArtistInfoDao;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
 import com.huwei.sweetmusicplayer.dao.MusicInfoDao;
 import com.huwei.sweetmusicplayer.models.AlbumInfo;
+import com.huwei.sweetmusicplayer.models.ArtistInfo;
 import com.huwei.sweetmusicplayer.models.MusicInfo;
 
 import java.io.IOException;
@@ -50,8 +51,9 @@ public class MusicUtils implements IContain {
             MediaStore.Audio.Albums.NUMBER_OF_SONGS, MediaStore.Audio.Albums._ID, MediaStore.Audio.Albums.ALBUM_ART, MediaStore.Audio.Albums.ARTIST};
 
     private static String[] proj_artist = new String[]{
+            MediaStore.Audio.Artists._ID,
             MediaStore.Audio.Artists.ARTIST,
-            MediaStore.Audio.Artists.NUMBER_OF_TRACKS};
+            MediaStore.Audio.Artists.NUMBER_OF_ALBUMS};
 
     public static final int THUMBNAIL_LEN_DP = 56;
 
@@ -106,7 +108,7 @@ public class MusicUtils implements IContain {
      * @param context
      * @return
      */
-    public static List<AlbumInfo> queryAlbum(Context context) {
+    public static List<AlbumInfo> queryAlbumList(Context context) {
         DaoSession session = SweetApplication.getDaoSession();
         AlbumInfoDao albumInfoDao = session.getAlbumInfoDao();
 
@@ -135,6 +137,43 @@ public class MusicUtils implements IContain {
             }
 
             return albumInfoList;
+        }
+    }
+
+    /**
+     * 查询歌手列表
+     * @param context
+     * @return
+     */
+    public static List<ArtistInfo> queryArtistList(Context context){
+        DaoSession session = SweetApplication.getDaoSession();
+        ArtistInfoDao artistInfoDao = session.getArtistInfoDao();
+
+        Uri uri = MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI;
+        ContentResolver cr = context.getContentResolver();
+        StringBuilder where = new StringBuilder(MediaStore.Audio.Artists._ID
+                + " in (select distinct " + MediaStore.Audio.Media.ARTIST_ID
+                + " from audio_meta where (1=1 ");
+
+        if (Environment.isFilterSize(context)) {
+            where.append(" and " + MediaStore.Audio.Media.SIZE + " > " + FILTER_SIZE);
+        }
+        if (Environment.isFilterDuration(context)) {
+            where.append(" and " + MediaStore.Audio.Media.DURATION + " > " + FILTER_DURATION);
+        }
+        where.append("))");
+
+        if (artistInfoDao.count() != 0) {
+            return artistInfoDao.loadAll();
+        } else {
+            //TODO 内置存储卡也需要扫描
+            List<ArtistInfo> artistInfoList = getArtistList(cr.query(uri, proj_album,
+                    where.toString(), null, MediaStore.Audio.Media.ALBUM_KEY));
+            for (ArtistInfo artistInfo : artistInfoList) {
+                artistInfoDao.insert(artistInfo);
+            }
+
+            return artistInfoList;
         }
     }
 
@@ -271,7 +310,19 @@ public class MusicUtils implements IContain {
         return albumInfoList;
     }
 
-//    public static List getArtist(Cursor cursor){
-//        MediaStore.Audio.Artists.ARTIST;
-//    }
+
+    public static List getArtistList(Cursor cursor){
+       if(cursor == null){
+           return null;
+       }
+
+        List<ArtistInfo> artistInfoList = new ArrayList<>();
+        while(cursor.moveToNext()){
+            ArtistInfo artistInfo = new ArtistInfo();
+            artistInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Artists._ID)));
+            artistInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST)));
+        }
+
+        return artistInfoList;
+    }
 }

@@ -33,7 +33,7 @@ public class LocalAlbumFragment extends Fragment implements IMusicViewTypeContai
     void init(){
         fragmentManager=getActivity().getSupportFragmentManager();
 
-        adapter.setData(MusicUtils.queryAlbum(getActivity()));
+        adapter.setData(MusicUtils.queryAlbumList(getActivity()));
         rv_album.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_album.setAdapter(adapter);
         adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {

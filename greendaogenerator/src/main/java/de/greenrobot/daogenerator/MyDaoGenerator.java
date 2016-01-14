@@ -8,6 +8,7 @@ public class MyDaoGenerator {
 
         addMusicInfo(schema);
         addAlbumInfo(schema);
+        addArtistInfo(schema);
 
         new DaoGenerator().generateAll(schema,"./greendaogenerator/src-gen");
     }
@@ -30,5 +31,11 @@ public class MyDaoGenerator {
         entity.addStringProperty("artist");
         entity.addIntProperty("numSongs");
         entity.addStringProperty("albumArt");   //封面地址
+    }
+
+    public static void addArtistInfo(Schema schema){
+        Entity entity=schema.addEntity("ArtistInfo");
+        entity.addLongProperty("artistId").primaryKey();
+        entity.addStringProperty("artist");  //歌手名
     }
 }
