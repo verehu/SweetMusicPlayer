@@ -130,7 +130,7 @@ public class MusicUtils implements IContain {
             return albumInfoDao.loadAll();
         } else {
             //TODO 内置存储卡也需要扫描
-            List<AlbumInfo> albumInfoList = getAlbumList(cr.query(uri, proj_album,
+            List<AlbumInfo> albumInfoList = getAlbumList(cr.query(uri, proj_artist,
                     where.toString(), null, MediaStore.Audio.Media.ALBUM_KEY));
             for (AlbumInfo albumInfo : albumInfoList) {
                 albumInfoDao.insert(albumInfo);
