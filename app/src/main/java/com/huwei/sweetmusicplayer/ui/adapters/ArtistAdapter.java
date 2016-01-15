@@ -55,6 +55,7 @@ public class ArtistAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.iv_artist = (ImageView) convertView.findViewById(R.id.iv_artist);
             viewHolder.tv_artist = (TextView) convertView.findViewById(R.id.tv_artist);
+            viewHolder.tv_count_song = (TextView) convertView.findViewById(R.id.tv_count_song);
             convertView.setTag(viewHolder);
         }
 
@@ -64,11 +65,14 @@ public class ArtistAdapter extends BaseAdapter {
         imageLoader.displayImage(artist.avatar_middle, viewHolder.iv_artist);
 
         viewHolder.tv_artist.setText(artist.author);
+        viewHolder.tv_count_song.setText(artist.album_num + "首");
+
         return convertView;
     }
 
     class ViewHolder {
         ImageView iv_artist;
         TextView tv_artist;
+        TextView tv_count_song;
     }
 }

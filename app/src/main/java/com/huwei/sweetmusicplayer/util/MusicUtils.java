@@ -130,7 +130,7 @@ public class MusicUtils implements IContain {
             return albumInfoDao.loadAll();
         } else {
             //TODO 内置存储卡也需要扫描
-            List<AlbumInfo> albumInfoList = getAlbumList(cr.query(uri, proj_artist,
+            List<AlbumInfo> albumInfoList = getAlbumList(cr.query(uri, proj_album,
                     where.toString(), null, MediaStore.Audio.Media.ALBUM_KEY));
             for (AlbumInfo albumInfo : albumInfoList) {
                 albumInfoDao.insert(albumInfo);
@@ -167,7 +167,7 @@ public class MusicUtils implements IContain {
             return artistInfoDao.loadAll();
         } else {
             //TODO 内置存储卡也需要扫描
-            List<ArtistInfo> artistInfoList = getArtistList(cr.query(uri, proj_album,
+            List<ArtistInfo> artistInfoList = getArtistList(cr.query(uri, proj_artist,
                     where.toString(), null, MediaStore.Audio.Media.ALBUM_KEY));
             for (ArtistInfo artistInfo : artistInfoList) {
                 artistInfoDao.insert(artistInfo);
