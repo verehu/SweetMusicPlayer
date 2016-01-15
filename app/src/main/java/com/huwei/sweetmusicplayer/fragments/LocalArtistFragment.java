@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
-import com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter;
+import com.huwei.sweetmusicplayer.ui.adapters.LocAlbumAdapter;
 import com.huwei.sweetmusicplayer.ui.adapters.RecyclerViewAdapterBase;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
 
@@ -19,6 +19,9 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * 本地音乐的Artist列表页面
+ */
 @EFragment(R.layout.fragment_artists)
 public class LocalArtistFragment extends Fragment implements IMusicViewTypeContain{
 
@@ -26,7 +29,7 @@ public class LocalArtistFragment extends Fragment implements IMusicViewTypeConta
 	RecyclerView rv_album;
 
 	@Bean
-	AlbumAdapter adapter;
+    LocAlbumAdapter adapter;
 
 	FragmentManager fragmentManager;
 
@@ -34,7 +37,7 @@ public class LocalArtistFragment extends Fragment implements IMusicViewTypeConta
 	void init(){
 		fragmentManager=getActivity().getSupportFragmentManager();
 
-		adapter.setData(MusicUtils.queryAlbum(getActivity()));
+		adapter.setData(MusicUtils.queryAlbumList(getActivity()));
 		rv_album.setLayoutManager(new LinearLayoutManager(getActivity()));
 		rv_album.setAdapter(adapter);
 		adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {

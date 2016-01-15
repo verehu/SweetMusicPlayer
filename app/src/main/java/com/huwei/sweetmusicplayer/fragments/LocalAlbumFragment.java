@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
-import com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter;
+import com.huwei.sweetmusicplayer.ui.adapters.LocAlbumAdapter;
 import com.huwei.sweetmusicplayer.ui.adapters.RecyclerViewAdapterBase;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
 
@@ -25,7 +25,7 @@ public class LocalAlbumFragment extends Fragment implements IMusicViewTypeContai
     RecyclerView rv_album;
 
     @Bean
-    AlbumAdapter adapter;
+    LocAlbumAdapter adapter;
 
     FragmentManager fragmentManager;
 
@@ -33,7 +33,7 @@ public class LocalAlbumFragment extends Fragment implements IMusicViewTypeContai
     void init(){
         fragmentManager=getActivity().getSupportFragmentManager();
 
-        adapter.setData(MusicUtils.queryAlbum(getActivity()));
+        adapter.setData(MusicUtils.queryAlbumList(getActivity()));
         rv_album.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_album.setAdapter(adapter);
         adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {

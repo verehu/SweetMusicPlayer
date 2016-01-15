@@ -82,6 +82,7 @@ public class BottomActionBarFragment extends Fragment implements IContain {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(PLAYBAR_UPDATE);
         intentFilter.addAction(CURRENT_UPDATE);
+        intentFilter.addAction(PLAY_STATUS_UPDATE);
         getActivity().registerReceiver(receiver, intentFilter);
     }
 
@@ -93,9 +94,13 @@ public class BottomActionBarFragment extends Fragment implements IContain {
             String action = intent.getAction();
 
             switch (action) {
+                case PLAY_STATUS_UPDATE:
+                    boolean isPlaying = intent.getBooleanExtra("isPlaying", false);
+                    btn_play.setChecked(MusicManager.getInstance().isPlaying());
+                    break;
                 case PLAYBAR_UPDATE:
                     pro_music.setMax(MusicManager.getInstance().getNowPlayingSong().getDuration());
-                    AbstractMusic music = intent.getParcelableExtra("newMusic");
+                    AbstractMusic music = MusicManager.getInstance().getNowPlayingSong();
                     updateBottomBarFromService(music);
                     break;
                 case CURRENT_UPDATE:

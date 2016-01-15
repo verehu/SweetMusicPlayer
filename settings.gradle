@@ -1,3 +1,2 @@
 include ':app'
 include ':greendaogenerator'
-include ':pull_to_refresh_library'

@@ -1,7 +1,6 @@
 package com.huwei.sweetmusicplayer.ui.adapters;
 
 import android.content.Context;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,36 +10,36 @@ import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
 /**
- *  专辑列表适配器
+ * 歌手适配器
+ *
  * @author jerry
- * @date 2015/12/30
+ * @date 2016/01/05
  */
-public class AlbumAdapter extends BaseAdapter {
-
+public class ArtistAdapter extends BaseAdapter {
     private Context mContext;
-    private List<Album> albums;
+    private List<Artist> artists;
 
     ImageLoader imageLoader = SweetApplication.getImageLoader();
 
-    public AlbumAdapter(Context context, List<Album> albums) {
+    public ArtistAdapter(Context context, List<Artist> artists) {
         this.mContext = context;
-        this.albums = albums;
+        this.artists = artists;
     }
 
     @Override
     public int getCount() {
-        return albums.size();
+        return artists.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return albums.get(position);
+        return artists.get(position);
     }
 
     @Override
@@ -52,25 +51,24 @@ public class AlbumAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_online_album, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_online_artist, null);
             viewHolder = new ViewHolder();
-            viewHolder.iv_album = (ImageView) convertView.findViewById(R.id.iv_album);
-            viewHolder.tv_album = (TextView) convertView.findViewById(R.id.tv_album);
+            viewHolder.iv_artist = (ImageView) convertView.findViewById(R.id.iv_artist);
+            viewHolder.tv_artist = (TextView) convertView.findViewById(R.id.tv_artist);
             convertView.setTag(viewHolder);
         }
 
-        final Album album = (Album) getItem(position);
+        final Artist artist = (Artist) getItem(position);
         viewHolder = (ViewHolder) convertView.getTag();
 
-        //todo 设置默认图片
-        imageLoader.displayImage(album.pic_small, viewHolder.iv_album);
+        imageLoader.displayImage(artist.avatar_middle, viewHolder.iv_artist);
 
-        viewHolder.tv_album.setText(Html.fromHtml(mContext.getString(R.string.tab_albums) + ":" + album.title));
+        viewHolder.tv_artist.setText(artist.author);
         return convertView;
     }
 
     class ViewHolder {
-        ImageView iv_album;
-        TextView tv_album;
+        ImageView iv_artist;
+        TextView tv_artist;
     }
 }

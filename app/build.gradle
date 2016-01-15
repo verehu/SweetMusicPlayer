@@ -46,7 +46,6 @@ def AAVersion = '4.0-SNAPSHOT' // change this to your desired version, for examp
 dependencies {
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
-    compile project(':pull_to_refresh_library')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'com.google.code.gson:gson:2.2.4'

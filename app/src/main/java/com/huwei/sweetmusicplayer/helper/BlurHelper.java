@@ -26,6 +26,11 @@ public class BlurHelper {
      */
     @Background
     public void blurBitmap(Bitmap originBitmap, int radius, OnGenerateBitmapCallback callback) {
+
+        if(originBitmap==null){
+            return;
+        }
+
         Bitmap outBitmap = FastBlur.doBlur(originBitmap, radius, false);
 
         onGenerateBitmap(outBitmap, callback);

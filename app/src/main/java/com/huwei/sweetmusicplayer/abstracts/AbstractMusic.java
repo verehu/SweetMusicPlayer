@@ -65,6 +65,11 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
         return TimeUtil.mill2mmss(getDuration());
     }
 
+    public boolean isOnlineMusic(){
+        return getType() == MusicType.Online;
+    }
+
+
     public enum MusicType {
         Local, Online
     }

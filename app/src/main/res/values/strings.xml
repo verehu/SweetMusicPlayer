@@ -47,4 +47,6 @@
 
     <!-- 消除警告，可忽略 -->
     <string name="d">图片描述</string>
+
+    <string name="artist_second_text">歌曲:%1$d首   专辑:%2$d张</string>
 </resources>
