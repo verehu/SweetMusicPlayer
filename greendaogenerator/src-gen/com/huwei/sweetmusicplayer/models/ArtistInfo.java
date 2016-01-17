@@ -8,6 +8,7 @@ public class ArtistInfo {
 
     private Long artistId;
     private String artist;
+    private Integer numSongs;
 
     public ArtistInfo() {
     }
@@ -16,9 +17,10 @@ public class ArtistInfo {
         this.artistId = artistId;
     }
 
-    public ArtistInfo(Long artistId, String artist) {
+    public ArtistInfo(Long artistId, String artist, Integer numSongs) {
         this.artistId = artistId;
         this.artist = artist;
+        this.numSongs = numSongs;
     }
 
     public Long getArtistId() {
@@ -35,6 +37,14 @@ public class ArtistInfo {
 
     public void setArtist(String artist) {
         this.artist = artist;
+    }
+
+    public Integer getNumSongs() {
+        return numSongs;
+    }
+
+    public void setNumSongs(Integer numSongs) {
+        this.numSongs = numSongs;
     }
 
 }

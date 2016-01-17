@@ -25,6 +25,7 @@ public class ArtistInfoDao extends AbstractDao<ArtistInfo, Long> {
     public static class Properties {
         public final static Property ArtistId = new Property(0, Long.class, "artistId", true, "ARTIST_ID");
         public final static Property Artist = new Property(1, String.class, "artist", false, "ARTIST");
+        public final static Property NumSongs = new Property(2, Integer.class, "numSongs", false, "NUM_SONGS");
     };
 
 
@@ -41,7 +42,8 @@ public class ArtistInfoDao extends AbstractDao<ArtistInfo, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'ARTIST_INFO' (" + //
                 "'ARTIST_ID' INTEGER PRIMARY KEY ," + // 0: artistId
-                "'ARTIST' TEXT);"); // 1: artist
+                "'ARTIST' TEXT," + // 1: artist
+                "'NUM_SONGS' INTEGER);"); // 2: numSongs
     }
 
     /** Drops the underlying database table. */
@@ -64,6 +66,11 @@ public class ArtistInfoDao extends AbstractDao<ArtistInfo, Long> {
         if (artist != null) {
             stmt.bindString(2, artist);
         }
+ 
+        Integer numSongs = entity.getNumSongs();
+        if (numSongs != null) {
+            stmt.bindLong(3, numSongs);
+        }
     }
 
     /** @inheritdoc */
@@ -77,7 +84,8 @@ public class ArtistInfoDao extends AbstractDao<ArtistInfo, Long> {
     public ArtistInfo readEntity(Cursor cursor, int offset) {
         ArtistInfo entity = new ArtistInfo( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // artistId
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // artist
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // artist
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2) // numSongs
         );
         return entity;
     }
@@ -87,6 +95,7 @@ public class ArtistInfoDao extends AbstractDao<ArtistInfo, Long> {
     public void readEntity(Cursor cursor, ArtistInfo entity, int offset) {
         entity.setArtistId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setArtist(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setNumSongs(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
      }
     
     /** @inheritdoc */

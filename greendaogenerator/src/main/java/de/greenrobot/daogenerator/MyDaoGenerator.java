@@ -37,5 +37,6 @@ public class MyDaoGenerator {
         Entity entity=schema.addEntity("ArtistInfo");
         entity.addLongProperty("artistId").primaryKey();
         entity.addStringProperty("artist");  //歌手名
+        entity.addIntProperty("numSongs");
     }
 }

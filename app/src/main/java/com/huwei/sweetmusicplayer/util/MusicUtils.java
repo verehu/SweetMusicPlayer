@@ -149,7 +149,7 @@ public class MusicUtils implements IContain {
         DaoSession session = SweetApplication.getDaoSession();
         ArtistInfoDao artistInfoDao = session.getArtistInfoDao();
 
-        Uri uri = MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI;
+        Uri uri = MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI;
         ContentResolver cr = context.getContentResolver();
         StringBuilder where = new StringBuilder(MediaStore.Audio.Artists._ID
                 + " in (select distinct " + MediaStore.Audio.Media.ARTIST_ID
@@ -168,7 +168,7 @@ public class MusicUtils implements IContain {
         } else {
             //TODO 内置存储卡也需要扫描
             List<ArtistInfo> artistInfoList = getArtistList(cr.query(uri, proj_artist,
-                    where.toString(), null, MediaStore.Audio.Media.ALBUM_KEY));
+                    where.toString(), null, MediaStore.Audio.Media.ARTIST_KEY));
             for (ArtistInfo artistInfo : artistInfoList) {
                 artistInfoDao.insert(artistInfo);
             }
@@ -321,6 +321,8 @@ public class MusicUtils implements IContain {
             ArtistInfo artistInfo = new ArtistInfo();
             artistInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Artists._ID)));
             artistInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST)));
+//            artistInfo.setNumSongs(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Artists.NUMBER_OF_ALBUMS)));
+            artistInfoList.add(artistInfo);
         }
 
         return artistInfoList;

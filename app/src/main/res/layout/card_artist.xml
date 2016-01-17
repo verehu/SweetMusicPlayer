@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:padding="5dp">
 
-        <ImageView
-            android:layout_width=""
-            android:layout_height="" />
+    <ImageView
+        android:id="@+id/iv_artist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop" />
 
-</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/feed_text_bg" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/secondary_text_white"
+        android:text="456" />
+
+    <TextView
+        android:id="@+id/tv_numsongs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_title"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_marginBottom="10dp"
+        android:textSize="22sp"
+        android:text="123"
+        android:textColor="@color/primary_text_white" />
+</RelativeLayout>

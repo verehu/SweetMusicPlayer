@@ -16,10 +16,12 @@ import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.fragments.MainFragment;
+import com.huwei.sweetmusicplayer.fragments.MainFragment_;
 import com.huwei.sweetmusicplayer.fragments.PlayingFragment;
 import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
 import com.huwei.sweetmusicplayer.services.MusicControlerService;
 import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
+import com.huwei.sweetmusicplayer.util.FragmentUtil;
 
 import java.util.List;
 
@@ -70,7 +72,9 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         setContentView(R.layout.activity_main);
 
         playing_fragment= (PlayingFragment) manager.findFragmentById(R.id.playing_fragment);
-        mainFragment = (MainFragment) manager.findFragmentById(R.id.main);
+//        mainFragment = (MainFragment) manager.findFragmentById(R.id.main);
+        mainFragment = new MainFragment_();
+        FragmentUtil.replace(this,R.id.main_container,mainFragment,false);
 
         initView();
         initReciever();

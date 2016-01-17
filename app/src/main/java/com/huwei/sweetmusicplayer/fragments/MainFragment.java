@@ -21,7 +21,7 @@ import com.huwei.sweetmusicplayer.OnlineSearchActivity_;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
 import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
-import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter;
+import com.huwei.sweetmusicplayer.ui.adapters.PagerStateAdapter;
 import com.huwei.sweetmusicplayer.util.TimeUtil;
 
 import org.androidannotations.annotations.AfterViews;
@@ -54,6 +54,7 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     @IntArrayRes
     int sleep_times[];
 
+    PagerStateAdapter mPagerAdapter;
 
     private long sleeptime = 0;
     private final int SLEEP = 0;
@@ -92,6 +93,8 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
         } else {
             setSleepBarVisiable(false);
         }
+
+       mPagerAdapter.notifyDataSetChanged();
     }
 
     @AfterViews
@@ -186,7 +189,7 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     }
 
     private void initPager() {
-        PagerAdapter mPagerAdapter = new PagerAdapter(
+        mPagerAdapter = new PagerStateAdapter(
                 getActivity().getSupportFragmentManager()){
 
             @Override
@@ -207,7 +210,7 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
         musicFragment.setArguments(bundle);
         mPagerAdapter.addFragment(musicFragment);
         // add tab_artists
-        mPagerAdapter.addFragment(new LocalArtistFragment());
+        mPagerAdapter.addFragment(new LocalArtistFragment_());
         // add tab_albums
         mPagerAdapter.addFragment(new LocalAlbumFragment_());
         //add tab_online
