@@ -6,14 +6,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -54,6 +57,8 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     @IntArrayRes
     int sleep_times[];
 
+    private View mView;
+
     PagerStateAdapter mPagerAdapter;
 
     private long sleeptime = 0;
@@ -85,6 +90,23 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
         }
     };
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //第二次可以直接返回mView
+        if (mView != null) {
+            ViewGroup parent = (ViewGroup) mView.getParent();
+            if (parent != null) {
+                parent.removeView(mView);
+            }
+            return mView;
+        }
+        Log.i(TAG, "onCreateView");
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -94,15 +116,18 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
             setSleepBarVisiable(false);
         }
 
-       mPagerAdapter.notifyDataSetChanged();
+        mPagerAdapter.notifyDataSetChanged();
     }
 
     @AfterViews
     void init() {
 
-
-        initToolBar();
-        initPager();
+        //防止第二次加载
+        if (mView == null) {
+            mView = getView();
+            initToolBar();
+            initPager();
+        }
     }
 
     @Click(R.id.tv_sleep_cancel)
@@ -190,7 +215,7 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
 
     private void initPager() {
         mPagerAdapter = new PagerStateAdapter(
-                getActivity().getSupportFragmentManager()){
+                getActivity().getSupportFragmentManager()) {
 
             @Override
             public CharSequence getPageTitle(int position) {

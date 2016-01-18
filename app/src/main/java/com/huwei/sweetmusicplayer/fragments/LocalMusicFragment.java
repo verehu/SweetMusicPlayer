@@ -97,7 +97,8 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
             case SHOW_MUSIC_BY_ALBUM:
                 toolbar.setVisibility(View.VISIBLE);
                 toolbar.setTitle(getArguments().getString("album_name"));
-                toolbar.setNavigationIcon(R.drawable.mc_back);
+//                toolbar.setNavigationIcon(R.drawable.mc_back);
+                toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
                 toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
