@@ -40,7 +40,7 @@ public class LocalAlbumFragment extends BaseFragment implements IMusicViewTypeCo
         adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(),"OnClick:"+position, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(),"OnClick:"+position, Toast.LENGTH_LONG).show();
                 LocalMusicFragment musicFragment = new LocalMusicFragment_();
                 Bundle bundle = new Bundle();
                 bundle.putInt(MUSIC_SHOW_TYPE, SHOW_MUSIC_BY_ALBUM);
