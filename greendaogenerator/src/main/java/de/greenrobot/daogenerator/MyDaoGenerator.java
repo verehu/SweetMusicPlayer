@@ -17,6 +17,7 @@ public class MyDaoGenerator {
         Entity entity = schema.addEntity("MusicInfo");
         entity.addLongProperty("songId").primaryKey();
         entity.addLongProperty("albumId");
+        entity.addLongProperty("artistId");
         entity.addStringProperty("title");
         entity.addStringProperty("artist");
         entity.addIntProperty("duration");

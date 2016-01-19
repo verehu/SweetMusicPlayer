@@ -26,6 +26,7 @@ import com.huwei.sweetmusicplayer.util.MusicUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.SystemService;
 import org.androidannotations.annotations.ViewById;
 
@@ -50,10 +51,16 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
     Toolbar toolbar;
 
     private boolean isABC;  //是否显示ABC视图
-    private int showtype = -1;
 
     @SystemService
     LayoutInflater inflater;
+
+    @FragmentArg
+    String title;
+    @FragmentArg
+    int showtype;
+    @FragmentArg
+    Long primaryId;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
@@ -95,9 +102,9 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
                 toolbar.setVisibility(View.GONE);
                 break;
             case SHOW_MUSIC_BY_ALBUM:
+            case SHOW_MUSIC_BY_ARTIST:
                 toolbar.setVisibility(View.VISIBLE);
-                toolbar.setTitle(getArguments().getString("album_name"));
-//                toolbar.setNavigationIcon(R.drawable.mc_back);
+                toolbar.setTitle(title);
                 toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
                 toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                     @Override
@@ -110,12 +117,12 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
     }
 
     void initParams() {
-        showtype = getArguments().getInt(MUSIC_SHOW_TYPE);
         switch (showtype) {
             case SHOW_MUSIC:
                 isABC = true;
                 break;
             case SHOW_MUSIC_BY_ALBUM:
+            case SHOW_MUSIC_BY_ARTIST:
                 isABC = false;
                 break;
         }
@@ -141,7 +148,7 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
     }
 
     void initView() {
-        if(isABC) {
+        if (isABC) {
             lv_song.setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -177,8 +184,10 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
                 musicInfoList = MusicUtils.queryMusic(getActivity());
                 break;
             case SHOW_MUSIC_BY_ALBUM:
-                //todo
-                musicInfoList = MusicUtils.queryMusicByAlbumId(getArguments().getLong("album_id"));
+                musicInfoList = MusicUtils.queryMusicByAlbumId(primaryId);
+                break;
+            case SHOW_MUSIC_BY_ARTIST:
+                musicInfoList = MusicUtils.queryMusicByArtistId(primaryId);
                 break;
         }
         mMusicAdapter = new MusicAdapter(getActivity(), musicInfoList, isABC);

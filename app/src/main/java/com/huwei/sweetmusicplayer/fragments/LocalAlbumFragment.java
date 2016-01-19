@@ -1,11 +1,11 @@
 package com.huwei.sweetmusicplayer.fragments;
 
-import android.os.Bundle;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
+
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
@@ -21,7 +21,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 @EFragment(R.layout.fragment_albums)
-public class LocalAlbumFragment extends BaseFragment implements IMusicViewTypeContain{
+public class LocalAlbumFragment extends BaseFragment implements IMusicViewTypeContain {
     @ViewById
     RecyclerView rv_album;
 
@@ -31,8 +31,8 @@ public class LocalAlbumFragment extends BaseFragment implements IMusicViewTypeCo
     FragmentManager fragmentManager;
 
     @AfterViews
-    void init(){
-        fragmentManager=getActivity().getSupportFragmentManager();
+    void init() {
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         adapter.setData(MusicUtils.queryAlbumList(getActivity()));
         rv_album.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -40,14 +40,12 @@ public class LocalAlbumFragment extends BaseFragment implements IMusicViewTypeCo
         adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Toast.makeText(getActivity(),"OnClick:"+position, Toast.LENGTH_LONG).show();
-                LocalMusicFragment musicFragment = new LocalMusicFragment_();
-                Bundle bundle = new Bundle();
-                bundle.putInt(MUSIC_SHOW_TYPE, SHOW_MUSIC_BY_ALBUM);
-                bundle.putLong("album_id", adapter.getData().get(position).getAlbumId());
-                bundle.putString("album_name", adapter.getData().get(position).getTitle());
-                musicFragment.setArguments(bundle);
-                FragmentUtil.replace((android.support.v4.app.FragmentActivity) mAct,R.id.main_container,musicFragment);
+
+                FragmentUtil.replace((android.support.v4.app.FragmentActivity) mAct, R.id.main_container,
+                        LocalMusicFragment_.builder().showtype(SHOW_MUSIC_BY_ALBUM)
+                                .primaryId(adapter.getData().get(position).getAlbumId())
+                                .title(adapter.getData().get(position).getTitle())
+                                .build());
             }
         });
     }

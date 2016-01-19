@@ -8,6 +8,7 @@ public class MusicInfo {
 
     private Long songId;
     private Long albumId;
+    private Long artistId;
     private String title;
     private String artist;
     private Integer duration;
@@ -21,9 +22,10 @@ public class MusicInfo {
         this.songId = songId;
     }
 
-    public MusicInfo(Long songId, Long albumId, String title, String artist, Integer duration, String path, Boolean favorite) {
+    public MusicInfo(Long songId, Long albumId, Long artistId, String title, String artist, Integer duration, String path, Boolean favorite) {
         this.songId = songId;
         this.albumId = albumId;
+        this.artistId = artistId;
         this.title = title;
         this.artist = artist;
         this.duration = duration;
@@ -45,6 +47,14 @@ public class MusicInfo {
 
     public void setAlbumId(Long albumId) {
         this.albumId = albumId;
+    }
+
+    public Long getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(Long artistId) {
+        this.artistId = artistId;
     }
 
     public String getTitle() {

@@ -10,6 +10,7 @@ import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
 import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
 import com.huwei.sweetmusicplayer.ui.adapters.LocArtistInfoAdapter;
 import com.huwei.sweetmusicplayer.ui.adapters.RecyclerViewAdapterBase;
+import com.huwei.sweetmusicplayer.util.FragmentUtil;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -41,17 +42,11 @@ public class LocalArtistFragment extends BaseFragment implements IMusicViewTypeC
 		adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {
 			@Override
 			public void onItemClick(View view, int position) {
-//                Toast.makeText(getActivity(),"OnClick:"+position,Toast.LENGTH_LONG).show();
-//				FragmentTransaction transaction=fragmentManager.beginTransaction();
-//				LocalMusicFragment musicFragment=new LocalMusicFragment_();
-//				Bundle bundle=new Bundle();
-//				bundle.putInt(MUSIC_SHOW_TYPE,SHOW_MUSIC_BY_ALBUM);
-//				bundle.putLong("album_id",adapter.getData().get(position).getAlbumId());
-//				bundle.putString("album_name",adapter.getData().get(position).getTitle());
-//				musicFragment.setArguments(bundle);
-//				transaction.addToBackStack(null);
-//				transaction.replace(R.id.main,musicFragment);
-//				transaction.commit();
+				FragmentUtil.replace((android.support.v4.app.FragmentActivity) mAct, R.id.main_container,
+						LocalMusicFragment_.builder().showtype(SHOW_MUSIC_BY_ALBUM)
+								.primaryId(adapter.getData().get(position).getArtistId())
+								.title(adapter.getData().get(position).getArtist())
+								.build());
 			}
 		});
 	}

@@ -103,6 +103,17 @@ public class MusicUtils implements IContain {
     }
 
     /**
+     * 通过artistId查询本地音乐
+     * @return
+     */
+    public static List<MusicInfo> queryMusicByArtistId(Long artistId){
+        DaoSession session = SweetApplication.getDaoSession();
+        MusicInfoDao musicInfoDao = session.getMusicInfoDao();
+
+        return musicInfoDao.queryBuilder().where(MusicInfoDao.Properties.ArtistId.eq(artistId)).list();
+    }
+
+    /**
      * 查询专辑信息
      *
      * @param context

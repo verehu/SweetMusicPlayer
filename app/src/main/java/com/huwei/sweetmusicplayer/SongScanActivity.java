@@ -137,13 +137,14 @@ public class SongScanActivity extends BaseActivity {
                         String title = cursor.getString(cursor.getColumnIndex(Media.DISPLAY_NAME));
                         String album = cursor.getString(cursor.getColumnIndex(Media.ALBUM));
                         long albumID = cursor.getLong(cursor.getColumnIndex(Media.ALBUM_ID));
+                        long artistId = cursor.getLong(cursor.getColumnIndex(Media.ARTIST_ID));
                         long id = cursor.getLong(cursor.getColumnIndex(Media._ID));
                         int duration = cursor.getInt(cursor.getColumnIndex(Media.DURATION));
                         long size = cursor.getLong(cursor.getColumnIndex(Media.SIZE));
                         String artist = cursor.getString(cursor.getColumnIndex(Media.ARTIST));
                         String path = cursor.getString(cursor.getColumnIndex(Media.DATA)) ;
 
-                        musicInfo = new MusicInfo( id , albumID , title , artist , duration , path , IS_FAVORITE ) ;
+                        musicInfo = new MusicInfo( id , albumID,artistId , title , artist , duration , path , IS_FAVORITE ) ;
                         musicList.add(musicInfo) ;
 
                     if(mHandler != null && SongScanActivity.this != null){
