@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
@@ -19,12 +20,14 @@ import com.huwei.sweetmusicplayer.dao.AlbumInfoDao;
 import com.huwei.sweetmusicplayer.dao.ArtistInfoDao;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
 import com.huwei.sweetmusicplayer.dao.MusicInfoDao;
+import com.huwei.sweetmusicplayer.interfaces.OnScanListener;
 import com.huwei.sweetmusicplayer.models.AlbumInfo;
 import com.huwei.sweetmusicplayer.models.ArtistInfo;
 import com.huwei.sweetmusicplayer.models.MusicInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,6 +38,8 @@ import java.util.List;
  * @date 2015/06/11
  */
 public class MusicUtils implements IContain {
+    public static final String TAG = "MusicUtils";
+
     public static final Uri sArtworkUri = Uri
             .parse("content://media/external/audio/albumart");
     private static final BitmapFactory.Options sBitmapOptionsCache = new BitmapFactory.Options();
@@ -56,6 +61,67 @@ public class MusicUtils implements IContain {
             MediaStore.Audio.Artists.NUMBER_OF_ALBUMS};
 
     public static final int THUMBNAIL_LEN_DP = 56;
+
+
+    private Context mContext;
+
+    public MusicUtils(Context context) {
+        this.mContext = context;
+    }
+
+    /**
+     * 扫描本地音乐  并且添加到本地数据库
+     */
+    public  void scanMusicToSQLite(OnScanListener onScanListener) {
+        ContentResolver cr = mContext.getContentResolver();
+        StringBuffer select = new StringBuffer(" 1=1 ");
+        // 查询语句：检索出.mp3为后缀名，时长大于1分钟，文件大小大于1MB的媒体文件
+        if (Environment.isFilterSize(mContext)) {
+            select.append(" and " + MediaStore.Audio.Media.SIZE + " > " + FILTER_SIZE);
+        }
+        if (Environment.isFilterDuration(mContext)) {
+            select.append(" and " + MediaStore.Audio.Media.DURATION + " > " + FILTER_DURATION);
+        }
+        final Cursor cursor = cr.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj_music,
+                select.toString(), null,
+                MediaStore.Audio.Media.TITLE_KEY);
+        while (cursor.moveToNext()) {
+
+            final DaoSession session = SweetApplication.getDaoSession();
+
+            MusicInfoDao musicInfoDao = session.getMusicInfoDao();
+            AlbumInfoDao albumInfoDao = session.getAlbumInfoDao();
+            ArtistInfoDao artistInfoDao = session.getArtistInfoDao();
+
+            MusicInfo musicInfo = new MusicInfo();
+            musicInfo.setSongId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+            musicInfo.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+            musicInfo.setAlbumId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+            musicInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+            musicInfo.setDuration(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)));
+            musicInfo.setPath(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)));
+            musicInfo.setFavorite(false);
+
+            if(albumInfoDao.load(musicInfo.getAlbumId()) == null){
+
+            }
+
+            try {
+                session.runInTx(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                });
+            } catch (Exception e) {
+                Log.i(TAG, "Exception:" + e.toString());
+                e.printStackTrace();
+            }
+
+
+
+        }
+    }
 
     /**
      * 查询音乐信息
@@ -104,9 +170,10 @@ public class MusicUtils implements IContain {
 
     /**
      * 通过artistId查询本地音乐
+     *
      * @return
      */
-    public static List<MusicInfo> queryMusicByArtistId(Long artistId){
+    public static List<MusicInfo> queryMusicByArtistId(Long artistId) {
         DaoSession session = SweetApplication.getDaoSession();
         MusicInfoDao musicInfoDao = session.getMusicInfoDao();
 
@@ -153,10 +220,11 @@ public class MusicUtils implements IContain {
 
     /**
      * 查询歌手列表
+     *
      * @param context
      * @return
      */
-    public static List<ArtistInfo> queryArtistList(Context context){
+    public static List<ArtistInfo> queryArtistList(Context context) {
         DaoSession session = SweetApplication.getDaoSession();
         ArtistInfoDao artistInfoDao = session.getArtistInfoDao();
 
@@ -322,13 +390,13 @@ public class MusicUtils implements IContain {
     }
 
 
-    public static List getArtistList(Cursor cursor){
-       if(cursor == null){
-           return null;
-       }
+    public static List getArtistList(Cursor cursor) {
+        if (cursor == null) {
+            return null;
+        }
 
         List<ArtistInfo> artistInfoList = new ArrayList<>();
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             ArtistInfo artistInfo = new ArtistInfo();
             artistInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Artists._ID)));
             artistInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST)));
