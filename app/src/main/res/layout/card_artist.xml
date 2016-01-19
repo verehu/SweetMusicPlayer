@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tv_title"
         android:layout_alignLeft="@+id/tv_title"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="6dp"
         android:textSize="22sp"
         android:text="123"
         android:textColor="@color/primary_text_white" />
