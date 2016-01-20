@@ -72,7 +72,7 @@ public class MusicUtils implements IContain {
     /**
      * 扫描本地音乐  并且添加到本地数据库
      */
-    public  void scanMusicToSQLite(OnScanListener onScanListener) {
+    public void scanMusicToSQLite(OnScanListener onScanListener) {
         ContentResolver cr = mContext.getContentResolver();
         StringBuffer select = new StringBuffer(" 1=1 ");
         // 查询语句：检索出.mp3为后缀名，时长大于1分钟，文件大小大于1MB的媒体文件
@@ -102,7 +102,7 @@ public class MusicUtils implements IContain {
             musicInfo.setPath(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)));
             musicInfo.setFavorite(false);
 
-            if(albumInfoDao.load(musicInfo.getAlbumId()) == null){
+            if (albumInfoDao.load(musicInfo.getAlbumId()) == null) {
 
             }
 
@@ -119,8 +119,24 @@ public class MusicUtils implements IContain {
             }
 
 
-
         }
+    }
+
+    /**
+     * 通过Id查询专辑信息   contentProvider
+     *
+     * @param albumId
+     * @return
+     */
+    public static AlbumInfo queryAlbumById(Context context, Long albumId) {
+        ContentResolver cr = context.getContentResolver();
+        AlbumInfo albumInfo = new AlbumInfo();
+        String selection = MediaStore.Audio.AlbumColumns.ALBUM_ID + " =? ";
+        String[] selectionArgs = new String[]{albumId + ""};
+        Cursor cursor = cr.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj_album,
+                selection, selectionArgs,
+                MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
+
     }
 
     /**
