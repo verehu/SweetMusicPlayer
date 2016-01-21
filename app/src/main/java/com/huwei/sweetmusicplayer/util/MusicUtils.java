@@ -8,6 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -44,7 +47,6 @@ public class MusicUtils implements IContain {
             .parse("content://media/external/audio/albumart");
     private static final BitmapFactory.Options sBitmapOptionsCache = new BitmapFactory.Options();
     private static final BitmapFactory.Options sBitmapOptions = new BitmapFactory.Options();
-    private static final HashMap<Long, Bitmap> sArtCache = new HashMap<Long, Bitmap>();
 
     private static String[] proj_music = new String[]{
             MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE,
@@ -62,17 +64,60 @@ public class MusicUtils implements IContain {
 
     public static final int THUMBNAIL_LEN_DP = 56;
 
+    public static final int MSG_SCAN_SUCCESS = 0;   //所有音乐扫描成功
+    public static final int MSG_SCAM_FAIL = 1;  //扫描失败 或者取消
+    public static final int MSG_SCAN_ING = 2;   //正在扫描某首歌  一般是扫描完成后显示
+
+    public static final String KEY_BUNDLE_MUSICINFO = "KEY_BUNDLE_MUSICINFO";
 
     private Context mContext;
+
+    private OnScanListener mOnScanListener;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            if (mOnScanListener != null) {
+                switch (msg.what) {
+                    case MSG_SCAN_SUCCESS:
+                        mOnScanListener.onSuccess();
+                        break;
+                    case MSG_SCAM_FAIL:
+                        mOnScanListener.onFail();
+                        break;
+                    case MSG_SCAN_ING:
+                        mOnScanListener.onScan((MusicInfo) msg.getData().getParcelable(KEY_BUNDLE_MUSICINFO));
+                        break;
+                }
+            }
+        }
+    };
+
+    private Thread mScanMusicThread = new Thread() {
+        @Override
+        public void run() {
+            scanMusicToSQLite();
+        }
+    };
 
     public MusicUtils(Context context) {
         this.mContext = context;
     }
 
+    public void startScan(){
+        mScanMusicThread.start();
+    }
+
+    public void setOnScanListener(OnScanListener mOnScanListener) {
+        this.mOnScanListener = mOnScanListener;
+    }
+
     /**
      * 扫描本地音乐  并且添加到本地数据库
      */
-    public void scanMusicToSQLite(OnScanListener onScanListener) {
+    private boolean scanMusicToSQLite() {
         ContentResolver cr = mContext.getContentResolver();
         StringBuffer select = new StringBuffer(" 1=1 ");
         // 查询语句：检索出.mp3为后缀名，时长大于1分钟，文件大小大于1MB的媒体文件
@@ -85,15 +130,16 @@ public class MusicUtils implements IContain {
         final Cursor cursor = cr.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, proj_music,
                 select.toString(), null,
                 MediaStore.Audio.Media.TITLE_KEY);
+
         while (cursor.moveToNext()) {
 
             final DaoSession session = SweetApplication.getDaoSession();
 
-            MusicInfoDao musicInfoDao = session.getMusicInfoDao();
-            AlbumInfoDao albumInfoDao = session.getAlbumInfoDao();
-            ArtistInfoDao artistInfoDao = session.getArtistInfoDao();
+            final MusicInfoDao musicInfoDao = session.getMusicInfoDao();
+            final AlbumInfoDao albumInfoDao = session.getAlbumInfoDao();
+            final ArtistInfoDao artistInfoDao = session.getArtistInfoDao();
 
-            MusicInfo musicInfo = new MusicInfo();
+            final MusicInfo musicInfo = new MusicInfo();
             musicInfo.setSongId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
             musicInfo.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
             musicInfo.setAlbumId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
@@ -102,24 +148,43 @@ public class MusicUtils implements IContain {
             musicInfo.setPath(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)));
             musicInfo.setFavorite(false);
 
-            if (albumInfoDao.load(musicInfo.getAlbumId()) == null) {
+            final AlbumInfo albumInfo = getAlbumById(mContext, musicInfo.getAlbumId());
 
-            }
+            final ArtistInfo artistInfo = getArtistInfoById(mContext, musicInfo.getArtistId());
 
             try {
                 session.runInTx(new Runnable() {
                     @Override
                     public void run() {
+                        musicInfoDao.insert(musicInfo);
 
+                        if (albumInfoDao.load(musicInfo.getAlbumId()) == null && albumInfo != null) {
+                            albumInfoDao.insertOrReplace(albumInfo);
+                        }
+
+                        if (artistInfoDao.load(musicInfo.getArtistId()) == null && artistInfo != null) {
+                            artistInfoDao.insertOrReplace(artistInfo);
+                        }
                     }
                 });
+
+                Message msg = Message.obtain();
+                msg.what = MSG_SCAN_ING;
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(KEY_BUNDLE_MUSICINFO, musicInfo);
+                msg.setData(bundle);
+                mHandler.sendMessage(msg);
             } catch (Exception e) {
                 Log.i(TAG, "Exception:" + e.toString());
                 e.printStackTrace();
+                mHandler.sendEmptyMessage(MSG_SCAM_FAIL);
+                return false;
             }
 
-
         }
+
+        mHandler.sendEmptyMessage(MSG_SCAN_SUCCESS);
+        return true;
     }
 
     /**
@@ -128,15 +193,39 @@ public class MusicUtils implements IContain {
      * @param albumId
      * @return
      */
-    public static AlbumInfo queryAlbumById(Context context, Long albumId) {
+    public static AlbumInfo getAlbumById(Context context, Long albumId) {
         ContentResolver cr = context.getContentResolver();
         AlbumInfo albumInfo = new AlbumInfo();
-        String selection = MediaStore.Audio.AlbumColumns.ALBUM_ID + " =? ";
+        String selection = MediaStore.Audio.Albums._ID + " =? ";
         String[] selectionArgs = new String[]{albumId + ""};
         Cursor cursor = cr.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj_album,
                 selection, selectionArgs,
                 MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
+        if (cursor != null && cursor.moveToNext()) {
+            albumInfo.setAlbumId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Albums._ID)));
+            albumInfo.setAlbumArt(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART)));
+            albumInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST)));
+            albumInfo.setNumSongs(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.NUMBER_OF_SONGS)));
+            albumInfo.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM)));
+            return albumInfo;
+        }
+        return null;
+    }
 
+    public static ArtistInfo getArtistInfoById(Context context, Long artistId) {
+        ContentResolver cr = context.getContentResolver();
+        ArtistInfo artistInfo = new ArtistInfo();
+        String selection = MediaStore.Audio.Artists._ID + " =? ";
+        String[] selectionArgs = new String[]{artistId + ""};
+        Cursor cursor = cr.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj_album,
+                selection, selectionArgs,
+                MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
+        if (cursor != null && cursor.moveToNext()) {
+            artistInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Artists._ID)));
+            artistInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST)));
+            return artistInfo;
+        }
+        return null;
     }
 
     /**

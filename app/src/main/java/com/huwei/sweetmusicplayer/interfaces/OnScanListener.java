@@ -7,6 +7,10 @@ import com.huwei.sweetmusicplayer.models.MusicInfo;
  * @date 2016-01-19
  */
 public interface OnScanListener {
+    void onSuccess();
+
+    void onFail();
+
     //扫描后
-    void afterScan(MusicInfo musicInfo);
+    void onScan(MusicInfo musicInfo);
 }
