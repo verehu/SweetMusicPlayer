@@ -281,9 +281,27 @@ public class MusicUtils implements IContain {
      */
     public static List<ArtistInfo> queryArtistList() {
         DaoSession session = SweetApplication.getDaoSession();
-        ArtistInfoDao artistInfoDao = session.getArtistInfoDao();
+        List<ArtistInfo> artistInfoList = new ArrayList<>();
 
-        return artistInfoDao.loadAll();
+        StringBuilder stringBuilder = new StringBuilder("select ");
+        stringBuilder.append(ArtistInfoDao.Properties.ArtistId.columnName).append(",");
+        stringBuilder.append(ArtistInfoDao.Properties.Artist.columnName).append(",");
+        stringBuilder.append(ArtistInfoDao.Properties.NumSongs.columnName).append(" as (select count(1) from " + MusicInfoDao.TABLENAME).
+                append(" where " + MusicInfoDao.TABLENAME + "." + MusicInfoDao.Properties.ArtistId.columnName).
+                append("=").append(ArtistInfoDao.TABLENAME + "." + ArtistInfoDao.Properties.ArtistId.columnName).append(")").
+                append(" from ").append(ArtistInfoDao.TABLENAME).append(",").append(MusicInfoDao.TABLENAME);
+
+        Log.i(TAG,"queryArtistList sql:"+stringBuilder.toString());
+        Cursor cursor = session.getDatabase().rawQuery(stringBuilder.toString(), null);
+        while (cursor!=null && cursor.moveToNext()){
+            ArtistInfo artistInfo = new ArtistInfo();
+            artistInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(ArtistInfoDao.Properties.ArtistId.columnName)));
+            artistInfo.setArtist(cursor.getString(cursor.getColumnIndex(ArtistInfoDao.Properties.Artist.columnName)));
+            artistInfo.setNumSongs(cursor.getInt(cursor.getColumnIndex(ArtistInfoDao.Properties.NumSongs.columnName)));
+            artistInfoList.add(artistInfo);
+        }
+
+        return artistInfoList;
     }
 
     /**
