@@ -181,7 +181,7 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
         List<MusicInfo> musicInfoList = null;
         switch (showtype) {
             case SHOW_MUSIC:
-                musicInfoList = MusicUtils.queryMusic(getActivity());
+                musicInfoList = MusicUtils.queryMusic();
                 break;
             case SHOW_MUSIC_BY_ALBUM:
                 musicInfoList = MusicUtils.queryMusicByAlbumId(primaryId);

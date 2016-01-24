@@ -30,8 +30,6 @@ import com.huwei.sweetmusicplayer.models.MusicInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -106,7 +104,7 @@ public class MusicUtils implements IContain {
         this.mContext = context;
     }
 
-    public void startScan(){
+    public void startScan() {
         mScanMusicThread.start();
     }
 
@@ -156,7 +154,13 @@ public class MusicUtils implements IContain {
                 session.runInTx(new Runnable() {
                     @Override
                     public void run() {
-                        musicInfoDao.insert(musicInfo);
+                        if (musicInfo == null) {
+                            return;
+                        }
+
+                        if (musicInfoDao.load(musicInfo.getSongId()) == null) {
+                            musicInfoDao.insert(musicInfo);
+                        }
 
                         if (albumInfoDao.load(musicInfo.getAlbumId()) == null && albumInfo != null) {
                             albumInfoDao.insertOrReplace(albumInfo);
@@ -231,39 +235,11 @@ public class MusicUtils implements IContain {
     /**
      * 查询音乐信息
      */
-    public static List<MusicInfo> queryMusic(Context context) {
+    public static List<MusicInfo> queryMusic() {
         DaoSession session = SweetApplication.getDaoSession();
         MusicInfoDao musicInfoDao = session.getMusicInfoDao();
 
-        //TODO 内置存储卡也需要扫描
-        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        ContentResolver cr = context.getContentResolver();
-
-        StringBuffer select = new StringBuffer(" 1=1 ");
-        // 查询语句：检索出.mp3为后缀名，时长大于1分钟，文件大小大于1MB的媒体文件
-        if (Environment.isFilterSize(context)) {
-            select.append(" and " + MediaStore.Audio.Media.SIZE + " > " + FILTER_SIZE);
-        }
-        if (Environment.isFilterDuration(context)) {
-            select.append(" and " + MediaStore.Audio.Media.DURATION + " > " + FILTER_DURATION);
-        }
-
-        if (musicInfoDao.count() != 0) {
-            return musicInfoDao.loadAll();
-        } else {
-            List<MusicInfo> musicInfoList = getMusicList(cr.query(uri, proj_music,
-                    select.toString(), null,
-                    MediaStore.Audio.Media.TITLE_KEY));
-
-            for (MusicInfo musicInfo : musicInfoList) {
-                //以前的数据库中不存在这首歌曲
-                if (musicInfoDao.load(musicInfo.getSongId()) == null) {
-                    musicInfoDao.insert(musicInfo);
-                }
-            }
-
-            return musicInfoDao.loadAll();
-        }
+        return musicInfoDao.loadAll();
     }
 
     public static List<MusicInfo> queryMusicByAlbumId(Long album_id) {

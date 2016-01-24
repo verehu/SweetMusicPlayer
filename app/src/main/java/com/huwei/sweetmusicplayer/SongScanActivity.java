@@ -67,10 +67,12 @@ public class SongScanActivity extends BaseActivity {
                 scannow_tv.setText(musicInfo.getTitle() + "--" + musicInfo.getPath());
             }
         });
+
+        mMusicUtils.startScan();
     }
 
-    public Intent getStartActIntent(Context from){
-        Intent intent = new Intent(from,SongScanActivity.class);
+    public static Intent getStartActIntent(Context from){
+        Intent intent = new Intent(from,SongScanActivity_.class);
         return intent;
     }
 }
