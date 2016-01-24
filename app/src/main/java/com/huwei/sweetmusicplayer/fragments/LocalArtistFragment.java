@@ -36,7 +36,7 @@ public class LocalArtistFragment extends BaseFragment implements IMusicViewTypeC
 	void init(){
 		fragmentManager=getActivity().getSupportFragmentManager();
 
-		adapter.setData(MusicUtils.queryArtistList(getActivity()));
+		adapter.setData(MusicUtils.queryArtistList());
         rv_artist.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         rv_artist.setAdapter(adapter);
 		adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {

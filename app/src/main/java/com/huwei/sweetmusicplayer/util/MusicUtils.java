@@ -267,74 +267,23 @@ public class MusicUtils implements IContain {
      * @param context
      * @return
      */
-    public static List<AlbumInfo> queryAlbumList(Context context) {
+    public static List<AlbumInfo> queryAlbumList() {
         DaoSession session = SweetApplication.getDaoSession();
         AlbumInfoDao albumInfoDao = session.getAlbumInfoDao();
 
-        Uri uri = MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI;
-        ContentResolver cr = context.getContentResolver();
-        StringBuilder where = new StringBuilder(MediaStore.Audio.Albums._ID
-                + " in (select distinct " + MediaStore.Audio.Media.ALBUM_ID
-                + " from audio_meta where (1=1 ");
-
-        if (Environment.isFilterSize(context)) {
-            where.append(" and " + MediaStore.Audio.Media.SIZE + " > " + FILTER_SIZE);
-        }
-        if (Environment.isFilterDuration(context)) {
-            where.append(" and " + MediaStore.Audio.Media.DURATION + " > " + FILTER_DURATION);
-        }
-        where.append("))");
-
-        if (albumInfoDao.count() != 0) {
-            return albumInfoDao.loadAll();
-        } else {
-            //TODO 内置存储卡也需要扫描
-            List<AlbumInfo> albumInfoList = getAlbumList(cr.query(uri, proj_album,
-                    where.toString(), null, MediaStore.Audio.Media.ALBUM_KEY));
-            for (AlbumInfo albumInfo : albumInfoList) {
-                albumInfoDao.insert(albumInfo);
-            }
-
-            return albumInfoList;
-        }
+        return albumInfoDao.loadAll();
     }
 
     /**
      * 查询歌手列表
      *
-     * @param context
      * @return
      */
-    public static List<ArtistInfo> queryArtistList(Context context) {
+    public static List<ArtistInfo> queryArtistList() {
         DaoSession session = SweetApplication.getDaoSession();
         ArtistInfoDao artistInfoDao = session.getArtistInfoDao();
 
-        Uri uri = MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI;
-        ContentResolver cr = context.getContentResolver();
-        StringBuilder where = new StringBuilder(MediaStore.Audio.Artists._ID
-                + " in (select distinct " + MediaStore.Audio.Media.ARTIST_ID
-                + " from audio_meta where (1=1 ");
-
-        if (Environment.isFilterSize(context)) {
-            where.append(" and " + MediaStore.Audio.Media.SIZE + " > " + FILTER_SIZE);
-        }
-        if (Environment.isFilterDuration(context)) {
-            where.append(" and " + MediaStore.Audio.Media.DURATION + " > " + FILTER_DURATION);
-        }
-        where.append("))");
-
-        if (artistInfoDao.count() != 0) {
-            return artistInfoDao.loadAll();
-        } else {
-            //TODO 内置存储卡也需要扫描
-            List<ArtistInfo> artistInfoList = getArtistList(cr.query(uri, proj_artist,
-                    where.toString(), null, MediaStore.Audio.Media.ARTIST_KEY));
-            for (ArtistInfo artistInfo : artistInfoList) {
-                artistInfoDao.insert(artistInfo);
-            }
-
-            return artistInfoList;
-        }
+        return artistInfoDao.loadAll();
     }
 
     /**
