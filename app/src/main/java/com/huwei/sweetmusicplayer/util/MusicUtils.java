@@ -221,7 +221,7 @@ public class MusicUtils implements IContain {
         ArtistInfo artistInfo = new ArtistInfo();
         String selection = MediaStore.Audio.Artists._ID + " =? ";
         String[] selectionArgs = new String[]{artistId + ""};
-        Cursor cursor = cr.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj_album,
+        Cursor cursor = cr.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj_artist,
                 selection, selectionArgs,
                 MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
         if (cursor != null && cursor.moveToNext()) {
