@@ -142,6 +142,7 @@ public class MusicUtils implements IContain {
             musicInfo.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
             musicInfo.setAlbumId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
             musicInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+            musicInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST_ID)));
             musicInfo.setDuration(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)));
             musicInfo.setPath(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)));
             musicInfo.setFavorite(false);
@@ -221,9 +222,9 @@ public class MusicUtils implements IContain {
         ArtistInfo artistInfo = new ArtistInfo();
         String selection = MediaStore.Audio.Artists._ID + " =? ";
         String[] selectionArgs = new String[]{artistId + ""};
-        Cursor cursor = cr.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, proj_artist,
+        Cursor cursor = cr.query(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, proj_artist,
                 selection, selectionArgs,
-                MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
+                MediaStore.Audio.Artists.DEFAULT_SORT_ORDER);
         if (cursor != null && cursor.moveToNext()) {
             artistInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Artists._ID)));
             artistInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST)));
@@ -264,7 +265,6 @@ public class MusicUtils implements IContain {
     /**
      * 查询专辑信息
      *
-     * @param context
      * @return
      */
     public static List<AlbumInfo> queryAlbumList() {
