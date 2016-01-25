@@ -42,7 +42,7 @@ public class ArtistItemView extends LinearLayout implements IRecycleViewItem<Art
     @Override
     public void bind(ArtistInfo artistInfo) {
         tv_title.setText(artistInfo.getArtist());
-        tv_numsongs.setText(artistInfo.getNumSongs());
+        tv_numsongs.setText(artistInfo.getNumSongs()+"首");
 
     }
 }

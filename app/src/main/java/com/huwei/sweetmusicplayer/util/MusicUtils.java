@@ -286,10 +286,10 @@ public class MusicUtils implements IContain {
         StringBuilder stringBuilder = new StringBuilder("select ");
         stringBuilder.append(ArtistInfoDao.Properties.ArtistId.columnName).append(",");
         stringBuilder.append(ArtistInfoDao.Properties.Artist.columnName).append(",");
-        stringBuilder.append(ArtistInfoDao.Properties.NumSongs.columnName).append(" as (select count(1) from " + MusicInfoDao.TABLENAME).
-                append(" where " + MusicInfoDao.TABLENAME + "." + MusicInfoDao.Properties.ArtistId.columnName).
-                append("=").append(ArtistInfoDao.TABLENAME + "." + ArtistInfoDao.Properties.ArtistId.columnName).append(")").
-                append(" from ").append(ArtistInfoDao.TABLENAME).append(",").append(MusicInfoDao.TABLENAME);
+        stringBuilder.append(" (select count(1) from " + MusicInfoDao.TABLENAME+" as t1").
+                append(" where t1." + MusicInfoDao.Properties.ArtistId.columnName).
+                append("=").append(  "t2." + ArtistInfoDao.Properties.ArtistId.columnName).append(") as ").append(ArtistInfoDao.Properties.NumSongs.columnName).
+                append(" from ").append(ArtistInfoDao.TABLENAME).append(" as t2");
 
         Log.i(TAG,"queryArtistList sql:"+stringBuilder.toString());
         Cursor cursor = session.getDatabase().rawQuery(stringBuilder.toString(), null);
