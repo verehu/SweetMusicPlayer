@@ -1,6 +1,6 @@
 **如今播放器的最新实现在dev-jerry上，支持在线搜索歌曲和网络播放功能,功能有较大的变化，如有需要，请自行切换到dev-jerry分支。**
 
-[博客链接](http://blog.csdn.net/column/details/sweetmusicplayer.html)
+[博客链接:http://blog.csdn.net/column/details/sweetmusicplayer.html](http://blog.csdn.net/column/details/sweetmusicplayer.html)
 
 # SweetMusicPlayer
 功能：  
