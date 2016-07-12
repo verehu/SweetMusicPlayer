@@ -14,6 +14,8 @@ import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.util.CharacterParser;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
 
+import java.io.File;
+
 /**
  * Entity mapped to table MUSIC_INFO.
  */
@@ -76,6 +78,12 @@ public class MusicInfo extends AbstractMusic {
 
     public String getArtist() {
         return artist;
+    }
+
+    @Override
+    public String getArtPic() {
+        Uri uri= Uri.fromFile(new File(MusicUtils.getAlbumArtPath(SweetApplication.context,albumId)));
+        return uri.toString();
     }
 
     public void setArtist(String artist) {
