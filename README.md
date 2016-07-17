@@ -11,22 +11,22 @@
 5，在线搜索音乐（抓取百度音乐API）
 
 
- ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145535.png)
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/dev/screenshots/device-2015-06-19-145535.png)
  
  
- ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2016-07-17-225956.png)
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/dev/screenshots/device-2016-07-17-225956.png)
   
   
- ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2016-07-17-230027.png)
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/dev/screenshots/device-2016-07-17-230027.png)
     
     
- ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145744.png)
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/dev/screenshots/device-2015-06-19-145744.png)
  
  
-![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2015-06-19-145757.png)
+![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/dev/screenshots/device-2015-06-19-145757.png)
 
- ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2016-07-17-230118.png)
+ ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/dev/screenshots/device-2016-07-17-230118.png)
  
-  ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/master/screenshots/device-2016-07-17-230227.png)
+  ![image](https://github.com/huweigoodboy/SweetMusicPlayer/blob/dev/screenshots/device-2016-07-17-230227.png)
       
       
