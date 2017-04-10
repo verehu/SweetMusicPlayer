@@ -3,12 +3,13 @@
 <!-- height设置有问题 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="68dp"
+    android:layout_height="56dp"
     android:layout_gravity="bottom"
     android:descendantFocusability="afterDescendants"
     android:focusable="true"
     android:clickable="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/_2c">
 
     <ProgressBar
         android:id="@+id/pro_music"
@@ -26,9 +27,9 @@
         android:orientation="horizontal">
 
 
-        <ImageView
+        <com.huwei.sweetmusicplayer.ui.widgets.SquareWrapWImageView
             android:id="@+id/img_album"
-            android:layout_width="66dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/img_album_background" />
 
@@ -48,7 +49,8 @@
                 android:ellipsize="end"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:text=""/>
+                android:text=""
+                style="@style/textViewWhite"/>
 
             <TextView
                 android:id="@+id/tv_artist"
@@ -56,8 +58,9 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textColor="@color/white"
-                android:text=""/>
+
+                android:text=""
+                style="@style/secondTextViewWhite"/>
 
         </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.huwei.sweetmusicplayer.abstracts;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcelable;
 
@@ -33,22 +34,54 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
 
     public abstract String getArtist();
 
+//    /**
+//     * 获取艺术家图片
+//     * @return   uri
+//     */
+//    public abstract String getArtPic();
+
     /**
-     * 获取艺术家图片
-     * @return   uri
+     * 加载艺术家图片  上面的方法废弃
+     *
+     * @param loadListener
      */
-    public abstract String getArtPic();
+    public abstract void loadArtPic(OnLoadListener loadListener);
+
+
+    public abstract void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener);
+
+    /**
+     * 专辑图片高斯模糊值
+     * @return
+     */
+    public abstract int blurValueOfPlaying();
 
     /**
      * 获取时间字符串
+     *
      * @return
      */
-    public String getDurationStr(){
+    public String getDurationStr() {
         return TimeUtil.mill2mmss(getDuration());
+    }
+
+    public boolean isOnlineMusic(){
+        return getType() == MusicType.Online;
     }
 
 
     public enum MusicType {
         Local, Online
+    }
+
+    public interface OnLoadListener {
+        void onSuccessLoad(Bitmap bitmap);
+    }
+
+    /**
+     * PIC 尺寸枚举
+     */
+    public enum PicSizeType {
+        SMALL, BIG, PREIUM, HUGE
     }
 }

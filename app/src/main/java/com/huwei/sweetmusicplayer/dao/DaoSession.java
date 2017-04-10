@@ -2,15 +2,16 @@ package com.huwei.sweetmusicplayer.dao;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.huwei.sweetmusicplayer.models.AlbumInfo;
+import com.huwei.sweetmusicplayer.models.ArtistInfo;
+import com.huwei.sweetmusicplayer.models.MusicInfo;
+
 import java.util.Map;
 
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.AbstractDaoSession;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
 import de.greenrobot.dao.internal.DaoConfig;
-
-import com.huwei.sweetmusicplayer.models.MusicInfo;
-import com.huwei.sweetmusicplayer.models.AlbumInfo;
 
 
 
@@ -19,15 +20,17 @@ import com.huwei.sweetmusicplayer.models.AlbumInfo;
 /**
  * {@inheritDoc}
  * 
- * @see AbstractDaoSession
+ * @see de.greenrobot.dao.AbstractDaoSession
  */
 public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig musicInfoDaoConfig;
     private final DaoConfig albumInfoDaoConfig;
+    private final DaoConfig artistInfoDaoConfig;
 
     private final MusicInfoDao musicInfoDao;
     private final AlbumInfoDao albumInfoDao;
+    private final ArtistInfoDao artistInfoDao;
 
     public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
@@ -39,16 +42,22 @@ public class DaoSession extends AbstractDaoSession {
         albumInfoDaoConfig = daoConfigMap.get(AlbumInfoDao.class).clone();
         albumInfoDaoConfig.initIdentityScope(type);
 
+        artistInfoDaoConfig = daoConfigMap.get(ArtistInfoDao.class).clone();
+        artistInfoDaoConfig.initIdentityScope(type);
+
         musicInfoDao = new MusicInfoDao(musicInfoDaoConfig, this);
         albumInfoDao = new AlbumInfoDao(albumInfoDaoConfig, this);
+        artistInfoDao = new ArtistInfoDao(artistInfoDaoConfig, this);
 
         registerDao(MusicInfo.class, musicInfoDao);
         registerDao(AlbumInfo.class, albumInfoDao);
+        registerDao(ArtistInfo.class, artistInfoDao);
     }
     
     public void clear() {
         musicInfoDaoConfig.getIdentityScope().clear();
         albumInfoDaoConfig.getIdentityScope().clear();
+        artistInfoDaoConfig.getIdentityScope().clear();
     }
 
     public MusicInfoDao getMusicInfoDao() {
@@ -57,6 +66,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public AlbumInfoDao getAlbumInfoDao() {
         return albumInfoDao;
+    }
+
+    public ArtistInfoDao getArtistInfoDao() {
+        return artistInfoDao;
     }
 
 }

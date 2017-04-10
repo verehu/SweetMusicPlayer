@@ -1,34 +1,35 @@
 package com.huwei.sweetmusicplayer;
 
+
 import android.app.SearchManager;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.interfaces.ISearchReuslt;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
-import com.huwei.sweetmusicplayer.baidumusic.resp.MusicSearchSugResp;
-import com.huwei.sweetmusicplayer.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.ui.adapters.SearchResultAdapter;
+import com.huwei.sweetmusicplayer.baidumusic.po.QueryResult;
+import com.huwei.sweetmusicplayer.baidumusic.resp.QueryMergeResp;
+import com.huwei.sweetmusicplayer.fragments.SearchAlbumFragment_;
+import com.huwei.sweetmusicplayer.fragments.SearchArtistFragment_;
+import com.huwei.sweetmusicplayer.fragments.SearchSongFragment_;
+import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * 在线音乐搜索的结果页面
@@ -40,21 +41,28 @@ import java.util.List;
 public class OnlineSearchActivity extends BaseActivity {
     public static final String TAG = "OnlineSearchActivity";
 
-    @ViewById
-    ListView lv_online_search;
-    @ViewById
+    private int total = 0;
+
+    private int pageNo = 1;
+    private int pageSize = 50;
+
+    @ViewById(R.id.actionbar)
     Toolbar toolbar;
+    @ViewById
+    View ll_link_view;
+    @ViewById
+    ImageView iv_img;
+    @ViewById
+    TextView tv_primary, tv_second;
+    @ViewById(R.id.viewpager)
+    ViewPager mViewpager;
+    @ViewById(R.id.tabs)
+    TabLayout mTabs;
 
-    SearchResultAdapter adapter;
+    private String mQuery;
+    private ImageLoader mImageLoader = SweetApplication.getImageLoader();
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            adapter.notifyDataSetInvalidated();
-        }
-    };
+    public static final String TAB_TITLES[] = {"歌曲", "歌手", "专辑"};
 
     @AfterViews
     void init() {
@@ -65,9 +73,6 @@ public class OnlineSearchActivity extends BaseActivity {
     }
 
     void initView() {
-        adapter = new SearchResultAdapter(mContext);
-        lv_online_search.setAdapter(adapter);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -80,80 +85,96 @@ public class OnlineSearchActivity extends BaseActivity {
                 onBackClicked(v);
             }
         });
-        lv_online_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ISearchReuslt reuslt = (ISearchReuslt) parent.getItemAtPosition(position);
-                switch (reuslt.getSearchResultType()) {
-                    case Song:
-                        List<AbstractMusic> list = new ArrayList<>();
-                        Log.i(TAG, "song:" + ((Song) reuslt).songInfo);
-                        list.add((Song) reuslt);
-                        //点击当前歌曲，把当前歌曲加入播放队列
-                        MusicManager.getInstance().preparePlayingList(0, list);
-//                        MusicManager.getInstance().play();
-//                        adapter.notifyDataSetInvalidated();
 
-                        finish();
-                        break;
-                }
-            }
-        });
     }
 
     void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            setTitle(query);
-            doQuery(query);
+            mQuery = intent.getStringExtra(SearchManager.QUERY);
+            setTitle(mQuery);
 
-            Toast.makeText(mContext, query, Toast.LENGTH_SHORT).show();
+            doQuery();
+            Toast.makeText(mContext, mQuery, Toast.LENGTH_SHORT).show();
         }
     }
 
-    void doQuery(String query) {
-        BaiduMusicUtil.query(query, new HttpHandler(mContext) {
+    void doQuery() {
+        doQuery(pageNo, new OnGetQueryData() {
             @Override
-            public void onSuccess(String response) {
-                adapter.getData().clear();
+            public void onGetData(QueryResult queryMergeResp) {
+                //初始化ViewPager
 
-                final MusicSearchSugResp sug = new Gson().fromJson(response, MusicSearchSugResp.class);
-                for (Album album : sug.getAlbum()) {
-                    adapter.add(album);
+                if (queryMergeResp != null) {
+                    handleLinkView(queryMergeResp);
+
+                    Fragment mSongFragment = SearchSongFragment_.builder().song_info(queryMergeResp.song_info).build();
+                    Fragment mArtistFragment = SearchArtistFragment_.builder().artist_info(queryMergeResp.artist_info).build();
+                    Fragment mAlbumFrament = SearchAlbumFragment_.builder().album_info(queryMergeResp.album_info).build();
+
+                    mViewpager.setAdapter(new PagerAdapter(getSupportFragmentManager(), Arrays.asList(mSongFragment, mArtistFragment, mAlbumFrament)) {
+                        @Override
+                        public CharSequence getPageTitle(int position) {
+                            return TAB_TITLES[position];
+                        }
+                    });
+
+                    mTabs.setupWithViewPager(mViewpager);
+
                 }
-
-                for (Artist artist : sug.getArtist()) {
-                    adapter.add(artist);
-                }
-
-                for (Song song : sug.getSong()) {
-                    adapter.add(song);
-                }
-
-                adapter.notifyDataSetInvalidated();
-
-//                //子线程网络请求
-//                new Thread(){
-//                    @Override
-//                    public void run() {
-//
-//                        for (Song song:sug.getSong()){
-//                            //同步请求到歌曲信息
-//                            SongPlayResp resp = BaiduMusicUtil.querySong(song.getSongid());
-//                            if(resp!=null) {
-//                                song.bitrate = resp.bitrate;
-//                                song.songInfo = resp.songinfo;
-//
-//                                Log.i(TAG,"song add:"+song);
-//                                adapter.add(song);
-//                            }
-//                        }
-//
-//                        handler.sendEmptyMessage(0);
-//                    }
-//                }.start();
             }
         });
     }
 
+    public void doQuery(int pageNo, final OnGetQueryData onGetQueryData) {
+        //todo暂时只搜索 1-50个  后续加入下拉刷新列表
+        BaiduMusicUtil.queryMerge(mQuery, pageNo, pageSize, new HttpHandler(mContext) {
+            @Override
+            public void onSuccess(String response) {
+
+                final QueryMergeResp sug = new Gson().fromJson(response, QueryMergeResp.class);
+                QueryResult result = sug.result;
+
+                if (onGetQueryData != null && result != null) {
+                    onGetQueryData.onGetData(result);
+                }
+            }
+        });
+    }
+
+    void handleLinkView(QueryResult queryMergeResp) {
+        if (queryMergeResp == null) {
+            return;
+        }
+        switch (queryMergeResp.rqt_type) {
+            case 2:
+                ll_link_view.setVisibility(View.VISIBLE);
+                if (queryMergeResp.artist_info != null && queryMergeResp.artist_info.artist_list != null && queryMergeResp.artist_info.artist_list.size() > 0) {
+                    Artist artist = queryMergeResp.artist_info.artist_list.get(0);
+                    if (artist != null) {
+                        mImageLoader.displayImage(artist.avatar_middle, iv_img);
+                        tv_primary.setText(artist.author);
+                        tv_second.setText(String.format(mContext.getResources().getString(R.string.artist_second_text), artist.song_num, artist.album_num));
+                    }
+                }
+                break;
+            case 3:
+                ll_link_view.setVisibility(View.VISIBLE);
+                if (queryMergeResp.album_info != null && queryMergeResp.album_info.album_list != null && queryMergeResp.album_info.album_list.size() > 0) {
+                    Album album = queryMergeResp.album_info.album_list.get(0);
+                    if (album != null) {
+                        mImageLoader.displayImage(album.pic_small, iv_img);
+                        tv_primary.setText(album.title);
+                        tv_second.setText(album.author);
+                    }
+                }
+                break;
+            default:
+                ll_link_view.setVisibility(View.GONE);
+        }
+    }
+
+
+    public interface OnGetQueryData {
+        void onGetData(QueryResult queryMergeResp);
+    }
 }

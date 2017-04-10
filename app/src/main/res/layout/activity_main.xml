@@ -1,6 +1,4 @@
 <com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-
     android:id="@+id/sp_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,14 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-<!--        android:layout_marginTop="?android:attr/actionBarSize"-->
+        <!--        android:layout_marginTop="?android:attr/actionBarSize"-->
 
-        <fragment
-            android:id="@+id/main"
-            android:name="com.huwei.sweetmusicplayer.fragments.MainFragment_"
+        <FrameLayout
+            android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+
+            <!--<fragment-->
+                <!--android:id="@+id/main"-->
+                <!--android:name="com.huwei.sweetmusicplayer.fragments.MainFragment_"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
+        </FrameLayout>
 
         <fragment
             android:id="@+id/bottom_bar"
@@ -29,10 +33,9 @@
     </LinearLayout>
 
 
-
     <!-- maincontent end -->
 
-    <LinearLayout
+    <com.huwei.sweetmusicplayer.ui.widgets.SmoothScrollLinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,6 +48,6 @@
             android:name="com.huwei.sweetmusicplayer.fragments.PlayingFragment_"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </LinearLayout>
+    </com.huwei.sweetmusicplayer.ui.widgets.SmoothScrollLinearLayout>
 
 </com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel>

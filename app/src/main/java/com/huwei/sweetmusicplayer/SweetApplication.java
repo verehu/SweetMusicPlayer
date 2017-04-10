@@ -10,6 +10,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.huwei.sweetmusicplayer.dao.DaoMaster;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
+import com.huwei.sweetmusicplayer.util.WindowTool;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -22,11 +23,14 @@ import org.androidannotations.annotations.EApplication;
  */
 @EApplication
 public class SweetApplication extends Application {
+
     private static DaoSession daoSession;
     private static RequestQueue mQueue;
     public static Context context;
     private static ImageLoader mImageLoader;
 
+    public static int mScreenWidth;
+    public static int mScreenHeight;
 
     /** set the value to decide weather to print debug log , default true in develop*/
     public static final boolean DEBUG = true ;
@@ -35,7 +39,8 @@ public class SweetApplication extends Application {
         super.onCreate();
         context=getApplicationContext();
 
-
+        mScreenWidth = WindowTool.getWidth(this);
+        mScreenHeight = WindowTool.getHeight(this);
     }
 
     public static DaoSession getDaoSession(){

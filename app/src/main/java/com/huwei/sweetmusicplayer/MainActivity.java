@@ -1,25 +1,27 @@
 package com.huwei.sweetmusicplayer;
 
 
-import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.fragments.MainFragment;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
-import com.huwei.sweetmusicplayer.services.MusicControlerService;
-import com.huwei.sweetmusicplayer.fragments.PlayingFragment;
-import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
-
-
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.*;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.PopupWindow;
 
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.fragments.MainFragment;
+import com.huwei.sweetmusicplayer.fragments.MainFragment_;
+import com.huwei.sweetmusicplayer.fragments.PlayingFragment;
+import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
+import com.huwei.sweetmusicplayer.services.MusicControlerService;
+import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
+import com.huwei.sweetmusicplayer.util.FragmentUtil;
 
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            Log.i(TAG,"onServiceConnected");
             isServiceBinding = true;
             musicControler = IMusicControlerService.Stub.asInterface(iBinder);
 
@@ -67,11 +70,20 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         manager=getSupportFragmentManager();
 
         setContentView(R.layout.activity_main);
+
         playing_fragment= (PlayingFragment) manager.findFragmentById(R.id.playing_fragment);
-        mainFragment = (MainFragment) manager.findFragmentById(R.id.main);
+//        mainFragment = (MainFragment) manager.findFragmentById(R.id.main);
+        mainFragment = new MainFragment_();
+        FragmentUtil.replace(this,R.id.main_container,mainFragment,false);
 
         initView();
         initReciever();
+
+        if (!isServiceBinding) {
+            Log.i(TAG,"start binding service");
+            Intent intent = new Intent(this,MusicControlerService.class);
+            bindService(intent, mConnection,BIND_AUTO_CREATE);
+        }
     }
 
     @Override
@@ -84,8 +96,6 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
 
             bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         }
-
-
     }
 
     @Override

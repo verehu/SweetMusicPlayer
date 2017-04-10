@@ -11,9 +11,7 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.contains.IContain;
 
-
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -52,7 +50,7 @@ public class HttpUtil {
         Log.i(IContain.HTTP,"request post url:"+url+"\n"+new Gson().toJson(params.getParams()));
 
         mQueue.add(request);
-        mQueue.start();
+//        mQueue.start();
         notifyHandlerStart(handler);
     }
 
@@ -62,23 +60,40 @@ public class HttpUtil {
      * @param params
      * @param handler
      */
-    public static void get(String url, final HttpParams params, final HttpHandler handler) {
+    public static void get(String url, final HttpParams params, final HttpHandler handler){
+        get(url,params,handler,false);
+    }
+
+    /**
+     * 封装的get请求
+     * @param url
+     * @param params
+     * @param handler
+     * @param isWindowsUserAgent 是否设置为IE WINDOWS 的userAgent   对于百度音乐API的某些接口需要特殊处理
+     */
+    public static void get(String url, final HttpParams params, final HttpHandler handler, final boolean isWindowsUserAgent) {
         url=handleurl(url);
+        url=addParamsToUrl(url,params); //拼接参数
 
         RequestQueue mQueue = SweetApplication.getQueue();
-        StringRequest request = new StringRequest(Request.Method.GET,addParamsToUrl(url,params),handler,handler){
+        StringRequest request = new StringRequest(Request.Method.GET,url,handler,handler){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> headers=new HashMap<>();
                 headers.put("Content-Type","text/html; charset=utf-8");
+
+                if(isWindowsUserAgent){
+                    headers.put("User-Agent","User-Agent:Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;");
+                }
+
                 return headers;
             }
         };
 
-        Log.i(IContain.HTTP,"request get url:"+url+"\n"+new Gson().toJson(params.getParams()));
+        Log.i(IContain.HTTP,"request get url:"+url);
 
         mQueue.add(request);
-        mQueue.start();
+//        mQueue.start();
         notifyHandlerStart(handler);
     }
 
@@ -91,6 +106,9 @@ public class HttpUtil {
     public static String getSync(String url, final HttpParams params){
         RequestFuture<String> future = RequestFuture.newFuture();
 
+        url=handleurl(url);
+        url=addParamsToUrl(url,params); //拼接参数
+
         RequestQueue mQueue = SweetApplication.getQueue();
         StringRequest request = new StringRequest(addParamsToUrl(url, params),future,future){
             @Override
@@ -101,10 +119,10 @@ public class HttpUtil {
             }
         };
 
-        Log.i(IContain.HTTP,"request getSync url:"+url+"\n"+new Gson().toJson(params.getParams()));
+        Log.i(IContain.HTTP,"request getSync url:"+url);
 
         mQueue.add(request);
-        mQueue.start();
+//        mQueue.start();
 
         String response = null;
         try {
@@ -133,9 +151,9 @@ public class HttpUtil {
         }
 
         //自动在地址末尾添加"/"
-        if(!url.endsWith("/")){
-            url+="/";
-        }
+//        if(!url.endsWith("/")){
+//            url+="/";
+//        }
         return url;
     }
 
@@ -166,11 +184,11 @@ public class HttpUtil {
         }
         String spaceStr=url.replaceAll(" ", "%20");
 
-        try {
-            return new String(spaceStr.getBytes(),"ISO-8859-1");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            return new String(spaceStr.getBytes(),"ISO-8859-1");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
         return spaceStr;
     }
 

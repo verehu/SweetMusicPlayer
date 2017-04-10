@@ -26,7 +26,6 @@
         android:layout_height="wrap_content" 
         android:layout_toRightOf="@+id/logo"
         android:textSize="20sp"
-        android:textColor="@color/gray"
         android:text="SweetMusicPlayer"/>
     </LinearLayout>
 

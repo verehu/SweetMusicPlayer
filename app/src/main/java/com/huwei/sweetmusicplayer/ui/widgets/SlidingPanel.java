@@ -6,11 +6,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.LinearLayout;
+import android.view.ViewConfiguration;
+import android.widget.FrameLayout;
+import android.widget.Scroller;
 
 import com.huwei.sweetmusicplayer.R;
 
@@ -18,25 +18,24 @@ import com.huwei.sweetmusicplayer.R;
 /**
  * Created by huwei on 14-12-19.
  */
-public class SlidingPanel extends LinearLayout implements GestureDetector.OnGestureListener {
+public class SlidingPanel extends FrameLayout implements GestureDetector.OnGestureListener {
     private static final String TAG = "SlidingPanel";
     private static final String GTAG = "GTAG";    //手势TAG
 
     private View mHandle;
-    private View mContent;
+    private SmoothScrollLinearLayout mContent;
 
+    public static int SNAP_VELOCITY = 600;  //最小的滑动速率
     private int mContentRangeTop;   //content在父布局的移动范围
     private int mContentRangeBottom;
-
     private int mDownY;     //ACTION_DOWN时y的坐标
-    private boolean mExpanded=false;  //是否展开
-    public static boolean mTracking=false;    //是否正在滑动
+    private int mMaxFlingVelocity;
 
-
-    private static final int ANIMATION_DURATION = 1000;   //  从底部到上面需要1s
+    public static boolean mTracking = false;    //是否正在滑动
 
     private GestureDetector mGestureDetector;   //检测手势辅助类
-
+    private VelocityTracker mVelocityTracker = null;
+    boolean isInit;
 
 
     public SlidingPanel(Context context) {
@@ -44,14 +43,10 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
     }
 
     public SlidingPanel(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public SlidingPanel(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        super(context, attrs);
 
         mGestureDetector = new GestureDetector(context, this);
-        setOrientation(LinearLayout.VERTICAL);
+        mMaxFlingVelocity = ViewConfiguration.get(context).getScaledMaximumFlingVelocity();
     }
 
 
@@ -65,7 +60,7 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
                     + "to a valid child.");
         }
 
-        mContent =  findViewById(R.id.content);
+        mContent = (SmoothScrollLinearLayout) findViewById(R.id.content);
 
         if (mContent == null) {
             throw new IllegalArgumentException("The content attribute is required and must refer "
@@ -91,41 +86,19 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
 
         measureChild(handle, widthMeasureSpec, heightMeasureSpec);
 
-        int height = (int) heightSpecSize;
-        measureChild(mContent, MeasureSpec.makeMeasureSpec(widthSpecSize, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+        mContentRangeBottom = heightSpecSize;
+        measureChild(mContent, MeasureSpec.makeMeasureSpec(widthSpecSize, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(mContentRangeBottom, MeasureSpec.EXACTLY));
 
         setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-
-
-        //获取自身的宽高
-        final int width = r - l;
-        final int height = b - t;
-
-        mContentRangeTop=0;
-        mContentRangeBottom = b - t;
-
-        final View handle = mHandle;
-        int childHeight = handle.getMeasuredHeight();
-        int childWidth = handle.getMeasuredWidth();
-
-        handle.layout(0, height - childHeight, childWidth, height);
-
-        final View content = mContent;
-        if (!mExpanded) {
-            mContent.layout(0, mContentRangeBottom, content.getMeasuredWidth(), mContentRangeBottom + content.getMeasuredHeight());
-        } else {
-            mContent.layout(0, mContentRangeTop, content.getMeasuredWidth(), mContentRangeTop + content.getMeasuredHeight());
-        }
-    }
-
-    @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
+        if (!isInit) {
+            mContent.scrollTo(0, -mContentRangeBottom);
+            isInit = true;
+        }
 
         long drawingTime = getDrawingTime();
 
@@ -136,163 +109,63 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
         drawChild(canvas, content, drawingTime);
     }
 
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return false;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                mDownY= (int)event.getY();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                mTracking=true;
-                int nowY=(int)event.getY();
-                
-                moveContent(nowY-mDownY);
-                break;
-            case MotionEvent.ACTION_UP:
-                mTracking=false;
-                adjustContentView();
-                break;
-        }
-        return  mExpanded;
-    }
- 
-
-    /**
-     * 停止滑动
-     *
-     * @param
-     */
-    private void stopTracking() {
-        //判断content是展开还是收缩
-        updateExpanded();
-    }
-
-    /**
-     * 更新mExpanded状态
-     */
-    private void updateExpanded(){
-        if (mContent.getTop() <= mContentRangeTop) {
-            mExpanded = true;
-        } else {
-            mExpanded = false;
-        }
-    }
-
-    /**
-     * move content到指定位置
-     *
-     * @param position
-     */
-    private void moveContent(int position) {
-
-
-        Log.i(GTAG, "*********move Content:position" + position + "**********");
-        //不能移出上边界
-        if (position < mContentRangeTop) {
-            position = mContentRangeTop;
-        } else if (position > mContentRangeBottom) {
-            position = mContentRangeBottom;
-        }
-
-        final View content=mContent;
-        final int top = (int) mContent.getY();
-        final int deltaY = position - top;
-
-
-
-        content.layout(0,position,content.getWidth(),position+content.getHeight());
-    }
-
-    //移动Content
-    private void doAnimation(int nowY, final int targetY) {
-        AccelerateInterpolator accelerateInterpolator = new AccelerateInterpolator();
-        //BounceInterpolator bounceInterpolator=new BounceInterpolator();
-        TranslateAnimation animation = new TranslateAnimation(0, 0, 0, targetY - nowY);
-        animation.setDuration(ANIMATION_DURATION * Math.abs(targetY - nowY) / mContentRangeBottom);
-        animation.setInterpolator(accelerateInterpolator);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                //Log.i(TAG,"onAnimationEnd");
-                mContent.clearAnimation();
-                mContent.layout(0, targetY, mContent.getMeasuredWidth(), targetY + mContent.getMeasuredHeight());
-
-                stopTracking();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-        mContent.startAnimation(animation);
-
-    }
-
     /**
      * 点击时打开Content*
      */
     private void open() {
-        doAnimation(mContentRangeBottom, 0);
-        //stopTracking();
+        mContent.smoothScrollTo(0, 0);
     }
 
     /**
      * 关闭Content*
      */
     public void close() {
-        doAnimation(0, mContentRangeBottom);
-        //stopTracking();
+        mContent.smoothScrollTo(0, -mContentRangeBottom);
     }
 
     /**
      * content是否展开*
      */
-    public boolean isExpanded(){
-        return mExpanded;
+    public boolean isExpanded() {
+        return mContent.isExpanded();
     }
 
     /**
      * ACTION_UP时 contentView不是停靠在屏幕边缘（在屏幕中间）时，调整contentView的位置*
+     * @param vY y方向上的速率
      */
-    private void adjustContentView(){
-        final int top = mContent.getTop();
+    private void adjustContentView(float vY) {
+        //根据速率判断
+        if (vY < -SNAP_VELOCITY) {
+            mContent.smoothScrollTo(0, 0);
+        }else {
+            //根据现在的位置调整
+            final int top = -mContent.getScrollY();
 
-        //切割父容器，分成3等份
-        final int perRange=(mContentRangeBottom-mContentRangeTop)/3;
-        if(mExpanded){
-            //小于1/3
-            if(top<perRange+mContentRangeTop){
-                doAnimation(top,0);
-            }else{
-                doAnimation(top, mContentRangeBottom);
-            }
-        }else{
-            //小于2/3
-            if(top<mContentRangeTop+perRange*2){
-                doAnimation(top,0);
-            }else{
-                doAnimation(top,mContentRangeBottom);
+            //切割父容器，分成3等份
+            final int perRange = (mContentRangeBottom - mContentRangeTop) / 3;
+            if (isExpanded()) {
+                //小于1/3
+                if (top < perRange + mContentRangeTop) {
+                    mContent.smoothScrollTo(0, 0);
+                } else {
+                    mContent.smoothScrollTo(0, -mContentRangeBottom);
+                }
+            } else {
+                //小于2/3
+                if (top < mContentRangeTop + perRange * 2) {
+                    mContent.smoothScrollTo(0, 0);
+                } else {
+                    mContent.smoothScrollTo(0, -mContentRangeBottom);
+                }
             }
         }
-        
+
     }
 
     /**
-     *按下时触发* 
+     * 按下时触发*
+     *
      * @param e
      * @return
      */
@@ -308,21 +181,23 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
     }
 
     /**
-     * 轻轻点击* 
+     * 轻轻点击*
+     *
      * @param e
      * @return
      */
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        Log.i(GTAG, "onSingleTapUp");
-        if (!mExpanded) {
+        Log.i(GTAG, "onSingleTapUp---mExpanded:" + isExpanded());
+        if (!isExpanded()) {
             open();
         }
         return false;
     }
 
     /**
-     * 滚动时出发* 
+     * 滚动时触发
+     *
      * @param e1
      * @param e2
      * @param distanceX
@@ -334,12 +209,13 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
 
         int touchY = (int) e2.getY();
         Log.i(GTAG, "onScroll:" + mContent.getY());
-        moveContent(touchY - mDownY + (mExpanded ? mContentRangeTop : mContentRangeBottom));
+        scrollTo(touchY - mDownY + (isExpanded() ? mContentRangeTop : mContentRangeBottom));
         return false;
     }
 
     /**
-     * 长按* 
+     * 长按*
+     *
      * @param e
      */
     @Override
@@ -349,6 +225,7 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
 
     /**
      * 瞬时滑动*
+     *
      * @param e1
      * @param e2
      * @param velocityX
@@ -361,22 +238,73 @@ public class SlidingPanel extends LinearLayout implements GestureDetector.OnGest
         return false;
     }
 
+    /**
+     * 获取速度追踪器
+     *
+     * @return
+     */
+    private VelocityTracker getVelocityTracker() {
+        if (mVelocityTracker == null) {
+            mVelocityTracker = VelocityTracker.obtain();
+        }
+        return mVelocityTracker;
+    }
+
+    /**
+     * 回收速度追踪器
+     */
+    private void recycleVelocityTracker() {
+        if (mVelocityTracker != null) {
+            mVelocityTracker.clear();
+            mVelocityTracker.recycle();
+            mVelocityTracker = null;
+        }
+    }
+
+    /**
+     * 滚动到某个位置
+     * @param fY    和正常的scrollTo（）方法相反
+     */
+    public void scrollTo(int fY) {
+        if (fY < 0) {
+            Log.i(TAG,"open");
+            mContent.scrollTo(0, 0);
+        } else if (fY > mContentRangeBottom) {
+            Log.i(TAG,"close");
+            mContent.scrollTo(0, -mContentRangeBottom);
+        } else {
+            mContent.scrollTo(0, -fY);
+        }
+    }
+
     OnTouchListener touchListener = new OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             final View handle = mHandle;
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                final int top = handle.getTop();
-                mDownY = (int) event.getY();
+            //1.获取速度追踪器
+            getVelocityTracker();
+            //2.将当前事件纳入到追踪器中
+            mVelocityTracker.addMovement(event);
 
-                Log.i(GTAG, "mDownY:" + mDownY);
-            } else if(event.getAction() == MotionEvent.ACTION_MOVE){
-                mTracking=true;              
+            int pointId = -1;
+
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                mDownY = (int) event.getY();
+                pointId = event.getPointerId(0);
+//                Log.i(GTAG, "mDownY:" + mDownY);
+            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                mTracking = true;
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                mTracking=false;
-                adjustContentView();
+                mTracking = false;
+
+                //3.计算当前速度
+                mVelocityTracker.computeCurrentVelocity(1000, mMaxFlingVelocity);
+                //获取x y方向上的速度
+                float vY = mVelocityTracker.getYVelocity(pointId);
+
+                adjustContentView(vY);
             }
-            Log.i(GTAG, "onTouch:" + event.getAction() + " y:" + event.getY());
+//            Log.i(GTAG, "onTouch:" + event.getAction() + " y:" + event.getY());
             return mGestureDetector.onTouchEvent(event);
         }
 

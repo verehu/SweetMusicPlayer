@@ -1,37 +1,76 @@
 package com.huwei.sweetmusicplayer.ui.adapters;
 
 import android.content.Context;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.huwei.sweetmusicplayer.models.AlbumInfo;
-import com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView;
-import com.huwei.sweetmusicplayer.ui.itemviews.AlbumItemView_;
+import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.SweetApplication;
+import com.huwei.sweetmusicplayer.baidumusic.po.Album;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
-import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.RootContext;
+import java.util.List;
 
 /**
- * @author Jayce
- * @date 2015/6/14
+ *  专辑列表适配器
+ * @author jerry
+ * @date 2015/12/30
  */
-@EBean
-public class AlbumAdapter extends RecyclerViewAdapterBase<AlbumInfo,AlbumItemView>{
+public class AlbumAdapter extends BaseAdapter {
 
-    @RootContext
-    Context context;
+    private Context mContext;
+    private List<Album> albums;
 
-    @Override
-    protected AlbumItemView onCreateItemView(ViewGroup parent, int viewType) {
-        return AlbumItemView_.build(context);
+    ImageLoader imageLoader = SweetApplication.getImageLoader();
+
+    public AlbumAdapter(Context context, List<Album> albums) {
+        this.mContext = context;
+        this.albums = albums;
     }
 
     @Override
-    public void onBindViewHolder(ViewWrapper<AlbumItemView> holder, int position) {
-        AlbumItemView view= (AlbumItemView) holder.getView();
-        AlbumInfo albumInfo=items.get(position);
-
-        view.bind(albumInfo);
+    public int getCount() {
+        return albums.size();
     }
 
+    @Override
+    public Object getItem(int position) {
+        return albums.get(position);
+    }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_online_album, null);
+            viewHolder = new ViewHolder();
+            viewHolder.iv_album = (ImageView) convertView.findViewById(R.id.iv_album);
+            viewHolder.tv_album = (TextView) convertView.findViewById(R.id.tv_album);
+            convertView.setTag(viewHolder);
+        }
+
+        final Album album = (Album) getItem(position);
+        viewHolder = (ViewHolder) convertView.getTag();
+
+        //todo 设置默认图片
+        imageLoader.displayImage(album.pic_small, viewHolder.iv_album);
+
+        viewHolder.tv_album.setText(Html.fromHtml(mContext.getString(R.string.tab_albums) + ":" + album.title));
+        return convertView;
+    }
+
+    class ViewHolder {
+        ImageView iv_album;
+        TextView tv_album;
+    }
 }

@@ -1,21 +1,13 @@
 package com.huwei.sweetmusicplayer.fragments;
 
 
-import com.huwei.sweetmusicplayer.R;
-//import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -25,12 +17,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+//import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+
 @EFragment(R.layout.bottom_action_bar)
 public class BottomActionBarFragment extends Fragment implements IContain {
+
+    public static final String TAG="BottomActionBarFragment";
 
     @ViewById
     TextView tv_title, tv_artist;
@@ -81,6 +82,7 @@ public class BottomActionBarFragment extends Fragment implements IContain {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(PLAYBAR_UPDATE);
         intentFilter.addAction(CURRENT_UPDATE);
+        intentFilter.addAction(PLAY_STATUS_UPDATE);
         getActivity().registerReceiver(receiver, intentFilter);
     }
 
@@ -92,9 +94,13 @@ public class BottomActionBarFragment extends Fragment implements IContain {
             String action = intent.getAction();
 
             switch (action) {
+                case PLAY_STATUS_UPDATE:
+                    boolean isPlaying = intent.getBooleanExtra("isPlaying", false);
+                    btn_play.setChecked(MusicManager.getInstance().isPlaying());
+                    break;
                 case PLAYBAR_UPDATE:
                     pro_music.setMax(MusicManager.getInstance().getNowPlayingSong().getDuration());
-                    AbstractMusic music = intent.getParcelableExtra("newMusic");
+                    AbstractMusic music = MusicManager.getInstance().getNowPlayingSong();
                     updateBottomBarFromService(music);
                     break;
                 case CURRENT_UPDATE:
@@ -119,9 +125,15 @@ public class BottomActionBarFragment extends Fragment implements IContain {
             tv_artist.setText(music.getArtist());
             btn_play.setChecked(MusicManager.getInstance().isPlaying());
 
-            ImageLoader imageLoader = SweetApplication.getImageLoader();
-            imageLoader.displayImage(music.getArtPic(), img_album);
-//            img_album.setImageBitmap(MusicUtils.getCachedArtwork(getActivity(), music.getAlbumId(), R.drawable.img_album_background));
+
+            music.loadArtPic(new AbstractMusic.OnLoadListener() {
+                @Override
+                public void onSuccessLoad(Bitmap bitmap) {
+                    Log.i(TAG, "onSuccessLoad bitmap:" + bitmap);
+
+                    img_album.setImageBitmap(bitmap);
+                }
+            });
         }
 
     }

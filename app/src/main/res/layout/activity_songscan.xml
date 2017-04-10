@@ -7,7 +7,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple"
+        android:background="@color/primary"
         android:layout_width="match_parent" />
 
     <ImageView
@@ -25,7 +25,6 @@
 
         <Button
             android:id="@+id/scanfinish_btn"
-            style="@style/default_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

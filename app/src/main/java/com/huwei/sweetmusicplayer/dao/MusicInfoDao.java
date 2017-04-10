@@ -25,11 +25,12 @@ public class MusicInfoDao extends AbstractDao<MusicInfo, Long> {
     public static class Properties {
         public final static Property SongId = new Property(0, Long.class, "songId", true, "SONG_ID");
         public final static Property AlbumId = new Property(1, Long.class, "albumId", false, "ALBUM_ID");
-        public final static Property Title = new Property(2, String.class, "title", false, "TITLE");
-        public final static Property Artist = new Property(3, String.class, "artist", false, "ARTIST");
-        public final static Property Duration = new Property(4, Integer.class, "duration", false, "DURATION");
-        public final static Property Path = new Property(5, String.class, "path", false, "PATH");
-        public final static Property Favorite = new Property(6, Boolean.class, "favorite", false, "FAVORITE");
+        public final static Property ArtistId = new Property(2, Long.class, "artistId", false, "ARTIST_ID");
+        public final static Property Title = new Property(3, String.class, "title", false, "TITLE");
+        public final static Property Artist = new Property(4, String.class, "artist", false, "ARTIST");
+        public final static Property Duration = new Property(5, Integer.class, "duration", false, "DURATION");
+        public final static Property Path = new Property(6, String.class, "path", false, "PATH");
+        public final static Property Favorite = new Property(7, Boolean.class, "favorite", false, "FAVORITE");
     };
 
 
@@ -47,11 +48,12 @@ public class MusicInfoDao extends AbstractDao<MusicInfo, Long> {
         db.execSQL("CREATE TABLE " + constraint + "'MUSIC_INFO' (" + //
                 "'SONG_ID' INTEGER PRIMARY KEY ," + // 0: songId
                 "'ALBUM_ID' INTEGER," + // 1: albumId
-                "'TITLE' TEXT," + // 2: title
-                "'ARTIST' TEXT," + // 3: artist
-                "'DURATION' INTEGER," + // 4: duration
-                "'PATH' TEXT," + // 5: path
-                "'FAVORITE' INTEGER);"); // 6: favorite
+                "'ARTIST_ID' INTEGER," + // 2: artistId
+                "'TITLE' TEXT," + // 3: title
+                "'ARTIST' TEXT," + // 4: artist
+                "'DURATION' INTEGER," + // 5: duration
+                "'PATH' TEXT," + // 6: path
+                "'FAVORITE' INTEGER);"); // 7: favorite
     }
 
     /** Drops the underlying database table. */
@@ -75,29 +77,34 @@ public class MusicInfoDao extends AbstractDao<MusicInfo, Long> {
             stmt.bindLong(2, albumId);
         }
  
+        Long artistId = entity.getArtistId();
+        if (artistId != null) {
+            stmt.bindLong(3, artistId);
+        }
+ 
         String title = entity.getTitle();
         if (title != null) {
-            stmt.bindString(3, title);
+            stmt.bindString(4, title);
         }
  
         String artist = entity.getArtist();
         if (artist != null) {
-            stmt.bindString(4, artist);
+            stmt.bindString(5, artist);
         }
  
         Integer duration = entity.getDuration();
         if (duration != null) {
-            stmt.bindLong(5, duration);
+            stmt.bindLong(6, duration);
         }
  
         String path = entity.getPath();
         if (path != null) {
-            stmt.bindString(6, path);
+            stmt.bindString(7, path);
         }
  
         Boolean favorite = entity.getFavorite();
         if (favorite != null) {
-            stmt.bindLong(7, favorite ? 1l: 0l);
+            stmt.bindLong(8, favorite ? 1l: 0l);
         }
     }
 
@@ -113,11 +120,12 @@ public class MusicInfoDao extends AbstractDao<MusicInfo, Long> {
         MusicInfo entity = new MusicInfo( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // songId
             cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // albumId
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // artist
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // duration
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // path
-            cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0 // favorite
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // artistId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // title
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // artist
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // duration
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // path
+            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0 // favorite
         );
         return entity;
     }
@@ -127,11 +135,12 @@ public class MusicInfoDao extends AbstractDao<MusicInfo, Long> {
     public void readEntity(Cursor cursor, MusicInfo entity, int offset) {
         entity.setSongId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setAlbumId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setArtist(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setDuration(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setPath(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setFavorite(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
+        entity.setArtistId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setTitle(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setArtist(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setDuration(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setPath(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setFavorite(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
      }
     
     /** @inheritdoc */

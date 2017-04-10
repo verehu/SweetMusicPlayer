@@ -1,5 +1,7 @@
 package com.huwei.sweetmusicplayer.baidumusic.resp;
 
+
+
 /**
  * @author Jayce
  * @date 2015/6/13
@@ -7,16 +9,16 @@ package com.huwei.sweetmusicplayer.baidumusic.resp;
 public class BaseResp {
 
     public static final int ERROR_CODE_OK=22000;
-    private int error_code;
+    public static final int ERROR_CODE_ERROR=22001;
+    public int error_code;
+    public int errorCode;
 
 
     public int getError_code() {
-        return error_code;
+        return error_code!=0?error_code:errorCode;
     }
 
-    public void setError_code(int error_code) {
-        this.error_code = error_code;
-    }
+
     public boolean isValid(){
         return error_code==0||error_code== ERROR_CODE_OK;
     }

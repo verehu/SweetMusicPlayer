@@ -8,6 +8,8 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.huwei.sweetmusicplayer.SweetApplication;
+import com.huwei.sweetmusicplayer.baidumusic.resp.BaseResp;
 import com.huwei.sweetmusicplayer.contains.IContain;
 
 /**
@@ -19,6 +21,10 @@ public abstract class HttpHandler implements Response.Listener<String>,Response.
     public static final String TAG="HttpHandler";
 
     private Context context;
+
+    public HttpHandler(){
+        this.context = SweetApplication.context;
+    }
 
     public HttpHandler(Context context) {
         this.context = context;
@@ -38,9 +44,17 @@ public abstract class HttpHandler implements Response.Listener<String>,Response.
 
     @Override
     public void onResponse(String response) {
-        Log.i(IContain.HTTP,"response:"+response);
+//        Log.i(IContain.HTTP,"response:"+response);
 
         onFinish();
+        BaseResp resp = new Gson().fromJson(response,BaseResp.class);
+        if(resp!=null){
+            switch (resp.getError_code()){
+                case BaseResp.ERROR_CODE_ERROR:
+                    onErrorResponse(new VolleyError("ERROR CODE:"+BaseResp.ERROR_CODE_ERROR));
+                    break;
+            }
+        }
         onSuccess(response);
     }
 

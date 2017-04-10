@@ -6,6 +6,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
+ * 获取屏幕高度和宽度
  * Created by huwei on 15-1-21.
  */
 public class WindowTool {

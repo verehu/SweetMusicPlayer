@@ -329,7 +329,7 @@ public class LrcView extends ScrollView implements OnScrollChangedListener, OnTo
         linePaint.setTextAlign(Paint.Align.CENTER);
 
         //设置画笔颜色
-        currentPaint.setColor(getResources().getColor(R.color.purple));
+        currentPaint.setColor(getResources().getColor(R.color.primary));
         notCurrentPaint.setColor(Color.argb(140, 255, 255, 255));
         tipsPaint.setColor(Color.WHITE);
         linePaint.setColor(Color.RED);

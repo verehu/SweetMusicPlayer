@@ -10,6 +10,7 @@
         android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,7 +25,7 @@
         android:icon="@drawable/sweet"
         android:label="@string/app_name"
         android:theme="@style/SweetTheme"
-        tools:replace="icon,label,theme">
+       >
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name">
@@ -36,7 +37,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".OnlineSearchActivity_" />
@@ -50,9 +52,12 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/search_online" />
         </activity>
+        <activity android:name=".AlbumInfoActivity_"/>
+        <activity android:name=".ArtistInfoActivity_"/>
+
 
         <service
-            android:name=".services.MusicControlerService"
+            android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"
             android:process=":remote">
             <intent-filter>
                 <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"/>

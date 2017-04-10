@@ -1,34 +1,30 @@
 package com.huwei.sweetmusicplayer.fragments;
 
-import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.huwei.sweetmusicplayer.OnlineSearchActivity_;
 import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.SongScanActivity_;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
 import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
-import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter;
-import com.huwei.sweetmusicplayer.ui.adapters.ScrollingTabsAdapter;
-import com.huwei.sweetmusicplayer.ui.widgets.ScrollableTabView;
+import com.huwei.sweetmusicplayer.ui.adapters.PagerStateAdapter;
 import com.huwei.sweetmusicplayer.util.TimeUtil;
 
 import org.androidannotations.annotations.AfterViews;
@@ -45,12 +41,12 @@ import org.androidannotations.annotations.res.IntArrayRes;
 @EFragment(R.layout.fragment_main)
 public class MainFragment extends BaseFragment implements IMusicViewTypeContain {
 
-    @ViewById
+    @ViewById(R.id.actionbar)
     Toolbar toolbar;
     @ViewById
     ViewPager viewPager;
     @ViewById
-    ScrollableTabView scrollingTabs;
+    TabLayout tabs;
     @ViewById
     TextView tv_sleepinfo, tv_sleep_cancel;
     @ViewById
@@ -61,6 +57,9 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     @IntArrayRes
     int sleep_times[];
 
+    private View mView;
+
+    PagerStateAdapter mPagerAdapter;
 
     private long sleeptime = 0;
     private final int SLEEP = 0;
@@ -91,6 +90,23 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
         }
     };
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //第二次可以直接返回mView
+        if (mView != null) {
+            ViewGroup parent = (ViewGroup) mView.getParent();
+            if (parent != null) {
+                parent.removeView(mView);
+            }
+            return mView;
+        }
+        Log.i(TAG, "onCreateView");
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -99,14 +115,19 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
         } else {
             setSleepBarVisiable(false);
         }
+
+        mPagerAdapter.notifyDataSetChanged();
     }
 
     @AfterViews
     void init() {
 
-
-        initToolBar();
-        initPager();
+        //防止第二次加载
+        if (mView == null) {
+            mView = getView();
+            initToolBar();
+            initPager();
+        }
     }
 
     @Click(R.id.tv_sleep_cancel)
@@ -124,49 +145,49 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_search:
-//                        mActivity.onSearchRequested();
+//                        mAct.onSearchRequested();
                         break;
-                    case R.id.menu_scan:
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(), SongScanActivity_.class);
-                        startActivity(intent);
-                        return true;
-                    case R.id.menu_clock:
-                        final String[] mItems = new String[sleep_times.length];
-                        for (int i = 0; i < mItems.length; i++)
-                            mItems[i] = sleep_times[i] + "分钟";
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setTitle("请设置自动关闭的时间");
-                        builder.setItems(mItems, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
-                                    case 0:
-                                        sleeptime = 10 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 1:
-                                        sleeptime = 20 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 2:
-                                        sleeptime = 30 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 3:
-                                        sleeptime = 60 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                    case 4:
-                                        sleeptime = 90 * 60 * 1000;
-                                        sleepHandler.sendEmptyMessage(SLEEP);
-                                        break;
-                                }
-                                Toast.makeText(getActivity(), mItems[which], Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        builder.create().show();
-                        return true;
+//                    case R.id.menu_scan:
+//                        Intent intent = new Intent();
+//                        intent.setClass(getActivity(), SongScanActivity_.class);
+//                        startActivity(intent);
+//                        return true;
+//                    case R.id.menu_clock:
+//                        final String[] mItems = new String[sleep_times.length];
+//                        for (int i = 0; i < mItems.length; i++)
+//                            mItems[i] = sleep_times[i] + "分钟";
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                        builder.setTitle("请设置自动关闭的时间");
+//                        builder.setItems(mItems, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                switch (which) {
+//                                    case 0:
+//                                        sleeptime = 10 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 1:
+//                                        sleeptime = 20 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 2:
+//                                        sleeptime = 30 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 3:
+//                                        sleeptime = 60 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                    case 4:
+//                                        sleeptime = 90 * 60 * 1000;
+//                                        sleepHandler.sendEmptyMessage(SLEEP);
+//                                        break;
+//                                }
+//                                Toast.makeText(getActivity(), mItems[which], Toast.LENGTH_LONG).show();
+//                            }
+//                        });
+//                        builder.create().show();
+//                        return true;
                     default:
                         break;
                 }
@@ -176,11 +197,10 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     }
 
 
-
     private void initMenu(Menu menu) {
         SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
-        SearchManager searchManager = (SearchManager) mActivity.getSystemService(Context.SEARCH_SERVICE);
-        ComponentName componentName = new ComponentName(mActivity, OnlineSearchActivity_.class);
+        SearchManager searchManager = (SearchManager) mAct.getSystemService(Context.SEARCH_SERVICE);
+        ComponentName componentName = new ComponentName(mAct, OnlineSearchActivity_.class);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
         searchView.setIconifiedByDefault(true);
 
@@ -194,21 +214,30 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     }
 
     private void initPager() {
-        PagerAdapter mPagerAdapter = new PagerAdapter(
-                getActivity().getSupportFragmentManager());
+        mPagerAdapter = new PagerStateAdapter(
+                getActivity().getSupportFragmentManager()) {
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return getResources().getStringArray(R.array.tab_titles)[position];
+            }
+        };
 
         // add tabs_recent
 //        mPagerAdapter.addFragment(new RecentlyAddedFragment());
         // add tab_songs
         Bundle bundle = new Bundle();
         bundle.putInt(MUSIC_SHOW_TYPE, SHOW_MUSIC);
-        MusicFragment musicFragment = new MusicFragment_();
+
+        String tabs_str[] = getResources().getStringArray(R.array.tab_titles);
+
+        LocalMusicFragment musicFragment = new LocalMusicFragment_();
         musicFragment.setArguments(bundle);
         mPagerAdapter.addFragment(musicFragment);
         // add tab_artists
-        mPagerAdapter.addFragment(new ArtistsFragment());
+        mPagerAdapter.addFragment(new LocalArtistFragment_());
         // add tab_albums
-        mPagerAdapter.addFragment(new AlbumsFragment_());
+        mPagerAdapter.addFragment(new LocalAlbumFragment_());
         //add tab_online
         mPagerAdapter.addFragment(new OnlineFragment_());
         // add tab_playlists
@@ -218,17 +247,11 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
 
         viewPager.setAdapter(mPagerAdapter);
 
-        initScrollableTabs(viewPager);
+        tabs.setupWithViewPager(viewPager);
+
+        tabs.setTabsFromPagerAdapter(mPagerAdapter);
     }
 
-    private void initScrollableTabs(ViewPager mViewPager) {
-        // TODO Auto-generated method stub
-
-        ScrollingTabsAdapter mScrollingTabsAdapter = new ScrollingTabsAdapter(
-                getActivity());
-        scrollingTabs.setAdapter(mScrollingTabsAdapter);
-        scrollingTabs.setViewPager(mViewPager);
-    }
 
     public void setSleepBarVisiable(boolean flag) {
         int visiblity = flag ? View.VISIBLE : View.GONE;
