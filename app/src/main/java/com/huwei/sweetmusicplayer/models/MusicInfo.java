@@ -80,11 +80,11 @@ public class MusicInfo extends AbstractMusic {
         return artist;
     }
 
-    @Override
-    public String getArtPic() {
-        Uri uri= Uri.fromFile(new File(MusicUtils.getAlbumArtPath(SweetApplication.context,albumId)));
-        return uri.toString();
-    }
+//    @Override
+//    public String getArtPic() {
+//        Uri uri= Uri.fromFile(new File(MusicUtils.getAlbumArtPath(SweetApplication.context,albumId)));
+//        return uri.toString();
+//    }
 
     public void setArtist(String artist) {
         this.artist = artist;
