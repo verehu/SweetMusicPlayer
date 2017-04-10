@@ -89,6 +89,13 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
     @Override
     protected void onStart() {
         super.onStart();
+
+        if (!isServiceBinding) {
+            Intent intent = new Intent(this, MusicControlerService.class);
+            startService(intent);
+
+            bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        }
     }
 
     @Override
