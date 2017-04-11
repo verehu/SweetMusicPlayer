@@ -37,4 +37,3 @@ proguard/
 .navigation/
 
 *.iml
-*/*.iml

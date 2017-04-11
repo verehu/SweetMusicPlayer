@@ -306,7 +306,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         final AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
         iv_playing_bg.setImageBitmap(null);
         //加载模糊背景图
-        song.loadArtPic(AbstractMusic.PicSizeType.HUGE, new AbstractMusic.OnLoadListener() {
+        song.loadArtPic(AbstractMusic.PicSizeType.BIG, new AbstractMusic.OnLoadListener() {
             @Override
             public void onSuccessLoad(Bitmap bitmap) {
                 mBlurHelper.blurBitmap(bitmap, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {

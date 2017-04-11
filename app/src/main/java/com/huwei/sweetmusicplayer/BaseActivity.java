@@ -1,14 +1,20 @@
 package com.huwei.sweetmusicplayer;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import static com.huwei.sweetmusicplayer.Permission.*;
 
 
 /**
@@ -42,6 +48,13 @@ public class BaseActivity extends AppCompatActivity {
 //        tintManager.setStatusBarDarkMode(true, this);
 //
 //        tintManager.setStatusBarAlpha(60);
+
+        //权限处理
+        for (String permiss : PERMISSIONS) {
+            if (ActivityCompat.checkSelfPermission(mContext, permiss) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{permiss}, CODE_READ_EXTERNAL_STORAGE);
+            }
+        }
     }
 
     @Override
@@ -67,17 +80,17 @@ public class BaseActivity extends AppCompatActivity {
      * 调整actionBar的高度 满足状态栏沉浸
      */
     public void adjustActionBarHeight() {
-        if(!hasAdjustActionBar) {
+        if (!hasAdjustActionBar) {
             View actionBar = findViewById(R.id.actionbar);
             if (actionBar != null) {
                 ViewGroup.LayoutParams params = actionBar.getLayoutParams();
                 params.height = params.height + getStatusBarHeight();
                 actionBar.setLayoutParams(params);
-                Log.i(TAG,"adjustActionBarHeight actionBar");
+                Log.i(TAG, "adjustActionBarHeight actionBar");
             }
             hasAdjustActionBar = true;
 
-            Log.i(TAG,"adjustActionBarHeight");
+            Log.i(TAG, "adjustActionBarHeight");
         }
     }
 
