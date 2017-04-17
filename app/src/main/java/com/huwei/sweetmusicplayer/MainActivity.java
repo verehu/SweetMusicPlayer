@@ -280,7 +280,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
     public void songscan(View v) {
 
         Intent intent = new Intent();
-        intent.setClass(this, SongScanActivity.class);
+        intent.setClass(this, SongScanActivity_.class);
         startActivity(intent);
     }
 

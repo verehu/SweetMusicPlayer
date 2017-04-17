@@ -12,4 +12,12 @@
         android:hint="@string/online_search_text"
         android:onClick="onlineSearchClicked"/>
 
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="重新扫描"
+        android:textColor="@color/black"
+        android:onClick="songscan"/>
+
 </LinearLayout>
