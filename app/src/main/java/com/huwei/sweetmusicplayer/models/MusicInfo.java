@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.util.CharacterParser;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
 
@@ -125,6 +126,7 @@ public class MusicInfo extends AbstractMusic {
 
         this.songId = parcel.readLong();
         this.albumId = parcel.readLong();
+        this.artistId = parcel.readLong();
         this.title = parcel.readString();
         this.artist = parcel.readString();
         this.duration = parcel.readInt();
@@ -220,5 +222,13 @@ public class MusicInfo extends AbstractMusic {
         }
     }
 
+    public static final Creator<MusicInfo> CREATOR = new Creator<MusicInfo>() {
+        public MusicInfo createFromParcel(Parcel source) {
+            return new MusicInfo(source);
+        }
 
+        public MusicInfo[] newArray(int size) {
+            return new MusicInfo[size];
+        }
+    };
 }
