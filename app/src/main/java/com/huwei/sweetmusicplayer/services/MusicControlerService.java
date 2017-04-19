@@ -343,6 +343,8 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
      * @param music
      */
     private void prepareSong(AbstractMusic music) {
+        Log.d(TAG, "prepareSong music:" + new Gson().toJson(music));
+
         showMusicPlayerNotification(music);
         updatePlayBar(!music.isOnlineMusic());
 
