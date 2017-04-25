@@ -1,7 +1,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- define by huwei -->
-    <style name="SweetTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="SweetTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

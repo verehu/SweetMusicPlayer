@@ -3,6 +3,8 @@ package com.huwei.sweetmusicplayer;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.ActivityCompat;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -25,7 +28,6 @@ import static com.huwei.sweetmusicplayer.Permission.PERMISSIONS;
  * @date 2015/6/19
  */
 public class BaseActivity extends AppCompatActivity {
-
     public static final boolean IMMERSE_SWITCH = true;
 
     protected Context mContext;
@@ -35,40 +37,18 @@ public class BaseActivity extends AppCompatActivity {
 
     protected String TAG = getClass().getSimpleName();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mContext = this;
 
-        mRootView = (ViewGroup) LayoutInflater.from(mContext).inflate(R.layout.activity_wrapper, null);
+        mRootView = (ViewGroup) LayoutInflater.from(mContext).inflate(R.layout.activity_wrapper, null, true);
 
         mStatusView = new View(mContext);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight());
         mStatusView.setLayoutParams(layoutParams);
         mStatusView.setBackgroundColor(getStatusBarColor());
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            //状态栏透明 需要在创建SystemBarTintManager 之前调用。
-//            setTranslucentStatus(true);
-//        }
-//        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-//        tintManager.setStatusBarTintEnabled(true);
-//        //使StatusBarTintView 和 actionbar的颜色保持一致，风格统一。
-//        tintManager.setStatusBarTintResource(R.color.primary_dark);
-//
-//        // 设置状态栏的文字颜色
-//        tintManager.setStatusBarDarkMode(true, this);
-//
-//        tintManager.setStatusBarAlpha(60);
-
-        //权限处理
-//        for (String permiss : PERMISSIONS) {
-//            if (ActivityCompat.checkSelfPermission(mContext, permiss) != PackageManager.PERMISSION_GRANTED) {
-//                ActivityCompat.requestPermissions(this, new String[]{permiss}, CODE_READ_EXTERNAL_STORAGE);
-//            }
-//        }
     }
 
     public int getStatusBarColor() {
@@ -88,16 +68,19 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        super.setContentView(mRootView, layoutParams);
-
-        mRootView.addView(mStatusView);
-
-        if (params !=null ) {
-            mRootView.addView(view, params);
-        } else {
-            mRootView.addView(view);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
+        super.setContentView(mRootView);
+
+//        mRootView.addView(mStatusView);
+
+        if (params == null ) {
+            params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        }
+
+        mRootView.addView(view, params);
     }
 
     @Override
