@@ -49,11 +49,11 @@ public class BaseActivity extends AppCompatActivity {
 //        tintManager.setStatusBarAlpha(60);
 
         //权限处理
-        for (String permiss : PERMISSIONS) {
-            if (ActivityCompat.checkSelfPermission(mContext, permiss) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{permiss}, CODE_READ_EXTERNAL_STORAGE);
-            }
-        }
+//        for (String permiss : PERMISSIONS) {
+//            if (ActivityCompat.checkSelfPermission(mContext, permiss) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(this, new String[]{permiss}, CODE_READ_EXTERNAL_STORAGE);
+//            }
+//        }
     }
 
     @Override

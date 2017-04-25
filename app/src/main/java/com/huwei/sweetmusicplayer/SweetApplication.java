@@ -69,4 +69,8 @@ public class SweetApplication extends Application {
         }
         return mImageLoader;
     }
+
+    public static Context getContext(){
+        return context;
+    }
 }

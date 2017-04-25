@@ -1,13 +1,10 @@
 package com.huwei.sweetmusicplayer;
 
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
@@ -25,7 +22,6 @@ public class SplashActivity extends BaseActivity {
     private long mills = 0;
     private long delay = 1000;
     private static int maxValue = 100;
-    private int mRunCount;
 
     Handler handler = new Handler() {
         @Override
@@ -94,28 +90,18 @@ public class SplashActivity extends BaseActivity {
         gtp_appname.setProColorInt(getResources().getColor(R.color.primary));
 
         FileUtil.createDir(LrcUtil.lrcRootPath);
-        handler.sendEmptyMessage(0);
 
-        int mRunCount = Environment.getHasRunCount(mContext);
-        Environment.setHasRunCount(mContext, mRunCount + 1);
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        int hasRunCount = Environment.getHasRunCount(mContext);
 
-        switch (requestCode) {
-            case Permission.CODE_READ_EXTERNAL_STORAGE:
-                //todo 0 的index需要处理
-                if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        &&grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    if (mRunCount == 0)  {
-                        startActivity(SongScanActivity.getStartActIntent(mContext, true));
-                    }
-                }
-                break;
-            default:
-                break;
+        hasRunCount = 0;
+
+        if (hasRunCount == 0) {
+            startActivity(SongScanActivity.getStartActIntent(mContext));
+            finish();
+        } else {
+            handler.sendEmptyMessage(0);
         }
+        Environment.setHasRunCount(mContext, hasRunCount + 1);
     }
 }
