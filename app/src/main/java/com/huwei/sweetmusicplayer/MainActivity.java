@@ -15,6 +15,7 @@ import android.widget.PopupWindow;
 
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.fragments.MainFragment;
 import com.huwei.sweetmusicplayer.fragments.MainFragment_;
@@ -40,6 +41,10 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
     private PlayingFragment playing_fragment;
     private MainFragment mainFragment;
 
+    public static Intent getStartActIntent(Context from){
+        Intent intent = new Intent(from,MainActivity.class);
+        return intent;
+    }
 
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override

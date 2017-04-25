@@ -7,4 +7,6 @@ package com.huwei.sweetmusicplayer.contains;
  */
 public class IntentExtra {
     public static final String EXTRA_ALBUM_ID ="album id";
+
+    public static final String EXTRA_AUTO_ENTERMAIN = "EXTRA_AUTO_ENTERMAIN";
 }

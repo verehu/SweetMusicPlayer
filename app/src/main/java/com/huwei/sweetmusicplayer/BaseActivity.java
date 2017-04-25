@@ -1,12 +1,10 @@
 package com.huwei.sweetmusicplayer;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +12,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import static com.huwei.sweetmusicplayer.Permission.*;
+import static com.huwei.sweetmusicplayer.Permission.CODE_READ_EXTERNAL_STORAGE;
+import static com.huwei.sweetmusicplayer.Permission.PERMISSIONS;
 
 
 /**
