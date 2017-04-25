@@ -4,9 +4,11 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -23,16 +25,29 @@ import static com.huwei.sweetmusicplayer.Permission.PERMISSIONS;
  * @date 2015/6/19
  */
 public class BaseActivity extends AppCompatActivity {
+
+    public static final boolean IMMERSE_SWITCH = true;
+
     protected Context mContext;
     private boolean hasAdjustActionBar;
+    private View mStatusView;
+    private ViewGroup mRootView;
 
     protected String TAG = getClass().getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mContext = this;
+
+        mRootView = (ViewGroup) LayoutInflater.from(mContext).inflate(R.layout.activity_wrapper, null);
+
+        mStatusView = new View(mContext);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight());
+        mStatusView.setLayoutParams(layoutParams);
+        mStatusView.setBackgroundColor(getStatusBarColor());
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 //            //状态栏透明 需要在创建SystemBarTintManager 之前调用。
@@ -54,6 +69,35 @@ public class BaseActivity extends AppCompatActivity {
 //                ActivityCompat.requestPermissions(this, new String[]{permiss}, CODE_READ_EXTERNAL_STORAGE);
 //            }
 //        }
+    }
+
+    public int getStatusBarColor() {
+        return getResources().getColor(R.color.primary);
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        View view = LayoutInflater.from(mContext).inflate(layoutResID, null, true);
+        setContentView(view, view.getLayoutParams());
+    }
+
+    @Override
+    public void setContentView(View view) {
+        setContentView(view, view.getLayoutParams());
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        super.setContentView(mRootView, layoutParams);
+
+        mRootView.addView(mStatusView);
+
+        if (params !=null ) {
+            mRootView.addView(view, params);
+        } else {
+            mRootView.addView(view);
+        }
     }
 
     @Override
