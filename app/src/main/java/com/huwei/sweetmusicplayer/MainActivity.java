@@ -109,6 +109,10 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         super.onResume();
     }
 
+    @Override
+    protected boolean isNeedStausView() {
+        return false;
+    }
 
     @Override
     protected void onDestroy() {

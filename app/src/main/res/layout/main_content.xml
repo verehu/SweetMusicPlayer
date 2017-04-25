@@ -11,6 +11,11 @@
         android:orientation="vertical">
         <!--        android:layout_marginTop="?android:attr/actionBarSize"-->
 
+        <com.huwei.sweetmusicplayer.ui.views.StatusBarView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/status_color"/>
+
         <FrameLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"

@@ -22,8 +22,10 @@
     <color name="f1f3f4">#F1F3F4</color>
     <color name="_2c">#2c2c2c</color>
 
+    <color name="status_color">@color/primary</color>
     <color name="primary">#9C27B0</color>
-    <color name="primary_dark">#7B1FA2</color>
+    <!--<color name="primary_dark">#7B1FA2</color>-->
+    <color name="primary_dark">@color/transparent</color>
     <color name="primary_light">#E1BEE7</color>
     <color name="accent">#E040FB</color>
     <color name="primary_text">#212121</color>
