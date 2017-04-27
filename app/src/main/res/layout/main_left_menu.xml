@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FF2323"
-        android:text="测试"/>
+        android:layout_height="173dp"
+        android:background="@color/primary">
+    </RelativeLayout>
 
 </LinearLayout>

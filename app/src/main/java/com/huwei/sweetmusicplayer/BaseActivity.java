@@ -78,12 +78,6 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        adjustActionBarHeight();
-    }
-
     protected boolean isNeedStausView() {
         return true;
     }

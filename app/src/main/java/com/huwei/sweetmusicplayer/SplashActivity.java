@@ -91,11 +91,7 @@ public class SplashActivity extends BaseActivity {
 
         FileUtil.createDir(LrcUtil.lrcRootPath);
 
-
         int hasRunCount = Environment.getHasRunCount(mContext);
-
-        hasRunCount = 0;
-
         if (hasRunCount == 0) {
             startActivity(SongScanActivity.getStartActIntent(mContext));
             finish();
