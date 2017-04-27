@@ -28,10 +28,11 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ImmersiveUtil.full(this);
+        ImmersiveUtil.immersive(this);
 
         mContext = this;
     }
+
 
     public int getStatusBarColor() {
         return getResources().getColor(R.color.status_color);

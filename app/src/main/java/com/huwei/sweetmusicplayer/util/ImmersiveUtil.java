@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
  */
 
 public class ImmersiveUtil {
-    public static void full(Activity activity){
+    public static void immersive(Activity activity){
         Window window = activity.getWindow();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
@@ -27,7 +27,6 @@ public class ImmersiveUtil {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
-
 
     /**
      * 生成一个和状态栏大小相同的矩形条
