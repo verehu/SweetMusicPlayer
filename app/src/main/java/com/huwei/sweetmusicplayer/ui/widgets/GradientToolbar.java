@@ -59,7 +59,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
 
     void initView() {
         mIv_toolbarBg = (ImageView) findViewById(R.id.iv_toolbar_bg);
-        mToolbar = (Toolbar) findViewById(R.id.actionbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
     }
 
     void initData() {

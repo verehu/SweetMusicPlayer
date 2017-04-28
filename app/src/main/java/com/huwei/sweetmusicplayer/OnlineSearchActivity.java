@@ -46,7 +46,7 @@ public class OnlineSearchActivity extends BaseActivity {
     private int pageNo = 1;
     private int pageSize = 50;
 
-    @ViewById(R.id.actionbar)
+    @ViewById(R.id.toolbar)
     Toolbar toolbar;
     @ViewById
     View ll_link_view;

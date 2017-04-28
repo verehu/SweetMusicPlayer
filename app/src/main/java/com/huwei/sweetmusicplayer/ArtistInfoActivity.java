@@ -48,7 +48,7 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
 
     @ViewById
     GradientToolbar gtoolbar;
-    @ViewById(R.id.actionbar)
+    @ViewById(R.id.toolbar)
     Toolbar toolbar;
     @ViewById(R.id.view_artist_info)
     ArtistInfoView mArtistInfoView;
