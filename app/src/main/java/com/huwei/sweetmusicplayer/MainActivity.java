@@ -9,13 +9,15 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.PopupWindow;
 
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.fragments.MainFragment;
 import com.huwei.sweetmusicplayer.fragments.MainFragment_;
@@ -40,6 +42,8 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
 
     private PlayingFragment playing_fragment;
     private MainFragment mainFragment;
+    private Toolbar mToolbar;
+    private DrawerLayout mDrawerLayout;
 
     public static Intent getStartActIntent(Context from){
         Intent intent = new Intent(from,MainActivity.class);
@@ -79,10 +83,11 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
 
         playing_fragment= (PlayingFragment) manager.findFragmentById(R.id.playing_fragment);
 //        mainFragment = (MainFragment) manager.findFragmentById(R.id.main);
-        mainFragment = new MainFragment_();
-        FragmentUtil.replace(this,R.id.main_container,mainFragment,false);
+//        mainFragment = new MainFragment_();
+//        FragmentUtil.replace(this,R.id.main_container,mainFragment, false);
 
         initView();
+        initListener();
         initReciever();
 
         if (!isServiceBinding) {
@@ -275,9 +280,22 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
 
     private void initView() {
         mSlidingPanel = (SlidingPanel) findViewById(R.id.sp_main);
-//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-//
-//        setSupportActionBar(mToolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToolbar.setNavigationIcon(R.drawable.actionbar_menu);
+    }
+
+    private void initListener(){
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                } else {
+                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                }
+            }
+        });
     }
 
     private void initReciever() {

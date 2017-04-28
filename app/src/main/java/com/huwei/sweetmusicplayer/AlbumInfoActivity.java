@@ -52,7 +52,7 @@ public class AlbumInfoActivity extends BaseActivity {
 
     ImageView iv_album;
     TextView tv_albumname, tv_artist, tv_pub_date;
-    @ViewById(R.id.actionbar)
+    @ViewById(R.id.toolbar)
     Toolbar toolbar;
     @ViewById
     GradientToolbar gtoolbar;

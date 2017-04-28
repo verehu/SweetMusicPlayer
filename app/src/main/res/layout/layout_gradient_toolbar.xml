@@ -11,7 +11,7 @@
         android:scaleType="centerCrop"/>
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/actionbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/transparent" />
