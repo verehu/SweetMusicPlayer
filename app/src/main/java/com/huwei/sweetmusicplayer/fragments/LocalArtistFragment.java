@@ -42,11 +42,11 @@ public class LocalArtistFragment extends BaseFragment implements IMusicViewTypeC
 		adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {
 			@Override
 			public void onItemClick(View view, int position) {
-				FragmentUtil.replace((android.support.v4.app.FragmentActivity) mAct, R.id.main_container,
-						LocalMusicFragment_.builder().showtype(SHOW_MUSIC_BY_ALBUM)
-								.primaryId(adapter.getData().get(position).getArtistId())
-								.title(adapter.getData().get(position).getArtist())
-								.build());
+//				FragmentUtil.replace((android.support.v4.app.FragmentActivity) mAct, R.id.main_container,
+//						LocalMusicFragment_.builder().showtype(SHOW_MUSIC_BY_ALBUM)
+//								.primaryId(adapter.getData().get(position).getArtistId())
+//								.title(adapter.getData().get(position).getArtist())
+//								.build());
 			}
 		});
 	}

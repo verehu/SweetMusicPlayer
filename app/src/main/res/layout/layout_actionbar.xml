@@ -5,7 +5,7 @@
 
     <!-- 自己定义actionbar  方便以后替换-->
     <android.support.v7.widget.Toolbar
-        android:id="@+id/actionbar"
+            android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary"
