@@ -17,7 +17,6 @@
     <string name="oneBtnscan_text">一键扫描</string>
     
     <!-- activity main actionbar menu -->
-    <string name="menu_item_scan">扫描音乐</string>
     <string name="menu_item_search">搜索</string>
     <string name="menu_item_sleep">睡眠</string>
 
@@ -49,4 +48,12 @@
     <string name="d">图片描述</string>
 
     <string name="artist_second_text">歌曲:%1$d首   专辑:%2$d张</string>
+
+    <!--左侧菜单-->
+    <string name="menu_item_scan">扫描歌曲</string>
+    <string name="menu_item_effect_adj">音效调节</string>
+    <string name="menu_item_change_theme">个性换肤</string>
+    <string name="menu_item_countdown">定时停止</string>
+    <string name="menu_item_setting">设置</string>
+    <string name="menu_item_exit">退出</string>
 </resources>

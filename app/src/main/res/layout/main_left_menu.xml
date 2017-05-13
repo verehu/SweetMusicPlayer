@@ -1,15 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="start"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="173dp"
-        android:background="@color/primary">
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="173dp"
+            android:background="@color/primary">
+
+            <com.thinkcool.circletextimageview.CircleTextImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                app:citv_border_color="@android:color/white"
+                app:citv_border_width="2dp"
+                android:layout_gravity="center"
+                app:citv_text_text="S"
+                app:citv_text_size="32sp"
+                app:citv_text_color="@android:color/white"
+                app:citv_fill_color="#50555D"/>
+        </RelativeLayout>
+        
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/playing_icon"
+                android:text="@string/menu_item_scan"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/playing_icon"
+                android:text="@string/menu_item_effect_adj"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/playing_icon"
+                android:text="@string/menu_item_change_theme"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/playing_icon"
+                android:text="@string/menu_item_countdown"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/playing_icon"
+                android:text="@string/menu_item_setting"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/playing_icon"
+                android:text="@string/menu_item_exit"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</ScrollView>
