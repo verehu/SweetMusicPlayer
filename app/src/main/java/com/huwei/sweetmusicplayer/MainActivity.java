@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Process;
 import android.os.RemoteException;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -29,14 +30,12 @@ import com.huwei.sweetmusicplayer.util.FragmentUtil;
 
 import java.util.List;
 
-
-public class MainActivity extends BaseActivity implements IMusicControl,IContain {
+public class MainActivity extends BaseActivity implements IMusicControl, IContain, View.OnClickListener {
     private SlidingPanel mSlidingPanel;
     private PopupWindow pop;
 
     private IMusicControlerService musicControler;
     private boolean isServiceBinding;
-
 
     private FragmentManager manager;
 
@@ -44,6 +43,7 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
     private MainFragment mainFragment;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
+    private View mMenuSongScan, mMenuExit;
 
     public static Intent getStartActIntent(Context from){
         Intent intent = new Intent(from,MainActivity.class);
@@ -144,6 +144,19 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fl_song_scan:
+                songscan(v);
+                break;
+            case R.id.fl_exit:
+                Process.killProcess(Process.myPid());
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     public void play() {
@@ -283,6 +296,10 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToolbar.setNavigationIcon(R.drawable.actionbar_menu);
+
+        //menu
+        mMenuSongScan = findViewById(R.id.fl_song_scan);
+        mMenuExit = findViewById(R.id.fl_exit);
     }
 
     private void initListener(){
@@ -296,6 +313,10 @@ public class MainActivity extends BaseActivity implements IMusicControl,IContain
                 }
             }
         });
+
+        //menu
+        mMenuSongScan.setOnClickListener(this);
+        mMenuExit.setOnClickListener(this);
     }
 
     private void initReciever() {
