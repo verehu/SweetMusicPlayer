@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DrawableTextView">
+        <attr name="android:drawableLeft" />
+        <attr name="android:drawableTop" />
+        <attr name="android:drawableRight" />
+        <attr name="android:drawableBottom" />
+        <attr name="drawableWidth" format="dimension" />
+        <attr name="drawableHeight" format="dimension" />
+        <attr name="isDrawableCenter" format="boolean" />
+    </declare-styleable>
+</resources>
