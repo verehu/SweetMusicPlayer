@@ -32,8 +32,11 @@
         </RelativeLayout>
         
         <FrameLayout
+            android:id="@+id/fl_song_scan"
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
             <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,8 +52,11 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fl_adjust_effect"
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
             <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,8 +72,11 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fl_change_theme"
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
             <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,8 +92,11 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fl_count_down"
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
             <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,8 +112,11 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fl_setting"
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
             <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,8 +132,11 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fl_exit"
             android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
             <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
