@@ -38,7 +38,6 @@ public class ArtistItemView extends LinearLayout implements IRecycleViewItem<Art
         mImageLoader = SweetApplication.getImageLoader();
     }
 
-
     @Override
     public void bind(ArtistInfo artistInfo) {
         tv_title.setText(artistInfo.getArtist());
