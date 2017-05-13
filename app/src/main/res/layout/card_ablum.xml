@@ -3,15 +3,16 @@
     xmlns:card_view="http://schemas.android.com/apk/com.huwei.sweetmusicplayer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="8dp"
     android:orientation="horizontal"
     card_view:cardBackgroundColor="#254852"
-    card_view:cardCornerRadius="5dp" >
+    card_view:cardCornerRadius="4dp" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:padding="5dp" >
+        android:layout_height="200dp">
 
         <ImageView
             android:id="@+id/img_album"

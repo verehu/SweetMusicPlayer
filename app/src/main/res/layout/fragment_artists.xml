@@ -6,6 +6,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_artist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"/>
 
 </FrameLayout>
