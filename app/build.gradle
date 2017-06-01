@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 // This does not break the build when Android Studio is missing the JRebel for Android plugin.
 //apply plugin: 'com.zeroturnaround.jrebel.android'
-apply plugin: 'android-apt'
 
 //tasks.withType(JavaCompile) {
 //    options.encoding ="GBK"
@@ -10,7 +9,7 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "21.1.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.huwei.sweetmusicplayer"
@@ -44,7 +43,7 @@ repositories {
 
 def AAVersion = "4.0-SNAPSHOT" // change this to your desired version, for example the latest stable: 3.3.2
 dependencies {
-    apt "org.androidannotations:androidannotations:$AAVersion"
+    annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.mcxiaoke.volley:library:1.0.+'
@@ -56,12 +55,6 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.github.thinkcool:circletextimageview:1.0.20151218'
-}
-
-apt {
-    arguments {
-        androidManifestFile variant.outputs[0].processResources.manifestFile
-    }
 }
 
 
