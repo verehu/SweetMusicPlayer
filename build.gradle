@@ -1,11 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext.kotlin_version = '1.1.2-4'
     repositories {
+        maven { url 'http://maven.aliyun.com' }
         jcenter()
-        mavenCentral()
-//        maven {
-//            url 'https://repos.zeroturnaround.com/nexus/content/repositories/zt-public-releases'
-//        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0-alpha1'
@@ -13,13 +11,17 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
-//        classpath 'com.zeroturnaround.jrebel.android:jr-android-gradle:0.9+'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 allprojects {
     repositories {
         jcenter()
+        maven { url 'http://maven.aliyun.com' }
         mavenCentral()
     }
 }
 
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

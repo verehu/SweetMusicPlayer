@@ -1,10 +1,7 @@
 apply plugin: 'com.android.application'
-// This does not break the build when Android Studio is missing the JRebel for Android plugin.
-//apply plugin: 'com.zeroturnaround.jrebel.android'
 
-//tasks.withType(JavaCompile) {
-//    options.encoding ="GBK"
-//}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 
 android {
@@ -45,6 +42,7 @@ def AAVersion = "4.0-SNAPSHOT" // change this to your desired version, for examp
 dependencies {
     annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'com.google.code.gson:gson:2.2.4'

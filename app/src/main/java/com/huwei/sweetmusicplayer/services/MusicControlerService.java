@@ -41,6 +41,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
 
+import static com.huwei.sweetmusicplayer.ext.ExtKt.toast;
+
 /**
  * 后台控制播放音乐的service
  */
@@ -211,7 +213,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             Log.d(TAG, "musicList:" + list + " musicIndex:" + index + "now title:" + ((AbstractMusic) list.get(index)).getTitle());
 
             if (musicList == null || musicList.size() == 0) {
-                Toast.makeText(getBaseContext(), "播放列表为空", Toast.LENGTH_LONG).show();
+                toast(getBaseContext(), "播放列表为空", Toast.LENGTH_LONG);
                 return;
             }
 
