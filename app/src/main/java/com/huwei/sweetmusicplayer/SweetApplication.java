@@ -16,8 +16,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.androidannotations.annotations.EApplication;
 
-
-
 /**
  * Created by huwei on 15-1-20.
  */
@@ -26,18 +24,18 @@ public class SweetApplication extends Application {
 
     private static DaoSession daoSession;
     private static RequestQueue mQueue;
-    public static Context context;
     private static ImageLoader mImageLoader;
 
     public static int mScreenWidth;
     public static int mScreenHeight;
+    public static SweetApplication CONTEXT;
 
     /** set the value to decide weather to print debug log , default true in develop*/
     public static final boolean DEBUG = true ;
     @Override
     public void onCreate() {
         super.onCreate();
-        context=getApplicationContext();
+        CONTEXT = this;
 
         mScreenWidth = WindowTool.getWidth(this);
         mScreenHeight = WindowTool.getHeight(this);
@@ -45,7 +43,7 @@ public class SweetApplication extends Application {
 
     public static DaoSession getDaoSession(){
         if(daoSession==null){
-            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, "notes-db", null);
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(CONTEXT, "notes-db", null);
             SQLiteDatabase db = helper.getWritableDatabase();
             DaoMaster daoMaster = new DaoMaster(db);
             daoSession = daoMaster.newSession();
@@ -55,14 +53,14 @@ public class SweetApplication extends Application {
 
     public static RequestQueue getQueue() {
         if(mQueue == null){
-            mQueue = Volley.newRequestQueue(context);
+            mQueue = Volley.newRequestQueue(CONTEXT);
         }
         return mQueue;
     }
 
     public static ImageLoader getImageLoader(){
         if(mImageLoader==null){
-            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(CONTEXT)
             .build();
             mImageLoader =ImageLoader.getInstance();
             mImageLoader.init(config);
@@ -70,7 +68,7 @@ public class SweetApplication extends Application {
         return mImageLoader;
     }
 
-    public static Context getContext(){
-        return context;
+    public static Context get(){
+        return CONTEXT;
     }
 }

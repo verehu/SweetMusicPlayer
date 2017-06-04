@@ -18,15 +18,15 @@ import java.util.List;
 public class Utils {
     public static int getStatusBarHeight() {
         int result = 0;
-        int resourceId = SweetApplication.getContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int resourceId = SweetApplication.get().getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = SweetApplication.getContext().getResources().getDimensionPixelSize(resourceId);
+            result = SweetApplication.get().getResources().getDimensionPixelSize(resourceId);
         }
         return result;
     }
 
     public static Resources getResources() {
-        return SweetApplication.getContext().getResources();
+        return SweetApplication.get().getResources();
     }
 
     /**

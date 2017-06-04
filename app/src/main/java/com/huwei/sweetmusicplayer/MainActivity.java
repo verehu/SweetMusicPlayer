@@ -1,6 +1,5 @@
 package com.huwei.sweetmusicplayer;
 
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -9,38 +8,24 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Process;
 import android.os.RemoteException;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.PopupWindow;
 
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.fragments.MainFragment;
-import com.huwei.sweetmusicplayer.fragments.MainFragment_;
-import com.huwei.sweetmusicplayer.fragments.PlayingFragment;
 import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
 import com.huwei.sweetmusicplayer.services.MusicControlerService;
-import com.huwei.sweetmusicplayer.ui.widgets.SlidingPanel;
-import com.huwei.sweetmusicplayer.util.FragmentUtil;
 
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements IMusicControl, IContain, View.OnClickListener {
-    private SlidingPanel mSlidingPanel;
-    private PopupWindow pop;
-
     private IMusicControlerService musicControler;
     private boolean isServiceBinding;
 
-    private FragmentManager manager;
-
-    private PlayingFragment playing_fragment;
-    private MainFragment mainFragment;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private View mMenuSongScan, mMenuExit;
@@ -56,13 +41,6 @@ public class MainActivity extends BaseActivity implements IMusicControl, IContai
             Log.i(TAG,"onServiceConnected");
             isServiceBinding = true;
             musicControler = IMusicControlerService.Stub.asInterface(iBinder);
-
-            //todo
-//            if (MusicManager.getInstance().isForeground()) {
-//
-//                Intent intent = new Intent(PLAYBAR_UPDATE);
-//                sendBroadcast(intent);
-//            }
         }
 
         @Override
@@ -77,18 +55,10 @@ public class MainActivity extends BaseActivity implements IMusicControl, IContai
         super.onCreate(savedInstanceState);
         MusicManager.getInstance().bindProxyedObject(this);
 
-        manager=getSupportFragmentManager();
-
         setContentView(R.layout.activity_main);
-
-        playing_fragment= (PlayingFragment) manager.findFragmentById(R.id.playing_fragment);
-//        mainFragment = (MainFragment) manager.findFragmentById(R.id.main);
-//        mainFragment = new MainFragment_();
-//        FragmentUtil.replace(this,R.id.main_container,mainFragment, false);
 
         initView();
         initListener();
-        initReciever();
 
         if (!isServiceBinding) {
             Log.i(TAG,"start binding service");
@@ -124,24 +94,6 @@ public class MainActivity extends BaseActivity implements IMusicControl, IContai
         // TODO Auto-generated method stub
         super.onDestroy();
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mSlidingPanel.isExpanded()) {
-            if(playing_fragment.isDrawerOpen()){
-                playing_fragment.closeDrawer();
-            }else {
-                mSlidingPanel.close();
-            }
-        }else if(manager.getBackStackEntryCount()!=0){
-            manager.popBackStack();
-        }
-        else {
-            moveTaskToBack(true);
-
-            //finish();
-        }
     }
 
     @Override
@@ -292,7 +244,6 @@ public class MainActivity extends BaseActivity implements IMusicControl, IContai
     }
 
     private void initView() {
-        mSlidingPanel = (SlidingPanel) findViewById(R.id.sp_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToolbar.setNavigationIcon(R.drawable.actionbar_menu);
@@ -319,25 +270,9 @@ public class MainActivity extends BaseActivity implements IMusicControl, IContai
         mMenuExit.setOnClickListener(this);
     }
 
-    private void initReciever() {
-        //ExitPlayProReciever reciever = new ExitPlayProReciever();
-        //IntentFilter filter1 = new IntentFilter(SweetMPContains.PLAYPRO_EXIT);
-        //registerReceiver(reciever, filter1);
-    }
-
     public void songscan(View v) {
-
         Intent intent = new Intent();
         intent.setClass(this, SongScanActivity_.class);
         startActivity(intent);
-    }
-
-    /**
-     * ???content*
-     *
-     * @param view
-     */
-    public void closeContent(View view) {
-        mSlidingPanel.close();
     }
 }

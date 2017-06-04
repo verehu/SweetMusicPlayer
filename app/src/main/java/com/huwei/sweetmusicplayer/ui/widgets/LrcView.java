@@ -424,11 +424,7 @@ public class LrcView extends ScrollView implements OnScrollChangedListener, OnTo
 
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-
-            if (!SlidingPanel.mTracking) {
-                invalidate();
-            }
+            invalidate();
         }
 
     };

@@ -208,7 +208,7 @@ public class MusicInfo extends AbstractMusic {
         @Override
         protected Bitmap doInBackground(Long... params) {
             long albumId = params[0];
-            return MusicUtils.getArtworkQuick(SweetApplication.context, albumId, picSizeType);
+            return MusicUtils.getArtworkQuick(SweetApplication.CONTEXT, albumId, picSizeType);
         }
 
         @Override
