@@ -20,6 +20,7 @@ public interface IContain {
     public static final String ENV_IS_FILTER_SIZE = "IS_FILTER_SIZE";
     public static final String ENV_IS_FILTER_DURATION = "IS_FLITER_DURATION";
     public static final String ENV_HAS_RUN_COUNT = "ENV_HAS_RUN_COUNT";
+    public static final String ENV_RECENT_MUSIC = "ENV_RECENT_MUSIC";
 
     /**
      * Define ACIOTN*

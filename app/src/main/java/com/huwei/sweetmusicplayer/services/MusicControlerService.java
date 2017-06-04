@@ -15,6 +15,7 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.Parcelable;
 import android.os.Process;
 import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
@@ -325,9 +326,10 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
      *
      * @param isNewPlayMusic
      */
-    private void updatePlayBar(boolean isNewPlayMusic) {
+    private void updatePlayBar(boolean isNewPlayMusic, AbstractMusic music) {
         Intent intent = new Intent(PLAYBAR_UPDATE);
         intent.putExtra("isNewPlayMusic", isNewPlayMusic);
+        intent.putExtra("nowPlayMusic", (Parcelable) music);
 
         sendBroadcast(intent);
     }
@@ -348,7 +350,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         Log.d(TAG, "prepareSong music:" + new Gson().toJson(music));
 
         showMusicPlayerNotification(music);
-        updatePlayBar(!music.isOnlineMusic());
+        updatePlayBar(!music.isOnlineMusic(), music);
 
         //如果是网络歌曲,而且未从网络获取详细信息，则需要获取歌曲的详细信息
         if (music.getType() == AbstractMusic.MusicType.Online) {
@@ -366,7 +368,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
                             Log.i(TAG,"song hasGetDetailInfo:"+song);
 
-                            updatePlayBar(true);
+                            updatePlayBar(true, song);
 
                             Message msg = Message.obtain();
                             msg.what = MSG_PLAY;

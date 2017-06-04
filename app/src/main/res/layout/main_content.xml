@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <fragment
-        android:id="@+id/bottom_bar"
-        android:name="com.huwei.sweetmusicplayer.fragments.BottomActionBarFragment_"
+    <FrameLayout
+        android:id="@id/bottomPlayContainer"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_action_bar_height"
-        android:descendantFocusability="beforeDescendants" />
+        android:layout_height="60dp">
+
+    </FrameLayout>
 </LinearLayout>

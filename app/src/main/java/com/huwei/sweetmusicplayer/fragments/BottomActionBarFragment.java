@@ -27,7 +27,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 //import com.huwei.sweetmusicplayer.datamanager.MusicManager;
-
+@Deprecated
 @EFragment(R.layout.bottom_action_bar)
 public class BottomActionBarFragment extends Fragment implements IContain {
 

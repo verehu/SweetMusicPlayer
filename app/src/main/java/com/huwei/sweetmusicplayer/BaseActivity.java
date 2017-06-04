@@ -1,6 +1,7 @@
 package com.huwei.sweetmusicplayer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,6 @@ public class BaseActivity extends AppCompatActivity {
 
         mContext = this;
     }
-
 
     public int getStatusBarColor() {
         return getResources().getColor(R.color.status_color);
@@ -85,5 +85,24 @@ public class BaseActivity extends AppCompatActivity {
 
     public void onBackClicked(View view) {
         onBackPressed();
+    }
+
+    /**
+     * 设置启动activity时没有动画
+     * @param intent
+     */
+    @Override
+    public void startActivity(Intent intent) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        super.startActivity(intent);
+    }
+
+    /**
+     * 防止退出activity时闪烁
+     */
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
     }
 }

@@ -6,13 +6,15 @@ import android.os.Parcelable;
 
 import com.huwei.sweetmusicplayer.util.TimeUtil;
 
+import java.io.Serializable;
+
 /**
  * 定义播放实体的抽象类，子类包含MusicInfo（本地音乐）,Song（在线音乐  来源于百度）
  *
  * @author Jayce
  * @date 2015/8/21
  */
-public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<AbstractMusic> {
+public abstract class AbstractMusic implements Serializable, Parcelable, Parcelable.Creator<AbstractMusic> {
 
     public static Creator<AbstractMusic> CREATOR;
 

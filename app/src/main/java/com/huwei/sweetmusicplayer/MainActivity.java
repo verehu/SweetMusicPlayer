@@ -1,8 +1,10 @@
 package com.huwei.sweetmusicplayer;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -22,7 +24,7 @@ import com.huwei.sweetmusicplayer.services.MusicControlerService;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements IMusicControl, IContain, View.OnClickListener {
+public class MainActivity extends BottomPlayActivity implements IMusicControl, IContain, View.OnClickListener {
     private IMusicControlerService musicControler;
     private boolean isServiceBinding;
 
@@ -269,6 +271,8 @@ public class MainActivity extends BaseActivity implements IMusicControl, IContai
         mMenuSongScan.setOnClickListener(this);
         mMenuExit.setOnClickListener(this);
     }
+
+
 
     public void songscan(View v) {
         Intent intent = new Intent();
