@@ -39,4 +39,9 @@ public interface IContain {
     public static final String HTTP = "HTTP";
 
     public static final String DEFAULT_PIC = "default";
+
+    /**
+     * 播放服务传递常亮
+     */
+    public static final String NOW_PLAYMUSIC = "NOW_PLAYMUSIC";
 }

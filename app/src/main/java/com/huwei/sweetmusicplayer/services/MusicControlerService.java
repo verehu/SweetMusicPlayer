@@ -329,7 +329,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
     private void updatePlayBar(boolean isNewPlayMusic, AbstractMusic music) {
         Intent intent = new Intent(PLAYBAR_UPDATE);
         intent.putExtra("isNewPlayMusic", isNewPlayMusic);
-        intent.putExtra("nowPlayMusic", (Parcelable) music);
+        intent.putExtra(NOW_PLAYMUSIC, (Parcelable) music);
 
         sendBroadcast(intent);
     }

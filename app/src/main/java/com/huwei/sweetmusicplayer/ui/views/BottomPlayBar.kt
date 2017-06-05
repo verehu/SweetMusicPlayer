@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.bottom_action_bar.view.*
 class BottomPlayBar(context: Context?) : LinearLayout(context) {
 
     val TAG = "BottomActionBarFragment"
-    var initRecentMusic : AbstractMusic? = null
 
     private val receiver = object : BroadcastReceiver() {
 
@@ -33,12 +32,12 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
             when (action) {
                 IContain.PLAY_STATUS_UPDATE -> {
                     val isPlaying = intent.getBooleanExtra("isPlaying", false)
-                    btn_play.isChecked = MusicManager.getInstance().isPlaying
+                    btn_play.isChecked = isPlaying
                 }
                 IContain.PLAYBAR_UPDATE -> {
                     pro_music.max = MusicManager.getInstance().nowPlayingSong.duration!!
                     val music = MusicManager.getInstance().nowPlayingSong
-                    updateBottomBar(music)
+                    updateBottomBar(music, MusicManager.getInstance().isPlaying)
                 }
                 IContain.CURRENT_UPDATE -> pro_music.progress = intent.getIntExtra("currentTime", 0)
             }
@@ -51,8 +50,6 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
 
         initListener()
         initRecievers()
-
-        updateBottomBar(initRecentMusic)
     }
 
     fun initListener() {
@@ -82,12 +79,16 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
         context.registerReceiver(receiver, intentFilter)
     }
 
-    internal fun updateBottomBar(music: AbstractMusic?) {
+    fun unRegisterRecievers(){
+        context.unregisterReceiver(receiver)
+    }
+
+    internal fun updateBottomBar(music: AbstractMusic?, isPlaying : Boolean = true) {
 
         if (music != null) {
             tv_title.text = music.title
             tv_artist.text = music.artist
-            btn_play.isChecked = MusicManager.getInstance().isPlaying
+            btn_play.isChecked = isPlaying
 
             music.loadArtPic { bitmap ->
                 Log.i(TAG, "onSuccessLoad bitmap:" + bitmap)

@@ -54,8 +54,8 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         MusicManager.getInstance().bindProxyedObject(this);
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 

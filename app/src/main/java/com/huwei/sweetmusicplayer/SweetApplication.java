@@ -23,6 +23,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.androidannotations.annotations.EApplication;
 
+import static com.huwei.sweetmusicplayer.contains.IContain.NOW_PLAYMUSIC;
 import static com.huwei.sweetmusicplayer.contains.IContain.PLAYBAR_UPDATE;
 
 /**
@@ -51,7 +52,7 @@ public class SweetApplication extends Application {
 
             switch (action) {
                 case PLAYBAR_UPDATE:
-                    AbstractMusic music = intent.getParcelableExtra("nowPlayMusic");
+                    AbstractMusic music = intent.getParcelableExtra(NOW_PLAYMUSIC);
                     if (music != null) {
                         Environment.saveRecentMusic(music);
                     }

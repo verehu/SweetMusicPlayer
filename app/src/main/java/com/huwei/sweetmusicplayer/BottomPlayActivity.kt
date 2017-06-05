@@ -1,14 +1,19 @@
 package com.huwei.sweetmusicplayer
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic
-import com.huwei.sweetmusicplayer.contains.IContain.ENV_RECENT_MUSIC
+import com.huwei.sweetmusicplayer.contains.IContain
+import com.huwei.sweetmusicplayer.contains.IContain.NOW_PLAYMUSIC
+
 import com.huwei.sweetmusicplayer.ui.views.BottomPlayBar
 import com.huwei.sweetmusicplayer.util.Environment
-import com.huwei.sweetmusicplayer.util.SpUtils
 
 /**
  *
@@ -18,15 +23,51 @@ import com.huwei.sweetmusicplayer.util.SpUtils
 abstract class BottomPlayActivity : BaseActivity() {
     var bottomPlayBar : BottomPlayBar? = null
     var barContainerView : FrameLayout? = null
+    var isBarAdd : Boolean = false
+
+    private val receiver = object : BroadcastReceiver() {
+
+        override fun onReceive(context: Context, intent: Intent) {
+            // TODO Auto-generated method stub
+            val action = intent.action
+
+            when (action) {
+                IContain.PLAYBAR_UPDATE -> {
+                    if (!isBarAdd) {
+                         addBottomPlayBar(intent.getParcelableExtra(NOW_PLAYMUSIC))
+                    }
+                }
+            }
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val music : AbstractMusic? = Environment.getRecentMusic()
+        addBottomPlayBar(music)
 
-        if (music != null) {
+        if(!isBarAdd) initRecievers()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        unregisterReceiver(receiver)
+        bottomPlayBar?.unRegisterRecievers()
+    }
+
+    fun initRecievers() {
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(IContain.PLAYBAR_UPDATE)
+        registerReceiver(receiver, intentFilter)
+    }
+
+    fun addBottomPlayBar(music : AbstractMusic?){
+        if (!isBarAdd && music != null) {
             bottomPlayBar = BottomPlayBar(this)
-            bottomPlayBar!!.initRecentMusic = music
+            bottomPlayBar!!.updateBottomBar(music)
 
             val container: FrameLayout? = findViewById(R.id.bottomPlayContainer) as FrameLayout?
 
@@ -41,6 +82,25 @@ abstract class BottomPlayActivity : BaseActivity() {
             val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             layoutParams.gravity = Gravity.BOTTOM
             barContainerView!!.addView(bottomPlayBar, layoutParams)
+
+            isBarAdd = true
         }
+    }
+
+    /**
+     * 设置启动activity时没有动画
+     * @param intent
+     */
+    override fun startActivity(intent: Intent) {
+        intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+        super.startActivity(intent)
+    }
+
+    /**
+     * 防止退出activity时闪烁
+     */
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(0, 0)
     }
 }
