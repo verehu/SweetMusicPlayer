@@ -34,7 +34,9 @@ import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
+import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
+import com.huwei.sweetmusicplayer.util.SpUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -234,7 +236,12 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public AbstractMusic getNowPlayingSong() throws RemoteException {
-            return musicList.get(musicIndex);
+            try {
+                return musicList.get(musicIndex);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+           return Environment.getRecentMusic();
         }
 
         @Override

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.LinearLayout
+import com.huwei.sweetmusicplayer.PlayingActivity
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic
 import com.huwei.sweetmusicplayer.contains.IContain
@@ -69,6 +70,10 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
                 }
             }
         })
+
+        setOnClickListener{
+            context.startActivity(PlayingActivity.getStartActIntent(context))
+        }
     }
 
     fun initRecievers() {

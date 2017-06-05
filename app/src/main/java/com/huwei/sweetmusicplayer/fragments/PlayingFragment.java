@@ -140,6 +140,8 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
         mScreenWidth = metric.widthPixels;
 
+        UpdateSongInfoView();
+
         return mRootView;
     }
 
@@ -179,12 +181,14 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
 
     public void UpdateSongInfoView() {
-        final AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
-        playpage_title_tv.setText(song.getTitle());
-        playpage_artist_tv.setText(song.getArtist());
+        AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
+        if (song != null) {
+            playpage_title_tv.setText(song.getTitle());
+            playpage_artist_tv.setText(song.getArtist());
 
-        playpage_duration_tv.setText(song.getDurationStr());
-        playpage_progressbar.setMax(song.getDuration());
+            playpage_duration_tv.setText(song.getDurationStr());
+            playpage_progressbar.setMax(song.getDuration());
+        }
     }
 
 
@@ -341,7 +345,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     @Override
     public void onStart() {
         // TODO Auto-generated method stub
-        super.onResume();
+        super.onStart();
         Log.i(TAG, "onResume");
         getActivity().registerReceiver(receiver, intentFilter);
     }
