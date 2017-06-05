@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 
+import com.huwei.sweetmusicplayer.LocalMusicActivity;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
 import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
@@ -46,6 +47,8 @@ public class LocalAlbumFragment extends BaseFragment implements IMusicViewTypeCo
 //                                .primaryId(adapter.getData().get(position).getAlbumId())
 //                                .title(adapter.getData().get(position).getTitle())
 //                                .build());
+                startActivity(LocalMusicActivity.Companion.getStartActIntent(mAct, SHOW_MUSIC_BY_ALBUM,
+                        adapter.getData().get(position).getTitle(), adapter.getData().get(position).getAlbumId()));
             }
         });
     }

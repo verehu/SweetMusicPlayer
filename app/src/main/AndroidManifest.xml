@@ -54,7 +54,7 @@
         <activity android:name=".AlbumInfoActivity_"/>
         <activity android:name=".ArtistInfoActivity_"/>
         <activity android:name=".PlayingActivity"/>
-
+        <activity android:name=".LocalMusicActivity"/>
 
         <service
             android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"

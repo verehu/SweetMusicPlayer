@@ -39,6 +39,10 @@ import java.util.List;
 public class LocalMusicFragment extends BaseFragment implements IContain, IMusicViewTypeContain {
     public static final String TAG = "LocalMusicFragment";
 
+    public final static String TITLE_ARG = "title";
+    public final static String SHOWTYPE_ARG = "showtype";
+    public final static String PRIMARY_ID_ARG = "primaryId";
+
     private MusicAdapter mMusicAdapter;
 
     @ViewById
@@ -72,6 +76,10 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
             }
         }
     };
+
+    public static LocalMusicFragment get(){
+        return new LocalMusicFragment_();
+    }
 
     @AfterViews
     void init() {

@@ -21,9 +21,10 @@ import com.huwei.sweetmusicplayer.util.Environment
  * @date 2017/06/04
  */
 abstract class BottomPlayActivity : BaseActivity() {
-    var bottomPlayBar : BottomPlayBar? = null
-    var barContainerView : FrameLayout? = null
-    var isBarAdd : Boolean = false
+    var bottomPlayBar: BottomPlayBar? = null
+    var barContainerView: FrameLayout? = null
+    var isBarAdd: Boolean = false
+    var isReceiverRegistered = false
 
     private val receiver = object : BroadcastReceiver() {
 
@@ -34,7 +35,7 @@ abstract class BottomPlayActivity : BaseActivity() {
             when (action) {
                 IContain.PLAYBAR_UPDATE -> {
                     if (!isBarAdd) {
-                         addBottomPlayBar(intent.getParcelableExtra(NOW_PLAYMUSIC))
+                        addBottomPlayBar(intent.getParcelableExtra(NOW_PLAYMUSIC))
                     }
                 }
             }
@@ -45,16 +46,16 @@ abstract class BottomPlayActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val music : AbstractMusic? = Environment.getRecentMusic()
+        val music: AbstractMusic? = Environment.getRecentMusic()
         addBottomPlayBar(music)
 
-        if(!isBarAdd) initRecievers()
+        if (isReceiverRegistered && !isBarAdd) initRecievers()
     }
 
     override fun onDestroy() {
         super.onDestroy()
 
-        unregisterReceiver(receiver)
+        if (isReceiverRegistered) unregisterReceiver(receiver)
         bottomPlayBar?.unRegisterRecievers()
     }
 
@@ -62,9 +63,11 @@ abstract class BottomPlayActivity : BaseActivity() {
         val intentFilter = IntentFilter()
         intentFilter.addAction(IContain.PLAYBAR_UPDATE)
         registerReceiver(receiver, intentFilter)
+
+        isReceiverRegistered = true
     }
 
-    fun addBottomPlayBar(music : AbstractMusic?){
+    fun addBottomPlayBar(music: AbstractMusic?) {
         if (!isBarAdd && music != null) {
             bottomPlayBar = BottomPlayBar(this)
             bottomPlayBar!!.updateBottomBar(music)
