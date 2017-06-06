@@ -21,7 +21,9 @@ import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.interfaces.IMusicControl;
 import com.huwei.sweetmusicplayer.services.MusicControlerService;
+import com.huwei.sweetmusicplayer.util.Environment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BottomPlayActivity implements IMusicControl, IContain, View.OnClickListener {
@@ -67,6 +69,9 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
             Intent intent = new Intent(this,MusicControlerService.class);
             bindService(intent, mConnection,BIND_AUTO_CREATE);
         }
+
+        //加载默认歌曲
+        loadDefaultMusic();
     }
 
     @Override
@@ -234,6 +239,15 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
     public void updateMusicQueue() {
         Intent intent = new Intent(UPTATE_MUISC_QUEUE);
         sendBroadcast(intent);
+    }
+
+    private void loadDefaultMusic(){
+        AbstractMusic music = Environment.getRecentMusic();
+        if (music != null) {
+            List<AbstractMusic> list = new ArrayList<>();
+            list.add(music);
+            MusicManager.getInstance().preparePlayingList(0, list);
+        }
     }
 
     public void stopPlayingService() {

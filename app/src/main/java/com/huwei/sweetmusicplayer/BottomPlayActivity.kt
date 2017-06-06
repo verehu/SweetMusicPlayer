@@ -45,6 +45,10 @@ abstract class BottomPlayActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
 
         val music: AbstractMusic? = Environment.getRecentMusic()
         addBottomPlayBar(music)
