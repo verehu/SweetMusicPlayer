@@ -1,10 +1,8 @@
 package com.huwei.sweetmusicplayer;
 
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -168,7 +166,7 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
 
         try {
             return musicControler.isPlaying();
-        } catch (RemoteException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

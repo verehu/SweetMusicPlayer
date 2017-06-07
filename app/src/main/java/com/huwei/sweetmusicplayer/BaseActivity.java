@@ -86,4 +86,18 @@ public class BaseActivity extends AppCompatActivity {
     public void onBackClicked(View view) {
         onBackPressed();
     }
+
+    @Override
+    public void startActivity(Intent intent) {
+        if (this instanceof BottomPlayActivity) {
+            try {
+                if (BottomPlayActivity.class.isAssignableFrom(Class.forName(intent.getComponent().getClassName()))) {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        super.startActivity(intent);
+    }
 }

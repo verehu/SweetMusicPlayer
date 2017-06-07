@@ -95,15 +95,6 @@ abstract class BottomPlayActivity : BaseActivity() {
     }
 
     /**
-     * 设置启动activity时没有动画
-     * @param intent
-     */
-    override fun startActivity(intent: Intent) {
-        intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-        super.startActivity(intent)
-    }
-
-    /**
      * 防止退出activity时闪烁
      */
     override fun finish() {
