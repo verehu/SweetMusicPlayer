@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.LinearLayout
 import com.huwei.sweetmusicplayer.PlayingActivity
 import com.huwei.sweetmusicplayer.R
@@ -22,12 +21,11 @@ import kotlinx.android.synthetic.main.bottom_action_bar.view.*
  */
 class BottomPlayBar(context: Context?) : LinearLayout(context) {
 
-    val TAG = "BottomActionBarFragment"
+    val TAG = "BottomPlayBar"
 
     private val receiver = object : BroadcastReceiver() {
 
         override fun onReceive(context: Context, intent: Intent) {
-            // TODO Auto-generated method stub
             val action = intent.action
 
             when (action) {
@@ -36,7 +34,7 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
                     btn_play.isChecked = isPlaying
                 }
                 IContain.PLAYBAR_UPDATE -> {
-                    pro_music.max = MusicManager.getInstance().nowPlayingSong.duration!!
+
                     val music = MusicManager.getInstance().nowPlayingSong
                     updateBottomBar(music, MusicManager.getInstance().isPlaying)
                 }
@@ -54,12 +52,12 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
     }
 
     fun initListener() {
-        btn_next.setOnClickListener(View.OnClickListener {
+        btn_next.setOnClickListener {
             // TODO Auto-generated method stub
             MusicManager.getInstance().nextSong()
-        })
+        }
 
-        btn_play.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        btn_play.setOnCheckedChangeListener { buttonView, isChecked ->
             // TODO Auto-generated method stub
             if (isChecked != MusicManager.getInstance().isPlaying) {
                 //播放意图
@@ -69,7 +67,7 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
                     MusicManager.getInstance().pause()
                 }
             }
-        })
+        }
 
         setOnClickListener{
             context.startActivity(PlayingActivity.getStartActIntent(context))
@@ -94,6 +92,7 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
             tv_title.text = music.title
             tv_artist.text = music.artist
             btn_play.isChecked = isPlaying
+            pro_music.max = music.duration!!
 
             music.loadArtPic { bitmap ->
                 Log.i(TAG, "onSuccessLoad bitmap:" + bitmap)
