@@ -17,10 +17,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.bumptech.glide.Glide;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -29,7 +31,7 @@ import org.androidannotations.annotations.ViewById;
 //import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 @Deprecated
 @EFragment(R.layout.bottom_action_bar)
-public class BottomActionBarFragment extends Fragment implements IContain {
+public class BottomActionBarFragment extends BaseFragment implements IContain {
 
     public static final String TAG="BottomActionBarFragment";
 
