@@ -53,7 +53,7 @@ abstract class BottomPlayActivity : BaseActivity() {
         val music: AbstractMusic? = Environment.getRecentMusic()
         addBottomPlayBar(music)
 
-        if (isReceiverRegistered && !isBarAdd) initRecievers()
+        if (!isReceiverRegistered && !isBarAdd) initRecievers()
     }
 
     override fun onDestroy() {

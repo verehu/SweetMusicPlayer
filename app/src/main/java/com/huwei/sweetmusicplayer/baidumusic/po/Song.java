@@ -10,10 +10,6 @@ import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-
-import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,49 +125,13 @@ public class Song extends AbstractMusic implements IQueryReuslt {
     }
 
     @Override
-    public void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener) {
-        String uri="";
-        switch (picSizeType){
-            case SMALL:
-                uri = Uri.parse(songinfo !=null? songinfo.getPic_small():"").toString();
-                break;
-            case BIG:
-                uri = Uri.parse(songinfo !=null? songinfo.getPic_big():"").toString();
-                break;
-            case PREIUM:
-                uri = Uri.parse(songinfo !=null? songinfo.getPic_premium():"").toString();
-                break;
-            case HUGE:
-                uri = Uri.parse(songinfo !=null? songinfo.getPic_huge():"").toString();
-                break;
-        }
-        loadArtPic(uri,loadListener);
+    public String getArtPic() {
+        return songinfo !=null? songinfo.getPic_big():"";
     }
 
-    /**
-     * 默认加载samll
-     * @param loadListener
-     */
     @Override
-    public void loadArtPic(final OnLoadListener loadListener) {
-        loadArtPic(PicSizeType.SMALL,loadListener);
-    }
-
-    private void loadArtPic(String artUri,final OnLoadListener loadListener){
-        Log.i(TAG, "loadArtPic   --->uri:" + artUri);
-        ImageLoader imageLoader = SweetApplication.getImageLoader();
-        imageLoader.loadImage(artUri,new SimpleImageLoadingListener(){
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                super.onLoadingComplete(imageUri, view, loadedImage);
-
-
-                if(loadListener!=null && StringUtils.isNotEmpty(imageUri)){
-                    Log.i(TAG, "onSuccessLoad   --->uri:" + imageUri);
-                    loadListener.onSuccessLoad(loadedImage);
-                }
-            }
-        });
+    public String getArtPicHuge() {
+        return songinfo !=null? songinfo.getPic_big():"";
     }
 
     @Override

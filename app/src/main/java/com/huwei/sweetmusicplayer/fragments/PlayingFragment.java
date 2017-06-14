@@ -30,6 +30,9 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.android.volley.VolleyError;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
@@ -310,10 +313,10 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         final AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
         iv_playing_bg.setImageBitmap(null);
         //加载模糊背景图
-        song.loadArtPic(AbstractMusic.PicSizeType.BIG, new AbstractMusic.OnLoadListener() {
+        Glide.with(getContext()).asBitmap().load(song.getArtPicHuge()).into(new SimpleTarget<Bitmap>() {
             @Override
-            public void onSuccessLoad(Bitmap bitmap) {
-                mBlurHelper.blurBitmap(bitmap, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {
+            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                mBlurHelper.blurBitmap(resource, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {
                     @Override
                     public void onGenerateBitmap(Bitmap bitmap) {
                         iv_playing_bg.setImageBitmap(bitmap);

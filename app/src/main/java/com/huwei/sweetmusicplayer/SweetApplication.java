@@ -15,11 +15,8 @@ import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.dao.DaoMaster;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
-import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.WindowTool;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.androidannotations.annotations.EApplication;
 
@@ -34,7 +31,6 @@ public class SweetApplication extends Application {
 
     private static DaoSession daoSession;
     private static RequestQueue mQueue;
-    private static ImageLoader mImageLoader;
 
     public static int mScreenWidth;
     public static int mScreenHeight;
@@ -97,16 +93,6 @@ public class SweetApplication extends Application {
             mQueue = Volley.newRequestQueue(CONTEXT);
         }
         return mQueue;
-    }
-
-    public static ImageLoader getImageLoader(){
-        if(mImageLoader==null){
-            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(CONTEXT)
-            .build();
-            mImageLoader =ImageLoader.getInstance();
-            mImageLoader.init(config);
-        }
-        return mImageLoader;
     }
 
     public static Context get(){

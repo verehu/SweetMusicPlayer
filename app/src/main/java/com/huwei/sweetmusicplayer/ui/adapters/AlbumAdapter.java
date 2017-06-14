@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -25,8 +24,6 @@ public class AlbumAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<Album> albums;
-
-    ImageLoader imageLoader = SweetApplication.getImageLoader();
 
     public AlbumAdapter(Context context, List<Album> albums) {
         this.mContext = context;
@@ -61,9 +58,6 @@ public class AlbumAdapter extends BaseAdapter {
 
         final Album album = (Album) getItem(position);
         viewHolder = (ViewHolder) convertView.getTag();
-
-        //todo 设置默认图片
-        imageLoader.displayImage(album.pic_small, viewHolder.iv_album);
 
         viewHolder.tv_album.setText(Html.fromHtml(mContext.getString(R.string.tab_albums) + ":" + album.title));
         return convertView;

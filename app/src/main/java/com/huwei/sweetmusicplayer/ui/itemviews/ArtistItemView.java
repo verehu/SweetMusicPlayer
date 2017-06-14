@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.models.ArtistInfo;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -26,22 +25,17 @@ public class ArtistItemView extends LinearLayout implements IRecycleViewItem<Art
     @ViewById
     ImageView iv_artist;
 
-    private ImageLoader mImageLoader;
-
     public ArtistItemView(Context context) {
         this(context, null);
     }
 
     public ArtistItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        mImageLoader = SweetApplication.getImageLoader();
     }
 
     @Override
     public void bind(ArtistInfo artistInfo) {
         tv_title.setText(artistInfo.getArtist());
         tv_numsongs.setText(artistInfo.getNumSongs()+"首");
-
     }
 }

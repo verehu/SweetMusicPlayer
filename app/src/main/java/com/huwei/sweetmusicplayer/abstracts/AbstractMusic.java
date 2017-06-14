@@ -36,21 +36,15 @@ public abstract class AbstractMusic implements Serializable, Parcelable, Parcela
 
     public abstract String getArtist();
 
-//    /**
-//     * 获取艺术家图片
-//     * @return   uri
-//     */
-//    public abstract String getArtPic();
-
     /**
-     * 加载艺术家图片  上面的方法废弃
-     *
-     * @param loadListener
+     * 获取艺术家图片
+     * @return   uri
      */
-    public abstract void loadArtPic(OnLoadListener loadListener);
+    public abstract String getArtPic();
 
-
-    public abstract void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener);
+    public String getArtPicHuge(){
+        return getArtPic();
+    }
 
     /**
      * 专辑图片高斯模糊值

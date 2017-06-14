@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import com.bumptech.glide.Glide
 import com.huwei.sweetmusicplayer.PlayingActivity
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic
@@ -94,11 +94,7 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
             btn_play.isChecked = isPlaying
             pro_music.max = music.duration!!
 
-            music.loadArtPic { bitmap ->
-                Log.i(TAG, "onSuccessLoad bitmap:" + bitmap)
-
-                img_album.setImageBitmap(bitmap)
-            }
+            Glide.with(context).load(music.artPic).into(img_album)
         }
 
     }

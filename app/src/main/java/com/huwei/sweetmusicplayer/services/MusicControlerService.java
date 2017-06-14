@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -18,12 +19,16 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.os.Process;
 import android.os.RemoteException;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
@@ -43,6 +48,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import static com.huwei.sweetmusicplayer.ext.ExtKt.toast;
 
@@ -501,17 +507,17 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
     }
 
     void updateArtistView(AbstractMusic music){
-        music.loadArtPic(new AbstractMusic.OnLoadListener() {
-            @Override
-            public void onSuccessLoad(Bitmap bitmap) {
-                Log.i(TAG,"onSuccessLoad bitmap:"+bitmap);
 
-                if(reViews!=null) {
-                    reViews.setImageViewBitmap(R.id.img_album, bitmap);
-                    mNoticationManager.notify(NT_PLAYBAR_ID,mNotification);
-                }
+        try {
+            Bitmap resource = Glide.with(getBaseContext()).asBitmap().load(music.getArtPic()).submit().get();
+            if(reViews!=null) {
+                reViews.setImageViewBitmap(R.id.img_album, resource);
             }
-        });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     static MediaPlayer getMediaPlayer(Context context) {
