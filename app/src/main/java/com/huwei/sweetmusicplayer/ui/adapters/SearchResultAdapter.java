@@ -10,16 +10,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
-import com.huwei.sweetmusicplayer.baidumusic.po.ArtistSug;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +38,6 @@ public class SearchResultAdapter extends BaseAdapter {
     List<AbstractMusic> songs = new ArrayList<>();
 
     private boolean isFisrtSong;
-
-    ImageLoader imageLoader = SweetApplication.getImageLoader();
 
     private IQueryReuslt.QueryType lastType = IQueryReuslt.QueryType.None;
 
@@ -131,7 +128,7 @@ public class SearchResultAdapter extends BaseAdapter {
                 TextView tv_album = (TextView) convertView.findViewById(R.id.tv_album);
 
                 Album album = (Album) ISearchReuslt;
-                imageLoader.displayImage(album.pic_small, iv_album);
+                Glide.with(mContext).load(album.pic_small).into(iv_album);
 
                 tv_album.setText(Html.fromHtml(mContext.getString(R.string.tab_albums) + ":" + album.title));
                 break;
@@ -143,7 +140,7 @@ public class SearchResultAdapter extends BaseAdapter {
                 Artist artist = (Artist) ISearchReuslt;
                 tv_artist.setText(artist.getName());
 
-                imageLoader.displayImage(artist.avatar_middle, iv_artist);
+                Glide.with(mContext).load(artist.avatar_middle).into(iv_artist);
 
                 tv_artist.setText(mContext.getString(R.string.tab_artists) + ":" + artist.author);
                 break;

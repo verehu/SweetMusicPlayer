@@ -8,10 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -24,8 +24,6 @@ import java.util.List;
 public class ArtistAdapter extends BaseAdapter {
     private Context mContext;
     private List<Artist> artists;
-
-    ImageLoader imageLoader = SweetApplication.getImageLoader();
 
     public ArtistAdapter(Context context, List<Artist> artists) {
         this.mContext = context;
@@ -62,7 +60,7 @@ public class ArtistAdapter extends BaseAdapter {
         final Artist artist = (Artist) getItem(position);
         viewHolder = (ViewHolder) convertView.getTag();
 
-        imageLoader.displayImage(artist.avatar_middle, viewHolder.iv_artist);
+        Glide.with(mContext).load(artist.avatar_middle).into(viewHolder.iv_artist);
 
         viewHolder.tv_artist.setText(artist.author);
         viewHolder.tv_count_song.setText(artist.album_num + "首");
