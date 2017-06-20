@@ -53,7 +53,7 @@ public class MusicUtils implements IContain {
             MediaStore.Audio.Media.DURATION};
 
     private static String[] proj_album = new String[]{MediaStore.Audio.Albums.ALBUM,
-            MediaStore.Audio.Albums.NUMBER_OF_SONGS, MediaStore.Audio.Albums._ID, MediaStore.Audio.Albums.ALBUM_ART, MediaStore.Audio.Albums.ARTIST, MediaStore.Audio.Artists.ARTIST_KEY};
+            MediaStore.Audio.Albums.NUMBER_OF_SONGS, MediaStore.Audio.Albums._ID, MediaStore.Audio.Albums.ALBUM_ART, MediaStore.Audio.Albums.ARTIST};
 
     private static String[] proj_artist = new String[]{
             MediaStore.Audio.Artists._ID,
@@ -212,7 +212,6 @@ public class MusicUtils implements IContain {
             albumInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST)));
             albumInfo.setNumSongs(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums.NUMBER_OF_SONGS)));
             albumInfo.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM)));
-            albumInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST_KEY)));
             return albumInfo;
         }
         return null;
@@ -299,13 +298,6 @@ public class MusicUtils implements IContain {
             artistInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(ArtistInfoDao.Properties.ArtistId.columnName)));
             artistInfo.setArtist(cursor.getString(cursor.getColumnIndex(ArtistInfoDao.Properties.Artist.columnName)));
             artistInfo.setNumSongs(cursor.getInt(cursor.getColumnIndex(ArtistInfoDao.Properties.NumSongs.columnName)));
-
-            //查询albumId
-            List<AlbumInfo> albumInfos = session.getAlbumInfoDao().queryBuilder().where(AlbumInfoDao.Properties.ArtistId.eq(artistInfo.getArtistId())).listLazy();
-            if(albumInfos != null && albumInfos.size() > 0 && albumInfos.get(0) != null) {
-                artistInfo.setAlbumArt(albumInfos.get(0).getAlbumArtPic());
-            }
-
             artistInfoList.add(artistInfo);
         }
 

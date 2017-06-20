@@ -8,7 +8,6 @@ public class AlbumInfo {
 
     private Long albumId;
     private String title;
-    private Long artistId;
     private String artist;
     private Integer numSongs;
     private String albumArt;
@@ -20,10 +19,9 @@ public class AlbumInfo {
         this.albumId = albumId;
     }
 
-    public AlbumInfo(Long albumId, String title, Long artistId, String artist, Integer numSongs, String albumArt) {
+    public AlbumInfo(Long albumId, String title, String artist, Integer numSongs, String albumArt) {
         this.albumId = albumId;
         this.title = title;
-        this.artistId = artistId;
         this.artist = artist;
         this.numSongs = numSongs;
         this.albumArt = albumArt;
@@ -43,14 +41,6 @@ public class AlbumInfo {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Long getArtistId() {
-        return artistId;
-    }
-
-    public void setArtistId(Long artistId) {
-        this.artistId = artistId;
     }
 
     public String getArtist() {

@@ -9,7 +9,6 @@ public class ArtistInfo {
     private Long artistId;
     private String artist;
     private Integer numSongs;
-    private String albumArt;
 
     public ArtistInfo() {
     }
@@ -48,16 +47,4 @@ public class ArtistInfo {
         this.numSongs = numSongs;
     }
 
-
-    public String getAlbumArt() {
-        return albumArt;
-    }
-
-    public void setAlbumArt(String albumArt) {
-        this.albumArt = albumArt;
-    }
-
-    public String getAlbumArtPic(){
-        return "file://" + albumArt;
-    }
 }

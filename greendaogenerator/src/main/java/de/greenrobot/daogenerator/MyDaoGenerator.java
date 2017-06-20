@@ -29,7 +29,6 @@ public class MyDaoGenerator {
         Entity entity=schema.addEntity("AlbumInfo");
         entity.addLongProperty("albumId").primaryKey();
         entity.addStringProperty("title");  //专辑名
-        entity.addLongProperty("artistId"); //artistId
         entity.addStringProperty("artist");
         entity.addIntProperty("numSongs");
         entity.addStringProperty("albumArt");   //封面地址
