@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.models.ArtistInfo;
@@ -35,6 +36,7 @@ public class ArtistItemView extends LinearLayout implements IRecycleViewItem<Art
 
     @Override
     public void bind(ArtistInfo artistInfo) {
+        Glide.with(getContext()).load(artistInfo.getAlbumArtPic()).into(iv_artist);
         tv_title.setText(artistInfo.getArtist());
         tv_numsongs.setText(artistInfo.getNumSongs()+"首");
     }

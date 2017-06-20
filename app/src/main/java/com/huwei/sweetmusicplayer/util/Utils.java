@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -85,5 +86,13 @@ public class Utils {
      */
     public static boolean canFetchFirst(List list) {
         return list != null && list.size() > 0 && list.get(0) != null;
+    }
+
+    public static void safeClose(Cursor cursor) {
+        try {
+            cursor.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
