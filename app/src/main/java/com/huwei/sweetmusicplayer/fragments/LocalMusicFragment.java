@@ -208,7 +208,7 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
 
                 Log.i(TAG, "clicked music:" + ((AbstractMusic) mMusicAdapter.getList().get(position)).getTitle());
 
-//                MusicManager.getInstance().play();
+                MusicManager.getInstance().play();
             }
         });
         lv_song.setAdapter(mMusicAdapter);
