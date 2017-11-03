@@ -9,10 +9,16 @@
 2，加载歌曲列表（可以实现a-z字母检索）  
 3，播放本地、在线音乐（MediaPlayer应用，AIDL运用）  
 4，智能匹配本地歌词,在线歌词   
-5，在线搜索音乐（抓取百度音乐API）
- ![image](http://on8vjlgub.bkt.clouddn.com/sweetmusic1.png)![image](http://on8vjlgub.bkt.clouddn.com/sweetmusic2.png)  
- ![image](http://on8vjlgub.bkt.clouddn.com/sweetmusic3.png)![image](http://on8vjlgub.bkt.clouddn.com/sweetmusic4.png)
-![image](http://on8vjlgub.bkt.clouddn.com/sweetmusic5.png)![image](http://on8vjlgub.bkt.clouddn.com/sweetmusic6.png)
-  ![image](http://on8vjlgub.bkt.clouddn.com/sweetmusic7.png)
-      
-      
+![enter description here][1]![enter description here][2]
+![enter description here][3]![enter description here][4]
+![enter description here][5]![enter description here][6]
+![enter description here][7]
+
+
+[1]: http://on8vjlgub.bkt.clouddn.com/sweetmusic1.png
+[2]: http://on8vjlgub.bkt.clouddn.com/sweetmusic2.png "sweetmusic2"
+[3]: http://on8vjlgub.bkt.clouddn.com/sweetmusic3.png
+[4]: http://on8vjlgub.bkt.clouddn.com/sweetmusic4.png "sweetmusic2"
+[5]: http://on8vjlgub.bkt.clouddn.com/sweetmusic5.png
+[6]: http://on8vjlgub.bkt.clouddn.com/sweetmusic6.png "sweetmusic2"
+[7]: http://on8vjlgub.bkt.clouddn.com/sweetmusic7.png
