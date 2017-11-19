@@ -107,6 +107,9 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     @Bean
     QueueAdapter queueAdapter;
 
+    private SimpleTarget mSimpleTarget; //设置成成员变量,防止被回收
+    private boolean mIsFirst = true;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -312,18 +315,23 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     void initMusicView(){
         final AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
         iv_playing_bg.setImageBitmap(null);
+
+        if (mSimpleTarget == null) {
+            mSimpleTarget = new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                    mBlurHelper.blurBitmap(resource, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {
+                        @Override
+                        public void onGenerateBitmap(Bitmap bitmap) {
+                            iv_playing_bg.setImageBitmap(bitmap);
+                        }
+                    });
+                }
+            };
+        }
+
         //加载模糊背景图
-        Glide.with(getContext()).asBitmap().load(song.getArtPicHuge()).into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                mBlurHelper.blurBitmap(resource, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {
-                    @Override
-                    public void onGenerateBitmap(Bitmap bitmap) {
-                        iv_playing_bg.setImageBitmap(bitmap);
-                    }
-                });
-            }
-        });
+        Glide.with(getContext()).asBitmap().load(song.getArtPicHuge()).into(mSimpleTarget);
     }
 
     void loadLrcView() {
@@ -351,6 +359,12 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         super.onStart();
         Log.i(TAG, "onResume");
         getActivity().registerReceiver(receiver, intentFilter);
+
+        if (mIsFirst) {
+            mIsFirst = false;
+            loadLrcView();
+            initMusicView();
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
@@ -16,7 +17,7 @@ import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
  */
 public class SongSug extends AbstractMusic implements IQueryReuslt {
 
-    public static final String TAG="Song";
+    public static final String TAG = "Song";
 
     public String songid;
     public String songname;
@@ -56,8 +57,8 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
         artistname = parcel.readString();
         control = parcel.readString();
         bitrate = parcel.readParcelable(Bitrate.class.getClassLoader());
-    songInfo = parcel.readParcelable(SongInfo.class.getClassLoader());
-}
+        songInfo = parcel.readParcelable(SongInfo.class.getClassLoader());
+    }
 
     public String getSongid() {
         return songid;
@@ -127,13 +128,13 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
 
     @Override
     public Uri getDataSoure() {
-        String url = bitrate!=null?bitrate.getFile_link(): BaiduMusicUtil.getDownloadUrlBySongId(songid);
+        String url = bitrate != null ? bitrate.getFile_link() : BaiduMusicUtil.getDownloadUrlBySongId(songid);
         return Uri.parse(url);
     }
 
     @Override
     public Integer getDuration() {
-        return bitrate!=null?bitrate.getFile_duration()*1000:0;
+        return bitrate != null ? bitrate.getFile_duration() * 1000 : 0;
     }
 
     @Override
@@ -153,12 +154,12 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
 
     //返回""加载默认的图片
     public String getArtPic() {
-        return Uri.parse(songInfo!=null?songInfo.getPic_small():"").toString();
+        return Uri.parse(songInfo != null ? songInfo.getPic_small() : "").toString();
     }
 
     @Override
     public String getArtPicHuge() {
-        return Uri.parse(songInfo!=null?songInfo.getPic_huge():"").toString();
+        return Uri.parse(songInfo != null ? songInfo.getPic_huge() : "").toString();
     }
 
     @Override
@@ -166,8 +167,8 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
         return 0;
     }
 
-    public boolean hasGetDetailInfo(){
-        return bitrate!=null||songInfo!=null;
+    public boolean hasGetDetailInfo() {
+        return bitrate != null || songInfo != null;
     }
 
 
@@ -195,7 +196,7 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
         dest.writeString(yyr_artist);
         dest.writeString(artistname);
         dest.writeString(control);
-        dest.writeParcelable(bitrate,flags);
-        dest.writeParcelable(songInfo,flags);
+        dest.writeParcelable(bitrate, flags);
+        dest.writeParcelable(songInfo, flags);
     }
 }

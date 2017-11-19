@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.os.Process;
 import android.os.RemoteException;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +33,7 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
 import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
@@ -526,21 +529,28 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         mNoticationManager.notify(NT_PLAYBAR_ID, mNotification);
     }
 
+    private SimpleTarget mSimpleTarget;
     void updateArtistView(AbstractMusic music) {
 
+        if (mSimpleTarget == null) {
+            mSimpleTarget = new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                    if(reViews!=null) {
+                        reViews.setImageViewBitmap(R.id.img_album, resource);
+                    }
+                }
+
+                @Override
+                public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                    super.onLoadFailed(errorDrawable);
+                }
+            };
+        }
+
+        //不能加载图片是多进程问题
         try {
-//            Bitmap resource = Glide.with(getBaseContext()).asBitmap().load(music.getArtPic()).submit().get();
-//            Glide.with(getBaseContext()).asBitmap().load(music.getArtPic()).into(new SimpleTarget<Bitmap>() {
-//                @Override
-//                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-//                    if(reViews!=null) {
-//                        reViews.setImageViewBitmap(R.id.img_album, resource);
-//                    }
-//                }
-//            });
-//            if(reViews!=null) {
-//                reViews.setImageViewBitmap(R.id.img_album, resource);
-//            }
+            Glide.with(SweetApplication.CONTEXT).asBitmap().load(music.getArtPic()).into(mSimpleTarget);
         } catch (Exception e) {
             e.printStackTrace();
         }
