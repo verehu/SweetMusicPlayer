@@ -27,8 +27,4 @@ class PlayingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playing)
     }
-
-    fun closeContent(view: View) {
-        finish()
-    }
 }
