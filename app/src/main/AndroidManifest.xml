@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.huwei.sweetmusicplayer"
     android:versionCode="1"
     android:versionName="1.0">
@@ -54,7 +53,8 @@
         </activity>
         <activity android:name=".AlbumInfoActivity_"/>
         <activity android:name=".ArtistInfoActivity_"/>
-
+        <activity android:name=".PlayingActivity"/>
+        <activity android:name=".LocalMusicActivity"/>
 
         <service
             android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"

@@ -23,9 +23,6 @@ import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -52,7 +49,7 @@ public class AlbumInfoActivity extends BaseActivity {
 
     ImageView iv_album;
     TextView tv_albumname, tv_artist, tv_pub_date;
-    @ViewById(R.id.actionbar)
+    @ViewById(R.id.toolbar)
     Toolbar toolbar;
     @ViewById
     GradientToolbar gtoolbar;
@@ -64,11 +61,8 @@ public class AlbumInfoActivity extends BaseActivity {
     private SongAdapter mMusicAdapter;
     private List<Song> songList = new ArrayList<>();
 
-    private ImageLoader mImageLoader;
-
     @AfterViews
     void init() {
-        mImageLoader = SweetApplication.getImageLoader();
         albumId = getIntent().getStringExtra(IntentExtra.EXTRA_ALBUM_ID);
 
         initToolBar();
@@ -142,34 +136,34 @@ public class AlbumInfoActivity extends BaseActivity {
                 AlbumDetailResp resp = new Gson().fromJson(response, AlbumDetailResp.class);
                 AlbumInfo albumDetail = resp.albumInfo;
                 if (albumDetail != null) {
-                    mImageLoader.loadImage(albumDetail.pic_big, new ImageLoadingListener() {
-                        @Override
-                        public void onLoadingStarted(String imageUri, View view) {
-//                            genBlurBitmap(BitmapUtil.drawable2bitamp(iv_album.getDrawable()));
-                        }
-
-                        @Override
-                        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-                        }
-
-                        @Override
-                        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                            iv_album.setImageBitmap(loadedImage);
-                            mBlurHelper.blurBitmap(loadedImage, 80, new BlurHelper.OnGenerateBitmapCallback() {
-                                @Override
-                                public void onGenerateBitmap(Bitmap bitmap) {
-                                    iv_bg.setImageBitmap(bitmap);
-                                    gtoolbar.setToolbarBg(bitmap);
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onLoadingCancelled(String imageUri, View view) {
-
-                        }
-                    });
+//                    mImageLoader.loadImage(albumDetail.pic_big, new ImageLoadingListener() {
+//                        @Override
+//                        public void onLoadingStarted(String imageUri, View view) {
+////                            genBlurBitmap(BitmapUtil.drawable2bitamp(iv_album.getDrawable()));
+//                        }
+//
+//                        @Override
+//                        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                            iv_album.setImageBitmap(loadedImage);
+//                            mBlurHelper.blurBitmap(loadedImage, 80, new BlurHelper.OnGenerateBitmapCallback() {
+//                                @Override
+//                                public void onGenerateBitmap(Bitmap bitmap) {
+//                                    iv_bg.setImageBitmap(bitmap);
+//                                    gtoolbar.setToolbarBg(bitmap);
+//                                }
+//                            });
+//                        }
+//
+//                        @Override
+//                        public void onLoadingCancelled(String imageUri, View view) {
+//
+//                        }
+//                    });
                     tv_albumname.setText(albumDetail.title);
                     tv_artist.setText("歌手：" + albumDetail.author);
                     tv_pub_date.setText("发行时间：" + albumDetail.publishtime);

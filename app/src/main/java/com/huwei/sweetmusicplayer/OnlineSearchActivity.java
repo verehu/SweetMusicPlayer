@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.baidumusic.po.Artist;
@@ -23,7 +24,6 @@ import com.huwei.sweetmusicplayer.fragments.SearchSongFragment_;
 import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -46,7 +46,7 @@ public class OnlineSearchActivity extends BaseActivity {
     private int pageNo = 1;
     private int pageSize = 50;
 
-    @ViewById(R.id.actionbar)
+    @ViewById(R.id.toolbar)
     Toolbar toolbar;
     @ViewById
     View ll_link_view;
@@ -60,7 +60,6 @@ public class OnlineSearchActivity extends BaseActivity {
     TabLayout mTabs;
 
     private String mQuery;
-    private ImageLoader mImageLoader = SweetApplication.getImageLoader();
 
     public static final String TAB_TITLES[] = {"歌曲", "歌手", "专辑"};
 
@@ -151,7 +150,7 @@ public class OnlineSearchActivity extends BaseActivity {
                 if (queryMergeResp.artist_info != null && queryMergeResp.artist_info.artist_list != null && queryMergeResp.artist_info.artist_list.size() > 0) {
                     Artist artist = queryMergeResp.artist_info.artist_list.get(0);
                     if (artist != null) {
-                        mImageLoader.displayImage(artist.avatar_middle, iv_img);
+                        Glide.with(mContext).load(artist.avatar_middle).into(iv_img);
                         tv_primary.setText(artist.author);
                         tv_second.setText(String.format(mContext.getResources().getString(R.string.artist_second_text), artist.song_num, artist.album_num));
                     }
@@ -162,7 +161,7 @@ public class OnlineSearchActivity extends BaseActivity {
                 if (queryMergeResp.album_info != null && queryMergeResp.album_info.album_list != null && queryMergeResp.album_info.album_list.size() > 0) {
                     Album album = queryMergeResp.album_info.album_list.get(0);
                     if (album != null) {
-                        mImageLoader.displayImage(album.pic_small, iv_img);
+                        Glide.with(mContext).load(album.pic_small).into(iv_img);
                         tv_primary.setText(album.title);
                         tv_second.setText(album.author);
                     }

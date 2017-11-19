@@ -60,6 +60,8 @@ public class MusicUtils implements IContain {
             MediaStore.Audio.Artists.ARTIST,
             MediaStore.Audio.Artists.NUMBER_OF_ALBUMS};
 
+    private static String[] proj_art_to_album = new String[]{ MediaStore.Audio.Artists.Albums.ALBUM_ART};
+
     public static final int THUMBNAIL_LEN_DP = 56;
 
     public static final int MSG_SCAN_SUCCESS = 0;   //所有音乐扫描成功
@@ -280,6 +282,7 @@ public class MusicUtils implements IContain {
      * @return
      */
     public static List<ArtistInfo> queryArtistList() {
+        ContentResolver cr = SweetApplication.get().getContentResolver();
         DaoSession session = SweetApplication.getDaoSession();
         List<ArtistInfo> artistInfoList = new ArrayList<>();
 
@@ -298,8 +301,19 @@ public class MusicUtils implements IContain {
             artistInfo.setArtistId(cursor.getLong(cursor.getColumnIndex(ArtistInfoDao.Properties.ArtistId.columnName)));
             artistInfo.setArtist(cursor.getString(cursor.getColumnIndex(ArtistInfoDao.Properties.Artist.columnName)));
             artistInfo.setNumSongs(cursor.getInt(cursor.getColumnIndex(ArtistInfoDao.Properties.NumSongs.columnName)));
+
             artistInfoList.add(artistInfo);
+
+            //查询专辑信息
+            Cursor albumCursor = cr.query(MediaStore.Audio.Artists.Albums.getContentUri("external", artistInfo.getArtistId()), proj_art_to_album, null, null, null);
+            if (albumCursor.moveToFirst()) {
+                artistInfo.setAlbumArt(albumCursor.getString(albumCursor.getColumnIndex(MediaStore.Audio.Artists.Albums.ALBUM_ART)));
+            }
+            Utils.safeClose(albumCursor);
         }
+        Utils.safeClose(cursor);
+
+
 
         return artistInfoList;
     }

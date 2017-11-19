@@ -6,13 +6,15 @@ import android.os.Parcelable;
 
 import com.huwei.sweetmusicplayer.util.TimeUtil;
 
+import java.io.Serializable;
+
 /**
  * 定义播放实体的抽象类，子类包含MusicInfo（本地音乐）,Song（在线音乐  来源于百度）
  *
  * @author Jayce
  * @date 2015/8/21
  */
-public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<AbstractMusic> {
+public abstract class AbstractMusic implements Serializable, Parcelable, Parcelable.Creator<AbstractMusic> {
 
     public static Creator<AbstractMusic> CREATOR;
 
@@ -34,21 +36,15 @@ public abstract class AbstractMusic implements Parcelable, Parcelable.Creator<Ab
 
     public abstract String getArtist();
 
-//    /**
-//     * 获取艺术家图片
-//     * @return   uri
-//     */
-//    public abstract String getArtPic();
-
     /**
-     * 加载艺术家图片  上面的方法废弃
-     *
-     * @param loadListener
+     * 获取艺术家图片
+     * @return   uri
      */
-    public abstract void loadArtPic(OnLoadListener loadListener);
+    public abstract String getArtPic();
 
-
-    public abstract void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener);
+    public String getArtPicHuge(){
+        return getArtPic();
+    }
 
     /**
      * 专辑图片高斯模糊值

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.huwei.sweetmusicplayer.LocalMusicActivity;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
 import com.huwei.sweetmusicplayer.fragments.base.BaseFragment;
@@ -42,11 +43,8 @@ public class LocalArtistFragment extends BaseFragment implements IMusicViewTypeC
 		adapter.setOnItemClickListener(new RecyclerViewAdapterBase.OnItemClickListener() {
 			@Override
 			public void onItemClick(View view, int position) {
-				FragmentUtil.replace((android.support.v4.app.FragmentActivity) mAct, R.id.main_container,
-						LocalMusicFragment_.builder().showtype(SHOW_MUSIC_BY_ALBUM)
-								.primaryId(adapter.getData().get(position).getArtistId())
-								.title(adapter.getData().get(position).getArtist())
-								.build());
+				startActivity(LocalMusicActivity.Companion.getStartActIntent(mAct, SHOW_MUSIC_BY_ARTIST,
+						adapter.getData().get(position).getArtist(), adapter.getData().get(position).getArtistId()));
 			}
 		});
 	}

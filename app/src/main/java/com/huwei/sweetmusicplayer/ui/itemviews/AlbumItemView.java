@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.models.AlbumInfo;
 
@@ -38,7 +39,7 @@ public class AlbumItemView extends RelativeLayout implements IRecycleViewItem<Al
 
     @Override
     public void bind(AlbumInfo albumInfo) {
-        img_album.setImageURI(Uri.parse("file://"+albumInfo.getAlbumArt()));
+        Glide.with(getContext()).load(albumInfo.getAlbumArtPic()).into(img_album);
         tv_title.setText(albumInfo.getTitle());
         tv_numsongs.setText(albumInfo.getNumSongs()+"首");
     }

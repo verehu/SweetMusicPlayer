@@ -4,15 +4,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-import android.view.View;
-
-import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.interfaces.IQueryReuslt;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
  * 百度音乐API返回的Song的SUG （搜索歌曲建议）
@@ -163,24 +157,8 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
     }
 
     @Override
-    public void loadArtPic(final OnLoadListener loadListener) {
-        ImageLoader imageLoader = SweetApplication.getImageLoader();
-        imageLoader.loadImage(getArtPic(),new SimpleImageLoadingListener(){
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                super.onLoadingComplete(imageUri, view, loadedImage);
-                Log.i(TAG,"onLoadingComplete   --->uri:"+imageUri);
-
-                if(loadListener!=null){
-                    loadListener.onSuccessLoad(loadedImage);
-                }
-            }
-        });
-    }
-
-    @Override
-    public void loadArtPic(PicSizeType picSizeType, OnLoadListener loadListener) {
-
+    public String getArtPicHuge() {
+        return Uri.parse(songInfo!=null?songInfo.getPic_huge():"").toString();
     }
 
     @Override

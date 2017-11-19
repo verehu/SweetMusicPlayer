@@ -67,4 +67,7 @@ public class AlbumInfo {
         this.albumArt = albumArt;
     }
 
+    public String getAlbumArtPic(){
+        return "file://" + albumArt;
+    }
 }

@@ -1,21 +1,16 @@
 package com.huwei.sweetmusicplayer;
 
-import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.LinearLayout;
 
-import static com.huwei.sweetmusicplayer.Permission.*;
-
+import com.huwei.sweetmusicplayer.util.ImmersiveUtil;
 
 /**
  * 项目中Activity基类，用于对activity的整体控制
@@ -25,7 +20,8 @@ import static com.huwei.sweetmusicplayer.Permission.*;
  */
 public class BaseActivity extends AppCompatActivity {
     protected Context mContext;
-    private boolean hasAdjustActionBar;
+    private View mStatusView;
+    private ViewGroup mRootView;
 
     protected String TAG = getClass().getSimpleName();
 
@@ -33,82 +29,75 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ImmersiveUtil.immersive(this);
+
         mContext = this;
+    }
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            //状态栏透明 需要在创建SystemBarTintManager 之前调用。
-//            setTranslucentStatus(true);
-//        }
-//        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-//        tintManager.setStatusBarTintEnabled(true);
-//        //使StatusBarTintView 和 actionbar的颜色保持一致，风格统一。
-//        tintManager.setStatusBarTintResource(R.color.primary_dark);
-//
-//        // 设置状态栏的文字颜色
-//        tintManager.setStatusBarDarkMode(true, this);
-//
-//        tintManager.setStatusBarAlpha(60);
-
-        //权限处理
-        for (String permiss : PERMISSIONS) {
-            if (ActivityCompat.checkSelfPermission(mContext, permiss) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{permiss}, CODE_READ_EXTERNAL_STORAGE);
-            }
-        }
+    public int getStatusBarColor() {
+        return getResources().getColor(R.color.status_color);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-//        adjustActionBarHeight();
+    public void setContentView(@LayoutRes int layoutResID) {
+        View view = LayoutInflater.from(mContext).inflate(layoutResID, null, true);
+        setContentView(view, view.getLayoutParams());
     }
 
-    @TargetApi(19)
-    private void setTranslucentStatus(boolean on) {
-        Window win = getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
+    @Override
+    public void setContentView(View view) {
+        setContentView(view, view.getLayoutParams());
     }
 
-    /**
-     * 调整actionBar的高度 满足状态栏沉浸
-     */
-    public void adjustActionBarHeight() {
-        if (!hasAdjustActionBar) {
-            View actionBar = findViewById(R.id.actionbar);
-            if (actionBar != null) {
-                ViewGroup.LayoutParams params = actionBar.getLayoutParams();
-                params.height = params.height + getStatusBarHeight();
-                actionBar.setLayoutParams(params);
-                Log.i(TAG, "adjustActionBarHeight actionBar");
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        if (isNeedStausView()) {
+            if (view instanceof LinearLayout && ((LinearLayout) view).getOrientation() == LinearLayout.VERTICAL) {
+                mRootView = (ViewGroup) view;
+                checkAndsetContentView(mRootView, params);
+            } else {
+                mRootView = new LinearLayout(this);
+                ((LinearLayout)mRootView).setOrientation(LinearLayout.VERTICAL);
+
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                mRootView.addView(view, layoutParams);
+                super.setContentView(mRootView);
             }
-            hasAdjustActionBar = true;
 
-            Log.i(TAG, "adjustActionBarHeight");
+            mStatusView = ImmersiveUtil.createStatusView(this, getStatusBarColor());
+            mRootView.addView(mStatusView, 0);
+        } else {
+            checkAndsetContentView(view, params);
         }
     }
 
-    /**
-     * 获取状态栏高度
-     *
-     * @return
-     */
-    public int getStatusBarHeight() {
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
+    private void checkAndsetContentView(View view, ViewGroup.LayoutParams params){
+        if (params != null) {
+            super.setContentView(view, params);
+        } else {
+            super.setContentView(view);
         }
-        return result;
+    }
+
+    protected boolean isNeedStausView() {
+        return true;
     }
 
     public void onBackClicked(View view) {
         onBackPressed();
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        if (this instanceof BottomPlayActivity) {
+            try {
+                if (BottomPlayActivity.class.isAssignableFrom(Class.forName(intent.getComponent().getClassName()))) {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        super.startActivity(intent);
     }
 }

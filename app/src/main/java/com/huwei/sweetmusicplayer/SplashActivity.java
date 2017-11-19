@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
@@ -41,6 +43,11 @@ public class SplashActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    protected boolean isNeedStausView() {
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +97,13 @@ public class SplashActivity extends BaseActivity {
         gtp_appname.setProColorInt(getResources().getColor(R.color.primary));
 
         FileUtil.createDir(LrcUtil.lrcRootPath);
-        handler.sendEmptyMessage(0);
 
         int hasRunCount = Environment.getHasRunCount(mContext);
-
         if (hasRunCount == 0) {
             startActivity(SongScanActivity.getStartActIntent(mContext));
+            finish();
+        } else {
+            handler.sendEmptyMessage(0);
         }
         Environment.setHasRunCount(mContext, hasRunCount + 1);
     }

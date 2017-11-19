@@ -3,6 +3,7 @@ package com.huwei.sweetmusicplayer.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 
 /**
@@ -77,5 +78,13 @@ public class Environment implements IContain {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(ENV_HAS_RUN_COUNT, hasRunCount);
         editor.commit();
+    }
+
+    public static AbstractMusic getRecentMusic(){
+        return SpUtils.getObject(ENV_RECENT_MUSIC, AbstractMusic.class);
+    }
+
+    public static void saveRecentMusic(AbstractMusic music){
+        SpUtils.setObject(ENV_RECENT_MUSIC, music);
     }
 }

@@ -39,6 +39,10 @@ import java.util.List;
 public class LocalMusicFragment extends BaseFragment implements IContain, IMusicViewTypeContain {
     public static final String TAG = "LocalMusicFragment";
 
+    public final static String TITLE_ARG = "title";
+    public final static String SHOWTYPE_ARG = "showtype";
+    public final static String PRIMARY_ID_ARG = "primaryId";
+
     private MusicAdapter mMusicAdapter;
 
     @ViewById
@@ -73,6 +77,10 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
         }
     };
 
+    public static LocalMusicFragment get(){
+        return new LocalMusicFragment_();
+    }
+
     @AfterViews
     void init() {
         initParams();
@@ -105,7 +113,7 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
             case SHOW_MUSIC_BY_ARTIST:
                 toolbar.setVisibility(View.VISIBLE);
                 toolbar.setTitle(title);
-                toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+                toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_material));
                 toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -200,7 +208,7 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
 
                 Log.i(TAG, "clicked music:" + ((AbstractMusic) mMusicAdapter.getList().get(position)).getTitle());
 
-//                MusicManager.getInstance().play();
+                MusicManager.getInstance().play();
             }
         });
         lv_song.setAdapter(mMusicAdapter);

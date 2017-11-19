@@ -23,7 +23,7 @@ public abstract class HttpHandler implements Response.Listener<String>,Response.
     private Context context;
 
     public HttpHandler(){
-        this.context = SweetApplication.context;
+        this.context = SweetApplication.CONTEXT;
     }
 
     public HttpHandler(Context context) {

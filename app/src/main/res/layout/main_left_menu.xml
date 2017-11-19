@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="start"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="173dp"
+            android:background="@color/primary">
+
+            <com.thinkcool.circletextimageview.CircleTextImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                app:citv_border_color="@android:color/white"
+                app:citv_border_width="2dp"
+                android:layout_gravity="center"
+                app:citv_text_text="S"
+                app:citv_text_size="32sp"
+                app:citv_text_color="@android:color/white"
+                app:citv_fill_color="#50555D"/>
+        </RelativeLayout>
+        
+        <FrameLayout
+            android:id="@+id/fl_song_scan"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/ic_search"
+                android:text="@string/menu_item_scan"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_adjust_effect"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/ic_sound_effect"
+                android:text="@string/menu_item_effect_adj"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_change_theme"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/ic_skin"
+                android:text="@string/menu_item_change_theme"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_count_down"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/ic_alarm"
+                android:text="@string/menu_item_countdown"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_setting"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/ic_settings"
+                android:text="@string/menu_item_setting"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_exit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:background="@drawable/common_ripple_dark_selector">
+            <com.huwei.sweetmusicplayer.ui.widgets.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/ic_exit_to_app"
+                android:text="@string/menu_item_exit"
+                android:textColor="@color/black_87"
+                app:drawableWidth="24dp"
+                app:drawableHeight="24dp" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</ScrollView>
