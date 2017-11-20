@@ -5,6 +5,8 @@ package com.huwei.sweetmusicplayer.models;
 import android.net.Uri;
 import android.os.Parcel;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.util.CharacterParser;
@@ -78,7 +80,9 @@ public class MusicInfo extends AbstractMusic {
 
     @Override
     public String getArtPic() {
-        Uri uri= Uri.fromFile(new File(MusicUtils.getAlbumArtPath(SweetApplication.CONTEXT,albumId)));
+        String artPath = MusicUtils.getAlbumArtPath(SweetApplication.CONTEXT, albumId);
+        if (TextUtils.isEmpty(artPath)) return "";
+        Uri uri = Uri.fromFile(new File(artPath));
         return uri.toString();
     }
 
@@ -133,6 +137,7 @@ public class MusicInfo extends AbstractMusic {
     public int blurValueOfPlaying() {
         return 120;
     }
+
     /**
      * 获取title的首字母
      *

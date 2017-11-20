@@ -33,7 +33,6 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.MainActivity;
 import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.baidumusic.resp.SongPlayResp;
@@ -42,6 +41,7 @@ import com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
+import com.huwei.sweetmusicplayer.util.LogUtils;
 import com.huwei.sweetmusicplayer.util.concurrent.locks.TLock;
 
 import java.lang.reflect.Constructor;
@@ -49,11 +49,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-import static com.huwei.sweetmusicplayer.ext.ExtKt.toast;
+import static com.huwei.sweetmusicplayer.util.ext.ExtKt.toast;
 
 /**
  * 后台控制播放音乐的service
@@ -529,28 +526,12 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         mNoticationManager.notify(NT_PLAYBAR_ID, mNotification);
     }
 
-    private SimpleTarget mSimpleTarget;
     void updateArtistView(AbstractMusic music) {
-
-        if (mSimpleTarget == null) {
-            mSimpleTarget = new SimpleTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                    if(reViews!=null) {
-                        reViews.setImageViewBitmap(R.id.img_album, resource);
-                    }
-                }
-
-                @Override
-                public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                    super.onLoadFailed(errorDrawable);
-                }
-            };
-        }
-
-        //不能加载图片是多进程问题
         try {
-            Glide.with(SweetApplication.CONTEXT).asBitmap().load(music.getArtPic()).into(mSimpleTarget);
+            Bitmap resource = Glide.with(getBaseContext()).asBitmap().load(music.getArtPic()).submit().get();
+            if(reViews!=null) {
+                reViews.setImageViewBitmap(R.id.img_album, resource);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

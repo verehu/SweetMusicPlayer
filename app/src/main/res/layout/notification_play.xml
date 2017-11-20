@@ -76,6 +76,7 @@
         <TextView
             android:id="@+id/title"
             style="@android:style/android:TextAppearance.StatusBar.EventContent.Title"
+            android:textColor="@color/primary_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"

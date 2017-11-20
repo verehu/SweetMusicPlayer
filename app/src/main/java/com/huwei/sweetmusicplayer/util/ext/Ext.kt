@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.ext
+package com.huwei.sweetmusicplayer.util.ext
 
 import android.content.Context
 import android.widget.Toast
