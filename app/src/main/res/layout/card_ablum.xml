@@ -31,11 +31,11 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="8dp"
             android:layout_alignParentBottom="true"
             android:textColor="@color/primary_text_white"
-            android:textSize="22sp"
+            android:textSize="14sp"
             android:text=""/>
 
         <TextView
@@ -45,6 +45,7 @@
             android:layout_above="@+id/tv_title"
             android:layout_alignLeft="@+id/tv_title"
             android:text=""
+            android:textSize="18sp"
             android:textColor="@color/secondary_text_white"/>
     </RelativeLayout>
 

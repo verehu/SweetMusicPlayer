@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:padding="5dp">
+    android:padding="4dp">
 
     <ImageView
         android:id="@+id/iv_artist"
@@ -21,10 +21,11 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="6dp"
         android:layout_alignParentBottom="true"
         android:textColor="@color/secondary_text_white"
+        android:textSize="14sp"
         android:text="456" />
 
     <TextView
@@ -33,8 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/tv_title"
         android:layout_alignLeft="@+id/tv_title"
-        android:layout_marginBottom="6dp"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:text="123"
         android:textColor="@color/primary_text_white" />
 </RelativeLayout>
