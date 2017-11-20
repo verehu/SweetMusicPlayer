@@ -8,13 +8,13 @@
         android:id="@+id/iv_playing_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/black_08">
+        android:background="@color/black_08"
+        android:orientation="vertical">
 
         <com.huwei.sweetmusicplayer.business.ui.views.StatusBarView
             android:layout_width="match_parent"
@@ -27,9 +27,10 @@
 
             <Button
                 android:id="@+id/playpage_return"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/bt_playpage_button_return_press"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/panel_back_btn"
                 android:onClick="closeContent" />
 
             <RelativeLayout
@@ -54,15 +55,16 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:text="Medium Text"
-                    android:focusable="false"/>
+                    android:focusable="false"
+                    android:text="Medium Text" />
             </RelativeLayout>
 
             <Button
                 android:id="@+id/btn_show_music_queue"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/bt_localsonglist_move_press" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/panel_list_btn" />
         </LinearLayout>
 
         <android.support.v4.widget.DrawerLayout
@@ -122,31 +124,45 @@
                 android:layout_marginRight="16dp"
                 android:text="00:00" />
 
-            <ToggleButton
-                android:id="@+id/playpage_play"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/playpage_progressbar"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/bt_playpage_play_toggle"
-                android:textOff=""
-                android:textOn="" />
+                android:gravity="center">
 
-            <ImageView
-                android:id="@+id/playpage_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/playpage_play"
-                android:layout_toLeftOf="@+id/playpage_duration_tv"
-                android:src="@drawable/bt_playpage_next" />
+                <ImageView
+                    android:id="@+id/playpage_previous"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginRight="48dp"
+                    android:layout_alignBottom="@+id/playpage_play"
+                    android:layout_toRightOf="@+id/playpage_playtime_tv"
+                    android:background="@drawable/panel_pre_btn" />
 
-            <ImageView
-                android:id="@+id/playpage_previous"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/playpage_play"
-                android:layout_toRightOf="@+id/playpage_playtime_tv"
-                android:background="@drawable/bt_playpage_previous" />
+
+
+                <ToggleButton
+                    android:id="@+id/playpage_play"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bt_playpage_play_toggle"
+                    android:textOff=""
+                    android:textOn="" />
+
+                <ImageView
+                    android:id="@+id/playpage_next"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignBottom="@+id/playpage_play"
+                    android:layout_toLeftOf="@+id/playpage_duration_tv"
+                    android:src="@drawable/panel_next_btn"
+                    android:layout_marginLeft="48dp"/>
+
+
+            </LinearLayout>
         </RelativeLayout>
 
     </LinearLayout>

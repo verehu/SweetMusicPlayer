@@ -59,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:ellipsize="end"
-
                 android:text=""
                 style="@style/secondTextViewWhite"/>
 
@@ -81,7 +80,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginRight="8dp"
-            android:background="@drawable/img_button_playcontrolbar_transparent_next_normal" />
+            android:background="@drawable/bottombar_next_btn" />
 
     </LinearLayout>
 
