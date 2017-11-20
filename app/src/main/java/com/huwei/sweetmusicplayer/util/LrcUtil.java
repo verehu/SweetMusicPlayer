@@ -14,11 +14,11 @@ import java.util.List;
 
 import android.util.Log;
 
-import com.huwei.sweetmusicplayer.comparator.LrcComparator;
+import com.huwei.sweetmusicplayer.business.comparator.LrcComparator;
 import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.models.LrcContent;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
+import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.business.models.LrcContent;
+import com.huwei.sweetmusicplayer.business.models.MusicInfo;
 
 
 /**

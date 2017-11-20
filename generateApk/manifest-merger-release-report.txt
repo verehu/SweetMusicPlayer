@@ -109,23 +109,23 @@ activity#com.huwei.sweetmusicplayer.SongScanActivity_
 ADDED from AndroidManifest.xml:39:9
 	android:name
 		ADDED from AndroidManifest.xml:39:19
-service#com.huwei.sweetmusicplayer.services.MusicControlerService
+service#com.huwei.sweetmusicplayer.business.services.MusicControlerService
 ADDED from AndroidManifest.xml:42:9
 	android:name
 		ADDED from AndroidManifest.xml:43:13
-service#com.huwei.sweetmusicplayer.services.ShakeService
+service#com.huwei.sweetmusicplayer.business.services.ShakeService
 ADDED from AndroidManifest.xml:45:9
 	android:exported
 		ADDED from AndroidManifest.xml:47:13
 	android:name
 		ADDED from AndroidManifest.xml:46:13
-intent-filter#com.huwei.sweetmusicplayer.services.ShakeService
+intent-filter#com.huwei.sweetmusicplayer.business.services.ShakeService
 ADDED from AndroidManifest.xml:48:13
-action#com.huwei.sweetmusicplayer.services.ShakeService
+action#com.huwei.sweetmusicplayer.business.services.ShakeService
 ADDED from AndroidManifest.xml:49:17
 	android:name
 		ADDED from AndroidManifest.xml:49:25
-receiver#com.huwei.sweetmusicplayer.recievers.BringToFrontReceiver
+receiver#com.huwei.sweetmusicplayer.business.recievers.BringToFrontReceiver
 ADDED from AndroidManifest.xml:52:9
 	android:priority
 		ADDED from AndroidManifest.xml:52:66

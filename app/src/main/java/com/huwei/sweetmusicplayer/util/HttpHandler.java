@@ -9,7 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.baidumusic.resp.BaseResp;
+import com.huwei.sweetmusicplayer.business.baidumusic.resp.BaseResp;
 import com.huwei.sweetmusicplayer.contains.IContain;
 
 /**

@@ -11,7 +11,7 @@ import com.android.volley.RequestQueue;
 
 
 import com.android.volley.toolbox.Volley;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.dao.DaoMaster;
 import com.huwei.sweetmusicplayer.dao.DaoSession;

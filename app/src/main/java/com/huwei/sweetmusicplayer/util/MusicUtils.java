@@ -17,16 +17,16 @@ import android.util.Log;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.dao.AlbumInfoDao;
 import com.huwei.sweetmusicplayer.dao.ArtistInfoDao;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
 import com.huwei.sweetmusicplayer.dao.MusicInfoDao;
-import com.huwei.sweetmusicplayer.interfaces.OnScanListener;
-import com.huwei.sweetmusicplayer.models.AlbumInfo;
-import com.huwei.sweetmusicplayer.models.ArtistInfo;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
+import com.huwei.sweetmusicplayer.business.interfaces.OnScanListener;
+import com.huwei.sweetmusicplayer.business.models.AlbumInfo;
+import com.huwei.sweetmusicplayer.business.models.ArtistInfo;
+import com.huwei.sweetmusicplayer.business.models.MusicInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;

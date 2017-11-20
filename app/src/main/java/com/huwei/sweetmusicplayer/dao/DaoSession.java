@@ -2,9 +2,9 @@ package com.huwei.sweetmusicplayer.dao;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.huwei.sweetmusicplayer.models.AlbumInfo;
-import com.huwei.sweetmusicplayer.models.ArtistInfo;
-import com.huwei.sweetmusicplayer.models.MusicInfo;
+import com.huwei.sweetmusicplayer.business.models.AlbumInfo;
+import com.huwei.sweetmusicplayer.business.models.ArtistInfo;
+import com.huwei.sweetmusicplayer.business.models.MusicInfo;
 
 import java.util.Map;
 

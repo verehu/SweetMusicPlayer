@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.huwei.sweetmusicplayer.ui.views.ArtistInfoView_
+        <com.huwei.sweetmusicplayer.business.ui.views.ArtistInfoView_
             android:id="@+id/view_artist_info"
             android:layout_width="match_parent"
             android:layout_height="196dp" />
@@ -30,7 +30,7 @@
             app:tabSelectedTextColor="@color/primary"/>
     </LinearLayout>
 
-    <com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar
+    <com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar
         android:id="@+id/gtoolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />

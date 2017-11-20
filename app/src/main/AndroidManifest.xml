@@ -26,7 +26,7 @@
         android:theme="@style/SweetTheme"
        >
         <activity
-            android:name=".SplashActivity"
+            android:name=".business.SplashActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,15 +35,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".business.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=".OnlineSearchActivity_" />
+                android:value=".business.OnlineSearchActivity_" />
         </activity>
-        <activity android:name=".SongScanActivity_" />
-        <activity android:name=".OnlineSearchActivity_">
+        <activity android:name=".business.SongScanActivity_" />
+        <activity android:name=".business.OnlineSearchActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -51,13 +51,13 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/search_online" />
         </activity>
-        <activity android:name=".AlbumInfoActivity_"/>
-        <activity android:name=".ArtistInfoActivity_"/>
-        <activity android:name=".PlayingActivity"/>
-        <activity android:name=".LocalMusicActivity"/>
+        <activity android:name=".business.AlbumInfoActivity_"/>
+        <activity android:name=".business.ArtistInfoActivity_"/>
+        <activity android:name=".business.PlayingActivity"/>
+        <activity android:name=".business.LocalMusicActivity"/>
 
         <service
-            android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"
+            android:name=".business.services.MusicControlerService"
             android:process=":remote">
             <intent-filter>
                 <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"/>
@@ -65,7 +65,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".services.ShakeService"
+            android:name=".business.services.ShakeService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.huwei.sweetmusicplayer.services.ShakeService" />
@@ -73,7 +73,7 @@
         </service>
 
         <receiver
-            android:name=".recievers.BringToFrontReceiver"
+            android:name=".business.recievers.BringToFrontReceiver"
             android:priority="1000">
              
             <intent-filter>            

@@ -3,7 +3,7 @@ package com.huwei.sweetmusicplayer.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.huwei.sweetmusicplayer.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 
 /**
