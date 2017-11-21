@@ -9,7 +9,7 @@
         android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,8 +23,7 @@
         android:allowBackup="true"
         android:icon="@drawable/sweet"
         android:label="@string/app_name"
-        android:theme="@style/SweetTheme"
-       >
+        android:theme="@style/SweetTheme">
         <activity
             android:name=".business.SplashActivity"
             android:label="@string/app_name">
@@ -38,12 +37,12 @@
             android:name=".business.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".business.OnlineSearchActivity_" />
+
         </activity>
         <activity android:name=".business.SongScanActivity_" />
-        <activity android:name=".business.OnlineSearchActivity_">
+        <activity
+            android:name=".business.OnlineSearchActivity_"
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -51,16 +50,16 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/search_online" />
         </activity>
-        <activity android:name=".business.AlbumInfoActivity_"/>
-        <activity android:name=".business.ArtistInfoActivity_"/>
-        <activity android:name=".business.PlayingActivity"/>
-        <activity android:name=".business.LocalMusicActivity"/>
+        <activity android:name=".business.AlbumInfoActivity_" />
+        <activity android:name=".business.ArtistInfoActivity_" />
+        <activity android:name=".business.PlayingActivity" />
+        <activity android:name=".business.LocalMusicActivity" />
 
         <service
             android:name=".business.services.MusicControlerService"
             android:process=":remote">
             <intent-filter>
-                <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService"/>
+                <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>

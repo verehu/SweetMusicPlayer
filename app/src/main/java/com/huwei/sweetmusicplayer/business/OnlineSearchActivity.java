@@ -3,10 +3,14 @@ package com.huwei.sweetmusicplayer.business;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,10 +70,17 @@ public class OnlineSearchActivity extends BaseActivity {
 
     @AfterViews
     void init() {
+        Log.d(TAG, Log.getStackTraceString(new Throwable()));
+
         initView();
         initListener();
 
         handleIntent(getIntent());
+    }
+
+    @Override
+    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
     }
 
     void initView() {

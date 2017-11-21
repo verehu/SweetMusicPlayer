@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 
 import java.util.List;
 
@@ -59,6 +60,7 @@ public class AlbumAdapter extends BaseAdapter {
         viewHolder = (ViewHolder) convertView.getTag();
 
         viewHolder.tv_album.setText(Html.fromHtml(mContext.getString(R.string.tab_albums) + ":" + album.title));
+        GlideApp.with(mContext).load(album.getPic()).placeholder(R.drawable.album_default).into(viewHolder.iv_album);
         return convertView;
     }
 

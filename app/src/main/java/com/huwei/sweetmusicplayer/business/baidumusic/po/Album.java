@@ -2,6 +2,7 @@ package com.huwei.sweetmusicplayer.business.baidumusic.po;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.huwei.sweetmusicplayer.business.interfaces.IQueryReuslt;
 
@@ -80,6 +81,17 @@ public class Album implements IQueryReuslt, Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    public String getPic() {
+        if (!TextUtils.isEmpty(pic_big)) {
+            return pic_big;
+        } else if (!TextUtils.isEmpty(pic_s180)) {
+            return pic_s180;
+        } else if (!TextUtils.isEmpty(pic_radio)) {
+            return pic_radio;
+        }
+        return pic_small;
     }
 
     @Override

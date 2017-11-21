@@ -1,5 +1,7 @@
 package com.huwei.sweetmusicplayer.business.fragments;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -32,8 +34,10 @@ public class SearchArtistFragment extends AutoListFragment {
     private ArtistAdapter mArtistAdapter;
     private List<Artist> mList = new ArrayList<>();
 
-    @AfterViews
-    void init() {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         mPageNo = 2;
 
         mArtistAdapter = new ArtistAdapter(mAct, mList);
@@ -59,7 +63,7 @@ public class SearchArtistFragment extends AutoListFragment {
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(ArtistInfoActivity.getStartActIntent(mAct, mList.get(i).ting_uid,mList.get(i).artist_id));
+                startActivity(ArtistInfoActivity.getStartActIntent(mAct, mList.get(i).ting_uid, mList.get(i).artist_id));
             }
         });
     }

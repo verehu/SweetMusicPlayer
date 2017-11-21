@@ -15,7 +15,7 @@ import com.huwei.sweetmusicplayer.business.ui.widgets.auto.AutoListView;
  * @author jerry
  * @date 2016/01/04
  */
-public class AutoListFragment extends BaseFragment{
+public abstract class AutoListFragment extends BaseFragment{
 
     protected AutoListView mAutoListView;
     protected int mPageNo;

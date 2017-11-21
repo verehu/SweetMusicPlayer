@@ -9,8 +9,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.ArtistInfo;
+import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
+import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.helper.BlurHelper;
 import com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar;
 import com.huwei.sweetmusicplayer.util.DisplayUtil;
@@ -58,33 +61,7 @@ public class ArtistInfoView extends FrameLayout {
         if (artistInfo != null) {
             tv_artist.setText(artistInfo.name);
             tv_country.setText(artistInfo.country + "歌手");
-//            mImageLoader.loadImage(artistInfo.avatar_s500, new ImageLoadingListener() {
-//                @Override
-//                public void onLoadingStarted(String imageUri, View view) {
-////                            genBlurBitmap(BitmapUtil.drawable2bitamp(iv_album.getDrawable()));
-//                }
-//
-//                @Override
-//                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-//
-//                }
-//
-//                @Override
-//                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                    iv_bg.setImageBitmap(loadedImage);
-//                    mBlurHelper.blurBitmap(loadedImage, 100, new BlurHelper.OnGenerateBitmapCallback() {
-//                        @Override
-//                        public void onGenerateBitmap(Bitmap bitmap) {
-//                            gtoolbar.setToolbarBg(bitmap);
-//                        }
-//                    });
-//                }
-//
-//                @Override
-//                public void onLoadingCancelled(String imageUri, View view) {
-//
-//                }
-//            });
+            GlideApp.with(mContext).load(artistInfo.avatar_s500).transform(new BlurBitmapTransformation(100)).into(iv_bg);
             gtoolbar.setGradientTitle(artistInfo.name);
         }
     }

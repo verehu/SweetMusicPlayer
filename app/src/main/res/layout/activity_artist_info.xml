@@ -26,12 +26,23 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:tabIndicatorColor="@color/primary"
-            app:tabTextColor="@color/secondary_text"
-            app:tabSelectedTextColor="@color/primary"/>
+            app:tabSelectedTextColor="@color/primary"
+            app:tabTextColor="@color/secondary_text" />
     </LinearLayout>
 
-    <com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar
-        android:id="@+id/gtoolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.huwei.sweetmusicplayer.business.ui.views.StatusBarView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar
+            android:id="@+id/gtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+    </LinearLayout>
 </FrameLayout>

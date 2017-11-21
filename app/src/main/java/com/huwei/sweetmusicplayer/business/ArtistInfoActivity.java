@@ -77,6 +77,11 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
         return intent;
     }
 
+    @Override
+    protected boolean isNeedStausView() {
+        return false;
+    }
+
     @AfterViews
     void init() {
         ting_uid = getIntent().getStringExtra(TINGUID);
