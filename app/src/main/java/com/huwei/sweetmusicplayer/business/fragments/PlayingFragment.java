@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -30,9 +29,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.android.volley.VolleyError;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
@@ -44,7 +41,8 @@ import com.huwei.sweetmusicplayer.business.comparator.LrcComparator;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
 import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
-import com.huwei.sweetmusicplayer.helper.BlurHelper;
+import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
+import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.business.models.LrcContent;
 import com.huwei.sweetmusicplayer.business.ui.adapters.QueueAdapter;
 import com.huwei.sweetmusicplayer.business.ui.listeners.OnLrcSearchClickListener;
@@ -84,7 +82,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
     private View mRootView;
 
-    @ViewById
+
     ImageView iv_playing_bg;
     @ViewById
     DrawerLayout dl_music_queue;
@@ -92,9 +90,6 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     ImageView btn_show_music_queue;
     @ViewById
     ListView lv_music_queue;
-
-    @Bean
-    BlurHelper mBlurHelper;
 
     private IntentFilter intentFilter;
 
@@ -139,6 +134,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         playpage_previous_btn = (ImageView) mRootView.findViewById(R.id.playpage_previous);
         playpage_play_btn = (ToggleButton) mRootView.findViewById(R.id.playpage_play);
         playpage_lrcview = (LrcView) mRootView.findViewById(R.id.playpage_lrcview);
+        iv_playing_bg = (ImageView) mRootView.findViewById(R.id.iv_playing_bg);
 
         initListener();
 
@@ -146,7 +142,9 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
         mScreenWidth = metric.widthPixels;
 
+        initMusicView();
         UpdateSongInfoView();
+        loadLrcView();
 
         return mRootView;
     }
@@ -314,24 +312,8 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
     void initMusicView(){
         final AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
-        iv_playing_bg.setImageBitmap(null);
-
-        if (mSimpleTarget == null) {
-            mSimpleTarget = new SimpleTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                    mBlurHelper.blurBitmap(resource, song.blurValueOfPlaying(), new BlurHelper.OnGenerateBitmapCallback() {
-                        @Override
-                        public void onGenerateBitmap(Bitmap bitmap) {
-                            iv_playing_bg.setImageBitmap(bitmap);
-                        }
-                    });
-                }
-            };
-        }
-
         //加载模糊背景图
-        Glide.with(getContext()).asBitmap().load(song.getArtPicHuge()).into(mSimpleTarget);
+        GlideApp.with(getContext()).load(song.getArtPicHuge()).transform(new BlurBitmapTransformation(song.blurValueOfPlaying())).into(iv_playing_bg);
     }
 
     void loadLrcView() {
@@ -362,8 +344,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
 
         if (mIsFirst) {
             mIsFirst = false;
-            loadLrcView();
-            initMusicView();
+
         }
     }
 
