@@ -56,12 +56,11 @@
 
 
     <!-- bottom_action_bar -->
-    <style name="BottomActionBarItem">
+    <style name="CommonButton">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:layout_width">@dimen/bottom_action_bar_item_width</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:padding">@dimen/bottom_action_bar_item_padding_left_right</item>
-        <item name="android:layout_gravity">center_vertical</item>
     </style>
 
     <!-- song_listitem -->

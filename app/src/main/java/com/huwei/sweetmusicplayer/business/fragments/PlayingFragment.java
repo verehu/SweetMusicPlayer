@@ -71,7 +71,7 @@ import java.util.List;
 public class PlayingFragment extends Fragment implements IContain, OnLrcSearchClickListener, ILrcStateContain {
     private static final String TAG = "PlayingFragment";
 
-    private Button playpage_return_btn;
+    private ImageView playpage_return_btn;
     private TextView playpage_title_tv;
     private TextView playpage_artist_tv;
     private TextView playpage_playtime_tv;
@@ -89,7 +89,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
     @ViewById
     DrawerLayout dl_music_queue;
     @ViewById
-    Button btn_show_music_queue;
+    ImageView btn_show_music_queue;
     @ViewById
     ListView lv_music_queue;
 
@@ -129,7 +129,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         // TODO Auto-generated method stub
         mRootView = inflater.inflate(R.layout.fragment_playing, null);
 
-        playpage_return_btn = (Button) mRootView.findViewById(R.id.playpage_return);
+        playpage_return_btn = (ImageView) mRootView.findViewById(R.id.playpage_return);
         playpage_title_tv = (TextView) mRootView.findViewById(R.id.playpage_title_tv);
         playpage_artist_tv = (TextView) mRootView.findViewById(R.id.playpage_artist);
         playpage_playtime_tv = (TextView) mRootView.findViewById(R.id.playpage_playtime_tv);

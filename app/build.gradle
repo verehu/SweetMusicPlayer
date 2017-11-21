@@ -9,6 +9,7 @@ android {
         applicationId "com.huwei.sweetmusicplayer"
         minSdkVersion 14
         targetSdkVersion 25
+        vectorDrawables.useSupportLibrary = true
     }
 
     compileOptions {

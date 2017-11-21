@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black01">
@@ -25,13 +26,11 @@
             android:layout_height="54dp"
             android:gravity="center">
 
-            <Button
+            <ImageView
                 android:id="@+id/playpage_return"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_margin="16dp"
-                android:background="@drawable/panel_back_btn"
-                android:onClick="closeContent" />
+                style="@style/CommonButton"
+                android:onClick="closeContent"
+                app:srcCompat="@drawable/panel_back_btn" />
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -59,12 +58,10 @@
                     android:text="Medium Text" />
             </RelativeLayout>
 
-            <Button
+            <ImageView
                 android:id="@+id/btn_show_music_queue"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_margin="16dp"
-                android:background="@drawable/panel_list_btn" />
+                style="@style/CommonButton"
+                app:srcCompat="@drawable/panel_list_btn" />
         </LinearLayout>
 
         <android.support.v4.widget.DrawerLayout
@@ -128,26 +125,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/playpage_progressbar"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
                 android:layout_centerHorizontal="true"
-                android:gravity="center">
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/playpage_previous"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginRight="48dp"
                     android:layout_alignBottom="@+id/playpage_play"
+                    android:layout_marginRight="48dp"
                     android:layout_toRightOf="@+id/playpage_playtime_tv"
-                    android:background="@drawable/panel_pre_btn" />
-
+                    app:srcCompat="@drawable/bt_playpage_previous" />
 
 
                 <ToggleButton
                     android:id="@+id/playpage_play"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@drawable/bt_playpage_play_toggle"
                     android:textOff=""
                     android:textOn="" />
@@ -157,9 +153,9 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_alignBottom="@+id/playpage_play"
+                    android:layout_marginLeft="48dp"
                     android:layout_toLeftOf="@+id/playpage_duration_tv"
-                    android:src="@drawable/panel_next_btn"
-                    android:layout_marginLeft="48dp"/>
+                    app:srcCompat="@drawable/bt_playpage_next" />
 
 
             </LinearLayout>
