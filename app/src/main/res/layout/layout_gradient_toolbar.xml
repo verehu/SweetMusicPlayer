@@ -14,5 +14,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
+        android:layout_gravity="bottom"
         android:background="@color/transparent" />
 </merge>

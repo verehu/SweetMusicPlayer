@@ -35,7 +35,7 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
-def AAVersion = "4.0-SNAPSHOT" // change this to your desired version, for example the latest stable: 3.3.2
+def AAVersion = "4.4.0" // change this to your desired version, for example the latest stable: 3.3.2
 dependencies {
     annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"

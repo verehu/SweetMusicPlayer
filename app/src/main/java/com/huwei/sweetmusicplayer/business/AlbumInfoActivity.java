@@ -2,6 +2,8 @@ package com.huwei.sweetmusicplayer.business;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.AlbumInfo;
@@ -16,6 +24,8 @@ import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.AlbumDetailResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
+import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.helper.BlurHelper;
 import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar;
@@ -136,34 +146,24 @@ public class AlbumInfoActivity extends BaseActivity {
                 AlbumDetailResp resp = new Gson().fromJson(response, AlbumDetailResp.class);
                 AlbumInfo albumDetail = resp.albumInfo;
                 if (albumDetail != null) {
-//                    mImageLoader.loadImage(albumDetail.pic_big, new ImageLoadingListener() {
-//                        @Override
-//                        public void onLoadingStarted(String imageUri, View view) {
-////                            genBlurBitmap(BitmapUtil.drawable2bitamp(iv_album.getDrawable()));
-//                        }
-//
-//                        @Override
-//                        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                            iv_album.setImageBitmap(loadedImage);
-//                            mBlurHelper.blurBitmap(loadedImage, 80, new BlurHelper.OnGenerateBitmapCallback() {
-//                                @Override
-//                                public void onGenerateBitmap(Bitmap bitmap) {
-//                                    iv_bg.setImageBitmap(bitmap);
-//                                    gtoolbar.setToolbarBg(bitmap);
-//                                }
-//                            });
-//                        }
-//
-//                        @Override
-//                        public void onLoadingCancelled(String imageUri, View view) {
-//
-//                        }
-//                    });
+                    GlideApp.with(mContext).asBitmap().load(albumDetail.pic_big).listener(new RequestListener<Bitmap>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                            iv_album.setImageBitmap(resource);
+                            return false;
+                        }
+                    }).transform(new BlurBitmapTransformation(80)).into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                            iv_bg.setImageBitmap(resource);
+                            gtoolbar.setToolbarBg(resource);
+                        }
+                    });
                     tv_albumname.setText(albumDetail.title);
                     tv_artist.setText("歌手：" + albumDetail.author);
                     tv_pub_date.setText("发行时间：" + albumDetail.publishtime);

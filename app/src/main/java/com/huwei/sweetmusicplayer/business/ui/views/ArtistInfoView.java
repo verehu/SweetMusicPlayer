@@ -1,7 +1,10 @@
 package com.huwei.sweetmusicplayer.business.ui.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -10,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.ArtistInfo;
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
@@ -61,7 +70,24 @@ public class ArtistInfoView extends FrameLayout {
         if (artistInfo != null) {
             tv_artist.setText(artistInfo.name);
             tv_country.setText(artistInfo.country + "歌手");
-            GlideApp.with(mContext).load(artistInfo.avatar_s500).transform(new BlurBitmapTransformation(100)).into(iv_bg);
+            GlideApp.with(mContext).asBitmap().load(artistInfo.avatar_s500).listener(new RequestListener<Bitmap>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                    iv_bg.setImageBitmap(resource);
+                    return false;
+                }
+            }).transform(new BlurBitmapTransformation(100)).into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                    gtoolbar.setToolbarBg(resource);
+                }
+            });
+
             gtoolbar.setGradientTitle(artistInfo.name);
         }
     }

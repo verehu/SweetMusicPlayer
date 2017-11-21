@@ -23,8 +23,11 @@ import com.huwei.sweetmusicplayer.business.interfaces.IListViewScroll;
 import com.huwei.sweetmusicplayer.business.ui.adapters.PagerAdapter;
 import com.huwei.sweetmusicplayer.business.ui.views.ArtistInfoView;
 import com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar;
+import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
+import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
+import com.huwei.sweetmusicplayer.util.Utils;
 import com.nineoldandroids.view.ViewHelper;
 
 import org.androidannotations.annotations.AfterViews;
@@ -112,7 +115,8 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
     void initMeasure() {
         mHeaderFlow.measure(View.MeasureSpec.makeMeasureSpec(SweetApplication.mScreenWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         gtoolbar.measure(View.MeasureSpec.makeMeasureSpec(SweetApplication.mScreenWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        mLimitHeight = mArtistInfoView.getMeasuredHeight() - gtoolbar.getMeasuredHeight();
+        //由于这里gtoolbar算出来只是56dp,需要加上状态栏的高度
+        mLimitHeight = mArtistInfoView.getMeasuredHeight() - (gtoolbar.getMeasuredHeight()+ Utils.getStatusBarHeight());
         Log.i(TAG, "mArtistInfoView:" + mArtistInfoView.getMeasuredHeight() + " gtoolbar.getMeasuredHeight():" + gtoolbar.getMeasuredHeight() + "   mLimitHeight:" + mLimitHeight);
     }
 
