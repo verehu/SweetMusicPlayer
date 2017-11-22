@@ -9,7 +9,7 @@ import java.security.MessageDigest
 /**
  * Created by huwei on 17-11-21.
  */
-class BlurBitmapTransformation : BitmapTransformation{
+open class BlurBitmapTransformation : BitmapTransformation{
     var mRadius : Int
 
     constructor(radius: Int) {

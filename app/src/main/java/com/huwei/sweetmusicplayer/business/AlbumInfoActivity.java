@@ -3,19 +3,14 @@ package com.huwei.sweetmusicplayer.business;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.R;
@@ -26,7 +21,6 @@ import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
-import com.huwei.sweetmusicplayer.helper.BlurHelper;
 import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.AutoListView;
@@ -35,9 +29,9 @@ import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +47,6 @@ public class AlbumInfoActivity extends BaseActivity {
 
     private View mHeaderView;
     private ImageView iv_bg;
-
-    @Bean
-    BlurHelper mBlurHelper;
 
     ImageView iv_album;
     TextView tv_albumname, tv_artist, tv_pub_date;
@@ -152,18 +143,14 @@ public class AlbumInfoActivity extends BaseActivity {
                 AlbumDetailResp resp = new Gson().fromJson(response, AlbumDetailResp.class);
                 AlbumInfo albumDetail = resp.albumInfo;
                 if (albumDetail != null) {
-                    GlideApp.with(mContext).asBitmap().load(albumDetail.pic_big).listener(new RequestListener<Bitmap>() {
+                    GlideApp.with(mContext).asBitmap().load(albumDetail.pic_big).transform(new BlurBitmapTransformation(80) {
+                        @NotNull
                         @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                            return false;
+                        protected Bitmap transform(@NotNull BitmapPool pool, @NotNull Bitmap toTransform, int outWidth, int outHeight) {
+                            iv_album.setImageBitmap(toTransform);
+                            return super.transform(pool, toTransform, outWidth, outHeight);
                         }
-
-                        @Override
-                        public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                            iv_album.setImageBitmap(resource);
-                            return false;
-                        }
-                    }).transform(new BlurBitmapTransformation(80)).into(new SimpleTarget<Bitmap>() {
+                    }).into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                             iv_bg.setImageBitmap(resource);
