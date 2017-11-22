@@ -71,6 +71,11 @@ public class AlbumInfoActivity extends BaseActivity {
     private SongAdapter mMusicAdapter;
     private List<Song> songList = new ArrayList<>();
 
+    @Override
+    protected boolean isNeedStausView() {
+        return false;
+    }
+
     @AfterViews
     void init() {
         albumId = getIntent().getStringExtra(IntentExtra.EXTRA_ALBUM_ID);
@@ -85,7 +90,7 @@ public class AlbumInfoActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        toolbar.setTitle(R.string.ativity_album_detail);
+        gtoolbar.setTitle(R.string.ativity_album_detail);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

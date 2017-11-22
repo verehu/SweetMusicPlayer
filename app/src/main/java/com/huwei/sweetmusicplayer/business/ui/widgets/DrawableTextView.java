@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.util.LogUtils;
+import com.huwei.sweetmusicplayer.util.LogUtil;
 
 
 /**
@@ -77,7 +77,7 @@ public class DrawableTextView extends TextView {
 //                        t[i].setIntrinsicWidth(mDrawbleWidth);
 //                        t[i].setIntrinsicHeight(mDrawbleHeight);
 
-                        LogUtils.i(TAG, "(mDrawbleWidth,mDrawbleWidth):" + mDrawbleWidth + "," + mDrawbleHeight + "   w,h:" + t[i].getIntrinsicWidth() + "," + t[i].getIntrinsicHeight());
+                        LogUtil.i(TAG, "(mDrawbleWidth,mDrawbleWidth):" + mDrawbleWidth + "," + mDrawbleHeight + "   w,h:" + t[i].getIntrinsicWidth() + "," + t[i].getIntrinsicHeight());
 
                         setCompoundDrawables(t[0], t[1], t[2], t[3]);
                         return;

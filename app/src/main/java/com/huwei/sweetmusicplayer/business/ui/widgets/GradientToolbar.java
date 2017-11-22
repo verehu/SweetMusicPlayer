@@ -16,6 +16,7 @@ import android.widget.ScrollView;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.util.BitmapUtil;
+import com.huwei.sweetmusicplayer.util.LogUtil;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -38,6 +39,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
     private Drawable mToolbarBgDrawable; //toolbar背景
     private Toolbar mToolbar;
     private String mGradientTitle; //渐变过程中的title
+    private String mTitle; //普通状态下的title
 
     public GradientToolbar(Context context) {
         this(context, null);
@@ -88,6 +90,18 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
         this.mGradientTitle = mTitle;
     }
 
+    public void setTitle(int resString) {
+        setTitle(getResources().getString(resString));
+    }
+
+    public void setTitle(String mTitle) {
+        this.mTitle = mTitle;
+
+        if (mToolbar != null) {
+            mToolbar.setTitle(mTitle);
+        }
+    }
+
     /**
      * 绑定ListView  直接调用adjustHeaderViewAndTitle()
      */
@@ -124,14 +138,15 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
                 float alpha = offsetY / (float) mGradientHeight;
                 if (alpha <= 0) {
                     alpha = 0;
-                    mToolbar.setTitle("专辑");
-                } else if (alpha >= 1) {
+                    mToolbar.setTitle(mTitle);
+                } else
+                    if (alpha >= 1) {
                     alpha = 1;
                     if (StringUtils.isNotEmpty(mGradientTitle)) {
                         mToolbar.setTitle(mGradientTitle);
                     }
                 } else {
-                    mToolbar.setTitle("专辑");
+                    mToolbar.setTitle(mTitle);
                 }
 
                 if (mToolbarBgDrawable != null) {
@@ -141,7 +156,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
                 }
 
                 mHeaderView.setAlpha(1 - alpha);
-                Log.i(TAG, offsetY + ":" + mGradientHeight + " = toolbar bg alpha:" + alpha);
+                LogUtil.i(TAG, offsetY + ":" + mGradientHeight + " = toolbar bg alpha:" + alpha);
             }
         }
     }

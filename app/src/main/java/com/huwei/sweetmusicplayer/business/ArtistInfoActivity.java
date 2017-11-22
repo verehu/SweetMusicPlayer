@@ -144,6 +144,7 @@ public class ArtistInfoActivity extends BaseActivity implements IListViewScroll 
     }
 
     void initGToolBar() {
+        gtoolbar.setTitle(R.string.activity_artist_info);
         gtoolbar.bindHeaderView(mArtistInfoView);
     }
 

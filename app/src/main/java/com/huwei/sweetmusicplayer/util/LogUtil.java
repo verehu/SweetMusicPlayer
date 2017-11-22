@@ -1,13 +1,13 @@
 package com.huwei.sweetmusicplayer.util;
 
-public class LogUtils {
+public class LogUtil {
     // Use BuildConfig.DEBUG cause lots of headache. Stupid.
     public static boolean DEBUG = true;
 
     /**
      * TAG标签
      */
-    private final static String TAG = LogUtils.class.getSimpleName();
+    private final static String TAG = LogUtil.class.getSimpleName();
 
     public static void i(String msg) {
         if (DEBUG)
