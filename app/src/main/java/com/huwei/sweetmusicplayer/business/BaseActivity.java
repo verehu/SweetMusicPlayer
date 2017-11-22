@@ -41,32 +41,40 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        View view = LayoutInflater.from(mContext).inflate(layoutResID, null, true);
-        setContentView(view, view.getLayoutParams());
+        View view = LayoutInflater.from(mContext).inflate(layoutResID, null, false);
+        handleContentView(view,null);
     }
 
     @Override
     public void setContentView(View view) {
-        setContentView(view, view.getLayoutParams());
+        handleContentView(view,null);
     }
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
+        handleContentView(view, params);
+    }
+
+    /**
+     * 处理contentView 不要直接复写setcontentView之后调用super
+     * @param view
+     * @param params
+     */
+    private void handleContentView(View view, ViewGroup.LayoutParams params) {
         if (isNeedStausView()) {
             if (view instanceof LinearLayout && ((LinearLayout) view).getOrientation() == LinearLayout.VERTICAL) {
                 mRootView = (ViewGroup) view;
-                checkAndsetContentView(mRootView, params);
             } else {
                 mRootView = new LinearLayout(this);
                 ((LinearLayout)mRootView).setOrientation(LinearLayout.VERTICAL);
 
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 mRootView.addView(view, layoutParams);
-                super.setContentView(mRootView);
             }
 
             mStatusView = ImmersiveUtil.createStatusView(this, getStatusBarColor());
             mRootView.addView(mStatusView, 0);
+            checkAndsetContentView(mRootView, params);
         } else {
             checkAndsetContentView(view, params);
         }

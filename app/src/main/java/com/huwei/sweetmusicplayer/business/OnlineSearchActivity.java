@@ -70,17 +70,12 @@ public class OnlineSearchActivity extends BaseActivity {
 
     @AfterViews
     void init() {
-        Log.d(TAG, Log.getStackTraceString(new Throwable()));
+        Log.d(TAG, this + " ---->" + Log.getStackTraceString(new Throwable()));
 
         initView();
         initListener();
 
         handleIntent(getIntent());
-    }
-
-    @Override
-    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onPostCreate(savedInstanceState, persistentState);
     }
 
     void initView() {
