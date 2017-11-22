@@ -123,6 +123,7 @@ public class AlbumInfoActivity extends BaseActivity {
             }
         });
         lv_albuminfo.onLoad();
+        lv_albuminfo.setOnScrollListener(gtoolbar);
 
         mMusicAdapter = new SongAdapter(mContext, songList);
         lv_albuminfo.setAdapter(mMusicAdapter);

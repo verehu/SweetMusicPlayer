@@ -2,6 +2,7 @@ package com.huwei.sweetmusicplayer.business.ui.widgets;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.util.BitmapUtil;
 import com.huwei.sweetmusicplayer.util.LogUtil;
 
@@ -117,25 +119,43 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
 
     }
 
+    /**
+     * 当header是直接嵌套在ListView的时候才能设置这个监听
+     * @param view
+     * @param firstVisibleItem
+     * @param visibleItemCount
+     * @param totalItemCount
+     */
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        adjustHeaderViewAndTitle();
+        LogUtil.i(TAG, "firstVisibleItem:" + firstVisibleItem);
+        adjustHeaderViewAndTitle(firstVisibleItem==0);
     }
 
-    public void adjustHeaderViewAndTitle() {
+    public void adjustHeaderViewAndTitle(){
+        adjustHeaderViewAndTitle(true);
+    }
+
+    private void adjustHeaderViewAndTitle(boolean isHeadViewVisiable) {
         if (mHeaderView != null) {
             mGradientHeight = mHeaderView.getMeasuredHeight() - getMeasuredHeight();
             if (mGradientHeight > 0 && mIv_toolbarBg != null) {
-                int toolbarLoc[] = new int[2];
-                int headerLoc[] = new int[2];
-                mHeaderView.getLocationOnScreen(toolbarLoc);
-                getLocationOnScreen(headerLoc);
+                float alpha;
+                int offsetY=0;
+                if (isHeadViewVisiable) {
+                    int toolbarLoc[] = new int[2];
+                    int headerLoc[] = new int[2];
+                    mHeaderView.getLocationOnScreen(toolbarLoc);
+                    getLocationOnScreen(headerLoc);
 
-                int toolbarY = toolbarLoc[1];
-                int headerY = headerLoc[1];
+                    int toolbarY = toolbarLoc[1];
+                    int headerY = headerLoc[1];
 
-                int offsetY = headerY - toolbarY;
-                float alpha = offsetY / (float) mGradientHeight;
+                    offsetY = headerY - toolbarY;
+                    alpha = offsetY / (float) mGradientHeight;
+                } else {
+                    alpha = 1;
+                }
                 if (alpha <= 0) {
                     alpha = 0;
                     mToolbar.setTitle(mTitle);
@@ -156,6 +176,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
                 }
 
                 mHeaderView.setAlpha(1 - alpha);
+
                 LogUtil.i(TAG, offsetY + ":" + mGradientHeight + " = toolbar bg alpha:" + alpha);
             }
         }
