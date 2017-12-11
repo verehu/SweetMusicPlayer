@@ -18,10 +18,14 @@ import com.huwei.sweetmusicplayer.contains.IntentExtra;
 import com.huwei.sweetmusicplayer.business.interfaces.OnScanListener;
 import com.huwei.sweetmusicplayer.business.models.MusicInfo;
 import com.huwei.sweetmusicplayer.util.MusicUtils;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.List;
 
 import static com.huwei.sweetmusicplayer.Permission.CODE_READ_EXTERNAL_STORAGE;
 import static com.huwei.sweetmusicplayer.Permission.PERMISSIONS;
@@ -98,26 +102,18 @@ public class SongScanActivity extends BaseActivity {
             }
         });
 
-        if (Permission.isPermissionGranted(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            mMusicUtils.startScan();
-        } else {
-            ActivityCompat.requestPermissions(this, PERMISSIONS, CODE_READ_EXTERNAL_STORAGE);
-        }
-    }
+        AndPermission.with(this).permission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .callback(new PermissionListener(){
+                    @Override
+                    public void onSucceed(int i, @NonNull List<String> list) {
+                        mMusicUtils.startScan();
+                    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case CODE_READ_EXTERNAL_STORAGE:
-                if (Permission.isPermissionGranted(requestCode, permissions, grantResults)) {
-                    mMusicUtils.startScan();
-                } else {
-                    Toast.makeText(mContext, "无存储权限，无法扫描歌曲", Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
+                    @Override
+                    public void onFailed(int i, @NonNull List<String> list) {
+                        Toast.makeText(mContext, "无存储权限，无法扫描歌曲", Toast.LENGTH_SHORT).show();
+                    }
+                }).start();
     }
 
     private void checkToMain(){
