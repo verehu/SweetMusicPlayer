@@ -1,11 +1,5 @@
 package com.huwei.sweetmusicplayer.util.concurrent.locks;
 
-import android.support.annotation.NonNull;
-
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-
 /**
  * 不可重入锁
  * @author Ezio
@@ -22,6 +16,6 @@ public class TLock   {
     }
     public synchronized void unlock(){
         isLocked = false;
-        notify();
+        notifyAll();
     }
 }

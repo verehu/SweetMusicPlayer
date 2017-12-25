@@ -56,7 +56,7 @@
         <activity android:name=".business.LocalMusicActivity" />
 
         <service
-            android:name=".business.services.MusicControlerService"
+            android:name=".business.core.MusicControlerService"
             android:process=":remote">
             <intent-filter>
                 <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService" />
@@ -64,7 +64,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".business.services.ShakeService"
+            android:name=".business.core.ShakeService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.huwei.sweetmusicplayer.services.ShakeService" />

@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.business.services;
+package com.huwei.sweetmusicplayer.business.core;
 
 
 import android.app.Notification;
@@ -25,6 +25,8 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.business.MainActivity;
@@ -52,11 +54,8 @@ import static com.huwei.sweetmusicplayer.util.ext.ExtKt.toast;
  */
 public class MusicControlerService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpdateListener, IContain {
 
-    private static TLock PREPARE_LOCK = new TLock();
-
     private String TAG = "MusicControlerService";
     private int musicIndex = -1;
-    private long lastSongID = -1;
     private List<AbstractMusic> musicList;
 
     private MediaPlayer mp;
@@ -88,7 +87,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                 case MSG_CURRENT:
                     Intent intent = new Intent(CURRENT_UPDATE);
                     int currentTime = mp.getCurrentPosition();
-                    Log.i("currentTime", currentTime + "");
+                    //Log.i("currentTime", currentTime + "");
                     intent.putExtra("currentTime", currentTime);
                     sendBroadcast(intent);
 
@@ -171,12 +170,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void play() throws RemoteException {
-            try {
-                PREPARE_LOCK.lock();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             reViews.setViewVisibility(R.id.button_play_notification_play, View.GONE);
             reViews.setViewVisibility(R.id.button_pause_notification_play, View.VISIBLE);
 
@@ -191,8 +184,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                 mp.start();
                 updatePlayStaute(true);
             }
-
-            PREPARE_LOCK.unlock();
         }
 
         @Override
@@ -293,7 +284,9 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             mp.reset();
         }
 
-        mp = getMediaPlayer(getBaseContext());
+        if (mp == null) {
+            mp = getMediaPlayer(getBaseContext());
+        }
         mp.setOnCompletionListener(this);
         mp.setOnBufferingUpdateListener(this);
         mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -302,13 +295,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                 Log.i(TAG, "onPrepared");
 
                 handler.sendEmptyMessage(MSG_CURRENT);
-
-//                try {
-//                    mBinder.play();
-//                } catch (RemoteException e) {
-//                    e.printStackTrace();
-//                }
-                PREPARE_LOCK.unlock();
             }
         });
 
@@ -368,12 +354,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
      * @param music
      */
     private void prepareSong(AbstractMusic music) {
-        try {
-            PREPARE_LOCK.lock();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         Log.d(TAG, "prepareSong music:" + new Gson().toJson(music));
 
         showMusicPlayerNotification(music);
@@ -424,7 +404,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             Log.i(TAG, "datasoure:" + music.getDataSoure());
             mp.setDataSource(getBaseContext(), music.getDataSoure());
 
-            mp.prepareAsync();
+            mp.prepare();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -478,19 +458,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         reViews.setTextViewText(R.id.text, artist);
 
         reViews.setImageViewResource(R.id.img_album, R.drawable.img_album_background);
-//        ImageLoader imageLoader = SweetApplication.getImageLoader();
-//        imageLoader.loadImage(music.getArtPic(), new SimpleImageLoadingListener() {
-//            @Override
-//            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                super.onLoadingComplete(imageUri, view, loadedImage);
-//
-//                reViews.setImageViewBitmap(R.id.img_album, loadedImage);
-//            }
-//        });
-//
-//        Log.i(TAG, "picUri:" + music.getArtPic());
-
-
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 0, intent, 0);
         reViews.setOnClickPendingIntent(R.id.nt_container, pendingIntent);
@@ -523,10 +490,15 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     void updateArtistView(AbstractMusic music) {
         try {
-            Bitmap resource = Glide.with(getBaseContext()).asBitmap().load(music.getArtPic()).submit().get();
-            if(reViews!=null) {
-                reViews.setImageViewBitmap(R.id.img_album, resource);
-            }
+//            Glide.with(getBaseContext()).
+//                    asBitmap().load(music.getArtPic()).into(new SimpleTarget<Bitmap>() {
+//                @Override
+//                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+//                    if(reViews!=null) {
+//                        reViews.setImageViewBitmap(R.id.img_album, resource);
+//                    }
+//                }
+//            });
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -16,7 +16,7 @@ import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Artist;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.interfaces.IQueryReuslt;
 
 import java.util.ArrayList;

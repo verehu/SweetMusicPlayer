@@ -40,7 +40,7 @@ import com.huwei.sweetmusicplayer.business.baidumusic.resp.MusicSearchSugResp;
 import com.huwei.sweetmusicplayer.business.comparator.LrcComparator;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.business.models.LrcContent;
@@ -155,8 +155,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         lv_music_queue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MusicManager.getInstance().preparePlayingList(position, MusicManager.getInstance().getPlayingList());
-                MusicManager.getInstance().play();
+                MusicManager.getInstance().prepareAndPlay(position, MusicManager.getInstance().getPlayingList());
                 queueAdapter.notifyDataSetChanged();
             }
         });

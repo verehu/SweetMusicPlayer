@@ -18,9 +18,9 @@ import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.interfaces.IMusicControl;
-import com.huwei.sweetmusicplayer.business.services.MusicControlerService;
+import com.huwei.sweetmusicplayer.business.core.MusicControlerService;
 import com.huwei.sweetmusicplayer.util.Environment;
 
 import java.util.ArrayList;

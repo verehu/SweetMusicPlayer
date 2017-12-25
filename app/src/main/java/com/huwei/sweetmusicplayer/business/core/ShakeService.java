@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.business.services;
+package com.huwei.sweetmusicplayer.business.core;
 
 import com.huwei.sweetmusicplayer.business.ui.listeners.ShakeListener;
  

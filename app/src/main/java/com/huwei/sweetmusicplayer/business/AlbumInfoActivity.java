@@ -18,7 +18,7 @@ import com.huwei.sweetmusicplayer.business.baidumusic.po.AlbumInfo;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.AlbumDetailResp;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
@@ -121,8 +121,7 @@ public class AlbumInfoActivity extends BaseActivity {
         lv_albuminfo.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(songList));
-                MusicManager.getInstance().play();
+                MusicManager.getInstance().prepareAndPlay(position, Song.getAbstractMusicList(songList));
             }
         });
     }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.comparator.MusicInfoComparator;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.models.MusicInfo;
 
 import java.util.ArrayList;

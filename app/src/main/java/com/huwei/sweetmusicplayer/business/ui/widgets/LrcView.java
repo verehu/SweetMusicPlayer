@@ -7,7 +7,7 @@ import java.util.List;
 //import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.models.LrcContent;
 import com.huwei.sweetmusicplayer.business.ui.listeners.OnLrcSearchClickListener;
 import com.huwei.sweetmusicplayer.util.DisplayUtil;

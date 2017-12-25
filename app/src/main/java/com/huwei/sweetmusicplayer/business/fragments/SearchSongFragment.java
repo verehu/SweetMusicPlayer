@@ -7,7 +7,7 @@ import com.huwei.sweetmusicplayer.business.OnlineSearchActivity;
 import com.huwei.sweetmusicplayer.business.baidumusic.group.Song_info;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.QueryResult;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
 
@@ -57,8 +57,7 @@ public class SearchSongFragment extends AutoListFragment {
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MusicManager.getInstance().preparePlayingList(i,Song.getAbstractMusicList(mList));
-                MusicManager.getInstance().play();
+                MusicManager.getInstance().prepareAndPlay(i,Song.getAbstractMusicList(mList));
             }
         });
     }

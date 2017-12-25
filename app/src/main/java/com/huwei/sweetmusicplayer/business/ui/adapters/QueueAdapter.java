@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;

@@ -16,7 +16,7 @@ import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment;
 import com.huwei.sweetmusicplayer.business.models.MusicInfo;
 import com.huwei.sweetmusicplayer.business.ui.adapters.MusicAdapter;
@@ -203,12 +203,12 @@ public class LocalMusicFragment extends BaseFragment implements IContain, IMusic
             @Override
             public void onItemClick(int position) {
                 long time = System.currentTimeMillis();
-                MusicManager.getInstance().preparePlayingList(position, mMusicAdapter.getList());
+                MusicManager.getInstance().prepareAndPlay(position, mMusicAdapter.getList());
                 Log.i(TAG, "time used:" + (System.currentTimeMillis() - time));
 
                 Log.i(TAG, "clicked music:" + ((AbstractMusic) mMusicAdapter.getList().get(position)).getTitle());
 
-                MusicManager.getInstance().play();
+
             }
         });
         lv_song.setAdapter(mMusicAdapter);

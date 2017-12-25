@@ -6,7 +6,7 @@ import android.widget.AdapterView;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.ArtistSongListResp;
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager;
+import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
@@ -64,8 +64,7 @@ public class SongListFragment extends BaseScrollTabFragment  {
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MusicManager.getInstance().preparePlayingList(position, Song.getAbstractMusicList(mSongList));
-                MusicManager.getInstance().play();
+                MusicManager.getInstance().prepareAndPlay(position, Song.getAbstractMusicList(mSongList));
             }
         });
     }

@@ -1,11 +1,11 @@
-package com.huwei.sweetmusicplayer.business.datamanager;
+package com.huwei.sweetmusicplayer.business.core;
 
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.interfaces.IMusicControl;
 
 
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Created by huwei on 15-1-27.
@@ -14,11 +14,12 @@ public class MusicManager implements IMusicControl {
     private static MusicManager instance = new MusicManager();
     IMusicControl t;    //被代理的对象
     private List<AbstractMusic> list;
-
-    ArrayBlockingQueue queue;
+    private ExecutorService mPlayThreadPool;
 
     private MusicManager() {
         super();
+
+        mPlayThreadPool = ThreadFactroy.get().getMusicOperateExecutor();
     }
 
     public static MusicManager getInstance() {
@@ -27,66 +28,72 @@ public class MusicManager implements IMusicControl {
 
     @Override
     public void play() {
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                super.run();
+        mPlayThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
                 t.play();
-//            }
-//        }.start();
-
+            }
+        });
     }
 
 
     @Override
     public void pause() {
-        new Thread() {
+        mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                super.run();
                 t.pause();
             }
-        }.start();
+        });
     }
 
     @Override
     public void stop() {
-        new Thread() {
+        mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                super.run();
                 t.stop();
             }
-        }.start();
+        });
     }
 
     @Override
     public void seekTo(final int mesc) {
-        new Thread() {
+        mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                super.run();
                 t.seekTo(mesc);
             }
-        }.start();
+        });
     }
 
     @Override
     public void preparePlayingList(final int index, final List<AbstractMusic> list) {
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                super.run();
-                t.preparePlayingList(index, list);
-                if (MusicManager.this.list != list) {
-                    updateMusicQueue();
-                    MusicManager.this.list = list;
-                }
-//            }
-//        }.start();
-
+        mPlayThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                preparePlayingListInner(index, list);
+            }
+        });
     }
 
+    public void prepareAndPlay(final int index, final List<AbstractMusic> list) {
+        mPlayThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                preparePlayingListInner(index, list);
+                t.play();
+            }
+        });
+    }
+
+    public void preparePlayingListInner(final int index, final List<AbstractMusic> list) {
+        t.preparePlayingList(index, list);
+        if (MusicManager.this.list != list) {
+            updateMusicQueue();
+            MusicManager.this.list = list;
+        }
+    }
 
     @Override
     public boolean isPlaying() {
@@ -110,35 +117,32 @@ public class MusicManager implements IMusicControl {
 
     @Override
     public void nextSong() {
-        new Thread() {
+        mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                super.run();
                 t.nextSong();
             }
-        }.start();
+        });
     }
 
     @Override
     public void preSong() {
-        new Thread() {
+        mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                super.run();
                 t.preSong();
             }
-        }.start();
+        });
     }
 
     @Override
     public void randomSong() {
-        new Thread() {
+        mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                super.run();
                 t.randomSong();
             }
-        }.start();
+        });
     }
 
     @Override

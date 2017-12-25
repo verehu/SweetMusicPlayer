@@ -11,7 +11,7 @@ import com.huwei.sweetmusicplayer.business.PlayingActivity
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic
 import com.huwei.sweetmusicplayer.contains.IContain
-import com.huwei.sweetmusicplayer.business.datamanager.MusicManager
+import com.huwei.sweetmusicplayer.business.core.MusicManager
 import kotlinx.android.synthetic.main.bottom_action_bar.view.*
 
 /**
