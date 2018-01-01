@@ -43,7 +43,7 @@ import java.util.Arrays;
  * @date 2015/8/17
  */
 @EActivity(R.layout.activity_online_search)
-public class OnlineSearchActivity extends BaseActivity {
+public class OnlineSearchActivity extends BottomPlayActivity {
     public static final String TAG = "OnlineSearchActivity";
 
     private int total = 0;

@@ -280,7 +280,7 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
             switch (action) {
                 case PLAY_STATUS_UPDATE:
                     boolean isPlaying = intent.getBooleanExtra("isPlaying", false);
-                    playpage_play_btn.setChecked(MusicManager.getInstance().isPlaying());
+                    playpage_play_btn.setChecked(isPlaying);
                     break;
                 case PLAYBAR_UPDATE:
                     boolean isNewPlayMusic = intent.getBooleanExtra("isNewPlayMusic", false);
@@ -313,6 +313,8 @@ public class PlayingFragment extends Fragment implements IContain, OnLrcSearchCl
         final AbstractMusic song = MusicManager.getInstance().getNowPlayingSong();
         //加载模糊背景图
         GlideApp.with(getContext()).load(song.getArtPicHuge()).transform(new BlurBitmapTransformation(song.blurValueOfPlaying())).into(iv_playing_bg);
+
+        playpage_play_btn.setChecked(MusicManager.getInstance().isPlaying());
     }
 
     void loadLrcView() {

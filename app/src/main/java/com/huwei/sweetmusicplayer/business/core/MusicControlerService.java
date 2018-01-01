@@ -36,6 +36,7 @@ import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.SongPlayResp;
 import com.huwei.sweetmusicplayer.contains.IContain;
 import com.huwei.sweetmusicplayer.business.recievers.BringToFrontReceiver;
+import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
@@ -299,6 +300,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                 mIsPrepared = true;
 
                 player.start();
+                updatePlayStaute(true);
                 handler.sendEmptyMessage(MSG_CURRENT);
             }
         });
@@ -320,6 +322,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     @Override
     public boolean onUnbind(Intent intent) {
+        handler.removeMessages(MSG_CURRENT);
         mp.release();
         return super.onUnbind(intent);
     }
@@ -494,17 +497,22 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         mNoticationManager.notify(NT_PLAYBAR_ID, mNotification);
     }
 
-    void updateArtistView(AbstractMusic music) {
+    void updateArtistView(final AbstractMusic music) {
         try {
-//            Glide.with(getBaseContext()).
-//                    asBitmap().load(music.getArtPic()).into(new SimpleTarget<Bitmap>() {
-//                @Override
-//                public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-//                    if(reViews!=null) {
-//                        reViews.setImageViewBitmap(R.id.img_album, resource);
-//                    }
-//                }
-//            });
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    GlideApp.with(getBaseContext()).
+                            asBitmap().load(music.getArtPic()).into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                            if(reViews!=null) {
+                                reViews.setImageViewBitmap(R.id.img_album, resource);
+                            }
+                        }
+                    });
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
