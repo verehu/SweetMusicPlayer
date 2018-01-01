@@ -59,6 +59,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
     private List<AbstractMusic> musicList;
 
     private MediaPlayer mp;
+    private boolean mIsPrepared;
 
     NotificationManager mNoticationManager;
     Notification mNotification;
@@ -85,9 +86,11 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_CURRENT:
+                    if (!mIsPrepared) return;
+//                    Log.i("currentTime", "currentTime Called");
                     Intent intent = new Intent(CURRENT_UPDATE);
                     int currentTime = mp.getCurrentPosition();
-                    //Log.i("currentTime", currentTime + "");
+
                     intent.putExtra("currentTime", currentTime);
                     sendBroadcast(intent);
 
@@ -170,6 +173,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void play() throws RemoteException {
+            if (!mIsPrepared) return;
             reViews.setViewVisibility(R.id.button_play_notification_play, View.GONE);
             reViews.setViewVisibility(R.id.button_pause_notification_play, View.VISIBLE);
 
@@ -188,6 +192,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void pause() throws RemoteException {
+            if (!mIsPrepared) return;
             reViews.setViewVisibility(R.id.button_play_notification_play, View.VISIBLE);
             reViews.setViewVisibility(R.id.button_pause_notification_play, View.GONE);
 
@@ -206,6 +211,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void seekTo(int mesc) throws RemoteException {
+            if(!mIsPrepared) return;
             mp.seekTo(mesc);
         }
 
@@ -227,7 +233,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public boolean isPlaying() {
-            return mp != null && mp.isPlaying();
+            return mIsPrepared && mp != null && mp.isPlaying();
         }
 
         @Override
@@ -254,21 +260,18 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         public void nextSong() throws RemoteException {
             musicIndex = (musicIndex + 1) % musicList.size();
             prepareSong(musicList.get(musicIndex));
-            play();
         }
 
         @Override
         public void preSong() throws RemoteException {
             musicIndex = (musicIndex - 1) % musicList.size();
             prepareSong(musicList.get(musicIndex));
-            play();
         }
 
         @Override
         public void randomSong() throws RemoteException {
             musicIndex = new Random().nextInt(musicList.size());
             prepareSong(musicList.get(musicIndex));
-            play();
         }
     };
 
@@ -291,9 +294,11 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         mp.setOnBufferingUpdateListener(this);
         mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
-            public void onPrepared(MediaPlayer mp) {
+            public void onPrepared(MediaPlayer player) {
                 Log.i(TAG, "onPrepared");
+                mIsPrepared = true;
 
+                player.start();
                 handler.sendEmptyMessage(MSG_CURRENT);
             }
         });
@@ -396,6 +401,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
     private void playMusic(AbstractMusic music) {
         if (mp != null) {
+            mIsPrepared = false;
             mp.reset();
         }
 
@@ -404,7 +410,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             Log.i(TAG, "datasoure:" + music.getDataSoure());
             mp.setDataSource(getBaseContext(), music.getDataSoure());
 
-            mp.prepare();
+            mp.prepareAsync();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -536,8 +542,8 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
             Method setsubtitleanchor = mediaplayer.getClass().getMethod("setSubtitleAnchor", cSubtitleController, iSubtitleControllerAnchor);
 
             setsubtitleanchor.invoke(mediaplayer, subtitleInstance, null);
-            //Log.e("", "subtitle is setted :p");
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return mediaplayer;

@@ -82,7 +82,7 @@ public class MusicManager implements IMusicControl {
             @Override
             public void run() {
                 preparePlayingListInner(index, list);
-                t.play();
+                //t.play();
             }
         });
     }
