@@ -44,7 +44,7 @@ import java.util.Arrays;
  * @date 2015-12-22
  */
 @EActivity(R.layout.activity_artist_info)
-public class ArtistInfoActivity extends BaseActivity implements IListViewScroll {
+public class ArtistInfoActivity extends BottomPlayActivity implements IListViewScroll {
 
     public static final String ARTISTID = "artist_id";
     public static final String TINGUID = "tinguid";
