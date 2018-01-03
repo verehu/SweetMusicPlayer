@@ -212,7 +212,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
 
         @Override
         public void seekTo(int mesc) throws RemoteException {
-            if(!mIsPrepared) return;
+            if (!mIsPrepared) return;
             mp.seekTo(mesc);
         }
 
@@ -488,7 +488,6 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         reViews.setOnClickPendingIntent(R.id.button_play_notification_play, playPendingIntent);
         reViews.setOnClickPendingIntent(R.id.button_pause_notification_play, playPendingIntent);
 
-
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
         builder.setContent(reViews).setSmallIcon(NT_PLAYBAR_ID).setTicker(title).setOngoing(true);
 
@@ -506,8 +505,10 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
                             asBitmap().load(music.getArtPic()).into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-                            if(reViews!=null) {
+                            if (reViews != null) {
                                 reViews.setImageViewBitmap(R.id.img_album, resource);
+
+                                mNoticationManager.notify(NT_PLAYBAR_ID, mNotification);
                             }
                         }
                     });
