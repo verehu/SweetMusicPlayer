@@ -56,4 +56,6 @@
     <string name="menu_item_countdown">定时停止</string>
     <string name="menu_item_setting">设置</string>
     <string name="menu_item_exit">退出</string>
+
+    <string name="sleep_countdown_dialog_title">定时停止播放</string>
 </resources>

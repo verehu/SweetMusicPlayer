@@ -2,13 +2,17 @@ package com.huwei.sweetmusicplayer.business;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+
 import android.os.IBinder;
 import android.os.Process;
 import android.os.RemoteException;
+
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,6 +27,7 @@ import com.huwei.sweetmusicplayer.business.interfaces.IMusicControl;
 import com.huwei.sweetmusicplayer.business.core.MusicControlerService;
 import com.huwei.sweetmusicplayer.util.Environment;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +37,8 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
-    private View mMenuSongScan, mMenuExit;
+    private View mMenuSongScan, mMenuExit, mMenuCountDown;
+    private TimeCountDown mTimeCountDown;
 
     public static Intent getStartActIntent(Context from){
         Intent intent = new Intent(from,MainActivity.class);
@@ -60,6 +66,8 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        mTimeCountDown  = new TimeCountDown();
 
         initView();
         initListener();
@@ -104,17 +112,38 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fl_song_scan:
-                songscan(v);
-                break;
-            case R.id.fl_exit:
-                Process.killProcess(Process.myPid());
-                break;
-            default:
-                break;
-        }
+    public void onClick(final View v) {
+        mDrawerLayout.closeDrawers();
+        mDrawerLayout.getHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                switch (v.getId()) {
+                    case R.id.fl_song_scan:
+                        songscan(v);
+                        break;
+                    case R.id.fl_count_down:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setTitle(R.string.sleep_countdown_dialog_title);
+                        builder.setSingleChoiceItems(R.array.sleep_times, mTimeCountDown.getSelectItem(),new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mTimeCountDown.setCountDownItem(which);
+
+                                dialog.dismiss();
+                            }
+                        });
+
+                        builder.show();
+
+                        break;
+                    case R.id.fl_exit:
+                        Process.killProcess(Process.myPid());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }, 260);
     }
 
     @Override
@@ -266,6 +295,7 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
 
         //menu
         mMenuSongScan = findViewById(R.id.fl_song_scan);
+        mMenuCountDown = findViewById(R.id.fl_count_down);
         mMenuExit = findViewById(R.id.fl_exit);
     }
 
@@ -283,6 +313,7 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
 
         //menu
         mMenuSongScan.setOnClickListener(this);
+        mMenuCountDown.setOnClickListener(this);
         mMenuExit.setOnClickListener(this);
     }
 

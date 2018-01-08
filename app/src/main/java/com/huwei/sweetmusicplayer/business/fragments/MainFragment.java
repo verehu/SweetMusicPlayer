@@ -64,32 +64,6 @@ public class MainFragment extends BaseFragment implements IMusicViewTypeContain 
     private long sleeptime = 0;
     private final int SLEEP = 0;
 
-    private Handler sleepHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (sleeptime > 0) {
-                sleeptime = sleeptime - 1000;
-                setSleepBarVisiable(true);
-                tv_sleepinfo.setText(TimeUtil.mill2mmss(sleeptime));
-
-                sleepHandler.sendEmptyMessageDelayed(SLEEP, 1000);
-                //sleeptime == -1表示取消了计时
-            } else if (sleeptime == -1) {
-                sleeptime = 0;
-            } else {
-                sleeptime = 0;
-                setSleepBarVisiable(false);
-
-                //todo
-//                exitApp();
-                System.exit(0);
-            }
-
-        }
-    };
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
