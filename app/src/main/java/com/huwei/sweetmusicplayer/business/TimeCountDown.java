@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Process;
 
 import com.huwei.sweetmusicplayer.business.enums.TimeContants;
+import com.huwei.sweetmusicplayer.frameworks.Alarm;
+import com.huwei.sweetmusicplayer.frameworks.AlarmRegister;
 
 /**
  * @author Ezio
@@ -27,12 +29,7 @@ public class TimeCountDown implements TimeContants {
 
         mHandler.removeCallbacks(mRunnable);
         if (mItem != 0) {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            }, mItemTimes[mItem]);
+            Alarm.get().set(mItemTimes[item], AlarmRegister.getStopIntent());
         }
     }
 

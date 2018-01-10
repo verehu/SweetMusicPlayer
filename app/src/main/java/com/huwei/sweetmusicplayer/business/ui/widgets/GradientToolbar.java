@@ -2,7 +2,6 @@ package com.huwei.sweetmusicplayer.business.ui.widgets;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -16,9 +15,8 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.huwei.sweetmusicplayer.R;
-import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.util.BitmapUtil;
-import com.huwei.sweetmusicplayer.util.LogUtil;
+import com.huwei.sweetmusicplayer.util.LogUtils;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -128,7 +126,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
      */
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        LogUtil.i(TAG, "firstVisibleItem:" + firstVisibleItem);
+        LogUtils.i(TAG, "firstVisibleItem:" + firstVisibleItem);
         adjustHeaderViewAndTitle(firstVisibleItem==0);
     }
 
@@ -177,7 +175,7 @@ public class GradientToolbar extends FrameLayout implements AbsListView.OnScroll
 
                 mHeaderView.setAlpha(1 - alpha);
 
-                LogUtil.i(TAG, offsetY + ":" + mGradientHeight + " = toolbar bg alpha:" + alpha);
+                LogUtils.i(TAG, offsetY + ":" + mGradientHeight + " = toolbar bg alpha:" + alpha);
             }
         }
     }

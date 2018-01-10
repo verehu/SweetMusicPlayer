@@ -65,6 +65,7 @@ public class SweetApplication extends Application {
         mScreenWidth = WindowTool.getWidth(this);
         mScreenHeight = WindowTool.getHeight(this);
 
+        AppContextHolder.setContext(this);
         initRecievers();
     }
 
