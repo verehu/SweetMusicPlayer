@@ -12,6 +12,7 @@ import com.huwei.sweetmusicplayer.business.baidumusic.po.Artist;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.QueryResult;
 import com.huwei.sweetmusicplayer.business.ui.adapters.ArtistAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
+import com.huwei.sweetmusicplayer.contains.IntentExtra;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -26,9 +27,9 @@ import java.util.List;
  * @author jerry
  * @date 2016/01/04
  */
-@EFragment
+
 public class SearchArtistFragment extends AutoListFragment {
-    @FragmentArg
+
     Artist_info artist_info;
 
     private ArtistAdapter mArtistAdapter;
@@ -41,7 +42,7 @@ public class SearchArtistFragment extends AutoListFragment {
         mPageNo = 2;
 
         mArtistAdapter = new ArtistAdapter(mAct, mList);
-        handleData(artist_info);
+        handleData((Artist_info) getArguments().getParcelable(IntentExtra.EXTRA_ARTISTINFO));
         mAutoListView.setAdapter(mArtistAdapter);
 
         mAutoListView.setRefreshEnable(false);

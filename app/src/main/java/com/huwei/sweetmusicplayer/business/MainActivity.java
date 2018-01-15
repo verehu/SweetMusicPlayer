@@ -321,7 +321,7 @@ public class MainActivity extends BottomPlayActivity implements IMusicControl, I
 
     public void songscan(View v) {
         Intent intent = new Intent();
-        intent.setClass(this, SongScanActivity_.class);
+        intent.setClass(this, SongScanActivity.class);
         startActivity(intent);
     }
 }

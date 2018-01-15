@@ -11,7 +11,6 @@
         android:layout_width="match_parent" />
 
     <ImageView
-        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -24,7 +23,7 @@
         android:layout_height="@dimen/scanbottombar_height" >
 
         <Button
-            android:id="@+id/scanfinish_btn"
+            android:id="@+id/btnScanFinish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -33,7 +32,7 @@
             android:text="完成" />
 
         <TextView
-            android:id="@+id/scancount_tv"
+            android:id="@+id/tvScanCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -44,7 +43,7 @@
             android:textSize="@dimen/text_size_large" />
 
         <TextView
-            android:id="@+id/scannow_tv"
+            android:id="@+id/tvScanNow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -54,7 +53,7 @@
             android:text="scannowinfo" />
 
         <Button
-            android:id="@+id/btn_enterhome"
+            android:id="@+id/btnEnterHome"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="进入主页"

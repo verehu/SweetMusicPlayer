@@ -1,19 +1,17 @@
 package com.huwei.sweetmusicplayer.business.fragments;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.huwei.sweetmusicplayer.business.AlbumInfoActivity;
 import com.huwei.sweetmusicplayer.business.OnlineSearchActivity;
 import com.huwei.sweetmusicplayer.business.baidumusic.group.Album_info;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.QueryResult;
 import com.huwei.sweetmusicplayer.business.ui.adapters.AlbumAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.FragmentArg;
+import com.huwei.sweetmusicplayer.contains.IntentExtra;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,20 +20,20 @@ import java.util.List;
  * @author jerry
  * @date 2016/01/04
  */
-@EFragment
+
 public class SearchAlbumFragment extends AutoListFragment {
-    @FragmentArg
     Album_info album_info;
 
     private AlbumAdapter mAlbumAdapter;
     private List<Album> mList = new ArrayList<>();
 
-    @AfterViews
-    void init() {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mPageNo = 2;
 
         mAlbumAdapter = new AlbumAdapter(mAct, mList);
-        handleData(album_info);
+        handleData((Album_info) getArguments().getParcelable(IntentExtra.EXTRA_ALBUMINFO));
         mAutoListView.setAdapter(mAlbumAdapter);
 
         mAutoListView.setRefreshEnable(false);
@@ -57,7 +55,7 @@ public class SearchAlbumFragment extends AutoListFragment {
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(AlbumInfoActivity.getStartActInent(mAct, mList.get(i).album_id));
+                startActivity(AlbumInfoActivity.Companion.getStartActInent(mAct, mList.get(i).album_id));
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.huwei.sweetmusicplayer.business.fragments;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -10,6 +12,7 @@ import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
+import com.huwei.sweetmusicplayer.contains.IntentExtra;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -23,20 +26,18 @@ import java.util.List;
  * @author jerry
  * @date 2016/01/04
  */
-@EFragment
 public class SearchSongFragment extends AutoListFragment {
-    @FragmentArg
     Song_info song_info;
 
     private SongAdapter mSongAdapter;
     private List<Song> mList = new ArrayList<>();
 
-    @AfterViews
-    void init() {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mPageNo = 2;
 
         mSongAdapter = new SongAdapter(mAct, mList);
-        handleData(song_info);
+        handleData((Song_info) getArguments().getParcelable(IntentExtra.EXTRA_SONGINFO));
         mAutoListView.setAdapter(mSongAdapter);
 
         mAutoListView.setRefreshEnable(false);

@@ -23,8 +23,6 @@ import com.huwei.sweetmusicplayer.business.interfaces.IListViewScroll;
 import com.huwei.sweetmusicplayer.business.ui.adapters.PagerAdapter;
 import com.huwei.sweetmusicplayer.business.ui.views.ArtistInfoView;
 import com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar;
-import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation;
-import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 import com.huwei.sweetmusicplayer.util.Utils;
@@ -59,7 +57,7 @@ public class ArtistInfoActivity extends BottomPlayActivity implements IListViewS
     ArtistInfoView mArtistInfoView;
     @ViewById(R.id.viewpager)
     public ViewPager mViewPager;
-    @ViewById(R.id.tabs)
+    @ViewById(R.id.tabLayout)
     TabLayout mTab;
     @ViewById(R.id.ll_flow_header)
     View mHeaderFlow;

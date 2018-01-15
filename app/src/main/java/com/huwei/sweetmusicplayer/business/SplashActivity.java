@@ -99,7 +99,7 @@ public class SplashActivity extends BaseActivity {
 
         int hasRunCount = Environment.getHasRunCount(mContext);
         if (hasRunCount == 0) {
-            startActivity(SongScanActivity.getStartActIntent(mContext));
+            startActivity(SongScanActivity.Companion.getStartActIntent(mContext, true));
             finish();
         } else {
             handler.sendEmptyMessage(0);

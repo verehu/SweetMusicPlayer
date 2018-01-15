@@ -39,9 +39,9 @@
             android:windowSoftInputMode="adjustPan">
 
         </activity>
-        <activity android:name=".business.SongScanActivity_" />
+        <activity android:name=".business.SongScanActivity" />
         <activity
-            android:name=".business.OnlineSearchActivity_"
+            android:name=".business.OnlineSearchActivity"
             android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

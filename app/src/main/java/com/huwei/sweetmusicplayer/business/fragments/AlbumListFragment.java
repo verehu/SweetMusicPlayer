@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.google.gson.Gson;
-import com.huwei.sweetmusicplayer.business.AlbumInfoActivity;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Album;
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.ArtistAlbumListResp;
 import com.huwei.sweetmusicplayer.business.ui.adapters.AlbumAdapter;
@@ -64,7 +63,7 @@ public class AlbumListFragment extends BaseScrollTabFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Album album = mAlbumList.get(position);
                 if (album != null) {
-                    startActivity(AlbumInfoActivity.getStartActInent(mAct, album.album_id));
+                    startActivity(AlbumInfoActivity.Companion.getStartActInent(mAct, album.album_id));
                 }
             }
         });
