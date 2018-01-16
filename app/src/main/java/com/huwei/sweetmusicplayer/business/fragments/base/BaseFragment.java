@@ -14,10 +14,14 @@ import com.huwei.sweetmusicplayer.business.BottomPlayActivity;
  */
 public class BaseFragment extends Fragment {
 
-    protected String TAG = getClass().getSimpleName();
+    protected final String TAG;
 
     protected Activity mAct;
     protected Context mContext;
+
+    public BaseFragment() {
+        TAG = getClass().getSimpleName();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

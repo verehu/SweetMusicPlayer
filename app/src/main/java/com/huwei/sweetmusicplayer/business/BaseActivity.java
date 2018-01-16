@@ -24,12 +24,14 @@ public class BaseActivity extends AppCompatActivity {
     private View mStatusView;
     private ViewGroup mRootView;
 
-    protected static String TAG;
+    protected final String TAG;
+
+    public BaseActivity() {
+        TAG = getClass().getSimpleName();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TAG = getClass().getSimpleName();
-
         super.onCreate(savedInstanceState);
 
         ImmersiveUtil.immersive(this);

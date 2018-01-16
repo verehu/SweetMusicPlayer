@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.huwei.sweetmusicplayer.business.AlbumInfoActivity;
 import com.huwei.sweetmusicplayer.business.OnlineSearchActivity;
 import com.huwei.sweetmusicplayer.business.baidumusic.group.Album_info;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Album;

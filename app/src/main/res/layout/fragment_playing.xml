@@ -38,7 +38,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/playpage_artist"
+                    android:id="@+id/playpage_artist_tv"
                     style="@style/secondTextViewWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

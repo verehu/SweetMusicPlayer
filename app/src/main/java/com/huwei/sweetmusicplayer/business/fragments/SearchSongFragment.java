@@ -14,10 +14,6 @@ import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.FragmentArg;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.huwei.sweetmusicplayer"
@@ -27,18 +27,17 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
     }
+}
 
-
+kapt {
+    generateStubs = true
 }
 
 repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
-def AAVersion = "4.4.0" // change this to your desired version, for example the latest stable: 3.3.2
 dependencies {
-    annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
-    compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.mcxiaoke.volley:library:1.0.+'
@@ -50,6 +49,5 @@ dependencies {
     compile 'com.github.thinkcool:circletextimageview:1.0.20151218'
     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
     compile 'com.yanzhenjie:permission:1.1.2'
-    //annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
     kapt 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 }

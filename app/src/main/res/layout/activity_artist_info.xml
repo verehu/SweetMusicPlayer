@@ -15,13 +15,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.huwei.sweetmusicplayer.business.ui.views.ArtistInfoView_
+        <com.huwei.sweetmusicplayer.business.ui.views.ArtistInfoView
             android:id="@+id/view_artist_info"
             android:layout_width="match_parent"
             android:layout_height="196dp" />
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"

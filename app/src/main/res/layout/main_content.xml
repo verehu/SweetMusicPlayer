@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/main"
-        android:name="com.huwei.sweetmusicplayer.business.fragments.MainFragment_"
+        android:name="com.huwei.sweetmusicplayer.business.fragments.MainFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>

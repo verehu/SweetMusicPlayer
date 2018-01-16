@@ -18,15 +18,12 @@ import com.huwei.sweetmusicplayer.dao.DaoSession;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.WindowTool;
 
-import org.androidannotations.annotations.EApplication;
-
 import static com.huwei.sweetmusicplayer.contains.IContain.NOW_PLAYMUSIC;
 import static com.huwei.sweetmusicplayer.contains.IContain.PLAYBAR_UPDATE;
 
 /**
  * Created by huwei on 15-1-20.
  */
-@EApplication
 public class SweetApplication extends Application {
 
     private static DaoSession daoSession;

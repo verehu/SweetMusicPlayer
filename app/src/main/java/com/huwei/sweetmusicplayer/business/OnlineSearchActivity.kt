@@ -46,8 +46,6 @@ open class OnlineSearchActivity : BottomPlayActivity() {
     }
 
     internal fun init() {
-        Log.d(TAG, this.toString() + " ---->" + Log.getStackTraceString(Throwable()))
-
         initView()
         initListener()
 
@@ -163,8 +161,6 @@ open class OnlineSearchActivity : BottomPlayActivity() {
     }
 
     companion object {
-        val TAG = "OnlineSearchActivity"
-
         val TAB_TITLES = arrayOf("歌曲", "歌手", "专辑")
     }
 }

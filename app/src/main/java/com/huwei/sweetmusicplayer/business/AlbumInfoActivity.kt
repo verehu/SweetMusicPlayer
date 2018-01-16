@@ -22,6 +22,8 @@ import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
 
 import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase
+import com.huwei.sweetmusicplayer.frameworks.image.GlideApp
+
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil
 import com.huwei.sweetmusicplayer.util.HttpHandler
 import kotlinx.android.synthetic.main.activity_album_info.*
@@ -35,7 +37,7 @@ import java.util.ArrayList
  * @author jerry
  * @date 2015-09-13
  */
-open class AlbumInfoActivity : BaseActivity() {
+open class AlbumInfoActivity : BottomPlayActivity() {
 
     private var mHeaderView: View? = null
     private var iv_bg: ImageView? = null
@@ -112,17 +114,17 @@ open class AlbumInfoActivity : BaseActivity() {
                 val resp = Gson().fromJson(response, AlbumDetailResp::class.java)
                 val albumDetail = resp.albumInfo
                 if (albumDetail != null) {
-//                    GlideApp.with(mContext).asBitmap().load(albumDetail.pic_big).transform(object : BlurBitmapTransformation(80) {
-//                        override fun transform(pool: BitmapPool, toTransform: Bitmap, outWidth: Int, outHeight: Int): Bitmap {
-//                            iv_album.setImageBitmap(toTransform)
-//                            return super.transform(pool, toTransform, outWidth, outHeight)
-//                        }
-//                    }).into(object : SimpleTarget<Bitmap>() {
-//                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>) {
-//                            iv_bg!!.setImageBitmap(resource)
-//                            gtoolbar.setToolbarBg(resource)
-//                        }
-//                    })
+                    GlideApp.with(mContext).asBitmap().load(albumDetail.pic_big).transform(object : BlurBitmapTransformation(80) {
+                        override fun transform(pool: BitmapPool, toTransform: Bitmap, outWidth: Int, outHeight: Int): Bitmap {
+                            iv_album.setImageBitmap(toTransform)
+                            return super.transform(pool, toTransform, outWidth, outHeight)
+                        }
+                    }).into(object : SimpleTarget<Bitmap>() {
+                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>) {
+                            iv_bg!!.setImageBitmap(resource)
+                            gtoolbar.setToolbarBg(resource)
+                        }
+                    })
                     tv_albumname.text = albumDetail.title
                     tv_artist.text = "歌手：" + albumDetail.author
                     tv_pub_date.text = "发行时间：" + albumDetail.publishtime

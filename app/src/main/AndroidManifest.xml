@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.REORDER_TASKS" />  
 
     <application
-        android:name=".SweetApplication_"
+        android:name=".SweetApplication"
         android:allowBackup="true"
         android:icon="@drawable/sweet"
         android:label="@string/app_name"
@@ -50,8 +50,8 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/search_online" />
         </activity>
-        <activity android:name=".business.AlbumInfoActivity_" />
-        <activity android:name=".business.ArtistInfoActivity_" />
+        <activity android:name=".business.AlbumInfoActivity" />
+        <activity android:name=".business.ArtistInfoActivity" />
         <activity android:name=".business.PlayingActivity" />
         <activity android:name=".business.LocalMusicActivity" />
 

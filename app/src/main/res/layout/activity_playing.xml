@@ -5,7 +5,7 @@
 
     <fragment
         android:id = "@+id/play_fragment"
-        android:name="com.huwei.sweetmusicplayer.business.fragments.PlayingFragment_"
+        android:name="com.huwei.sweetmusicplayer.business.fragments.PlayingFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

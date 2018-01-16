@@ -1,5 +1,7 @@
 package com.huwei.sweetmusicplayer.business.fragments;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -12,12 +14,13 @@ import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.FragmentArg;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.huwei.sweetmusicplayer.contains.IntentExtra.EXTRA_ARTIST_ID;
+import static com.huwei.sweetmusicplayer.contains.IntentExtra.EXTRA_TING_UID;
 
 /**
  * 在线歌曲列表
@@ -25,19 +28,21 @@ import java.util.List;
  * @author jerry
  * @date 2015/12/24
  */
-@EFragment
 public class SongListFragment extends BaseScrollTabFragment  {
     
     private SongAdapter mMusicAdapter;
     private List<Song> mSongList = new ArrayList<>();
 
-    @FragmentArg
     String ting_uid;
-    @FragmentArg
     String artist_id;
-    
-    @AfterViews
-    void init() {
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ting_uid = getArguments().getString(EXTRA_TING_UID);
+        artist_id = getArguments().getString(EXTRA_ARTIST_ID);
+
         mMusicAdapter = new SongAdapter(mAct, mSongList);
         mAutoListView.setAdapter(mMusicAdapter);
 

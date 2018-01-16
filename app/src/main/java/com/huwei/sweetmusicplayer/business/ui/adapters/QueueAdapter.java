@@ -1,7 +1,6 @@
 package com.huwei.sweetmusicplayer.business.ui.adapters;
 
 import android.content.Context;
-//import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,30 +11,28 @@ import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.core.MusicManager;
 
-import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.RootContext;
-import org.androidannotations.annotations.SystemService;
-import org.androidannotations.annotations.res.ColorRes;
-
 import java.util.List;
 
 /**
  * 播放队列适配器
+ *
  * @author Jayce
  * @date 2015/6/17
  */
-@EBean
-public class QueueAdapter extends BaseAdapter{
+public class QueueAdapter extends BaseAdapter {
 
     private List<AbstractMusic> list;
-    @RootContext
-    Context context;
-    @SystemService
-    LayoutInflater inflater;
-    @ColorRes
+    Context mContext;
+
     int primary;
-    @ColorRes
     int white;
+
+    public QueueAdapter(Context mContext) {
+        this.mContext = mContext;
+
+        primary = mContext.getResources().getColor(R.color.primary);
+        white = mContext.getResources().getColor(R.color.white);
+    }
 
     public List<AbstractMusic> getList() {
         return list;
@@ -62,26 +59,26 @@ public class QueueAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder=null;
-        if(convertView==null){
-            convertView=inflater.inflate(R.layout.listitem_music_queue,null);
-            viewHolder=new ViewHolder();
-            viewHolder.tv_title= (TextView) convertView.findViewById(R.id.tv_title);
+        ViewHolder viewHolder = null;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_music_queue, null);
+            viewHolder = new ViewHolder();
+            viewHolder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
             convertView.setTag(viewHolder);
         }
-        viewHolder= (ViewHolder) convertView.getTag();
+        viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_title.setText(list.get(position).getTitle());
 
-        if(MusicManager.getInstance().getNowPlayingIndex()==position){
+        if (MusicManager.getInstance().getNowPlayingIndex() == position) {
             viewHolder.tv_title.setTextColor(primary);
-        }else{
+        } else {
             viewHolder.tv_title.setTextColor(white);
         }
 
         return convertView;
     }
 
-    class ViewHolder{
+    class ViewHolder {
         TextView tv_title;
     }
 }

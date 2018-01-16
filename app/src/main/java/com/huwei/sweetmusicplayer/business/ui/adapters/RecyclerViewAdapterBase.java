@@ -1,5 +1,6 @@
 package com.huwei.sweetmusicplayer.business.ui.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,11 @@ public abstract class RecyclerViewAdapterBase<T, V extends View> extends Recycle
     protected List<T> items = new ArrayList<T>();
     private RecyclerViewAdapterBase.OnItemClickListener onItemClickListener;
     private RecyclerViewAdapterBase.OnItemLongClickListener onItemLongClickListener;
+    protected Context mContext;
+
+    public RecyclerViewAdapterBase(Context context) {
+        this.mContext = context;
+    }
 
     @Override
     public int getItemCount() {

@@ -14,10 +14,6 @@ import com.huwei.sweetmusicplayer.business.ui.adapters.ArtistAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.contains.IntentExtra;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.FragmentArg;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +25,6 @@ import java.util.List;
  */
 
 public class SearchArtistFragment extends AutoListFragment {
-
-    Artist_info artist_info;
 
     private ArtistAdapter mArtistAdapter;
     private List<Artist> mList = new ArrayList<>();
@@ -64,7 +58,7 @@ public class SearchArtistFragment extends AutoListFragment {
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(ArtistInfoActivity.getStartActIntent(mAct, mList.get(i).ting_uid, mList.get(i).artist_id));
+                startActivity(ArtistInfoActivity.Companion.getStartActIntent(mAct, mList.get(i).ting_uid, mList.get(i).artist_id));
             }
         });
     }
