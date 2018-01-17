@@ -178,7 +178,6 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
         }
     }
 
-
     fun updateMusicQueue() {
         val nowPlayings = MusicManager.getInstance().playingList
         if (nowPlayings != null) {

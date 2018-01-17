@@ -70,12 +70,24 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <com.huwei.sweetmusicplayer.business.ui.widgets.LrcView
-                android:id="@+id/playpage_lrcview"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="false"
-                android:text="歌词界面" />
+                android:layout_height="match_parent">
+
+                <com.huwei.sweetmusicplayer.business.ui.views.RotateCircleImageView
+                    android:layout_width="280dp"
+                    android:layout_height="280dp"
+                    android:layout_gravity="center"/>
+
+                <com.huwei.sweetmusicplayer.business.ui.widgets.LrcView
+                    android:id="@+id/playpage_lrcview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="false"
+                    android:text="歌词界面"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
 
             <ListView
                 android:id="@+id/lv_music_queue"
