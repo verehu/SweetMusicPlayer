@@ -4,14 +4,21 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.huwei.sweetmusicplayer.business.PlayingActivity
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic
 import com.huwei.sweetmusicplayer.contains.IContain
 import com.huwei.sweetmusicplayer.business.core.MusicManager
+import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
+import com.huwei.sweetmusicplayer.frameworks.image.GlideApp
+import com.huwei.sweetmusicplayer.util.BitmapUtil
 import kotlinx.android.synthetic.main.bottom_action_bar.view.*
 
 /**
@@ -69,7 +76,7 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
             }
         }
 
-        setOnClickListener{
+        setOnClickListener {
             context.startActivity(PlayingActivity.getStartActIntent(context))
         }
     }
@@ -82,11 +89,11 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
         context.registerReceiver(receiver, intentFilter)
     }
 
-    fun unRegisterRecievers(){
+    fun unRegisterRecievers() {
         context.unregisterReceiver(receiver)
     }
 
-    internal fun updateBottomBar(music: AbstractMusic?, isPlaying : Boolean = true) {
+    internal fun updateBottomBar(music: AbstractMusic?, isPlaying: Boolean = true) {
 
         if (music != null) {
             tv_title.text = music.title
@@ -94,7 +101,9 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
             btn_play.isChecked = isPlaying
             pro_music.max = music.duration!!
 
-            Glide.with(context).load(music.artPic).into(img_album)
+            val requst = GlideApp.with(context).load(music.artPic)
+            requst.into(img_album)
+            requst.clone().transform(BlurBitmapTransformation(music.blurValueOfPlaying())).into(blurBgView)
         }
 
     }
