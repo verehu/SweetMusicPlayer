@@ -4,8 +4,9 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator.INFINITE
 import android.animation.ValueAnimator.RESTART
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
+import android.view.animation.LinearInterpolator
+import com.huwei.sweetmusicplayer.R
 import com.thinkcool.circletextimageview.CircleTextImageView
 
 /**
@@ -18,16 +19,19 @@ class RotateCircleImageView @JvmOverloads constructor(internal var context: Cont
 
     init {
         ratoteAnimator = ObjectAnimator.ofFloat(this, "rotation", 0f, 360f)
-        ratoteAnimator.setDuration(2000)
+        ratoteAnimator.setInterpolator(LinearInterpolator())
+        ratoteAnimator.setDuration(20000)
         ratoteAnimator.repeatMode = RESTART
         ratoteAnimator.repeatCount = INFINITE
 
-        setBackgroundColor(Color.BLACK)
+        setBorderColorResource(R.color.black)
+        setBorderWidth(5)
 
-        start()
+        setImageResource(R.drawable.turntable)
     }
 
     fun start() {
+        ratoteAnimator.setupStartValues()
         ratoteAnimator.start()
     }
 
@@ -35,11 +39,7 @@ class RotateCircleImageView @JvmOverloads constructor(internal var context: Cont
         ratoteAnimator.pause()
     }
 
-    fun stop() {
-        ratoteAnimator.pause()
-    }
-
-    private fun reset() {
-
+    fun resume() {
+        ratoteAnimator.resume()
     }
 }

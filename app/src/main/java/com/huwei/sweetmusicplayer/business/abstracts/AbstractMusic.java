@@ -46,6 +46,10 @@ public abstract class AbstractMusic implements Serializable, Parcelable, Parcela
         return getArtPic();
     }
 
+    public String getArtPremium() {
+        return getArtPic();
+    }
+
     /**
      * 专辑图片高斯模糊值
      * @return

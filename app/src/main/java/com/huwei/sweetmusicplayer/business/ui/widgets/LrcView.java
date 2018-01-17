@@ -229,47 +229,6 @@ public class LrcView extends ScrollView implements OnScrollChangedListener, OnTo
                     canvas.drawText("网络无匹配歌词", width / 2, tempY, tipsPaint);
                     break;
             }
-
-//		  	if(MusicManager.OperateState.READLRC_LISTNULL.equals(lrcState)){
-//		    	canvas.drawText("歌词内容为空", width/2, tempY, notCurrentPaint);
-//		    	return;
-//		    }else if(MusicManager.OperateState.READLRCFILE_FAIL.equals(lrcState)){
-//		    	canvas.drawText("暂无歌词", width/2, tempY, notCurrentPaint);
-//		    	return;
-//		    }
-//		    else if(MusicManager.OperateState.READLRC_SUCCESS.equals(lrcState)){
-//
-//			    //绘制歌词
-//			    for(int i=0;i<lrcLists.size();i++,tempY+=textHeight){
-//			    	if(i==index){
-//			    		canvas.drawText(lrcLists.get(i).getLrcStr(), width/2, tempY, currentPaint);
-//			    	}else if(i==pos){
-//			    		canvas.drawText(lrcLists.get(i).getLrcStr(), width/2, tempY, linePaint);
-//			    	}else{
-//			    		canvas.drawText(lrcLists.get(i).getLrcStr(), width/2, tempY, notCurrentPaint);
-//			    	}
-//			    }
-//
-//		    	return;
-//		    }else if(MusicManager.OperateState.READLRC_ONLINE.equals(lrcState)){
-//		    	String drawContentStr="在线匹配歌词";
-//
-//		    	for(int i=0;i<count;i++){
-//		    		drawContentStr+=".";
-//		    	}
-//
-//		    	count++;
-//		    	if(count>=6) count=0;
-//
-//		    	canvas.drawText(drawContentStr, width/2, tempY, notCurrentPaint);
-//
-//
-//		    	handler.sendEmptyMessageDelayed(1, 500);
-//		    	return;
-//		    }else if(MusicManager.OperateState.READLRCONLINE_FAIL.equals(lrcState)){
-//		    	canvas.drawText("从网络加载歌词失败", width/2, tempY, notCurrentPaint);
-//		    	return;
-//		    }
         }
 
         @Override
@@ -277,16 +236,10 @@ public class LrcView extends ScrollView implements OnScrollChangedListener, OnTo
             // TODO Auto-generated method stub
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-
             heightMeasureSpec = (int) (height + textHeight * (lrcLists.size() - 1));
             setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
         }
-
-
     }
-
-    ;
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -382,12 +335,10 @@ public class LrcView extends ScrollView implements OnScrollChangedListener, OnTo
 
         }
 
-
         return false;
     }
 
     boolean handleTouchLrcOK(int action) {
-
         switch (action) {
             case MotionEvent.ACTION_MOVE:
                 scrollY = this.getScrollY();

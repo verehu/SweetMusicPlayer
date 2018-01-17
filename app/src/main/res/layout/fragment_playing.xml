@@ -71,10 +71,12 @@
             android:layout_weight="1">
 
             <FrameLayout
+                android:id="@+id/centerFrameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <com.huwei.sweetmusicplayer.business.ui.views.RotateCircleImageView
+                    android:id="@+id/rotateView"
                     android:layout_width="280dp"
                     android:layout_height="280dp"
                     android:layout_gravity="center"/>

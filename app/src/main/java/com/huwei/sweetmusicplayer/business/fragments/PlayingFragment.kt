@@ -11,7 +11,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Button
@@ -75,6 +75,7 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
                 IContain.PLAY_STATUS_UPDATE -> {
                     val isPlaying = intent.getBooleanExtra("isPlaying", false)
                     playpage_play!!.isChecked = isPlaying
+                    if (isPlaying) rotateView.resume() else rotateView.pause()
                 }
                 IContain.PLAYBAR_UPDATE -> {
                     val isNewPlayMusic = intent.getBooleanExtra("isNewPlayMusic", false)
@@ -145,8 +146,19 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id) {
+        when (v!!.id) {
             R.id.btn_show_music_queue -> btn_show_music_queueWasClicked()
+            R.id.centerFrameLayout -> toggleCenterView()
+        }
+    }
+
+    private fun toggleCenterView() {
+        if (rotateView.visibility == VISIBLE) {
+            rotateView.visibility = GONE
+            playpage_lrcview.visibility = VISIBLE
+        } else {
+            rotateView.visibility = VISIBLE
+            playpage_lrcview.visibility = GONE
         }
     }
 
@@ -235,14 +247,24 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
 
         playpage_lrcview!!.setOnLrcSearchClickListener(this)
         btn_show_music_queue.setOnClickListener(this)
+        centerFrameLayout.setOnClickListener(this)
     }
 
     internal fun initMusicView() {
         val song = MusicManager.getInstance().nowPlayingSong
-        //加载模糊背景图
-        GlideApp.with(context).load(song.artPicHuge).transform(BlurBitmapTransformation(song.blurValueOfPlaying())).into(iv_playing_bg)
 
-        playpage_play!!.isChecked = MusicManager.getInstance().isPlaying
+        GlideApp.with(context).load(song.artPicHuge).into(rotateView)
+        //加载模糊背景图
+        GlideApp.with(context).load(song.artPic).transform(BlurBitmapTransformation(song.blurValueOfPlaying())).into(iv_playing_bg)
+
+        val isPlaying =  MusicManager.getInstance().isPlaying
+        playpage_play!!.isChecked = isPlaying
+
+        if (isPlaying) {
+            rotateView.start()
+        } else {
+            rotateView.pause()
+        }
     }
 
     internal fun loadLrcView() {
