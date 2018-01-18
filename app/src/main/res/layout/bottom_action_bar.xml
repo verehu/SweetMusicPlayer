@@ -21,65 +21,75 @@
         android:minHeight="2dp"
         android:progressDrawable="@drawable/bg_seekbar" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-
-        <com.huwei.sweetmusicplayer.business.ui.widgets.SquareWrapWImageView
-            android:id="@+id/img_album"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/img_album_background" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp">
-
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/textViewWhite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_artist"
-                style="@style/secondTextViewWhite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="" />
-
-        </LinearLayout>
-
-        <com.huwei.sweetmusicplayer.business.ui.widgets.CheckableImageView
-            android:id="@+id/btn_play"
-            style="@style/CommonButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:srcCompat="@drawable/playtoggle_btn_selector" />
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/btn_next"
-            style="@style/CommonButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginRight="8dp"
-            app:srcCompat="@drawable/bottombar_next_btn" />
+            android:id="@+id/blurBgView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.huwei.sweetmusicplayer.business.ui.widgets.SquareWrapWImageView
+                android:id="@+id/img_album"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/img_album_background" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/textViewWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_artist"
+                    style="@style/secondTextViewWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <com.huwei.sweetmusicplayer.business.ui.widgets.CheckableImageView
+                android:id="@+id/btn_play"
+                style="@style/CommonButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:srcCompat="@drawable/playtoggle_btn_selector" />
+
+            <ImageView
+                android:id="@+id/btn_next"
+                style="@style/CommonButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginRight="8dp"
+                app:srcCompat="@drawable/bottombar_next_btn" />
+
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

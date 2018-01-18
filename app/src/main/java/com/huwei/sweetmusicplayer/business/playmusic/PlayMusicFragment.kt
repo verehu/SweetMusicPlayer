@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.business.fragments
+package com.huwei.sweetmusicplayer.business.playmusic
 
 import android.app.Dialog
 import android.content.BroadcastReceiver
@@ -11,7 +11,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Button
@@ -47,7 +47,7 @@ import java.util.Collections
 /**
  * 播放界面
  */
-class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrcStateContain, OnClickListener {
+class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrcStateContain, OnClickListener, PlayMusicContract.View {
 
     private var mRootView: View? = null
 
@@ -64,6 +64,7 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
     val isDrawerOpen: Boolean
         get() = dl_music_queue!!.isDrawerOpen(Gravity.END)
 
+    private lateinit var presenter: PlayMusicContract.Presenter
 
     private val receiver = object : BroadcastReceiver() {
 
@@ -75,6 +76,7 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
                 IContain.PLAY_STATUS_UPDATE -> {
                     val isPlaying = intent.getBooleanExtra("isPlaying", false)
                     playpage_play!!.isChecked = isPlaying
+                    if (isPlaying) rotateView.resume() else rotateView.pause()
                 }
                 IContain.PLAYBAR_UPDATE -> {
                     val isNewPlayMusic = intent.getBooleanExtra("isNewPlayMusic", false)
@@ -101,6 +103,12 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
             }
         }
 
+    }
+
+    override fun setPresenter(presenter: PlayMusicContract.Presenter) {
+        this.presenter = presenter
+
+        playpage_lrcview.setPresenter(presenter)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -145,8 +153,19 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id) {
+        when (v!!.id) {
             R.id.btn_show_music_queue -> btn_show_music_queueWasClicked()
+            R.id.centerFrameLayout -> togglePanel()
+        }
+    }
+
+    override fun togglePanel() {
+        if (rotateView.visibility == VISIBLE) {
+            rotateView.visibility = GONE
+            playpage_lrcview.visibility = VISIBLE
+        } else {
+            rotateView.visibility = VISIBLE
+            playpage_lrcview.visibility = GONE
         }
     }
 
@@ -177,7 +196,6 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
             playpage_progressbar!!.max = song.duration!!
         }
     }
-
 
     fun updateMusicQueue() {
         val nowPlayings = MusicManager.getInstance().playingList
@@ -236,14 +254,24 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
 
         playpage_lrcview!!.setOnLrcSearchClickListener(this)
         btn_show_music_queue.setOnClickListener(this)
+        centerFrameLayout.setOnClickListener(this)
     }
 
     internal fun initMusicView() {
         val song = MusicManager.getInstance().nowPlayingSong
-        //加载模糊背景图
-        GlideApp.with(context).load(song.artPicHuge).transform(BlurBitmapTransformation(song.blurValueOfPlaying())).into(iv_playing_bg)
 
-        playpage_play!!.isChecked = MusicManager.getInstance().isPlaying
+        GlideApp.with(context).load(song.artPicHuge).into(rotateView)
+        //加载模糊背景图
+        GlideApp.with(context).load(song.artPic).transform(BlurBitmapTransformation(song.blurValueOfPlaying())).into(iv_playing_bg)
+
+        val isPlaying = MusicManager.getInstance().isPlaying
+        playpage_play!!.isChecked = isPlaying
+
+        if (isPlaying) {
+            rotateView.start()
+        } else {
+            rotateView.pause()
+        }
     }
 
     internal fun loadLrcView() {
@@ -253,14 +281,14 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
             loadLrcBySongId(song)
         }
         lrcLists = LrcUtil.loadLrc(song)
-        playpage_lrcview!!.lrcLists = lrcLists
+        playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
         playpage_lrcview!!.setLrcState(if (lrcLists!!.size == 0) ILrcStateContain.READ_LOC_FAIL else ILrcStateContain.READ_LOC_OK)
     }
 
     internal fun updateLrcView(currentTime: Int) {
         val tempIndex = playpage_lrcview!!.getIndexByLrcTime(currentTime)
         if (tempIndex != playpage_lrcview!!.index) {
-            playpage_lrcview!!.index = tempIndex
+            playpage_lrcview!!.setSongIndex(tempIndex)
             playpage_lrcview!!.invalidate()
         }
     }
@@ -268,7 +296,7 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
     override fun onStart() {
         // TODO Auto-generated method stub
         super.onStart()
-        Log.i(TAG, "onResume")
+        Log.i(TAG, "onStart")
         activity.registerReceiver(receiver, intentFilter)
 
         if (mIsFirst) {
@@ -367,7 +395,7 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
                 val lrcLists = LrcUtil.parseLrcStr(lrc.lrcContent)
                 // 按时间排序
                 Collections.sort(lrcLists, LrcComparator())
-                playpage_lrcview!!.lrcLists = lrcLists
+                playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
                 playpage_lrcview!!.setLrcState(if (lrcLists.size == 0) ILrcStateContain.QUERY_ONLINE_NULL else ILrcStateContain.QUERY_ONLINE_OK)
 
                 if (lrcLists.size != 0) {
@@ -402,7 +430,7 @@ class PlayingFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrc
                     val lrcLists = LrcUtil.parseLrcStr(lrc.lrcContent)
                     // 按时间排序
                     Collections.sort(lrcLists, LrcComparator())
-                    playpage_lrcview!!.lrcLists = lrcLists
+                    playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
                     playpage_lrcview!!.setLrcState(if (lrcLists.size == 0) ILrcStateContain.QUERY_ONLINE_NULL else ILrcStateContain.QUERY_ONLINE_OK)
 
                     if (lrcLists.size != 0) {

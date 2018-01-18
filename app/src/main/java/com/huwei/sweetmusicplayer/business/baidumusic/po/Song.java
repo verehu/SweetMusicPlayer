@@ -2,6 +2,7 @@ package com.huwei.sweetmusicplayer.business.baidumusic.po;
 
 import android.net.Uri;
 import android.os.Parcel;
+import android.text.TextUtils;
 
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.interfaces.IQueryReuslt;
@@ -12,11 +13,12 @@ import java.util.List;
 
 /**
  * 歌曲简略信息
+ *
  * @author jayce
  * @date 2015/10/20
  */
 public class Song extends AbstractMusic implements IQueryReuslt {
-    public static final String TAG="Song";
+    public static final String TAG = "Song";
 
     /**
      * content :
@@ -96,7 +98,7 @@ public class Song extends AbstractMusic implements IQueryReuslt {
 
     @Override
     public Uri getDataSoure() {
-        String url = bitrate!=null?bitrate.getFile_link(): BaiduMusicUtil.getDownloadUrlBySongId(song_id);
+        String url = bitrate != null ? bitrate.getFile_link() : BaiduMusicUtil.getDownloadUrlBySongId(song_id);
         return Uri.parse(url);
     }
 
@@ -122,12 +124,31 @@ public class Song extends AbstractMusic implements IQueryReuslt {
 
     @Override
     public String getArtPic() {
-        return songinfo !=null? songinfo.getPic_big():"";
+        return songinfo != null ? songinfo.getPic_big() : "";
     }
 
     @Override
     public String getArtPicHuge() {
-        return songinfo !=null? songinfo.getPic_big():"";
+        if (songinfo != null) {
+            if (!TextUtils.isEmpty(songinfo.getPic_huge())) {
+                return songinfo.getPic_huge();
+            } else if (!TextUtils.isEmpty(songinfo.getPic_premium())) {
+                return songinfo.getPic_premium();
+            }
+            return songinfo.getPic_big();
+        }
+        return null;
+    }
+
+    @Override
+    public String getArtPremium() {
+        if (songinfo != null) {
+            if (!TextUtils.isEmpty(songinfo.getPic_premium())) {
+                return songinfo.getPic_premium();
+            }
+            return songinfo.getPic_big();
+        }
+        return null;
     }
 
     @Override
@@ -135,8 +156,8 @@ public class Song extends AbstractMusic implements IQueryReuslt {
         return 80;
     }
 
-    public boolean hasGetDetailInfo(){
-        return bitrate!=null|| songinfo !=null;
+    public boolean hasGetDetailInfo() {
+        return bitrate != null || songinfo != null;
     }
 
 
@@ -230,9 +251,9 @@ public class Song extends AbstractMusic implements IQueryReuslt {
         }
     };
 
-    public static List<AbstractMusic> getAbstractMusicList(List<Song> songList){
+    public static List<AbstractMusic> getAbstractMusicList(List<Song> songList) {
         List<AbstractMusic> list = new ArrayList<>();
-        for(Song song:songList){
+        for (Song song : songList) {
             list.add(song);
         }
         return list;

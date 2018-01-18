@@ -52,7 +52,7 @@
         </activity>
         <activity android:name=".business.AlbumInfoActivity" />
         <activity android:name=".business.ArtistInfoActivity" />
-        <activity android:name=".business.PlayingActivity" />
+        <activity android:name=".business.playmusic.PlayMusicActivity" />
         <activity android:name=".business.LocalMusicActivity" />
 
         <service
