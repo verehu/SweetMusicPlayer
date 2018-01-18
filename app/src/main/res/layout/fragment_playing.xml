@@ -83,6 +83,8 @@
 
                 <com.huwei.sweetmusicplayer.business.ui.widgets.LrcView
                     android:id="@+id/playpage_lrcview"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fillViewport="false"
