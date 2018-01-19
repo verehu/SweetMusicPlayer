@@ -42,7 +42,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@id/layout"
             android:contentDescription="@string/d"
             android:src="@drawable/pull_to_refresh_arrow" />
     </RelativeLayout>

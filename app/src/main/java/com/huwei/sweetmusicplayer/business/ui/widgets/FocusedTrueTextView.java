@@ -1,6 +1,7 @@
 package com.huwei.sweetmusicplayer.business.ui.widgets;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -11,7 +12,7 @@ import android.widget.TextView;
  * @author Jayce
  * @date 2015/6/12
  */
-public class FocusedTrueTextView extends TextView {
+public class FocusedTrueTextView extends AppCompatTextView {
 
     public FocusedTrueTextView(Context context) {
         super(context);

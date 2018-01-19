@@ -5,7 +5,4 @@
             <!--<item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
             <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
         <!--</style>-->
-    <style name="SweetTheme.NoActionBar">
-        <item name="selectableItemBackground">@drawable/common_ripple_dark_selector</item>
-    </style>
 </resources>

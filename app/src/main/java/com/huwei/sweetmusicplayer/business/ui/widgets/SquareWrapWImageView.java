@@ -1,6 +1,8 @@
 package com.huwei.sweetmusicplayer.business.ui.widgets;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
@@ -9,7 +11,7 @@ import android.widget.ImageView;
  * @author Administrator
  *
  */
-public class SquareWrapWImageView extends ImageView {
+public class SquareWrapWImageView extends AppCompatImageView {
 
 	public SquareWrapWImageView(Context context, AttributeSet attrs,
 								int defStyle) {
