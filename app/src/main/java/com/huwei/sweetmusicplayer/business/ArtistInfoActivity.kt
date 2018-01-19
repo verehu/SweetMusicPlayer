@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat.setTranslationY
 import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.View
@@ -22,7 +23,6 @@ import com.huwei.sweetmusicplayer.frameworks.BundleBuilder
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil
 import com.huwei.sweetmusicplayer.util.HttpHandler
 import com.huwei.sweetmusicplayer.util.Utils
-import com.nineoldandroids.view.ViewHelper
 
 import java.util.Arrays
 
@@ -162,7 +162,7 @@ class ArtistInfoActivity : BottomPlayActivity(), IListViewScroll {
         val translationY = ll_flow_header!!.translationY
         Log.i(TAG, "-scrollY:$scrollY    translationY:$translationY")
         if (translationY != (-scrollY).toFloat()) {
-            ViewHelper.setTranslationY(ll_flow_header!!, (-scrollY).toFloat())
+            setTranslationY(ll_flow_header!!, (-scrollY).toFloat())
         }
         gtoolbar!!.adjustHeaderViewAndTitle()
     }
