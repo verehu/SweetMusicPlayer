@@ -21,6 +21,12 @@ public class BaiduMusicUtil implements Url {
     public static final String GET_ALBUMINFO = "baidu.ting.album.getAlbumInfo";
     public static final String QUERY_MERGE = "baidu.ting.search.merge";
 
+
+    private static void addCommonarams(HttpParams params ) {
+        params.add("from", "android");
+        params.add("version", "5.6.5.0");
+    }
+
     /**
      * 根据歌名 艺术家 专家搜索歌曲的建议
      *
@@ -38,6 +44,9 @@ public class BaiduMusicUtil implements Url {
 
     public static void queryMerge(String keyword, int pageno, int pageSize, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("format", "json");
         params.add("method", QUERY_MERGE);
         params.add("query", keyword);
@@ -84,7 +93,7 @@ public class BaiduMusicUtil implements Url {
 
     /**
      * 请求歌曲信息
-     *
+     *QUERY_MERGE
      * @param songid
      * @return
      */
@@ -117,10 +126,10 @@ public class BaiduMusicUtil implements Url {
      * @param artistid
      * @param httpHandler
      */
-    public static void getArtistInfo(String ting_uid, String artist_id, HttpHandler httpHandler) {
+    public static void getArtistInfo(String tinguid, String artistid, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
-        params.add("tinguid", ting_uid);
-        params.add("artistid", artist_id);
+        params.add("tinguid", tinguid);
+        params.add("artistid", artistid);
         params.add("method", GET_ARTISTINFO);
         HttpUtil.get(BAIDU_MUSIC, params, httpHandler, true);
     }

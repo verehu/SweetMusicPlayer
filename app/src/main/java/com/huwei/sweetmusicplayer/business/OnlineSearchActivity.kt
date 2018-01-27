@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 
 import android.support.v4.app.Fragment
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.view.View
 import android.widget.Toast
 
@@ -134,7 +136,7 @@ open class OnlineSearchActivity : BottomPlayActivity() {
                     val artist = queryMergeResp.artist_info.artist_list[0]
                     if (artist != null) {
                         Glide.with(mContext).load(artist.avatar_middle).into(iv_img!!)
-                        tv_primary!!.text = artist.author
+                        tv_primary!!.text = Html.fromHtml(artist.author)
                         tv_second!!.text = String.format(mContext.resources.getString(R.string.artist_second_text), artist.song_num, artist.album_num)
                     }
                 }
