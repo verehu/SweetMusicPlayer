@@ -4,22 +4,16 @@ import android.app.SearchManager
 import android.content.ComponentName
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
 import android.support.v7.widget.SearchView
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.business.OnlineSearchActivity
-import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain
+import com.huwei.sweetmusicplayer.contants.MusicViewTypeContain
 import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment
 import com.huwei.sweetmusicplayer.business.ui.adapters.PagerStateAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -30,7 +24,7 @@ import kotlinx.android.synthetic.main.layout_gradient_toolbar.*
  * @author Jayce
  * @date 2015/6/17
  */
-class MainFragment : BaseFragment(), IMusicViewTypeContain {
+class MainFragment : BaseFragment(), MusicViewTypeContain {
 
     private var mView: View? = null
 
@@ -116,7 +110,7 @@ class MainFragment : BaseFragment(), IMusicViewTypeContain {
         //        mPagerAdapter.addFragment(new RecentlyAddedFragment());
         // add tab_songs
         val bundle = Bundle()
-        bundle.putInt(IMusicViewTypeContain.MUSIC_SHOW_TYPE, IMusicViewTypeContain.SHOW_MUSIC)
+        bundle.putInt(MusicViewTypeContain.MUSIC_SHOW_TYPE, MusicViewTypeContain.SHOW_MUSIC)
 
         val tabs_str = resources.getStringArray(R.array.tab_titles)
 

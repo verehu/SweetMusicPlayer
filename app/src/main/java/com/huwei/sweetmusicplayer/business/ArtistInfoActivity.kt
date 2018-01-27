@@ -26,8 +26,8 @@ import com.huwei.sweetmusicplayer.util.Utils
 
 import java.util.Arrays
 
-import com.huwei.sweetmusicplayer.contains.IntentExtra.EXTRA_ARTIST_ID
-import com.huwei.sweetmusicplayer.contains.IntentExtra.EXTRA_TING_UID
+import com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_ARTIST_ID
+import com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_TING_UID
 import kotlinx.android.synthetic.main.activity_artist_info.*
 import kotlinx.android.synthetic.main.layout_gradient_toolbar.*
 

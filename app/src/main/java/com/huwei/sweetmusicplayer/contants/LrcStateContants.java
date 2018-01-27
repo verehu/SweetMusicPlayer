@@ -1,11 +1,11 @@
-package com.huwei.sweetmusicplayer.contains;
+package com.huwei.sweetmusicplayer.contants;
 
 /**
  * 歌词界面状态常量
  * @author Jayce
  * @date 2015/6/10
  */
-public interface ILrcStateContain {
+public interface LrcStateContants {
     public static final int READ_LOC_FAIL=0;    //本地查找不到歌词或者查询异常
     public static final int READ_LOC_OK=1;
     public static final int QUERY_ONLINE=2; //正在联网查找

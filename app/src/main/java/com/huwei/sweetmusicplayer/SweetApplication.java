@@ -12,14 +12,14 @@ import com.android.volley.RequestQueue;
 
 import com.android.volley.toolbox.Volley;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contants.Contants;
 import com.huwei.sweetmusicplayer.dao.DaoMaster;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.WindowTool;
 
-import static com.huwei.sweetmusicplayer.contains.IContain.NOW_PLAYMUSIC;
-import static com.huwei.sweetmusicplayer.contains.IContain.PLAYBAR_UPDATE;
+import static com.huwei.sweetmusicplayer.contants.Contants.NOW_PLAYMUSIC;
+import static com.huwei.sweetmusicplayer.contants.Contants.PLAYBAR_UPDATE;
 
 /**
  * Created by huwei on 15-1-20.
@@ -68,7 +68,7 @@ public class SweetApplication extends Application {
 
     void initRecievers() {
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(IContain.PLAYBAR_UPDATE);
+        intentFilter.addAction(Contants.PLAYBAR_UPDATE);
         registerReceiver(receiver, intentFilter);
     }
 

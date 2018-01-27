@@ -16,7 +16,7 @@ import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Song
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.AlbumDetailResp
-import com.huwei.sweetmusicplayer.contains.IntentExtra
+import com.huwei.sweetmusicplayer.contants.IntentExtra
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
 

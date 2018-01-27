@@ -12,7 +12,7 @@ import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
 import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
-import com.huwei.sweetmusicplayer.contains.IntentExtra;
+import com.huwei.sweetmusicplayer.contants.IntentExtra;
 
 import java.util.ArrayList;
 import java.util.List;

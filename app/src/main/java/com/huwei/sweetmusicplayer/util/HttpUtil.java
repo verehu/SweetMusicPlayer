@@ -9,9 +9,8 @@ import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contants.Contants;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -47,7 +46,7 @@ public class HttpUtil {
             }
         };
 
-        Log.i(IContain.HTTP,"request post url:"+url+"\n"+new Gson().toJson(params.getParams()));
+        Log.i(Contants.HTTP,"request post url:"+url+"\n"+new Gson().toJson(params.getParams()));
 
         mQueue.add(request);
 //        mQueue.start();
@@ -90,7 +89,7 @@ public class HttpUtil {
             }
         };
 
-        Log.i(IContain.HTTP,"request get url:"+url);
+        Log.i(Contants.HTTP,"request get url:"+url);
 
         mQueue.add(request);
 //        mQueue.start();
@@ -119,7 +118,7 @@ public class HttpUtil {
             }
         };
 
-        Log.i(IContain.HTTP,"request getSync url:"+url);
+        Log.i(Contants.HTTP,"request getSync url:"+url);
 
         mQueue.add(request);
 //        mQueue.start();
@@ -127,7 +126,7 @@ public class HttpUtil {
         String response = null;
         try {
             response =  future.get();
-            Log.i(IContain.HTTP,"response:"+url+"\n"+ response);
+            Log.i(Contants.HTTP,"response:"+url+"\n"+ response);
             return response;
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -135,7 +134,7 @@ public class HttpUtil {
             e.printStackTrace();
         }
 
-        Log.i(IContain.HTTP,"response:"+url+"\n"+ response);
+        Log.i(Contants.HTTP,"response:"+url+"\n"+ response);
         return null;
     }
 

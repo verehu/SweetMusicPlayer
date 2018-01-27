@@ -28,8 +28,8 @@ import com.huwei.sweetmusicplayer.business.baidumusic.po.SongSug
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.MusicSearchSugResp
 import com.huwei.sweetmusicplayer.business.comparator.LrcComparator
 import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment
-import com.huwei.sweetmusicplayer.contains.IContain
-import com.huwei.sweetmusicplayer.contains.ILrcStateContain
+import com.huwei.sweetmusicplayer.contants.Contants
+import com.huwei.sweetmusicplayer.contants.LrcStateContants
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp
@@ -47,7 +47,7 @@ import java.util.Collections
 /**
  * 播放界面
  */
-class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, ILrcStateContain, OnClickListener, PlayMusicContract.View {
+class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, LrcStateContants, OnClickListener, PlayMusicContract.View {
 
     private var mRootView: View? = null
 
@@ -73,12 +73,12 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
             val action = intent.action
 
             when (action) {
-                IContain.PLAY_STATUS_UPDATE -> {
+                Contants.PLAY_STATUS_UPDATE -> {
                     val isPlaying = intent.getBooleanExtra("isPlaying", false)
                     playpage_play!!.isChecked = isPlaying
                     if (isPlaying) rotateView.resume() else rotateView.pause()
                 }
-                IContain.PLAYBAR_UPDATE -> {
+                Contants.PLAYBAR_UPDATE -> {
                     val isNewPlayMusic = intent.getBooleanExtra("isNewPlayMusic", false)
                     if (isNewPlayMusic) {
                         loadLrcView()
@@ -86,20 +86,20 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
                     }
                     UpdateSongInfoView()
                 }
-                IContain.CURRENT_UPDATE -> {
+                Contants.CURRENT_UPDATE -> {
                     val currentTime = intent.getIntExtra("currentTime", 0)
                     playpage_playtime_tv!!.text = TimeUtil.mill2mmss(currentTime.toLong())
                     if (!mProgressBarLock) playpage_progressbar!!.progress = currentTime
 
                     updateLrcView(currentTime)
                 }
-                IContain.BUFFER_UPDATE -> {
+                Contants.BUFFER_UPDATE -> {
                     val bufferTime = intent.getIntExtra("bufferTime", 0)
                     if (!mProgressBarLock) playpage_progressbar!!.secondaryProgress = bufferTime
                     updateMusicQueue()
                 }
 
-                IContain.UPTATE_MUISC_QUEUE -> updateMusicQueue()
+                Contants.UPTATE_MUISC_QUEUE -> updateMusicQueue()
             }
         }
 
@@ -116,11 +116,11 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
         super.onCreate(savedInstanceState)
 
         intentFilter = IntentFilter()
-        intentFilter!!.addAction(IContain.PLAYBAR_UPDATE)
-        intentFilter!!.addAction(IContain.CURRENT_UPDATE)
-        intentFilter!!.addAction(IContain.UPTATE_MUISC_QUEUE)
-        intentFilter!!.addAction(IContain.BUFFER_UPDATE)
-        intentFilter!!.addAction(IContain.PLAY_STATUS_UPDATE)
+        intentFilter!!.addAction(Contants.PLAYBAR_UPDATE)
+        intentFilter!!.addAction(Contants.CURRENT_UPDATE)
+        intentFilter!!.addAction(Contants.UPTATE_MUISC_QUEUE)
+        intentFilter!!.addAction(Contants.BUFFER_UPDATE)
+        intentFilter!!.addAction(Contants.PLAY_STATUS_UPDATE)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -282,7 +282,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
         }
         lrcLists = LrcUtil.loadLrc(song)
         playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
-        playpage_lrcview!!.setLrcState(if (lrcLists!!.size == 0) ILrcStateContain.READ_LOC_FAIL else ILrcStateContain.READ_LOC_OK)
+        playpage_lrcview!!.setLrcState(if (lrcLists!!.size == 0) LrcStateContants.READ_LOC_FAIL else LrcStateContants.READ_LOC_OK)
     }
 
     internal fun updateLrcView(currentTime: Int) {
@@ -345,7 +345,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
                 BaiduMusicUtil.querySug(musicEt.text.toString().split("\\(".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] + " " + artistEt.text.toString(), object : HttpHandler(activity) {
                     override fun onStart() {
                         super.onStart()
-                        playpage_lrcview!!.setLrcState(ILrcStateContain.QUERY_ONLINE)
+                        playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE)
                     }
 
                     override fun onSuccess(response: String) {
@@ -354,7 +354,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
                         val sug = Gson().fromJson(response, MusicSearchSugResp::class.java)
 
                         if (!sug.isValid) {
-                            playpage_lrcview!!.setLrcState(ILrcStateContain.QUERY_ONLINE_NULL)
+                            playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
                             return
                         }
 
@@ -364,7 +364,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
 
                     override fun onErrorResponse(error: VolleyError) {
                         super.onErrorResponse(error)
-                        playpage_lrcview!!.setLrcState(ILrcStateContain.QUERY_ONLINE_FAIL)
+                        playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
                     }
                 })
             } else if (v === cancleBtn) {
@@ -378,7 +378,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
 
     private fun findLrc(songList: List<SongSug>?, index: Int) {
         if (songList == null || songList.size == 0) {
-            playpage_lrcview!!.setLrcState(ILrcStateContain.QUERY_ONLINE_NULL)
+            playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
             return
         }
         val song = songList[index]
@@ -388,7 +388,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
                 val lrc = Gson().fromJson(response, Lrc::class.java)
 
                 if (!lrc.isValid) {
-                    playpage_lrcview!!.setLrcState(ILrcStateContain.QUERY_ONLINE_NULL)
+                    playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
                     return
                 }
 
@@ -396,7 +396,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
                 // 按时间排序
                 Collections.sort(lrcLists, LrcComparator())
                 playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
-                playpage_lrcview!!.setLrcState(if (lrcLists.size == 0) ILrcStateContain.QUERY_ONLINE_NULL else ILrcStateContain.QUERY_ONLINE_OK)
+                playpage_lrcview!!.setLrcState(if (lrcLists.size == 0) LrcStateContants.QUERY_ONLINE_NULL else LrcStateContants.QUERY_ONLINE_OK)
 
                 if (lrcLists.size != 0) {
                     LrcUtil.writeLrcToLoc(song.title, song.artist, lrc.lrcContent)
@@ -409,7 +409,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
                 if (index + 1 < songList.size) {
                     findLrc(songList, index + 1)
                 } else {
-                    playpage_lrcview!!.setLrcState(ILrcStateContain.QUERY_ONLINE_FAIL)
+                    playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
                 }
             }
         })
@@ -423,7 +423,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
                     val lrc = Gson().fromJson(response, Lrc::class.java)
 
                     if (!lrc.isValid) {
-                        playpage_lrcview!!.setLrcState(ILrcStateContain.QUERY_ONLINE_NULL)
+                        playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
                         return
                     }
 
@@ -431,7 +431,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
                     // 按时间排序
                     Collections.sort(lrcLists, LrcComparator())
                     playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
-                    playpage_lrcview!!.setLrcState(if (lrcLists.size == 0) ILrcStateContain.QUERY_ONLINE_NULL else ILrcStateContain.QUERY_ONLINE_OK)
+                    playpage_lrcview!!.setLrcState(if (lrcLists.size == 0) LrcStateContants.QUERY_ONLINE_NULL else LrcStateContants.QUERY_ONLINE_OK)
 
                     if (lrcLists.size != 0) {
                         LrcUtil.writeLrcToLoc(song.getTitle(), song.artist, lrc.lrcContent)
@@ -440,7 +440,7 @@ class PlayMusicFragment : BaseFragment(), IContain, OnLrcSearchClickListener, IL
 
                 override fun onErrorResponse(error: VolleyError) {
                     super.onErrorResponse(error)
-                    playpage_lrcview!!.setLrcState(ILrcStateContain.QUERY_ONLINE_FAIL)
+                    playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
                 }
             })
         }

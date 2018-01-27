@@ -10,7 +10,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.BaseResp;
-import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contants.Contants;
 
 /**
  * @author jayce
@@ -33,7 +33,7 @@ public abstract class HttpHandler implements Response.Listener<String>,Response.
     @Override
     public void onErrorResponse(VolleyError error) {
         error.printStackTrace();
-        Log.e(IContain.HTTP,"error:"+error.getMessage());
+        Log.e(Contants.HTTP,"error:"+error.getMessage());
 
 
         if(error instanceof NoConnectionError) {
@@ -44,7 +44,7 @@ public abstract class HttpHandler implements Response.Listener<String>,Response.
 
     @Override
     public void onResponse(String response) {
-        Log.i(IContain.HTTP,"response:"+response);
+        Log.i(Contants.HTTP,"response:"+response);
 
         onFinish();
         BaseResp resp = new Gson().fromJson(response,BaseResp.class);

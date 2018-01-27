@@ -1,7 +1,8 @@
 package com.huwei.sweetmusicplayer.business
 
 import android.view.ViewGroup
-import com.huwei.sweetmusicplayer.contains.IContain.NOW_PLAYMUSIC
+import com.huwei.sweetmusicplayer.contants.Contants
+import com.huwei.sweetmusicplayer.contants.Contants.NOW_PLAYMUSIC
 
 /**
  *
@@ -21,7 +22,7 @@ abstract class BottomPlayActivity : BaseActivity() {
             val action = intent.action
 
             when (action) {
-                com.huwei.sweetmusicplayer.contains.IContain.PLAYBAR_UPDATE -> {
+                Contants.PLAYBAR_UPDATE -> {
                     if (!isBarAdd) {
                         addBottomPlayBar(intent.getParcelableExtra(NOW_PLAYMUSIC))
                     }
@@ -53,7 +54,7 @@ abstract class BottomPlayActivity : BaseActivity() {
 
     fun initRecievers() {
         val intentFilter = android.content.IntentFilter()
-        intentFilter.addAction(com.huwei.sweetmusicplayer.contains.IContain.PLAYBAR_UPDATE)
+        intentFilter.addAction(Contants.PLAYBAR_UPDATE)
         registerReceiver(receiver, intentFilter)
 
         isReceiverRegistered = true

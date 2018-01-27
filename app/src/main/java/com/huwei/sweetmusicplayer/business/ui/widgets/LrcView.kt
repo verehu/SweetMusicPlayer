@@ -1,7 +1,7 @@
 package com.huwei.sweetmusicplayer.business.ui.widgets
 
 import com.huwei.sweetmusicplayer.R
-import com.huwei.sweetmusicplayer.contains.ILrcStateContain
+import com.huwei.sweetmusicplayer.contants.LrcStateContants
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.business.models.LrcContent
 import com.huwei.sweetmusicplayer.business.ui.listeners.OnLrcSearchClickListener
@@ -28,7 +28,7 @@ import com.huwei.sweetmusicplayer.business.BaseView
 import com.huwei.sweetmusicplayer.business.playmusic.PlayMusicContract
 
 class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: AttributeSet? = null, defStyle: Int = 0)
-    : ScrollView(mContext, attrs, defStyle), OnScrollChangedListener, View.OnTouchListener, ILrcStateContain,
+    : ScrollView(mContext, attrs, defStyle), OnScrollChangedListener, View.OnTouchListener, LrcStateContants,
         GestureDetector.OnGestureListener, BaseView<PlayMusicContract.Presenter> {
 
     private var viewWidth: Int = 0    //歌词视图宽度
@@ -145,15 +145,6 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
         this.index = index
     }
 
-//    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-//        super.onSizeChanged(w, h, oldw, oldh)
-//
-//        this.viewWidth = w.toFloat()
-//        this.viewHeight = h.toFloat()
-//
-//        notifyLrcListsChanged(lrcLists!!)
-//    }
-
     fun getIndexByLrcTime(currentTime: Int): Int {
         if (lrcLists == null) {
             return 0
@@ -188,11 +179,11 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
             var centerY = viewHeight / 2
 
             when (lrcState) {
-                ILrcStateContain.READ_LOC_FAIL -> {
+                LrcStateContants.READ_LOC_FAIL -> {
                     tipsPaint!!.isUnderlineText = true
                     canvas.drawText("暂无歌词,点击开始搜索", (viewWidth / 2).toFloat(), centerY.toFloat(), tipsPaint!!)
                 }
-                ILrcStateContain.QUERY_ONLINE -> {
+                LrcStateContants.QUERY_ONLINE -> {
                     tipsPaint!!.isUnderlineText = false
                     var drawContentStr = "在线匹配歌词"
                     for (i in 0 until count) {
@@ -206,7 +197,7 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
 
                     handler.postDelayed(Runnable { invalidate() }, 500)
                 }
-                ILrcStateContain.QUERY_ONLINE_OK, ILrcStateContain.READ_LOC_OK -> {
+                LrcStateContants.QUERY_ONLINE_OK, LrcStateContants.READ_LOC_OK -> {
                     //绘制歌词
                     var i = 0
                     while (i < lrcLists!!.size) {
@@ -221,11 +212,11 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
                         centerY += textHeight.toInt()
                     }
                 }
-                ILrcStateContain.QUERY_ONLINE_FAIL -> {
+                LrcStateContants.QUERY_ONLINE_FAIL -> {
                     tipsPaint!!.isUnderlineText = true
                     canvas.drawText("搜索失败，请重试", (viewWidth / 2).toFloat(), centerY.toFloat(), tipsPaint!!)
                 }
-                ILrcStateContain.QUERY_ONLINE_NULL -> {
+                LrcStateContants.QUERY_ONLINE_NULL -> {
                     tipsPaint!!.isUnderlineText = false
                     canvas.drawText("网络无匹配歌词", (viewWidth / 2).toFloat(), centerY.toFloat(), tipsPaint!!)
                 }
@@ -266,8 +257,8 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         when (lrcState) {
-            ILrcStateContain.READ_LOC_FAIL, ILrcStateContain.QUERY_ONLINE_FAIL -> return handleTouchLrcFail(event.action)
-            ILrcStateContain.READ_LOC_OK, ILrcStateContain.QUERY_ONLINE_OK -> return handleTouchLrcOK(event)
+            LrcStateContants.READ_LOC_FAIL, LrcStateContants.QUERY_ONLINE_FAIL -> return handleTouchLrcFail(event.action)
+            LrcStateContants.READ_LOC_OK, LrcStateContants.QUERY_ONLINE_OK -> return handleTouchLrcOK(event)
         }
 
         return false

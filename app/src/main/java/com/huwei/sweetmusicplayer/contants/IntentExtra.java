@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.contains;
+package com.huwei.sweetmusicplayer.contants;
 
 /**
  * Intent之间传递参数的定义

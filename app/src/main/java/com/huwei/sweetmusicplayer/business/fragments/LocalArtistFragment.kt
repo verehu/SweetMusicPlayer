@@ -9,7 +9,7 @@ import android.view.ViewGroup
 
 import com.huwei.sweetmusicplayer.business.LocalMusicActivity
 import com.huwei.sweetmusicplayer.R
-import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain
+import com.huwei.sweetmusicplayer.contants.MusicViewTypeContain
 import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment
 import com.huwei.sweetmusicplayer.business.ui.adapters.LocArtistInfoAdapter
 import com.huwei.sweetmusicplayer.util.MusicUtils
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_artists.*
 /**
  * 本地音乐的Artist列表页面
  */
-class LocalArtistFragment : BaseFragment(), IMusicViewTypeContain {
+class LocalArtistFragment : BaseFragment(), MusicViewTypeContain {
     internal var adapter: LocArtistInfoAdapter? = null
 
     lateinit internal var fragmentManager: FragmentManager
@@ -35,7 +35,7 @@ class LocalArtistFragment : BaseFragment(), IMusicViewTypeContain {
         rv_artist!!.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         rv_artist!!.adapter = adapter
         adapter!!.setOnItemClickListener { view, position ->
-            startActivity(LocalMusicActivity.getStartActIntent(mAct, IMusicViewTypeContain.SHOW_MUSIC_BY_ARTIST,
+            startActivity(LocalMusicActivity.getStartActIntent(mAct, MusicViewTypeContain.SHOW_MUSIC_BY_ARTIST,
                     adapter!!.data[position].artist, adapter!!.data[position].artistId!!))
         }
     }

@@ -18,7 +18,7 @@ import android.util.Log;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contants.Contants;
 import com.huwei.sweetmusicplayer.dao.AlbumInfoDao;
 import com.huwei.sweetmusicplayer.dao.ArtistInfoDao;
 import com.huwei.sweetmusicplayer.dao.DaoSession;
@@ -38,7 +38,7 @@ import java.util.List;
  * @author jayce
  * @date 2015/06/11
  */
-public class MusicUtils implements IContain {
+public class MusicUtils implements Contants {
     public static final String TAG = "MusicUtils";
 
     public static final Uri sArtworkUri = Uri

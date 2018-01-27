@@ -19,8 +19,8 @@ import com.huwei.sweetmusicplayer.util.HttpHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.huwei.sweetmusicplayer.contains.IntentExtra.EXTRA_ARTIST_ID;
-import static com.huwei.sweetmusicplayer.contains.IntentExtra.EXTRA_TING_UID;
+import static com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_ARTIST_ID;
+import static com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_TING_UID;
 
 /**
  * 在线歌曲列表

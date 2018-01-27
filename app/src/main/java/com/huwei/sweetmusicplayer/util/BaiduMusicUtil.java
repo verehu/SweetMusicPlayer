@@ -1,6 +1,6 @@
 package com.huwei.sweetmusicplayer.util;
 
-import com.huwei.sweetmusicplayer.contains.IUrl;
+import com.huwei.sweetmusicplayer.contants.Url;
 
 /**
  * 使用百度音乐API的工具类
@@ -8,7 +8,7 @@ import com.huwei.sweetmusicplayer.contains.IUrl;
  * @author Jayce
  * @date 2015/6/11
  */
-public class BaiduMusicUtil implements IUrl {
+public class BaiduMusicUtil implements Url {
     public static final int PAGESIZE = 20;
 
     public static final String SEARCH_CATALOGSUG = "baidu.ting.search.catalogSug";

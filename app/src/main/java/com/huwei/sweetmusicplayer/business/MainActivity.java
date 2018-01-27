@@ -21,7 +21,7 @@ import android.view.View;
 import com.huwei.sweetmusicplayer.IMusicControlerService;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contants.Contants;
 import com.huwei.sweetmusicplayer.business.core.MusicManager;
 import com.huwei.sweetmusicplayer.business.interfaces.IMusicControl;
 import com.huwei.sweetmusicplayer.business.core.MusicControlerService;
@@ -31,7 +31,7 @@ import com.huwei.sweetmusicplayer.util.Environment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BottomPlayActivity implements IMusicControl, IContain, View.OnClickListener {
+public class MainActivity extends BottomPlayActivity implements IMusicControl, Contants, View.OnClickListener {
     private IMusicControlerService musicControler;
     private boolean isServiceBinding;
 

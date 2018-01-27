@@ -15,20 +15,20 @@ import android.widget.TextView
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.R.layout.fragment_localmusic
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic
-import com.huwei.sweetmusicplayer.contains.IContain
-import com.huwei.sweetmusicplayer.contains.IMusicViewTypeContain
+import com.huwei.sweetmusicplayer.contants.Contants
+import com.huwei.sweetmusicplayer.contants.MusicViewTypeContain
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment
 import com.huwei.sweetmusicplayer.business.models.MusicInfo
 import com.huwei.sweetmusicplayer.business.ui.adapters.MusicAdapter
-import com.huwei.sweetmusicplayer.contains.IntentExtra
+import com.huwei.sweetmusicplayer.contants.IntentExtra
 import com.huwei.sweetmusicplayer.util.MusicUtils
 import kotlinx.android.synthetic.main.fragment_localmusic.*
 
 /**
  * 装载音乐的fragment容器
  */
-class LocalMusicFragment : BaseFragment(), IContain, IMusicViewTypeContain {
+class LocalMusicFragment : BaseFragment(), Contants, MusicViewTypeContain {
 
     private var mMusicAdapter: MusicAdapter? = null
 
@@ -43,7 +43,7 @@ class LocalMusicFragment : BaseFragment(), IContain, IMusicViewTypeContain {
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.action) {
-                IContain.PLAYBAR_UPDATE -> mMusicAdapter!!.notifyDataSetChanged()
+                Contants.PLAYBAR_UPDATE -> mMusicAdapter!!.notifyDataSetChanged()
             }
         }
     }
@@ -65,7 +65,7 @@ class LocalMusicFragment : BaseFragment(), IContain, IMusicViewTypeContain {
     override fun onStart() {
         super.onStart()
         val filter = IntentFilter()
-        filter.addAction(IContain.PLAYBAR_UPDATE)
+        filter.addAction(Contants.PLAYBAR_UPDATE)
         activity.registerReceiver(receiver, filter)
     }
 
@@ -76,8 +76,8 @@ class LocalMusicFragment : BaseFragment(), IContain, IMusicViewTypeContain {
 
     internal fun initToolBar() {
         when (showtype) {
-            IMusicViewTypeContain.SHOW_MUSIC -> toolbar!!.visibility = View.GONE
-            IMusicViewTypeContain.SHOW_MUSIC_BY_ALBUM, IMusicViewTypeContain.SHOW_MUSIC_BY_ARTIST -> {
+            MusicViewTypeContain.SHOW_MUSIC -> toolbar!!.visibility = View.GONE
+            MusicViewTypeContain.SHOW_MUSIC_BY_ALBUM, MusicViewTypeContain.SHOW_MUSIC_BY_ARTIST -> {
                 toolbar!!.visibility = View.VISIBLE
                 toolbar!!.title = title
                 toolbar!!.navigationIcon = resources.getDrawable(R.drawable.abc_ic_ab_back_material)
@@ -92,8 +92,8 @@ class LocalMusicFragment : BaseFragment(), IContain, IMusicViewTypeContain {
         primaryId = arguments.getLong(IntentExtra.EXTRA_PRIMARY_ID)
 
         when (showtype) {
-            IMusicViewTypeContain.SHOW_MUSIC -> isABC = true
-            IMusicViewTypeContain.SHOW_MUSIC_BY_ALBUM, IMusicViewTypeContain.SHOW_MUSIC_BY_ARTIST -> isABC = false
+            MusicViewTypeContain.SHOW_MUSIC -> isABC = true
+            MusicViewTypeContain.SHOW_MUSIC_BY_ALBUM, MusicViewTypeContain.SHOW_MUSIC_BY_ARTIST -> isABC = false
         }
     }
 
@@ -138,9 +138,9 @@ class LocalMusicFragment : BaseFragment(), IContain, IMusicViewTypeContain {
     fun showMusicList() {
         var musicInfoList: List<MusicInfo>? = null
         when (showtype) {
-            IMusicViewTypeContain.SHOW_MUSIC -> musicInfoList = MusicUtils.queryMusic()
-            IMusicViewTypeContain.SHOW_MUSIC_BY_ALBUM -> musicInfoList = MusicUtils.queryMusicByAlbumId(primaryId)
-            IMusicViewTypeContain.SHOW_MUSIC_BY_ARTIST -> musicInfoList = MusicUtils.queryMusicByArtistId(primaryId)
+            MusicViewTypeContain.SHOW_MUSIC -> musicInfoList = MusicUtils.queryMusic()
+            MusicViewTypeContain.SHOW_MUSIC_BY_ALBUM -> musicInfoList = MusicUtils.queryMusicByAlbumId(primaryId)
+            MusicViewTypeContain.SHOW_MUSIC_BY_ARTIST -> musicInfoList = MusicUtils.queryMusicByArtistId(primaryId)
         }
         mMusicAdapter = MusicAdapter(activity, musicInfoList, isABC)
         mMusicAdapter!!.setOnItemClickListener { position ->
