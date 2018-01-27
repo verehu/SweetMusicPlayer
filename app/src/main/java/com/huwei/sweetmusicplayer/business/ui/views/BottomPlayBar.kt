@@ -36,8 +36,8 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
                 }
                 Contants.PLAYBAR_UPDATE -> {
 
-                    val music = MusicManager.getInstance().nowPlayingSong
-                    updateBottomBar(music, MusicManager.getInstance().isPlaying)
+                    val music = MusicManager.get().nowPlayingSong
+                    updateBottomBar(music, MusicManager.get().isPlaying)
                 }
                 Contants.CURRENT_UPDATE -> pro_music.progress = intent.getIntExtra("currentTime", 0)
             }
@@ -55,17 +55,17 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
     fun initListener() {
         btn_next.setOnClickListener {
             // TODO Auto-generated method stub
-            MusicManager.getInstance().nextSong()
+            MusicManager.get().nextSong()
         }
 
         btn_play.setOnCheckedChangeListener { buttonView, isChecked ->
             // TODO Auto-generated method stub
-            if (isChecked != MusicManager.getInstance().isPlaying) {
+            if (isChecked != MusicManager.get().isPlaying) {
                 //播放意图
                 if (isChecked) {
-                    MusicManager.getInstance().play()
+                    MusicManager.get().play()
                 } else {
-                    MusicManager.getInstance().pause()
+                    MusicManager.get().pause()
                 }
             }
         }

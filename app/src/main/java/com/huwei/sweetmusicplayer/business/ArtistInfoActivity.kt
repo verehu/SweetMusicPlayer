@@ -55,7 +55,7 @@ class ArtistInfoActivity : BottomPlayActivity(), IListViewScroll {
             return paddingHeight
         }
 
-    override fun isNeedStausView(): Boolean {
+    override fun isNeedStatusView(): Boolean {
         return false
     }
 

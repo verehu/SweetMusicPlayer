@@ -65,7 +65,7 @@ public class BaseActivity extends AppCompatActivity {
      * @param params
      */
     private void handleContentView(View view, ViewGroup.LayoutParams params) {
-        if (isNeedStausView()) {
+        if (isNeedStatusView()) {
             if (view instanceof LinearLayout && ((LinearLayout) view).getOrientation() == LinearLayout.VERTICAL) {
                 mRootView = (ViewGroup) view;
             } else {
@@ -78,13 +78,13 @@ public class BaseActivity extends AppCompatActivity {
 
             mStatusView = ImmersiveUtil.createStatusView(this, getStatusBarColor());
             mRootView.addView(mStatusView, 0);
-            checkAndsetContentView(mRootView, params);
+            checkAndSetContentView(mRootView, params);
         } else {
-            checkAndsetContentView(view, params);
+            checkAndSetContentView(view, params);
         }
     }
 
-    private void checkAndsetContentView(View view, ViewGroup.LayoutParams params){
+    private void checkAndSetContentView(View view, ViewGroup.LayoutParams params){
         if (params != null) {
             super.setContentView(view, params);
         } else {
@@ -92,7 +92,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected boolean isNeedStausView() {
+    protected boolean isNeedStatusView() {
         return true;
     }
 

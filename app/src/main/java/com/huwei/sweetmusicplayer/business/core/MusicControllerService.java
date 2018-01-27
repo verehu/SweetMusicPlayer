@@ -27,8 +27,8 @@ import android.widget.Toast;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
-import com.huwei.sweetmusicplayer.IMusicControlerService;
-import com.huwei.sweetmusicplayer.business.MainActivity;
+import com.huwei.sweetmusicplayer.IMusicControllerService;
+import com.huwei.sweetmusicplayer.business.main.MainActivity;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
@@ -51,9 +51,9 @@ import static com.huwei.sweetmusicplayer.util.ext.ExtKt.toast;
 /**
  * 后台控制播放音乐的service
  */
-public class MusicControlerService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpdateListener, Contants {
+public class MusicControllerService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpdateListener, Contants {
 
-    private String TAG = "MusicControlerService";
+    private String TAG = "MusicControllerService";
     private int musicIndex = -1;
     private List<AbstractMusic> musicList;
 
@@ -159,7 +159,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         }
     };
 
-    private IMusicControlerService.Stub mBinder = new IMusicControlerService.Stub() {
+    private IMusicControllerService.Stub mBinder = new IMusicControllerService.Stub() {
         @Override
         public int getPid() throws RemoteException {
             return Process.myPid();

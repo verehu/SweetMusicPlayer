@@ -147,7 +147,7 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
 
         updateMusicQueue()
         lv_music_queue!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            MusicManager.getInstance().prepareAndPlay(position, MusicManager.getInstance().playingList)
+            MusicManager.get().prepareAndPlay(position, MusicManager.get().playingList)
             queueAdapter!!.notifyDataSetChanged()
         }
     }
@@ -187,7 +187,7 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
 
 
     fun UpdateSongInfoView() {
-        val song = MusicManager.getInstance().nowPlayingSong
+        val song = MusicManager.get().nowPlayingSong
         if (song != null) {
             playpage_title_tv!!.text = song.title
             playpage_artist_tv!!.text = song.artist
@@ -198,7 +198,7 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
     }
 
     fun updateMusicQueue() {
-        val nowPlayings = MusicManager.getInstance().playingList
+        val nowPlayings = MusicManager.get().playingList
         if (nowPlayings != null) {
             queueAdapter!!.list = nowPlayings
             lv_music_queue!!.adapter = queueAdapter
@@ -212,7 +212,7 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // TODO Auto-generated method stub
                 mProgressBarLock = false
-                MusicManager.getInstance().seekTo(pro)
+                MusicManager.get().seekTo(pro)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -231,23 +231,23 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
 
         playpage_next!!.setOnClickListener {
             // TODO Auto-generated method stub
-            MusicManager.getInstance().nextSong()
+            MusicManager.get().nextSong()
         }
 
         playpage_previous!!.setOnClickListener {
             // TODO Auto-generated method stub
-            MusicManager.getInstance().preSong()
+            MusicManager.get().preSong()
         }
 
 
         playpage_play!!.setOnCheckedChangeListener { buttonView, isChecked ->
             // TODO Auto-generated method stub
-            if (isChecked != MusicManager.getInstance().isPlaying) {
+            if (isChecked != MusicManager.get().isPlaying) {
 
                 if (isChecked) {
-                    MusicManager.getInstance().play()
+                    MusicManager.get().play()
                 } else {
-                    MusicManager.getInstance().pause()
+                    MusicManager.get().pause()
                 }
             }
         }
@@ -258,13 +258,13 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
     }
 
     internal fun initMusicView() {
-        val song = MusicManager.getInstance().nowPlayingSong
+        val song = MusicManager.get().nowPlayingSong
 
         GlideApp.with(context).load(song.artPicHuge).into(rotateView)
         //加载模糊背景图
         GlideApp.with(context).load(song.artPic).transform(BlurBitmapTransformation(song.blurValueOfPlaying())).into(iv_playing_bg)
 
-        val isPlaying = MusicManager.getInstance().isPlaying
+        val isPlaying = MusicManager.get().isPlaying
         playpage_play!!.isChecked = isPlaying
 
         if (isPlaying) {
@@ -275,7 +275,7 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
     }
 
     internal fun loadLrcView() {
-        val song = MusicManager.getInstance().nowPlayingSong
+        val song = MusicManager.get().nowPlayingSong
         var lrcLists: List<LrcContent>? = null
         if (song is Song) {
             loadLrcBySongId(song)
@@ -334,7 +334,7 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
         val artistEt = content.findViewById(R.id.artist_tv) as EditText
         val musicEt = content.findViewById(R.id.music_tv) as EditText
 
-        val musicInfo = MusicManager.getInstance().nowPlayingSong
+        val musicInfo = MusicManager.get().nowPlayingSong
         artistEt.setText(musicInfo.artist)
         musicEt.setText(musicInfo.title)
         val btnListener = OnClickListener { v ->

@@ -112,7 +112,7 @@ public class MusicAdapter extends BaseAdapter implements SectionIndexer {
             }
         });
 
-		if(MusicManager.isIndexNowPLayng(list, position)){
+		if(MusicManager.isIndexNowPlaying(list, position)){
 			mViewHolder.selected_view.setVisibility(View.VISIBLE);
 		}else{
 			mViewHolder.selected_view.setVisibility(View.GONE);

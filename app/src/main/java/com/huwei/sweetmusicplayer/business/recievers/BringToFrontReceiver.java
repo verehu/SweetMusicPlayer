@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.huwei.sweetmusicplayer.business.MainActivity;
+import com.huwei.sweetmusicplayer.business.main.MainActivity;
 
 import java.util.List;
 

@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.contants.IntentExtra
 import com.huwei.sweetmusicplayer.business.interfaces.OnScanListener
+import com.huwei.sweetmusicplayer.business.main.MainActivity
 import com.huwei.sweetmusicplayer.business.models.MusicInfo
 import com.huwei.sweetmusicplayer.util.MusicUtils
 import com.yanzhenjie.permission.AndPermission

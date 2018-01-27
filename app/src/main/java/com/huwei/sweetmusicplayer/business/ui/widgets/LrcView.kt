@@ -271,7 +271,7 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
             mIsScrolling = false
 
             if (pos != -1)
-                MusicManager.getInstance().seekTo(lrcLists!![pos].lrcTime)
+                MusicManager.get().seekTo(lrcLists!![pos].lrcTime)
             canDrawLine = false
             pos = -1
             this.invalidate()

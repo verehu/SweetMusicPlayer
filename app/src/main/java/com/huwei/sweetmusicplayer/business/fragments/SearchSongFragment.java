@@ -54,7 +54,7 @@ public class SearchSongFragment extends AutoListFragment {
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MusicManager.getInstance().prepareAndPlay(i,Song.getAbstractMusicList(mList));
+                MusicManager.get().prepareAndPlay(i,Song.getAbstractMusicList(mList));
             }
         });
     }

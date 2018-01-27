@@ -145,7 +145,7 @@ class LocalMusicFragment : BaseFragment(), Contants, MusicViewTypeContain {
         mMusicAdapter = MusicAdapter(activity, musicInfoList, isABC)
         mMusicAdapter!!.setOnItemClickListener { position ->
             val time = System.currentTimeMillis()
-            MusicManager.getInstance().prepareAndPlay(position, mMusicAdapter!!.list as MutableList<AbstractMusic>?)
+            MusicManager.get().prepareAndPlay(position, mMusicAdapter!!.list as MutableList<AbstractMusic>?)
             Log.i(TAG, "time used:" + (System.currentTimeMillis() - time))
 
             Log.i(TAG, "clicked music:" + (mMusicAdapter!!.list[position] as AbstractMusic).title)

@@ -21,7 +21,7 @@ class PlayMusicActivity : BaseActivity() {
         }
     }
 
-    override fun isNeedStausView(): Boolean {
+    override fun isNeedStatusView(): Boolean {
         return false
     }
 

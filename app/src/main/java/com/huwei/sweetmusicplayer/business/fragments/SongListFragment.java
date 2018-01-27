@@ -69,7 +69,7 @@ public class SongListFragment extends BaseScrollTabFragment  {
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MusicManager.getInstance().prepareAndPlay(position, Song.getAbstractMusicList(mSongList));
+                MusicManager.get().prepareAndPlay(position, Song.getAbstractMusicList(mSongList));
             }
         });
     }
