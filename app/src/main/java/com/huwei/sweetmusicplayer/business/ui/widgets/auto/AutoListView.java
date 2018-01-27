@@ -204,11 +204,6 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
         headerContentHeight = header.getMeasuredHeight();
         topPadding(-headerContentHeight);
 
-        //todo
-//        //默认设置header无分割线
-//        setHeaderDividersEnabled(false);
-//        setDividerHeight(0);
-
         this.addHeaderView(header);
         this.addFooterView(footer);
         super.setOnScrollListener(this);
@@ -222,8 +217,8 @@ public class AutoListView extends ListView implements OnScrollListener, IPullRef
 
                 if (mOnItemNoneClickListener != null) {
                     int pos = position - getHeaderViewsCount();
-                    if (pos > getChildCount() - getHeaderViewsCount() - getFooterViewsCount()) {
-                        pos = getChildCount() - getHeaderViewsCount() - getFooterViewsCount();
+                    if (pos > getAdapter().getCount() - getHeaderViewsCount() - getFooterViewsCount()) {
+                        pos = getAdapter().getCount() - getHeaderViewsCount() - getFooterViewsCount();
                     } else if (pos < 0) {
                         pos = 0;
                     }

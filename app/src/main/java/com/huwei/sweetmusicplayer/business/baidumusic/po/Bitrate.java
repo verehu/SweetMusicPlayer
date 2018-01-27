@@ -3,11 +3,13 @@ package com.huwei.sweetmusicplayer.business.baidumusic.po;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * @author jayce
  * @date 2015/08/24
  */
-public class Bitrate implements Parcelable {
+public class Bitrate implements Parcelable, Serializable {
     /**
      * json:
      "bitrate": {
