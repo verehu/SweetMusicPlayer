@@ -35,6 +35,9 @@ public class BaiduMusicUtil implements Url {
      */
     public static void querySug(String keyword, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("format", "json");
         params.add("method", SEARCH_CATALOGSUG);
         params.add("from", "android");
@@ -71,6 +74,9 @@ public class BaiduMusicUtil implements Url {
 
     public static void getAlbumInfo(String albumId, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("format", "json");
         params.add("method", GET_ALBUMINFO);
         params.add("album_id", albumId);
@@ -85,6 +91,9 @@ public class BaiduMusicUtil implements Url {
      */
     public static void queryLrc(String songid, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("format", "json");
         params.add("method", SONG_LRC);
         params.add("songid", songid);
@@ -99,6 +108,9 @@ public class BaiduMusicUtil implements Url {
      */
     public static void querySong(String songid, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("format", "json");
         params.add("method", SONG_PLAY);
         params.add("songid", songid);
@@ -114,6 +126,9 @@ public class BaiduMusicUtil implements Url {
     @Deprecated
     public static void getAlbumDetail(String albumId, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("albumId", albumId);
         params.add("type", "album");
         HttpUtil.get(BAIDU_MUSIC_ALBUM, params, httpHandler, true);
@@ -128,6 +143,9 @@ public class BaiduMusicUtil implements Url {
      */
     public static void getArtistInfo(String tinguid, String artistid, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("tinguid", tinguid);
         params.add("artistid", artistid);
         params.add("method", GET_ARTISTINFO);
@@ -143,6 +161,9 @@ public class BaiduMusicUtil implements Url {
      */
     public static void getArtistSongList(String ting_uid, String artist_id, int pageNo, HttpHandler httpHandler) {
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("tinguid", ting_uid);
         params.add("artistid", artist_id);
         params.add("offset", pageNo * PAGESIZE);
@@ -153,6 +174,9 @@ public class BaiduMusicUtil implements Url {
 
     public static void getAritistAlbumList(String ting_uid, String artist_id, int pageNo, HttpHandler httpHandler){
         HttpParams params = new HttpParams();
+
+        addCommonarams(params);
+
         params.add("tinguid", ting_uid);
         params.add("artistid", artist_id);
         params.add("offset", pageNo * PAGESIZE);
