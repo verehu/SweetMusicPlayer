@@ -17,7 +17,7 @@
         android:background="@color/black_08"
         android:orientation="vertical">
 
-        <com.huwei.sweetmusicplayer.business.ui.views.StatusBarView
+        <com.huwei.sweetmusicplayer.ui.views.StatusBarView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -75,13 +75,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.huwei.sweetmusicplayer.business.ui.views.RotateCircleImageView
+                <com.huwei.sweetmusicplayer.ui.views.RotateCircleImageView
                     android:id="@+id/rotateView"
                     android:layout_width="280dp"
                     android:layout_height="280dp"
                     android:layout_gravity="center"/>
 
-                <com.huwei.sweetmusicplayer.business.ui.widgets.LrcView
+                <com.huwei.sweetmusicplayer.ui.widgets.LrcView
                     android:id="@+id/playpage_lrcview"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"

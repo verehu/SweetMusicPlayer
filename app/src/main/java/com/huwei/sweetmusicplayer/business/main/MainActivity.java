@@ -16,7 +16,7 @@ import android.view.View;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.BottomPlayActivity;
 import com.huwei.sweetmusicplayer.business.SongScanActivity;
-import com.huwei.sweetmusicplayer.contants.Contants;
+import com.huwei.sweetmusicplayer.data.contants.Contants;
 
 public class MainActivity extends BottomPlayActivity implements MainContract.View, Contants, View.OnClickListener {
 

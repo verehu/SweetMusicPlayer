@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.google.gson.Gson;
-import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
-import com.huwei.sweetmusicplayer.business.baidumusic.resp.ArtistSongListResp;
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Song;
+import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.ArtistSongListResp;
 import com.huwei.sweetmusicplayer.business.core.MusicManager;
-import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter;
-import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
+import com.huwei.sweetmusicplayer.ui.adapters.SongAdapter;
+import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 
@@ -19,8 +19,8 @@ import com.huwei.sweetmusicplayer.util.HttpHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_ARTIST_ID;
-import static com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_TING_UID;
+import static com.huwei.sweetmusicplayer.data.contants.IntentExtra.EXTRA_ARTIST_ID;
+import static com.huwei.sweetmusicplayer.data.contants.IntentExtra.EXTRA_TING_UID;
 
 /**
  * 在线歌曲列表

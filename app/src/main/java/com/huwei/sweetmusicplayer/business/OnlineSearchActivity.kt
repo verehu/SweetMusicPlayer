@@ -6,7 +6,6 @@ import android.os.Bundle
 
 import android.support.v4.app.Fragment
 import android.text.Html
-import android.text.Html.FROM_HTML_MODE_LEGACY
 import android.view.View
 import android.widget.Toast
 
@@ -14,11 +13,11 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
 
-import com.huwei.sweetmusicplayer.business.baidumusic.po.QueryResult
-import com.huwei.sweetmusicplayer.business.baidumusic.resp.QueryMergeResp
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.QueryResult
+import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.QueryMergeResp
 import com.huwei.sweetmusicplayer.business.fragments.*
-import com.huwei.sweetmusicplayer.business.ui.adapters.PagerAdapter
-import com.huwei.sweetmusicplayer.contants.IntentExtra
+import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter
+import com.huwei.sweetmusicplayer.data.contants.IntentExtra
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil
 import com.huwei.sweetmusicplayer.util.HttpHandler
 import kotlinx.android.synthetic.main.activity_online_search.*

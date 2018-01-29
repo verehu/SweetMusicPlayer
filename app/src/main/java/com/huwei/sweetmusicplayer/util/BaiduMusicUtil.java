@@ -1,6 +1,6 @@
 package com.huwei.sweetmusicplayer.util;
 
-import com.huwei.sweetmusicplayer.contants.Url;
+import com.huwei.sweetmusicplayer.data.contants.Url;
 
 /**
  * 使用百度音乐API的工具类

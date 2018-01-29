@@ -53,7 +53,7 @@
         <activity android:name=".business.AlbumInfoActivity" />
         <activity android:name=".business.ArtistInfoActivity" />
         <activity android:name=".business.playmusic.PlayMusicActivity" />
-        <activity android:name=".business.LocalMusicActivity" />
+        <activity android:name=".business.main.localmusic.LocalMusicActivity" />
 
         <service
             android:name=".business.core.MusicControllerService"

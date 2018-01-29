@@ -2,7 +2,7 @@ package com.huwei.sweetmusicplayer.business.comparator;
 
 import java.util.Comparator;
 
-import com.huwei.sweetmusicplayer.business.models.LrcContent;
+import com.huwei.sweetmusicplayer.data.models.LrcContent;
 
 public class LrcComparator implements Comparator<LrcContent>{
 

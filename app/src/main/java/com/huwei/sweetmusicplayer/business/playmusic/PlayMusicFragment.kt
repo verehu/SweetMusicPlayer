@@ -22,20 +22,20 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import com.android.volley.VolleyError
 import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
-import com.huwei.sweetmusicplayer.business.baidumusic.po.Lrc
-import com.huwei.sweetmusicplayer.business.baidumusic.po.Song
-import com.huwei.sweetmusicplayer.business.baidumusic.po.SongSug
-import com.huwei.sweetmusicplayer.business.baidumusic.resp.MusicSearchSugResp
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Lrc
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Song
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.SongSug
+import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.MusicSearchSugResp
 import com.huwei.sweetmusicplayer.business.comparator.LrcComparator
-import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment
-import com.huwei.sweetmusicplayer.contants.Contants
-import com.huwei.sweetmusicplayer.contants.LrcStateContants
+import com.huwei.sweetmusicplayer.business.BaseFragment
+import com.huwei.sweetmusicplayer.data.contants.Contants
+import com.huwei.sweetmusicplayer.data.contants.LrcStateContants
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp
-import com.huwei.sweetmusicplayer.business.models.LrcContent
-import com.huwei.sweetmusicplayer.business.ui.adapters.QueueAdapter
-import com.huwei.sweetmusicplayer.business.ui.listeners.OnLrcSearchClickListener
+import com.huwei.sweetmusicplayer.data.models.LrcContent
+import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter
+import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil
 import com.huwei.sweetmusicplayer.util.HttpHandler
 import com.huwei.sweetmusicplayer.util.LrcUtil
@@ -364,7 +364,7 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
 
                     override fun onErrorResponse(error: VolleyError) {
                         super.onErrorResponse(error)
-                        playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
+                        playpage_lrcview?.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
                     }
                 })
             } else if (v === cancleBtn) {

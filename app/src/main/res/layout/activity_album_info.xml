@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.huwei.sweetmusicplayer.business.ui.widgets.auto.AutoListView
+    <com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView
         android:id="@+id/lv_albuminfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar
+    <com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar
         android:id="@+id/gtoolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp" />

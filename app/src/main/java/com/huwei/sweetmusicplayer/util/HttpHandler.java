@@ -9,8 +9,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.business.baidumusic.resp.BaseResp;
-import com.huwei.sweetmusicplayer.contants.Contants;
+import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.BaseResp;
+import com.huwei.sweetmusicplayer.data.contants.Contants;
 
 /**
  * @author jayce

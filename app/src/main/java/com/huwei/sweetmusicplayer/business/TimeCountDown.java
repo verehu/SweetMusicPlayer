@@ -3,7 +3,7 @@ package com.huwei.sweetmusicplayer.business;
 import android.os.Handler;
 import android.os.Process;
 
-import com.huwei.sweetmusicplayer.business.enums.TimeContants;
+import com.huwei.sweetmusicplayer.data.enums.TimeContants;
 import com.huwei.sweetmusicplayer.frameworks.Alarm;
 import com.huwei.sweetmusicplayer.frameworks.AlarmRegister;
 

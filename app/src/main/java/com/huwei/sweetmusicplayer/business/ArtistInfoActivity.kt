@@ -12,13 +12,13 @@ import android.view.View
 import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.SweetApplication
-import com.huwei.sweetmusicplayer.business.baidumusic.po.ArtistInfo
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.ArtistInfo
 import com.huwei.sweetmusicplayer.business.fragments.AlbumListFragment
 import com.huwei.sweetmusicplayer.business.fragments.BaseScrollTabFragment
 import com.huwei.sweetmusicplayer.business.fragments.SongListFragment
 import com.huwei.sweetmusicplayer.business.interfaces.IAdjustListView
 import com.huwei.sweetmusicplayer.business.interfaces.IListViewScroll
-import com.huwei.sweetmusicplayer.business.ui.adapters.PagerAdapter
+import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter
 import com.huwei.sweetmusicplayer.frameworks.BundleBuilder
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil
 import com.huwei.sweetmusicplayer.util.HttpHandler
@@ -26,8 +26,8 @@ import com.huwei.sweetmusicplayer.util.Utils
 
 import java.util.Arrays
 
-import com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_ARTIST_ID
-import com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_TING_UID
+import com.huwei.sweetmusicplayer.data.contants.IntentExtra.EXTRA_ARTIST_ID
+import com.huwei.sweetmusicplayer.data.contants.IntentExtra.EXTRA_TING_UID
 import kotlinx.android.synthetic.main.activity_artist_info.*
 import kotlinx.android.synthetic.main.layout_gradient_toolbar.*
 

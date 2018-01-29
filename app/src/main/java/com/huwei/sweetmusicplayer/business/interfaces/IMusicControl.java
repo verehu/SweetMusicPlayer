@@ -1,6 +1,6 @@
 package com.huwei.sweetmusicplayer.business.interfaces;
 
-import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
 
 import java.util.List;
 

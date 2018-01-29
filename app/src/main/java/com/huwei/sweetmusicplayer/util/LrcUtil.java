@@ -15,10 +15,10 @@ import java.util.List;
 import android.util.Log;
 
 import com.huwei.sweetmusicplayer.business.comparator.LrcComparator;
-import com.huwei.sweetmusicplayer.contants.LrcStateContants;
-import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.business.models.LrcContent;
-import com.huwei.sweetmusicplayer.business.models.MusicInfo;
+import com.huwei.sweetmusicplayer.data.contants.LrcStateContants;
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
+import com.huwei.sweetmusicplayer.data.models.LrcContent;
+import com.huwei.sweetmusicplayer.data.models.MusicInfo;
 
 
 /**

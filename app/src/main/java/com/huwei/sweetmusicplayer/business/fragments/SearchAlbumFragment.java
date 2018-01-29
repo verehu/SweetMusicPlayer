@@ -7,12 +7,12 @@ import android.widget.AdapterView;
 
 import com.huwei.sweetmusicplayer.business.AlbumInfoActivity;
 import com.huwei.sweetmusicplayer.business.OnlineSearchActivity;
-import com.huwei.sweetmusicplayer.business.baidumusic.group.Album_info;
-import com.huwei.sweetmusicplayer.business.baidumusic.po.Album;
-import com.huwei.sweetmusicplayer.business.baidumusic.po.QueryResult;
-import com.huwei.sweetmusicplayer.business.ui.adapters.AlbumAdapter;
-import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
-import com.huwei.sweetmusicplayer.contants.IntentExtra;
+import com.huwei.sweetmusicplayer.data.models.baidumusic.group.Album_info;
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.QueryResult;
+import com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter;
+import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
+import com.huwei.sweetmusicplayer.data.contants.IntentExtra;
 
 import java.util.ArrayList;
 import java.util.List;

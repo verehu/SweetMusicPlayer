@@ -14,14 +14,14 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
-import com.huwei.sweetmusicplayer.business.baidumusic.po.Song
-import com.huwei.sweetmusicplayer.business.baidumusic.resp.AlbumDetailResp
-import com.huwei.sweetmusicplayer.contants.IntentExtra
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Song
+import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.AlbumDetailResp
+import com.huwei.sweetmusicplayer.data.contants.IntentExtra
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
 
-import com.huwei.sweetmusicplayer.business.ui.adapters.SongAdapter
-import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase
+import com.huwei.sweetmusicplayer.ui.adapters.SongAdapter
+import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp
 
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil

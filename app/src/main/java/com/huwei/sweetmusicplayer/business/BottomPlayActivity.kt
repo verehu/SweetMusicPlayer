@@ -1,8 +1,9 @@
 package com.huwei.sweetmusicplayer.business
 
 import android.view.ViewGroup
-import com.huwei.sweetmusicplayer.contants.Contants
-import com.huwei.sweetmusicplayer.contants.Contants.NOW_PLAYMUSIC
+import com.huwei.sweetmusicplayer.data.contants.Contants
+import com.huwei.sweetmusicplayer.data.contants.Contants.NOW_PLAYMUSIC
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic
 
 /**
  *
@@ -10,7 +11,7 @@ import com.huwei.sweetmusicplayer.contants.Contants.NOW_PLAYMUSIC
  * @date 2017/06/04
  */
 abstract class BottomPlayActivity : BaseActivity() {
-    var bottomPlayBar: com.huwei.sweetmusicplayer.business.ui.views.BottomPlayBar? = null
+    var bottomPlayBar: com.huwei.sweetmusicplayer.ui.views.BottomPlayBar? = null
     var barContainerView: android.widget.FrameLayout? = null
     var isBarAdd: Boolean = false
     var isReceiverRegistered = false
@@ -39,7 +40,7 @@ abstract class BottomPlayActivity : BaseActivity() {
     override fun onPostCreate(savedInstanceState: android.os.Bundle?) {
         super.onPostCreate(savedInstanceState)
 
-        val music: com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic? = com.huwei.sweetmusicplayer.util.Environment.getRecentMusic()
+        val music: AbstractMusic? = com.huwei.sweetmusicplayer.util.Environment.getRecentMusic()
         addBottomPlayBar(music)
 
         if (!isReceiverRegistered && !isBarAdd) initRecievers()
@@ -60,9 +61,9 @@ abstract class BottomPlayActivity : BaseActivity() {
         isReceiverRegistered = true
     }
 
-    fun addBottomPlayBar(music: com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic?) {
+    fun addBottomPlayBar(music: AbstractMusic?) {
         if (!isBarAdd && music != null) {
-            bottomPlayBar = com.huwei.sweetmusicplayer.business.ui.views.BottomPlayBar(this)
+            bottomPlayBar = com.huwei.sweetmusicplayer.ui.views.BottomPlayBar(this)
             bottomPlayBar!!.updateBottomBar(music)
 
             val container: android.widget.FrameLayout? = findViewById(com.huwei.sweetmusicplayer.R.id.bottomPlayContainer) as android.widget.FrameLayout?

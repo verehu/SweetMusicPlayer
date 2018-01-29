@@ -1,7 +1,7 @@
 // IPlayingMusicService.aidl
 package com.huwei.sweetmusicplayer;
-import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
 // Declare any non-default types here with import statements
 
 interface IMusicControllerService {

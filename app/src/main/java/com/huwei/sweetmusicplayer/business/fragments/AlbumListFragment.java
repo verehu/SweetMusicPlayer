@@ -7,18 +7,18 @@ import android.widget.AdapterView;
 
 import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.business.AlbumInfoActivity;
-import com.huwei.sweetmusicplayer.business.baidumusic.po.Album;
-import com.huwei.sweetmusicplayer.business.baidumusic.resp.ArtistAlbumListResp;
-import com.huwei.sweetmusicplayer.business.ui.adapters.AlbumAdapter;
-import com.huwei.sweetmusicplayer.business.ui.widgets.auto.IPullRefershBase;
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Album;
+import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.ArtistAlbumListResp;
+import com.huwei.sweetmusicplayer.ui.adapters.AlbumAdapter;
+import com.huwei.sweetmusicplayer.ui.widgets.auto.IPullRefershBase;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_ARTIST_ID;
-import static com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_TING_UID;
+import static com.huwei.sweetmusicplayer.data.contants.IntentExtra.EXTRA_ARTIST_ID;
+import static com.huwei.sweetmusicplayer.data.contants.IntentExtra.EXTRA_TING_UID;
 
 /**
  * @author jerry

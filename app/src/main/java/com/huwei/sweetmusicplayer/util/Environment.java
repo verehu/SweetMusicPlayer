@@ -3,8 +3,8 @@ package com.huwei.sweetmusicplayer.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.contants.Contants;
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
+import com.huwei.sweetmusicplayer.data.contants.Contants;
 
 /**
  * @author Jayce

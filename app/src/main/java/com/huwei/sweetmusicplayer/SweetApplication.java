@@ -11,15 +11,15 @@ import com.android.volley.RequestQueue;
 
 
 import com.android.volley.toolbox.Volley;
-import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.contants.Contants;
-import com.huwei.sweetmusicplayer.dao.DaoMaster;
-import com.huwei.sweetmusicplayer.dao.DaoSession;
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
+import com.huwei.sweetmusicplayer.data.contants.Contants;
+import com.huwei.sweetmusicplayer.data.dao.DaoMaster;
+import com.huwei.sweetmusicplayer.data.dao.DaoSession;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.WindowTool;
 
-import static com.huwei.sweetmusicplayer.contants.Contants.NOW_PLAYMUSIC;
-import static com.huwei.sweetmusicplayer.contants.Contants.PLAYBAR_UPDATE;
+import static com.huwei.sweetmusicplayer.data.contants.Contants.NOW_PLAYMUSIC;
+import static com.huwei.sweetmusicplayer.data.contants.Contants.PLAYBAR_UPDATE;
 
 /**
  * Created by huwei on 15-1-20.

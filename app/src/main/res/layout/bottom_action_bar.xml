@@ -37,7 +37,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.huwei.sweetmusicplayer.business.ui.widgets.SquareWrapWImageView
+            <com.huwei.sweetmusicplayer.ui.widgets.SquareWrapWImageView
                 android:id="@+id/img_album"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -74,7 +74,7 @@
 
             </LinearLayout>
 
-            <com.huwei.sweetmusicplayer.business.ui.widgets.CheckableImageView
+            <com.huwei.sweetmusicplayer.ui.widgets.CheckableImageView
                 android:id="@+id/btn_play"
                 style="@style/CommonButton"
                 android:layout_width="48dp"

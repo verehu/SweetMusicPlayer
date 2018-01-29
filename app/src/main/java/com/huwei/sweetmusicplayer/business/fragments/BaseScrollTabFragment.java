@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 
-import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment;
+import com.huwei.sweetmusicplayer.business.BaseFragment;
 import com.huwei.sweetmusicplayer.business.interfaces.IAdjustListView;
 import com.huwei.sweetmusicplayer.business.interfaces.IListViewScroll;
-import com.huwei.sweetmusicplayer.business.ui.widgets.auto.AutoListView;
+import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 
 /**
  * @author jerry

@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment;
-import com.huwei.sweetmusicplayer.business.ui.widgets.auto.AutoListView;
+import com.huwei.sweetmusicplayer.business.BaseFragment;
+import com.huwei.sweetmusicplayer.ui.widgets.auto.AutoListView;
 
 /**
  * 一个AutoListView视图的Fragment
