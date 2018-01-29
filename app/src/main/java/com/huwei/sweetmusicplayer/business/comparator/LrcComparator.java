@@ -3,8 +3,6 @@ package com.huwei.sweetmusicplayer.business.comparator;
 import java.util.Comparator;
 
 import com.huwei.sweetmusicplayer.business.models.LrcContent;
- 
- 
 
 public class LrcComparator implements Comparator<LrcContent>{
 

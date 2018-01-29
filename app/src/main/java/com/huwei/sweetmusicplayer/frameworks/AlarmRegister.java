@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.huwei.sweetmusicplayer.AppContextHolder;
 
-import static com.huwei.sweetmusicplayer.business.core.MusicControlerService.PLAYPRO_EXIT;
+import static com.huwei.sweetmusicplayer.business.core.MusicControllerService.PLAYPRO_EXIT;
 
 /**
  * Created by huwei on 18-1-10.

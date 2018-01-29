@@ -1,6 +1,7 @@
 package com.huwei.sweetmusicplayer.business.ui.adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +62,8 @@ public class ArtistAdapter extends BaseAdapter {
 
         Glide.with(mContext).load(artist.avatar_middle).into(viewHolder.iv_artist);
 
-        viewHolder.tv_artist.setText(artist.author);
-        viewHolder.tv_count_song.setText(artist.album_num + "首");
+        viewHolder.tv_artist.setText(Html.fromHtml(artist.author));
+        viewHolder.tv_count_song.setText(artist.song_num + "首");
 
         return convertView;
     }

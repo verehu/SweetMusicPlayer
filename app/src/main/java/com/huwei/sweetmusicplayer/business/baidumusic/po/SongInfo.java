@@ -3,12 +3,14 @@ package com.huwei.sweetmusicplayer.business.baidumusic.po;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * 具体的歌曲信息
  * @author jayce
  * @date 2015/08/24
  */
-public class SongInfo implements Parcelable {
+public class SongInfo implements Parcelable, Serializable{
     /**
      * json:
      "songinfo": {
@@ -424,8 +426,7 @@ public class SongInfo implements Parcelable {
         dest.writeInt(special_type);
     }
 
-    public static final Parcelable.Creator<SongInfo> CREATOR = new Parcelable.Creator<SongInfo>()
-    {
+    public static final Parcelable.Creator<SongInfo> CREATOR = new Parcelable.Creator<SongInfo>() {
         public SongInfo createFromParcel(Parcel in)
         {
             return new SongInfo(in);

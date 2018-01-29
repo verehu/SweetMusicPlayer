@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.business.main.MainActivity;
 import com.huwei.sweetmusicplayer.business.ui.widgets.GradientTextProgress;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.FileUtil;
@@ -44,7 +45,7 @@ public class SplashActivity extends BaseActivity {
     };
 
     @Override
-    protected boolean isNeedStausView() {
+    protected boolean isNeedStatusView() {
         return false;
     }
 

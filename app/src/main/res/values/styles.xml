@@ -20,14 +20,6 @@
     </style>
 
     <!--溢出菜单样式 -->
-    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
-        <item name="overlapAnchor">false</item>
-        <item name="android:dropDownWidth">wrap_content</item>
-        <item name="android:paddingRight">5dp</item>
-        <item name="android:popupBackground">?attr/colorPrimary</item>
-        <item name="android:dropDownVerticalOffset">4dip</item>
-        <item name="android:dropDownHorizontalOffset">0dip</item>
-    </style>
 
     <style name="SweetTheme.TextView" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textColor">@color/primary_text</item>
@@ -64,9 +56,6 @@
     </style>
 
     <!-- song_listitem -->
-    <style name="song_title">
-        <item name="android:layout_margin">8dp</item>
-    </style>
 
     <style name="catalog">
         <!--<item name="android:padding">8dp</item>-->
@@ -79,13 +68,6 @@
     </style>
 
     <!--menu-->
-    <style name="item_select_sleeptime">
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingBottom">10dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:clickable">true</item>
-    </style>
 
     <style name="lrc_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>

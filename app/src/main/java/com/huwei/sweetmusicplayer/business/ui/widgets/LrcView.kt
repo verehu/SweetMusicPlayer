@@ -1,7 +1,7 @@
 package com.huwei.sweetmusicplayer.business.ui.widgets
 
 import com.huwei.sweetmusicplayer.R
-import com.huwei.sweetmusicplayer.contains.ILrcStateContain
+import com.huwei.sweetmusicplayer.contants.LrcStateContants
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.business.models.LrcContent
 import com.huwei.sweetmusicplayer.business.ui.listeners.OnLrcSearchClickListener
@@ -20,19 +20,19 @@ import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.MeasureSpec.EXACTLY
 import android.view.ViewTreeObserver.OnScrollChangedListener
 import android.widget.ScrollView
-import android.view.View.OnTouchListener
 import android.widget.FrameLayout
 import com.huwei.sweetmusicplayer.business.BaseView
 import com.huwei.sweetmusicplayer.business.playmusic.PlayMusicContract
 
 class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: AttributeSet? = null, defStyle: Int = 0)
-    : ScrollView(mContext, attrs, defStyle), OnScrollChangedListener, OnTouchListener, ILrcStateContain,
+    : ScrollView(mContext, attrs, defStyle), OnScrollChangedListener, View.OnTouchListener, LrcStateContants,
         GestureDetector.OnGestureListener, BaseView<PlayMusicContract.Presenter> {
 
-    private var viewWidth: Float = 0.toFloat()    //歌词视图宽度
-    private var viewHeight: Float = 0.toFloat()    //歌词视图高度
+    private var viewWidth: Int = 0    //歌词视图宽度
+    private var viewHeight: Int = 0   //歌词视图高度
     private var currentPaint: Paint? = null        //当前画笔对象
     private var notCurrentPaint: Paint? = null        //非当前画笔对象
     private var tipsPaint: Paint? = null  //提示信息画笔
@@ -54,8 +54,6 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
     private var canDrawLine = false
     private var pos = -1 //手指按下后歌词要到的位置
     private var linePaint: Paint? = null
-
-    private val canTouchLrc = true        //是否可以触摸并调整歌词
 
     private var count = 0  //绘制加载点的次数
 
@@ -103,7 +101,6 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
         tipsPaint!!.color = Color.WHITE
         linePaint!!.color = Color.RED
 
-
         //设置字体
         currentPaint!!.textSize = lightTextSize
         currentPaint!!.typeface = Typeface.SERIF
@@ -126,15 +123,15 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
         this.onLrcSearchClickListener = onLrcSearchClickListener
     }
 
-    public fun notifyLrcListsChanged(lrcLists: List<LrcContent>) {
+    fun notifyLrcListsChanged(lrcLists: List<LrcContent>) {
         this.lrcLists = lrcLists
         //设置index=-1
         index = -1
 
+        
         val params1 = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         lrcTextView = LrcTextView(this.context)
         lrcTextView!!.layoutParams = params1
-
 
         this.removeAllViews()
         this.addView(lrcTextView)
@@ -146,13 +143,6 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
             this.scrollTo(0, (index * textHeight).toInt())
         }
         this.index = index
-    }
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-
-        this.viewWidth = w.toFloat()
-        this.viewHeight = h.toFloat()
     }
 
     fun getIndexByLrcTime(currentTime: Int): Int {
@@ -186,14 +176,14 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
 
             if (canvas == null) return
 
-            var centerY = viewHeight.toInt() / 2
+            var centerY = viewHeight / 2
 
             when (lrcState) {
-                ILrcStateContain.READ_LOC_FAIL -> {
+                LrcStateContants.READ_LOC_FAIL -> {
                     tipsPaint!!.isUnderlineText = true
                     canvas.drawText("暂无歌词,点击开始搜索", (viewWidth / 2).toFloat(), centerY.toFloat(), tipsPaint!!)
                 }
-                ILrcStateContain.QUERY_ONLINE -> {
+                LrcStateContants.QUERY_ONLINE -> {
                     tipsPaint!!.isUnderlineText = false
                     var drawContentStr = "在线匹配歌词"
                     for (i in 0 until count) {
@@ -207,7 +197,7 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
 
                     handler.postDelayed(Runnable { invalidate() }, 500)
                 }
-                ILrcStateContain.QUERY_ONLINE_OK, ILrcStateContain.READ_LOC_OK -> {
+                LrcStateContants.QUERY_ONLINE_OK, LrcStateContants.READ_LOC_OK -> {
                     //绘制歌词
                     var i = 0
                     while (i < lrcLists!!.size) {
@@ -222,11 +212,11 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
                         centerY += textHeight.toInt()
                     }
                 }
-                ILrcStateContain.QUERY_ONLINE_FAIL -> {
+                LrcStateContants.QUERY_ONLINE_FAIL -> {
                     tipsPaint!!.isUnderlineText = true
                     canvas.drawText("搜索失败，请重试", (viewWidth / 2).toFloat(), centerY.toFloat(), tipsPaint!!)
                 }
-                ILrcStateContain.QUERY_ONLINE_NULL -> {
+                LrcStateContants.QUERY_ONLINE_NULL -> {
                     tipsPaint!!.isUnderlineText = false
                     canvas.drawText("网络无匹配歌词", (viewWidth / 2).toFloat(), centerY.toFloat(), tipsPaint!!)
                 }
@@ -234,59 +224,54 @@ class LrcView @JvmOverloads constructor(private val mContext: Context, attrs: At
         }
 
         override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-            var heightMeasureSpec = heightMeasureSpec
-            // TODO Auto-generated method stub
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-            heightMeasureSpec = (height + textHeight * (lrcLists!!.size - 1)).toInt()
+            viewWidth = measuredWidth
+            viewHeight = MeasureSpec.getSize(heightMeasureSpec)
+            LogUtils.i(TAG, "viewHeight:" + viewHeight)
+
+            val heightMeasureSpec = MeasureSpec.makeMeasureSpec(
+                    (viewHeight + textHeight * lrcLists!!.size).toInt(), EXACTLY)
             setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
         }
     }
 
     override fun onDraw(canvas: Canvas) {
-        // TODO Auto-generated method stub
         super.onDraw(canvas)
 
         if (canDrawLine) {
-            canvas.drawLine(0f, scrollY + viewHeight / 2, viewWidth, (scrollY + viewHeight / 2), linePaint!!)
-            canvas.drawText(TimeUtil.mill2mmss(lrcLists!![pos].lrcTime.toLong()), 42f, scrollY + viewHeight / 2 - 2, linePaint!!)
+            canvas.drawLine(0f, (scrollY + viewHeight / 2).toFloat(), viewWidth.toFloat(), ((scrollY + viewHeight / 2).toFloat()), linePaint!!)
+            canvas.drawText(TimeUtil.mill2mmss(lrcLists!![pos].lrcTime.toLong()), 42f, (scrollY + viewHeight / 2 - 2).toFloat(), linePaint!!)
         }
     }
 
 
     override fun invalidate() {
-        // TODO Auto-generated method stub
         super.invalidate()
 
         lrcTextView!!.invalidate()
     }
 
     override fun onScrollChanged() {
-        // TODO Auto-generated method stub
-
-
     }
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
-        // TODO Auto-generated method stub
-
-        //界面不能被触摸
-        if (!canTouchLrc) return true
-
         when (lrcState) {
-            ILrcStateContain.READ_LOC_FAIL, ILrcStateContain.QUERY_ONLINE_FAIL -> return handleTouchLrcFail(event.action)
-            ILrcStateContain.READ_LOC_OK, ILrcStateContain.QUERY_ONLINE_OK -> return handleTouchLrcOK(event)
+            LrcStateContants.READ_LOC_FAIL, LrcStateContants.QUERY_ONLINE_FAIL -> return handleTouchLrcFail(event.action)
+            LrcStateContants.READ_LOC_OK, LrcStateContants.QUERY_ONLINE_OK -> return handleTouchLrcOK(event)
         }
 
         return false
     }
+
+
 
     internal fun handleTouchLrcOK(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_UP && mIsScrolling) {
             mIsScrolling = false
 
             if (pos != -1)
-                MusicManager.getInstance().seekTo(lrcLists!![pos].lrcTime)
+                MusicManager.get().seekTo(lrcLists!![pos].lrcTime)
             canDrawLine = false
             pos = -1
             this.invalidate()

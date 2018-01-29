@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".business.MainActivity"
+            android:name=".business.main.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
 
@@ -56,7 +56,7 @@
         <activity android:name=".business.LocalMusicActivity" />
 
         <service
-            android:name=".business.core.MusicControlerService"
+            android:name=".business.core.MusicControllerService"
             android:process=":remote">
             <intent-filter>
                 <action android:name="com.huwei.sweetmusicplayer.services.MusicControlerService" />

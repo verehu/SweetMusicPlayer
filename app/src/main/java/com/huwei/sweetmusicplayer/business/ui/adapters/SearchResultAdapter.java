@@ -114,7 +114,7 @@ public class SearchResultAdapter extends BaseAdapter {
                 viewHolder.tv_songname.setText(song.title);
                 viewHolder.tv_info.setText(song.author);
 
-                if(MusicManager.isIndexNowPLayng(data, position)){
+                if(MusicManager.isIndexNowPlaying(data, position)){
                     viewHolder.selected_view.setVisibility(View.VISIBLE);
                 }else{
                     viewHolder.selected_view.setVisibility(View.GONE);

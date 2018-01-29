@@ -4,13 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contants.Contants;
 
 /**
  * @author Jayce
  * @date 2015/6/10
  */
-public class Environment implements IContain {
+public class Environment implements Contants {
 
     public static final String ENV = "env";
 

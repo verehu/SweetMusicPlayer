@@ -16,7 +16,7 @@ import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Song
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.AlbumDetailResp
-import com.huwei.sweetmusicplayer.contains.IntentExtra
+import com.huwei.sweetmusicplayer.contants.IntentExtra
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
 
@@ -52,7 +52,7 @@ open class AlbumInfoActivity : BottomPlayActivity() {
     private var mMusicAdapter: SongAdapter? = null
     private val songList = ArrayList<Song>()
 
-    override fun isNeedStausView(): Boolean {
+    override fun isNeedStatusView(): Boolean {
         return false
     }
 
@@ -102,7 +102,7 @@ open class AlbumInfoActivity : BottomPlayActivity() {
 
         mMusicAdapter = SongAdapter(mContext, songList)
         lv_albuminfo.setAdapter(mMusicAdapter)
-        lv_albuminfo.setOnItemNoneClickListener(AdapterView.OnItemClickListener { parent, view, position, id -> MusicManager.getInstance().prepareAndPlay(position, Song.getAbstractMusicList(songList)) })
+        lv_albuminfo.setOnItemNoneClickListener(AdapterView.OnItemClickListener { parent, view, position, id -> MusicManager.get().prepareAndPlay(position, Song.getAbstractMusicList(songList)) })
     }
 
     /**

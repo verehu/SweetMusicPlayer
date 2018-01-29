@@ -1,6 +1,6 @@
 package com.huwei.sweetmusicplayer.business
 
-import com.huwei.sweetmusicplayer.contains.IntentExtra.*
+import com.huwei.sweetmusicplayer.contants.IntentExtra.*
 
 /**
  *

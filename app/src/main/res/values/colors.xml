@@ -9,18 +9,12 @@
     <color name="black01">#000001</color>
     <color name="black_08">#14000000</color>
     <color name="black_87">#DE000000</color>
-    <color name="black_54">#8A000000</color>
     <color name="lightgray">#D3D3D3</color>
-    <color name="lavender">#E6E6FA</color>
     <!--洋李色 -->
-    <color name="gainsboro">#DCDCDC</color>
 
     <!-- selected tab text -->
-    <color name="selected_tabtext">#bb000000</color>
     <!-- non selected tab text -->
-    <color name="unselected_tabtext">#77000000</color>
 
-    <color name="fa">#fafafa</color>
     <color name="f1f3f4">#F1F3F4</color>
     <color name="_2c">#2c2c2c</color>
 
@@ -31,11 +25,8 @@
     <color name="accent">#E040FB</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
-    <color name="icons">#FFFFFF</color>
-    <color name="divider">#B6B6B6</color>
 
     <color name="secondary_text_white">@color/abc_secondary_text_material_dark</color>
     <color name="primary_text_white">#fdfdfe</color>
 
-    <color name="indicator">#ff5722</color>
 </resources>

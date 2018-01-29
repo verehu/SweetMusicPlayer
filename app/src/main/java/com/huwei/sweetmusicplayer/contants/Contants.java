@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.contains;
+package com.huwei.sweetmusicplayer.contants;
 
 /**
  * 常用常量接口定义
@@ -6,7 +6,7 @@ package com.huwei.sweetmusicplayer.contains;
  * @author Jayce
  * @date 2015/6/10
  */
-public interface IContain {
+public interface Contants {
     //常见常量定义
     public static final int FILTER_SIZE = 1 * 1024 * 1024;// 1MB
     public static final int FILTER_DURATION = 1 * 60 * 1000;// 1分钟

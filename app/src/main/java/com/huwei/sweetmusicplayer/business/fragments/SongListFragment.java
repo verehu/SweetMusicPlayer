@@ -19,8 +19,8 @@ import com.huwei.sweetmusicplayer.util.HttpHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.huwei.sweetmusicplayer.contains.IntentExtra.EXTRA_ARTIST_ID;
-import static com.huwei.sweetmusicplayer.contains.IntentExtra.EXTRA_TING_UID;
+import static com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_ARTIST_ID;
+import static com.huwei.sweetmusicplayer.contants.IntentExtra.EXTRA_TING_UID;
 
 /**
  * 在线歌曲列表
@@ -69,7 +69,7 @@ public class SongListFragment extends BaseScrollTabFragment  {
         mAutoListView.setOnItemNoneClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MusicManager.getInstance().prepareAndPlay(position, Song.getAbstractMusicList(mSongList));
+                MusicManager.get().prepareAndPlay(position, Song.getAbstractMusicList(mSongList));
             }
         });
     }

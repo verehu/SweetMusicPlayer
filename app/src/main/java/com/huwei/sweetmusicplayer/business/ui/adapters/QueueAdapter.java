@@ -69,7 +69,7 @@ public class QueueAdapter extends BaseAdapter {
         viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.tv_title.setText(list.get(position).getTitle());
 
-        if (MusicManager.getInstance().getNowPlayingIndex() == position) {
+        if (MusicManager.get().getNowPlayingIndex() == position) {
             viewHolder.tv_title.setTextColor(primary);
         } else {
             viewHolder.tv_title.setTextColor(white);

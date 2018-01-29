@@ -24,23 +24,21 @@ import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
-import com.huwei.sweetmusicplayer.IMusicControlerService;
-import com.huwei.sweetmusicplayer.business.MainActivity;
+import com.huwei.sweetmusicplayer.IMusicControllerService;
+import com.huwei.sweetmusicplayer.business.main.MainActivity;
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.business.baidumusic.resp.SongPlayResp;
-import com.huwei.sweetmusicplayer.contains.IContain;
+import com.huwei.sweetmusicplayer.contants.Contants;
 import com.huwei.sweetmusicplayer.business.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
 import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.HttpHandler;
-import com.huwei.sweetmusicplayer.util.concurrent.locks.TLock;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -53,9 +51,9 @@ import static com.huwei.sweetmusicplayer.util.ext.ExtKt.toast;
 /**
  * 后台控制播放音乐的service
  */
-public class MusicControlerService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpdateListener, IContain {
+public class MusicControllerService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnBufferingUpdateListener, Contants {
 
-    private String TAG = "MusicControlerService";
+    private String TAG = "MusicControllerService";
     private int musicIndex = -1;
     private List<AbstractMusic> musicList;
 
@@ -161,7 +159,7 @@ public class MusicControlerService extends Service implements MediaPlayer.OnComp
         }
     };
 
-    private IMusicControlerService.Stub mBinder = new IMusicControlerService.Stub() {
+    private IMusicControllerService.Stub mBinder = new IMusicControllerService.Stub() {
         @Override
         public int getPid() throws RemoteException {
             return Process.myPid();

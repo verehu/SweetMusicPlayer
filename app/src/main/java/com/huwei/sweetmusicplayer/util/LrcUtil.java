@@ -15,7 +15,7 @@ import java.util.List;
 import android.util.Log;
 
 import com.huwei.sweetmusicplayer.business.comparator.LrcComparator;
-import com.huwei.sweetmusicplayer.contains.ILrcStateContain;
+import com.huwei.sweetmusicplayer.contants.LrcStateContants;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.models.LrcContent;
 import com.huwei.sweetmusicplayer.business.models.MusicInfo;
@@ -24,7 +24,7 @@ import com.huwei.sweetmusicplayer.business.models.MusicInfo;
 /**
  * 歌词工具类
  */
-public class LrcUtil implements ILrcStateContain {
+public class LrcUtil implements LrcStateContants {
     public static final String lrcRootPath = android.os.Environment
             .getExternalStorageDirectory().toString()
             + "/SweetMusicPlayer/Lyrics/";

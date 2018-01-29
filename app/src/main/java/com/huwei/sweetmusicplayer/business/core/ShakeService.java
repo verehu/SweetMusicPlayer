@@ -41,7 +41,7 @@ public class ShakeService extends Service {
 		vibrator.vibrate(500);
 		
 		
-//		MusicManager.getInstance().random_a_song();
+//		MusicManager.get().random_a_song();
 	}
 	
 	@Override

@@ -4,7 +4,7 @@ import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 
 // Declare any non-default types here with import statements
 
-interface IMusicControlerService {
+interface IMusicControllerService {
 
     
     int getPid();

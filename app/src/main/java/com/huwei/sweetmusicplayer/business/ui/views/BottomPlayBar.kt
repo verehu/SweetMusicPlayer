@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import com.huwei.sweetmusicplayer.business.playmusic.PlayMusicActivity
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic
-import com.huwei.sweetmusicplayer.contains.IContain
+import com.huwei.sweetmusicplayer.contants.Contants
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp
@@ -30,16 +30,16 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
             val action = intent.action
 
             when (action) {
-                IContain.PLAY_STATUS_UPDATE -> {
+                Contants.PLAY_STATUS_UPDATE -> {
                     val isPlaying = intent.getBooleanExtra("isPlaying", false)
                     btn_play.isChecked = isPlaying
                 }
-                IContain.PLAYBAR_UPDATE -> {
+                Contants.PLAYBAR_UPDATE -> {
 
-                    val music = MusicManager.getInstance().nowPlayingSong
-                    updateBottomBar(music, MusicManager.getInstance().isPlaying)
+                    val music = MusicManager.get().nowPlayingSong
+                    updateBottomBar(music, MusicManager.get().isPlaying)
                 }
-                IContain.CURRENT_UPDATE -> pro_music.progress = intent.getIntExtra("currentTime", 0)
+                Contants.CURRENT_UPDATE -> pro_music.progress = intent.getIntExtra("currentTime", 0)
             }
         }
 
@@ -55,17 +55,17 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
     fun initListener() {
         btn_next.setOnClickListener {
             // TODO Auto-generated method stub
-            MusicManager.getInstance().nextSong()
+            MusicManager.get().nextSong()
         }
 
         btn_play.setOnCheckedChangeListener { buttonView, isChecked ->
             // TODO Auto-generated method stub
-            if (isChecked != MusicManager.getInstance().isPlaying) {
+            if (isChecked != MusicManager.get().isPlaying) {
                 //播放意图
                 if (isChecked) {
-                    MusicManager.getInstance().play()
+                    MusicManager.get().play()
                 } else {
-                    MusicManager.getInstance().pause()
+                    MusicManager.get().pause()
                 }
             }
         }
@@ -77,9 +77,9 @@ class BottomPlayBar(context: Context?) : LinearLayout(context) {
 
     fun initRecievers() {
         val intentFilter = IntentFilter()
-        intentFilter.addAction(IContain.PLAYBAR_UPDATE)
-        intentFilter.addAction(IContain.CURRENT_UPDATE)
-        intentFilter.addAction(IContain.PLAY_STATUS_UPDATE)
+        intentFilter.addAction(Contants.PLAYBAR_UPDATE)
+        intentFilter.addAction(Contants.CURRENT_UPDATE)
+        intentFilter.addAction(Contants.PLAY_STATUS_UPDATE)
         context.registerReceiver(receiver, intentFilter)
     }
 

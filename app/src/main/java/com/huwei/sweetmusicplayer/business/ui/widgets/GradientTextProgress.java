@@ -7,6 +7,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Shader;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ import android.widget.TextView;
  * @author jayce
  * @date 2015/1/23
  */
-public class GradientTextProgress extends TextView {
+public class GradientTextProgress extends AppCompatTextView {
     private String mText;
     private int maxValue;
     private int curValue;

@@ -1,5 +1,6 @@
 package com.huwei.sweetmusicplayer.business.core;
 
+import com.huwei.sweetmusicplayer.IMusicControllerService;
 import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.interfaces.IMusicControl;
 
@@ -12,7 +13,7 @@ import java.util.concurrent.ExecutorService;
  */
 public class MusicManager implements IMusicControl {
     private static MusicManager instance = new MusicManager();
-    IMusicControl t;    //被代理的对象
+    private IMusicControllerService service;    //被代理的对象
     private List<AbstractMusic> list;
     private ExecutorService mPlayThreadPool;
 
@@ -22,8 +23,12 @@ public class MusicManager implements IMusicControl {
         mPlayThreadPool = ThreadFactroy.get().getMusicOperateExecutor();
     }
 
-    public static MusicManager getInstance() {
+    public static MusicManager get() {
         return instance;
+    }
+
+    public void bindService(IMusicControllerService service) {
+        this.service = service;
     }
 
     @Override
@@ -31,7 +36,11 @@ public class MusicManager implements IMusicControl {
         mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                t.play();
+                try {
+                    service.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -42,7 +51,11 @@ public class MusicManager implements IMusicControl {
         mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                t.pause();
+                try {
+                    service.pause();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -52,7 +65,11 @@ public class MusicManager implements IMusicControl {
         mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                t.stop();
+                try {
+                    service.stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -62,7 +79,11 @@ public class MusicManager implements IMusicControl {
         mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                t.seekTo(mesc);
+                try {
+                    service.seekTo(mesc);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -82,13 +103,16 @@ public class MusicManager implements IMusicControl {
             @Override
             public void run() {
                 preparePlayingListInner(index, list);
-                //t.play();
             }
         });
     }
 
     public void preparePlayingListInner(final int index, final List<AbstractMusic> list) {
-        t.preparePlayingList(index, list);
+        try {
+            service.preparePlayingList(index, list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (MusicManager.this.list != list) {
             updateMusicQueue();
             MusicManager.this.list = list;
@@ -97,22 +121,42 @@ public class MusicManager implements IMusicControl {
 
     @Override
     public boolean isPlaying() {
-        return t.isPlaying();
+        try {
+            return service.isPlaying();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
     public int getNowPlayingIndex() {
-        return t.getNowPlayingIndex();
+        try {
+            return service.getPlayingSongIndex();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     @Override
     public AbstractMusic getNowPlayingSong() {
-        return t.getNowPlayingSong();
+        try {
+            return service.getNowPlayingSong();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public boolean isForeground() {
-        return t.isForeground();
+        try {
+            return service.isForeground();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
@@ -120,7 +164,11 @@ public class MusicManager implements IMusicControl {
         mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                t.nextSong();
+                try {
+                    service.nextSong();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -130,7 +178,11 @@ public class MusicManager implements IMusicControl {
         mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                t.preSong();
+                try {
+                    service.preSong();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -140,19 +192,18 @@ public class MusicManager implements IMusicControl {
         mPlayThreadPool.execute(new Runnable() {
             @Override
             public void run() {
-                t.randomSong();
+                try {
+                    service.randomSong();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
     @Override
     public void updateMusicQueue() {
-        t.updateMusicQueue();
-    }
-
-    //绑定被代理的对象
-    public void bindProxyedObject(IMusicControl t) {
-        this.t = t;
+        //service.updateMusicQueue();
     }
 
     public List<AbstractMusic> getPlayingList() {
@@ -167,7 +218,7 @@ public class MusicManager implements IMusicControl {
      * @return
      */
     public static boolean isListEqual(List list2) {
-        List list1 = getInstance().getPlayingList();
+        List list1 = get().getPlayingList();
         if (list1 == null || list2 == null) {
             return false;
         } else {
@@ -182,7 +233,7 @@ public class MusicManager implements IMusicControl {
      * @param pos
      * @return
      */
-    public static boolean isIndexNowPLayng(List list, int pos) {
-        return isListEqual(list) && getInstance().getNowPlayingIndex() == pos;
+    public static boolean isIndexNowPlaying(List list, int pos) {
+        return isListEqual(list) && get().getNowPlayingIndex() == pos;
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import com.huwei.sweetmusicplayer.util.LogUtils;
  * @author jerry
  * @date 2016/03/18
  */
-public class DrawableTextView extends TextView {
+public class DrawableTextView extends AppCompatTextView {
 
     public static final String TAG = "DrawableTextView";
 
