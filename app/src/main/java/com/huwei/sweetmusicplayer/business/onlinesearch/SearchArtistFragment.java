@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.business.fragments;
+package com.huwei.sweetmusicplayer.business.onlinesearch;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.huwei.sweetmusicplayer.business.ArtistInfoActivity;
-import com.huwei.sweetmusicplayer.business.OnlineSearchActivity;
+import com.huwei.sweetmusicplayer.business.AutoListFragment;
 import com.huwei.sweetmusicplayer.data.models.baidumusic.group.Artist_info;
 import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Artist;
 import com.huwei.sweetmusicplayer.data.models.baidumusic.po.QueryResult;

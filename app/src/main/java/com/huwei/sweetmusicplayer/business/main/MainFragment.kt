@@ -12,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.huwei.sweetmusicplayer.R
-import com.huwei.sweetmusicplayer.business.OnlineSearchActivity
+import com.huwei.sweetmusicplayer.business.onlinesearch.OnlineSearchActivity
 import com.huwei.sweetmusicplayer.business.main.localalbum.LocalAlbumFragment
 import com.huwei.sweetmusicplayer.business.main.localartist.LocalArtistFragment
 import com.huwei.sweetmusicplayer.business.main.localmusic.LocalMusicFragment

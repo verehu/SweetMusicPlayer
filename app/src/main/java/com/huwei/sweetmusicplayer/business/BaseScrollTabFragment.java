@@ -1,4 +1,4 @@
-package com.huwei.sweetmusicplayer.business.fragments;
+package com.huwei.sweetmusicplayer.business;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

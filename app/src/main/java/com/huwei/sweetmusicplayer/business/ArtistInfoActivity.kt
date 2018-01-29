@@ -13,9 +13,8 @@ import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.SweetApplication
 import com.huwei.sweetmusicplayer.data.models.baidumusic.po.ArtistInfo
-import com.huwei.sweetmusicplayer.business.fragments.AlbumListFragment
-import com.huwei.sweetmusicplayer.business.fragments.BaseScrollTabFragment
-import com.huwei.sweetmusicplayer.business.fragments.SongListFragment
+import com.huwei.sweetmusicplayer.business.onlinesearch.AlbumListFragment
+import com.huwei.sweetmusicplayer.business.onlinesearch.SongListFragment
 import com.huwei.sweetmusicplayer.business.interfaces.IAdjustListView
 import com.huwei.sweetmusicplayer.business.interfaces.IListViewScroll
 import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter
