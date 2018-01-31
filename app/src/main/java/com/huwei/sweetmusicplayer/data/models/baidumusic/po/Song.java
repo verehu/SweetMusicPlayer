@@ -4,9 +4,9 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.text.TextUtils;
 
+import com.huwei.sweetmusicplayer.data.api.baidu.BaiduMusicService;
 import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.interfaces.IQueryReuslt;
-import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +98,8 @@ public class Song extends AbstractMusic implements IQueryReuslt {
 
     @Override
     public Uri getDataSoure() {
-        String url = bitrate != null ? bitrate.getFile_link() : BaiduMusicUtil.getDownloadUrlBySongId(song_id);
+        String url = bitrate != null ? bitrate.getFile_link() :
+                BaiduMusicService.Companion.getDownloadUrlBySongId(song_id);
         return Uri.parse(url);
     }
 

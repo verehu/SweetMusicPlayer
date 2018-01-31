@@ -13,14 +13,11 @@ public class BaseResp {
     public int error_code;
     public int errorCode;
 
-
     public int getError_code() {
         return error_code!=0?error_code:errorCode;
     }
 
-
     public boolean isValid(){
         return error_code==0||error_code== ERROR_CODE_OK;
     }
-
 }

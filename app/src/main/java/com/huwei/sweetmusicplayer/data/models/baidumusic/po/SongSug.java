@@ -4,9 +4,9 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.huwei.sweetmusicplayer.data.api.baidu.BaiduMusicService;
 import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.interfaces.IQueryReuslt;
-import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 
 /**
  * 百度音乐API返回的Song的SUG （搜索歌曲建议）
@@ -127,7 +127,8 @@ public class SongSug extends AbstractMusic implements IQueryReuslt {
 
     @Override
     public Uri getDataSoure() {
-        String url = bitrate != null ? bitrate.getFile_link() : BaiduMusicUtil.getDownloadUrlBySongId(songid);
+        String url = bitrate != null ? bitrate.getFile_link() :
+                BaiduMusicService.Companion.getDownloadUrlBySongId(songid);
         return Uri.parse(url);
     }
 

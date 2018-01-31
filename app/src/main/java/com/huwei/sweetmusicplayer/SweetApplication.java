@@ -7,10 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.volley.RequestQueue;
-
-
-import com.android.volley.toolbox.Volley;
 import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
 import com.huwei.sweetmusicplayer.data.contants.Contants;
 import com.huwei.sweetmusicplayer.data.dao.DaoMaster;
@@ -27,14 +23,10 @@ import static com.huwei.sweetmusicplayer.data.contants.Contants.PLAYBAR_UPDATE;
 public class SweetApplication extends Application {
 
     private static DaoSession daoSession;
-    private static RequestQueue mQueue;
 
     public static int mScreenWidth;
     public static int mScreenHeight;
     public static SweetApplication CONTEXT;
-
-    /** set the value to decide weather to print debug log , default true in develop*/
-    public static final boolean DEBUG = true ;
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
 
@@ -84,13 +76,6 @@ public class SweetApplication extends Application {
             daoSession = daoMaster.newSession();
         }
         return daoSession;
-    }
-
-    public static RequestQueue getQueue() {
-        if(mQueue == null){
-            mQueue = Volley.newRequestQueue(CONTEXT);
-        }
-        return mQueue;
     }
 
     public static Context get(){

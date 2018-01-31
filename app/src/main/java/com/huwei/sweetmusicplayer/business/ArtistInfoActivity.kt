@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.View
 
-import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.SweetApplication
 import com.huwei.sweetmusicplayer.data.models.baidumusic.po.ArtistInfo
@@ -17,16 +16,19 @@ import com.huwei.sweetmusicplayer.business.onlinesearch.AlbumListFragment
 import com.huwei.sweetmusicplayer.business.onlinesearch.SongListFragment
 import com.huwei.sweetmusicplayer.business.interfaces.IAdjustListView
 import com.huwei.sweetmusicplayer.business.interfaces.IListViewScroll
+import com.huwei.sweetmusicplayer.data.api.RetrofitFactory
+import com.huwei.sweetmusicplayer.data.api.SimpleObserver
+import com.huwei.sweetmusicplayer.data.api.baidu.BaiduMusicService
 import com.huwei.sweetmusicplayer.ui.adapters.PagerAdapter
 import com.huwei.sweetmusicplayer.frameworks.BundleBuilder
-import com.huwei.sweetmusicplayer.util.BaiduMusicUtil
-import com.huwei.sweetmusicplayer.util.HttpHandler
 import com.huwei.sweetmusicplayer.util.Utils
 
 import java.util.Arrays
 
 import com.huwei.sweetmusicplayer.data.contants.IntentExtra.EXTRA_ARTIST_ID
 import com.huwei.sweetmusicplayer.data.contants.IntentExtra.EXTRA_TING_UID
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_artist_info.*
 import kotlinx.android.synthetic.main.layout_gradient_toolbar.*
 
@@ -38,8 +40,8 @@ import kotlinx.android.synthetic.main.layout_gradient_toolbar.*
  */
 class ArtistInfoActivity : BottomPlayActivity(), IListViewScroll {
 
-    private var ting_uid: String? = null
-    private var artist_id: String? = null
+    private var ting_uid: String = ""
+    private var artist_id: String = ""
 
     private var mSongListFragment: BaseScrollTabFragment? = null
     private var mAlbumListFragment: BaseScrollTabFragment? = null
@@ -102,7 +104,7 @@ class ArtistInfoActivity : BottomPlayActivity(), IListViewScroll {
             }
         }
         viewpager!!.adapter = mPagerAdapter
-        viewpager.addOnPageChangeListener(object  : ViewPager.OnPageChangeListener {
+        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -137,24 +139,27 @@ class ArtistInfoActivity : BottomPlayActivity(), IListViewScroll {
 
 
     internal fun getArtistInfo() {
-        BaiduMusicUtil.getArtistInfo(ting_uid, artist_id, object : HttpHandler() {
-            override fun onSuccess(response: String) {
-                val artistInfo = Gson().fromJson(response, ArtistInfo::class.java)
-                view_artist_info!!.bind(artistInfo!!, gtoolbar)
-                val mTabSong = tabLayout!!.getTabAt(0)
-                if (mTabSong != null) {
-                    mTabSong.text = "歌曲(" + artistInfo.songs_total + ")"
-                }
-                val mTabAlbum = tabLayout!!.getTabAt(1)
-                if (mTabAlbum != null) {
-                    mTabAlbum.text = "专辑(" + artistInfo.albums_total + ")"
-                }
+        RetrofitFactory.create(BaiduMusicService::class.java)
+                .getArtistInfo(ting_uid, artist_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SimpleObserver<ArtistInfo>() {
+                    override fun onSuccess(resp: ArtistInfo) {
+                        view_artist_info!!.bind(resp!!, gtoolbar)
+                        val mTabSong = tabLayout!!.getTabAt(0)
+                        if (mTabSong != null) {
+                            mTabSong.text = "歌曲(" + resp.songs_total + ")"
+                        }
+                        val mTabAlbum = tabLayout!!.getTabAt(1)
+                        if (mTabAlbum != null) {
+                            mTabAlbum.text = "专辑(" + resp.albums_total + ")"
+                        }
 
-                if (artistInfo != null) {
-                    gtoolbar!!.setGradientTitle(artistInfo.name)
-                }
-            }
-        })
+                        if (resp != null) {
+                            gtoolbar!!.setGradientTitle(resp.name)
+                        }
+                    }
+                })
     }
 
     override fun scrollY(scrollY: Int) {

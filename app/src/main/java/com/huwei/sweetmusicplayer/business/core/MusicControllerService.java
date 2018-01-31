@@ -30,21 +30,25 @@ import com.google.gson.Gson;
 import com.huwei.sweetmusicplayer.IMusicControllerService;
 import com.huwei.sweetmusicplayer.business.main.MainActivity;
 import com.huwei.sweetmusicplayer.R;
+import com.huwei.sweetmusicplayer.data.api.RetrofitFactory;
+import com.huwei.sweetmusicplayer.data.api.SimpleObserver;
+import com.huwei.sweetmusicplayer.data.api.baidu.BaiduMusicService;
 import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
 import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Song;
 import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.SongPlayResp;
 import com.huwei.sweetmusicplayer.data.contants.Contants;
 import com.huwei.sweetmusicplayer.business.recievers.BringToFrontReceiver;
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp;
-import com.huwei.sweetmusicplayer.util.BaiduMusicUtil;
 import com.huwei.sweetmusicplayer.util.Environment;
-import com.huwei.sweetmusicplayer.util.HttpHandler;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.huwei.sweetmusicplayer.util.ext.ExtKt.toast;
 
@@ -371,27 +375,28 @@ public class MusicControllerService extends Service implements MediaPlayer.OnCom
             if (!song.hasGetDetailInfo()) {
 
                 //同步请求到歌曲信息
-                BaiduMusicUtil.querySong(song.song_id, new HttpHandler() {
-                    @Override
-                    public void onSuccess(String response) {
-                        SongPlayResp resp = new Gson().fromJson(response, SongPlayResp.class);
-                        if (resp != null) {
-                            song.bitrate = resp.bitrate;
-                            song.songinfo = resp.songinfo;
+                RetrofitFactory.Companion.create(BaiduMusicService.class)
+                        .querySong(song.song_id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SimpleObserver<SongPlayResp>() {
+                            @Override
+                            public void onSuccess(SongPlayResp resp) {
+                                song.bitrate = resp.bitrate;
+                                song.songinfo = resp.songinfo;
 
-                            Log.i(TAG, "song hasGetDetailInfo:" + song);
+                                Log.i(TAG, "song hasGetDetailInfo:" + song);
 
-                            updatePlayBar(true, song);
+                                updatePlayBar(true, song);
 
-                            Message msg = Message.obtain();
-                            msg.what = MSG_PLAY;
-                            msg.obj = song;
-                            handler.sendMessage(msg);
+                                Message msg = Message.obtain();
+                                msg.what = MSG_PLAY;
+                                msg.obj = song;
+                                handler.sendMessage(msg);
 
-                            updateArtistView(song);
-                        }
-                    }
-                });
+                                updateArtistView(song);
+                            }
+                        });
             } else {
                 playMusic(music);
             }

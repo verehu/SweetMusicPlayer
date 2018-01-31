@@ -1,11 +1,15 @@
 package com.huwei.sweetmusicplayer.business.onlinesearch
 
 import android.content.Context
-import com.google.gson.Gson
+
 import com.huwei.sweetmusicplayer.business.ViewHoldPresenter
+import com.huwei.sweetmusicplayer.data.api.RetrofitFactory
+import com.huwei.sweetmusicplayer.data.api.SimpleObserver
+import com.huwei.sweetmusicplayer.data.api.baidu.BaiduMusicService
 import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.QueryMergeResp
-import com.huwei.sweetmusicplayer.util.BaiduMusicUtil
-import com.huwei.sweetmusicplayer.util.HttpHandler
+
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by huwei on 18-1-29.
@@ -13,22 +17,19 @@ import com.huwei.sweetmusicplayer.util.HttpHandler
 class OnlineSearchPresenter(context: Context, view: OnlineSearchContract.View) :
         ViewHoldPresenter<OnlineSearchContract.View>(context, view), OnlineSearchContract.Presenter {
 
-
     override fun doQuery(query: String, pageNo: Int, pageSize: Int,
                          onGetQueryData: OnlineSearchActivity.OnGetQueryData?) {
-
-        BaiduMusicUtil.queryMerge(query, pageNo, pageSize, object : HttpHandler(mContext) {
-            override fun onSuccess(response: String) {
-
-                val sug = Gson().fromJson(response, QueryMergeResp::class.java)
-                val result = sug.result
-
-                if (onGetQueryData == null) {
-                    mView.showResultPage(result)
-                } else {
-                    onGetQueryData.onGetData(result)
-                }
-            }
-        })
+        RetrofitFactory.create(BaiduMusicService::class.java).
+                queryMerge(query, pageNo, pageSize).
+                subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).
+                subscribe(object : SimpleObserver<QueryMergeResp>() {
+                    override fun onSuccess(resp: QueryMergeResp) {
+                        if (onGetQueryData == null) {
+                            mView.showResultPage(resp.result)
+                        } else {
+                            onGetQueryData.onGetData(resp.result)
+                        }
+                    }
+                })
     }
 }
