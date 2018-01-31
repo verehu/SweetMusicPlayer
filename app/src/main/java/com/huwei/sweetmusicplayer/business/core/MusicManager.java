@@ -1,7 +1,7 @@
 package com.huwei.sweetmusicplayer.business.core;
 
 import com.huwei.sweetmusicplayer.IMusicControllerService;
-import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
 import com.huwei.sweetmusicplayer.business.interfaces.IMusicControl;
 
 

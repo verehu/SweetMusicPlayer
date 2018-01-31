@@ -1,6 +1,6 @@
 package com.huwei.sweetmusicplayer.business.interfaces;
 
-import com.huwei.sweetmusicplayer.business.models.MusicInfo;
+import com.huwei.sweetmusicplayer.data.models.MusicInfo;
 
 /**
  * @author jerry

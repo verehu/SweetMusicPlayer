@@ -20,7 +20,7 @@
         android:layout_margin="8dp"
         android:src="@drawable/sweet"/>
 
-    <com.huwei.sweetmusicplayer.business.ui.widgets.GradientTextProgress
+    <com.huwei.sweetmusicplayer.ui.widgets.GradientTextProgress
         android:id="@+id/gtp_appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 

@@ -3,14 +3,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.huwei.sweetmusicplayer.business.ui.views.StatusBarView
+    <com.huwei.sweetmusicplayer.ui.views.StatusBarView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/status_color" />
 
     <fragment
         android:id="@+id/main"
-        android:name="com.huwei.sweetmusicplayer.business.fragments.MainFragment"
+        android:name="com.huwei.sweetmusicplayer.business.main.MainFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>

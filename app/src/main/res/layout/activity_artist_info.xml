@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.huwei.sweetmusicplayer.business.ui.views.ArtistInfoView
+        <com.huwei.sweetmusicplayer.ui.views.ArtistInfoView
             android:id="@+id/view_artist_info"
             android:layout_width="match_parent"
             android:layout_height="196dp" />
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.huwei.sweetmusicplayer.business.ui.widgets.GradientToolbar
+        <com.huwei.sweetmusicplayer.ui.widgets.GradientToolbar
             android:id="@+id/gtoolbar"
             android:layout_width="match_parent"
             android:layout_height="80dp" />

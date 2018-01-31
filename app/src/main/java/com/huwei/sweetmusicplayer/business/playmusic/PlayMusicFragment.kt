@@ -19,27 +19,28 @@ import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 
-import com.android.volley.VolleyError
-import com.google.gson.Gson
 import com.huwei.sweetmusicplayer.R
-import com.huwei.sweetmusicplayer.business.baidumusic.po.Lrc
-import com.huwei.sweetmusicplayer.business.baidumusic.po.Song
-import com.huwei.sweetmusicplayer.business.baidumusic.po.SongSug
-import com.huwei.sweetmusicplayer.business.baidumusic.resp.MusicSearchSugResp
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Lrc
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.Song
+import com.huwei.sweetmusicplayer.data.models.baidumusic.po.SongSug
+import com.huwei.sweetmusicplayer.data.models.baidumusic.resp.MusicSearchSugResp
 import com.huwei.sweetmusicplayer.business.comparator.LrcComparator
-import com.huwei.sweetmusicplayer.business.fragments.base.BaseFragment
-import com.huwei.sweetmusicplayer.contants.Contants
-import com.huwei.sweetmusicplayer.contants.LrcStateContants
+import com.huwei.sweetmusicplayer.business.BaseFragment
+import com.huwei.sweetmusicplayer.data.contants.Contants
+import com.huwei.sweetmusicplayer.data.contants.LrcStateContants
 import com.huwei.sweetmusicplayer.business.core.MusicManager
+import com.huwei.sweetmusicplayer.data.api.RetrofitFactory
+import com.huwei.sweetmusicplayer.data.api.SimpleObserver
+import com.huwei.sweetmusicplayer.data.api.baidu.BaiduMusicService
 import com.huwei.sweetmusicplayer.frameworks.image.BlurBitmapTransformation
 import com.huwei.sweetmusicplayer.frameworks.image.GlideApp
-import com.huwei.sweetmusicplayer.business.models.LrcContent
-import com.huwei.sweetmusicplayer.business.ui.adapters.QueueAdapter
-import com.huwei.sweetmusicplayer.business.ui.listeners.OnLrcSearchClickListener
-import com.huwei.sweetmusicplayer.util.BaiduMusicUtil
-import com.huwei.sweetmusicplayer.util.HttpHandler
+import com.huwei.sweetmusicplayer.data.models.LrcContent
+import com.huwei.sweetmusicplayer.ui.adapters.QueueAdapter
+import com.huwei.sweetmusicplayer.ui.listeners.OnLrcSearchClickListener
 import com.huwei.sweetmusicplayer.util.LrcUtil
 import com.huwei.sweetmusicplayer.util.TimeUtil
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_playing.*
 
 import java.util.Collections
@@ -341,32 +342,34 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
             if (v === okBtn) {
                 dialog.dismiss()
 
-                //搜索歌曲
-                BaiduMusicUtil.querySug(musicEt.text.toString().split("\\(".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] + " " + artistEt.text.toString(), object : HttpHandler(activity) {
-                    override fun onStart() {
-                        super.onStart()
-                        playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE)
-                    }
+                RetrofitFactory.create(BaiduMusicService::class.java).
+                        querySug(musicEt.text.toString().
+                                split("\\(".toRegex()).dropLastWhile {
+                            it.isEmpty()
+                        }.toTypedArray()[0] + " " + artistEt.text.toString())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(object : SimpleObserver<MusicSearchSugResp>() {
+                            override fun onStart() {
+                                playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE)
+                            }
 
-                    override fun onSuccess(response: String) {
-                        Log.i(HttpHandler.TAG, "SUG JSON:" + response)
+                            override fun onSuccess(resp: MusicSearchSugResp) {
+                                if (!resp.isValid) {
+                                    playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
+                                    return
+                                }
 
-                        val sug = Gson().fromJson(response, MusicSearchSugResp::class.java)
+                                val songList = resp.song
+                                findLrc(songList, 0)
+                            }
 
-                        if (!sug.isValid) {
-                            playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
-                            return
-                        }
+                            override fun onFailure(e: Throwable, isNetworkError: Boolean) {
+                                super.onFailure(e, isNetworkError)
 
-                        val songList = sug.song
-                        findLrc(songList, 0)
-                    }
-
-                    override fun onErrorResponse(error: VolleyError) {
-                        super.onErrorResponse(error)
-                        playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
-                    }
-                })
+                                playpage_lrcview?.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
+                            }
+                        })
             } else if (v === cancleBtn) {
                 dialog.dismiss()
             }
@@ -377,72 +380,83 @@ class PlayMusicFragment : BaseFragment(), Contants, OnLrcSearchClickListener, Lr
 
 
     private fun findLrc(songList: List<SongSug>?, index: Int) {
-        if (songList == null || songList.size == 0) {
+        if (songList == null || songList.isEmpty()) {
             playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
             return
         }
         val song = songList[index]
         val songid = song.songid
-        BaiduMusicUtil.queryLrc(songid, object : HttpHandler(activity) {
-            override fun onSuccess(response: String) {
-                val lrc = Gson().fromJson(response, Lrc::class.java)
 
-                if (!lrc.isValid) {
-                    playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
-                    return
-                }
+        RetrofitFactory.create(BaiduMusicService::class.java)
+                .queryLrc(songid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SimpleObserver<Lrc>() {
+                    override fun onSuccess(lrc: Lrc) {
 
-                val lrcLists = LrcUtil.parseLrcStr(lrc.lrcContent)
-                // 按时间排序
-                Collections.sort(lrcLists, LrcComparator())
-                playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
-                playpage_lrcview!!.setLrcState(if (lrcLists.size == 0) LrcStateContants.QUERY_ONLINE_NULL else LrcStateContants.QUERY_ONLINE_OK)
+                        if (!lrc.isValid) {
+                            playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
+                            return
+                        }
 
-                if (lrcLists.size != 0) {
-                    LrcUtil.writeLrcToLoc(song.title, song.artist, lrc.lrcContent)
-                }
-            }
+                        val lrcLists = LrcUtil.parseLrcStr(lrc.lrcContent)
+                        // 按时间排序
+                        Collections.sort(lrcLists, LrcComparator())
+                        playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
+                        playpage_lrcview!!.setLrcState(
+                                if (lrcLists.size == 0) LrcStateContants.QUERY_ONLINE_NULL
+                                else LrcStateContants.QUERY_ONLINE_OK)
 
-            override fun onErrorResponse(error: VolleyError) {
-                super.onErrorResponse(error)
+                        if (lrcLists.size != 0) {
+                            LrcUtil.writeLrcToLoc(song.title, song.artist, lrc.lrcContent)
+                        }
+                    }
 
-                if (index + 1 < songList.size) {
-                    findLrc(songList, index + 1)
-                } else {
-                    playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
-                }
-            }
-        })
+                    override fun onFailure(e: Throwable, isNetworkError: Boolean) {
+                        super.onFailure(e, isNetworkError)
+
+                        if (index + 1 < songList.size) {
+                            findLrc(songList, index + 1)
+                        } else {
+                            playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
+                        }
+                    }
+                })
     }
 
     //加载网络歌曲歌词
     private fun loadLrcBySongId(song: Song?) {
         if (song != null) {
-            BaiduMusicUtil.queryLrc(song.song_id, object : HttpHandler(activity) {
-                override fun onSuccess(response: String) {
-                    val lrc = Gson().fromJson(response, Lrc::class.java)
+            RetrofitFactory.create(BaiduMusicService::class.java)
+                    .queryLrc(song.song_id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : SimpleObserver<Lrc>() {
+                        override fun onSuccess(lrc: Lrc) {
+                            if (!lrc.isValid) {
+                                playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
+                                return
+                            }
 
-                    if (!lrc.isValid) {
-                        playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_NULL)
-                        return
-                    }
+                            val lrcLists = LrcUtil.parseLrcStr(lrc.lrcContent)
+                            // 按时间排序
+                            Collections.sort(lrcLists, LrcComparator())
+                            playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
+                            playpage_lrcview!!.setLrcState(
+                                    if (lrcLists.size == 0) LrcStateContants.QUERY_ONLINE_NULL
+                                    else LrcStateContants.QUERY_ONLINE_OK)
 
-                    val lrcLists = LrcUtil.parseLrcStr(lrc.lrcContent)
-                    // 按时间排序
-                    Collections.sort(lrcLists, LrcComparator())
-                    playpage_lrcview!!.notifyLrcListsChanged(lrcLists)
-                    playpage_lrcview!!.setLrcState(if (lrcLists.size == 0) LrcStateContants.QUERY_ONLINE_NULL else LrcStateContants.QUERY_ONLINE_OK)
+                            if (lrcLists.size != 0) {
+                                LrcUtil.writeLrcToLoc(song.getTitle(), song.artist, lrc.lrcContent)
+                            }
+                        }
 
-                    if (lrcLists.size != 0) {
-                        LrcUtil.writeLrcToLoc(song.getTitle(), song.artist, lrc.lrcContent)
-                    }
-                }
+                        override fun onFailure(e: Throwable, isNetworkError: Boolean) {
+                            super.onFailure(e, isNetworkError)
 
-                override fun onErrorResponse(error: VolleyError) {
-                    super.onErrorResponse(error)
-                    playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
-                }
-            })
+                            playpage_lrcview!!.setLrcState(LrcStateContants.QUERY_ONLINE_FAIL)
+                        }
+                    })
         }
     }
 }

@@ -9,7 +9,7 @@ import android.util.Log
 import com.huwei.sweetmusicplayer.IMusicControllerService
 import com.huwei.sweetmusicplayer.business.TimeCountDown
 import com.huwei.sweetmusicplayer.business.ViewHoldPresenter
-import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic
 import com.huwei.sweetmusicplayer.business.core.MusicControllerService
 import com.huwei.sweetmusicplayer.business.core.MusicManager
 import com.huwei.sweetmusicplayer.util.Environment

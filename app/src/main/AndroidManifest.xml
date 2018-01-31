@@ -41,7 +41,7 @@
         </activity>
         <activity android:name=".business.SongScanActivity" />
         <activity
-            android:name=".business.OnlineSearchActivity"
+            android:name=".business.onlinesearch.OnlineSearchActivity"
             android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -53,7 +53,7 @@
         <activity android:name=".business.AlbumInfoActivity" />
         <activity android:name=".business.ArtistInfoActivity" />
         <activity android:name=".business.playmusic.PlayMusicActivity" />
-        <activity android:name=".business.LocalMusicActivity" />
+        <activity android:name=".business.main.localmusic.LocalMusicActivity" />
 
         <service
             android:name=".business.core.MusicControllerService"

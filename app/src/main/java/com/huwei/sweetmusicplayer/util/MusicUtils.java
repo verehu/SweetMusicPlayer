@@ -17,16 +17,16 @@ import android.util.Log;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.SweetApplication;
-import com.huwei.sweetmusicplayer.business.abstracts.AbstractMusic;
-import com.huwei.sweetmusicplayer.contants.Contants;
-import com.huwei.sweetmusicplayer.dao.AlbumInfoDao;
-import com.huwei.sweetmusicplayer.dao.ArtistInfoDao;
-import com.huwei.sweetmusicplayer.dao.DaoSession;
-import com.huwei.sweetmusicplayer.dao.MusicInfoDao;
+import com.huwei.sweetmusicplayer.data.models.AbstractMusic;
+import com.huwei.sweetmusicplayer.data.contants.Contants;
+import com.huwei.sweetmusicplayer.data.dao.AlbumInfoDao;
+import com.huwei.sweetmusicplayer.data.dao.ArtistInfoDao;
+import com.huwei.sweetmusicplayer.data.dao.DaoSession;
+import com.huwei.sweetmusicplayer.data.dao.MusicInfoDao;
 import com.huwei.sweetmusicplayer.business.interfaces.OnScanListener;
-import com.huwei.sweetmusicplayer.business.models.AlbumInfo;
-import com.huwei.sweetmusicplayer.business.models.ArtistInfo;
-import com.huwei.sweetmusicplayer.business.models.MusicInfo;
+import com.huwei.sweetmusicplayer.data.models.AlbumInfo;
+import com.huwei.sweetmusicplayer.data.models.ArtistInfo;
+import com.huwei.sweetmusicplayer.data.models.MusicInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -312,9 +312,6 @@ public class MusicUtils implements Contants {
             Utils.safeClose(albumCursor);
         }
         Utils.safeClose(cursor);
-
-
-
         return artistInfoList;
     }
 

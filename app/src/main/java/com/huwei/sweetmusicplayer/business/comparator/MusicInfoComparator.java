@@ -1,6 +1,6 @@
 package com.huwei.sweetmusicplayer.business.comparator;
 
-import com.huwei.sweetmusicplayer.business.models.MusicInfo;
+import com.huwei.sweetmusicplayer.data.models.MusicInfo;
 
 import java.util.Comparator;
 

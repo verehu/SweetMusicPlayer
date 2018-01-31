@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.business.main.MainActivity;
-import com.huwei.sweetmusicplayer.business.ui.widgets.GradientTextProgress;
+import com.huwei.sweetmusicplayer.ui.widgets.GradientTextProgress;
 import com.huwei.sweetmusicplayer.util.Environment;
 import com.huwei.sweetmusicplayer.util.FileUtil;
 import com.huwei.sweetmusicplayer.util.LrcUtil;
