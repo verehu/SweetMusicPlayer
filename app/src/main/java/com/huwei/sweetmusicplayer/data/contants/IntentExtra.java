@@ -6,6 +6,7 @@ package com.huwei.sweetmusicplayer.data.contants;
  * @date 2015/09/16
  */
 public class IntentExtra {
+    public static final String EXTRA_SONG_ID = "EXTRA_SONG_ID";
     public static final String EXTRA_ARTIST_ID = "EXTRA_ARTIST_ID";
     public static final String EXTRA_ALBUM_ID ="EXTRA_ALBUM_ID";
     public static final String EXTRA_TING_UID = "EXTRA_TING_UID";

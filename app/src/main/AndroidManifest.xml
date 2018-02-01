@@ -4,10 +4,6 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="16" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -54,6 +50,7 @@
         <activity android:name=".business.ArtistInfoActivity" />
         <activity android:name=".business.playmusic.PlayMusicActivity" />
         <activity android:name=".business.main.localmusic.LocalMusicActivity" />
+        <activity android:name=".business.mv.PlayMvActivity" />
 
         <service
             android:name=".business.core.MusicControllerService"

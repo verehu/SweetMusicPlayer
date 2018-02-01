@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.huwei.sweetmusicplayer.R;
 import com.huwei.sweetmusicplayer.util.ImmersiveUtil;
+import com.hwangjr.rxbus.RxBus;
 
 /**
  * 项目中Activity基类，用于对activity的整体控制
@@ -37,6 +38,19 @@ public class BaseActivity extends AppCompatActivity {
         ImmersiveUtil.immersive(this);
 
         mContext = this;
+
+        if (isActivityNeedBus()) {
+            RxBus.get().register(this);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (isActivityNeedBus()) {
+            RxBus.get().unregister(this);
+        }
     }
 
     public int getStatusBarColor() {
@@ -98,6 +112,10 @@ public class BaseActivity extends AppCompatActivity {
 
     public void onBackClicked(View view) {
         onBackPressed();
+    }
+
+    protected boolean isActivityNeedBus() {
+        return false;
     }
 
     @Override
