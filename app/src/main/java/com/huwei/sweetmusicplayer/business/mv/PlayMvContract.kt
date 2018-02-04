@@ -13,6 +13,10 @@ interface PlayMvContract {
         fun loadMvInfo(songId : String)
 
         fun loadUrlAndPlay(url : String)
+
+        fun togglePlay()
+
+        fun seekTo(position : Long)
     }
 
     interface View : BaseView<Presenter> {

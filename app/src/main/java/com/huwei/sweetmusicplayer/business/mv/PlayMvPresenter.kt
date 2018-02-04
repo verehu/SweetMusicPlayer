@@ -45,4 +45,16 @@ class PlayMvPresenter(context: Context?, view: PlayMvContract.View?)
     override fun loadUrlAndPlay(url: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun togglePlay() {
+        if (VideoManager.isPlaying()) {
+            VideoManager.pause()
+        } else {
+            VideoManager.start()
+        }
+    }
+
+    override fun seekTo(position : Long) {
+        VideoManager.seekTo(position)
+    }
 }

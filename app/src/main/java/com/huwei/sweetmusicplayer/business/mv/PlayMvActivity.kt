@@ -6,14 +6,17 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.SurfaceView
 import android.view.View
+import android.widget.SeekBar
 import com.huwei.sweetmusicplayer.R
 import com.huwei.sweetmusicplayer.business.BaseActivity
+import com.huwei.sweetmusicplayer.data.Progress
 import com.huwei.sweetmusicplayer.data.contants.BusTag
 import com.huwei.sweetmusicplayer.data.contants.IntentExtra
 import com.huwei.sweetmusicplayer.data.models.baidumusic.VideoPreparedInfo
 import com.huwei.sweetmusicplayer.data.models.baidumusic.po.PlayMv
 import com.huwei.sweetmusicplayer.frameworks.VideoManager
 import com.huwei.sweetmusicplayer.util.TimeUtil
+import com.huwei.sweetmusicplayer.util.Utils
 import com.hwangjr.rxbus.annotation.Subscribe
 import com.hwangjr.rxbus.annotation.Tag
 import com.hwangjr.rxbus.thread.EventThread
@@ -22,7 +25,8 @@ import kotlinx.android.synthetic.main.activity_playmv.*
 /**
  * Created by huwei on 18-2-1.
  */
-class PlayMvActivity : BaseActivity(), PlayMvContract.View, View.OnClickListener {
+class PlayMvActivity : BaseActivity(), PlayMvContract.View, View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+
     companion object {
         fun getStartActIntent(context: Context, songId: String): Intent {
             val intent = Intent(context, PlayMvActivity::class.java)
@@ -50,8 +54,7 @@ class PlayMvActivity : BaseActivity(), PlayMvContract.View, View.OnClickListener
     override fun onClick(v: View) {
         when (v.id) {
             R.id.ivBack -> onBackPressed()
-            R.id.ivPlayToggle -> {
-            }
+            R.id.ivPlayToggle -> mPresenter!!.togglePlay()
             R.id.ivFullScreen -> {
             }
         }
@@ -77,6 +80,7 @@ class PlayMvActivity : BaseActivity(), PlayMvContract.View, View.OnClickListener
         ivBack.setOnClickListener(this)
         ivPlayToggle.setOnClickListener(this)
         ivFullScreen.setOnClickListener(this)
+        seekBarVideo.setOnSeekBarChangeListener(this)
     }
 
     override fun setPresenter(presenter: PlayMvContract.Presenter) {
@@ -105,8 +109,26 @@ class PlayMvActivity : BaseActivity(), PlayMvContract.View, View.OnClickListener
             thread = EventThread.MAIN_THREAD,
             tags = arrayOf(Tag(BusTag.VideoPlay.PROGRESS_CHANGED))
     )
-    fun onVideoProgressChanged(progress: Int) {
+    fun onVideoProgressChanged(progress: Progress) {
         seekBarVideo.max = 100
-        seekBarVideo.setProgress(progress)
+        val progressInt = (100 * progress.currentPosition / progress.duration).toInt()
+        seekBarVideo.setProgress(progressInt)
+
+        tvCurrentTime.text = TimeUtil.mill2mmss(progress.currentPosition)
+    }
+
+    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+        if (fromUser) {
+            val nProgress = progress * VideoManager.getDuration() / 100
+            mPresenter!!.seekTo(nProgress)
+        }
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+    }
+
+
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {
     }
 }

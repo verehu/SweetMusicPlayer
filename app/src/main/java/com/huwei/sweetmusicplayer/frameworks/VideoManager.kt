@@ -1,6 +1,7 @@
 package com.huwei.sweetmusicplayer.frameworks
 
 import android.view.SurfaceView
+import com.huwei.sweetmusicplayer.data.Progress
 import com.huwei.sweetmusicplayer.data.contants.BusTag
 import com.huwei.sweetmusicplayer.data.models.baidumusic.VideoPreparedInfo
 import com.huwei.sweetmusicplayer.util.LogUtils
@@ -35,7 +36,7 @@ object VideoManager : IMediaPlayer.OnPreparedListener, IMediaPlayer.OnInfoListen
                             "   duration:" + mediaPlayer!!.duration)
 
                     RxBus.get().post(BusTag.VideoPlay.PROGRESS_CHANGED,
-                            100 * mediaPlayer!!.currentPosition / mediaPlayer!!.duration)
+                            Progress(mediaPlayer!!.currentPosition, mediaPlayer!!.duration))
                 }
     }
 
@@ -144,6 +145,10 @@ object VideoManager : IMediaPlayer.OnPreparedListener, IMediaPlayer.OnInfoListen
 
     fun seekTo(l: Long) {
         mediaPlayer!!.seekTo(l)
+    }
+
+    fun isPlaying() : Boolean{
+        return mediaPlayer!!.isPlaying
     }
 
     private fun notifyPlayStatusChange() {
