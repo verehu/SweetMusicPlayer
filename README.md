@@ -77,6 +77,6 @@
 - [GreenDAO](https://github.com/greenrobot/greenDAO)
 
 
-  [1]: http://on8vjlgub.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1_1.png
-  [2]: http://on8vjlgub.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1_2.png
-  [3]: http://on8vjlgub.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1_3.png
+  [1]: screenshots/1_1.png
+  [2]: screenshots/1_2.png
+  [3]: screenshots/1_3.png
