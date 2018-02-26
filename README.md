@@ -3,8 +3,8 @@
 [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-SweetMusicPlayer 是一款基于百度音乐API的在线音乐播放器。拥有播放本地、在线音乐以及mv等功能，采用 MVP + RxJava + Retrofit 架构的项目。
-更多请看[博客。](http://blog.csdn.net/column/details/sweetmusicplayer.html)
+**SweetMusicPlayer**是一款基于百度音乐API的在线音乐播放器。拥有播放本地、在线音乐以及mv等功能，采用 MVP + RxJava + Retrofit 架构的项目。
+更多请看[博客](http://blog.csdn.net/column/details/sweetmusicplayer.html)。
 
 ## Features  
 - 本地音乐按照歌曲，专辑，艺术家显示对应信息
@@ -21,13 +21,9 @@ SweetMusicPlayer 是一款基于百度音乐API的在线音乐播放器。拥有
 - 登录、收藏音乐
 
 ## Screenshots
-![][1]　
+![][1]
 ![][2]
-![][3]　
-![][4]
-![][5]　
-![][6]
-![][7]
+![][3]
 
 ## Changelog
 ```
@@ -71,10 +67,16 @@ SweetMusicPlayer 是一款基于百度音乐API的在线音乐播放器。拥有
 开始第一版的开发
 ```
 
-[1]: http://on8vjlgub.bkt.clouddn.com/sweetmusic1.png
-[2]: http://on8vjlgub.bkt.clouddn.com/sweetmusic2.png 
-[3]: http://on8vjlgub.bkt.clouddn.com/sweetmusic3.png
-[4]: http://on8vjlgub.bkt.clouddn.com/sweetmusic4.png 
-[5]: http://on8vjlgub.bkt.clouddn.com/sweetmusic5.png
-[6]: http://on8vjlgub.bkt.clouddn.com/sweetmusic6.png 
-[7]: http://on8vjlgub.bkt.clouddn.com/sweetmusic7.png
+## Libraries
+- [Glide](https://github.com/bumptech/glide)
+- [Retrofit](https://github.com/square/retrofit)
+- [RxJava](https://github.com/ReactiveX/RxJava)
+- [OkHttp](https://github.com/square/okhttp)
+- [ijkplayer](https://github.com/Bilibili/ijkplayer)
+- [Rxbus](https://github.com/AndroidKnife/RxBus)
+- [GreenDAO](https://github.com/greenrobot/greenDAO)
+
+
+  [1]: http://on8vjlgub.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1_1.png
+  [2]: http://on8vjlgub.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1_2.png
+  [3]: http://on8vjlgub.bkt.clouddn.com/%E5%B0%8F%E4%B9%A6%E5%8C%A0/1_3.png
