@@ -22,6 +22,7 @@ interface BaiduMusicService {
         const val GET_ARTISTALUBMLIST = "baidu.ting.artist.getAlbumList"   //获取歌手的专辑列表;
         const val GET_ALBUMINFO = "baidu.ting.album.getAlbumInfo"
         const val QUERY_MERGE = "baidu.ting.search.merge"
+        const val GET_PLAY_MV = "baidu.ting.mv.playMV"
 
         const val PAGESIZE = 20
 
@@ -58,14 +59,17 @@ interface BaiduMusicService {
     @GET(V1_TING + "?method=" + GET_ARTISTSONGLIST)
     fun getArtistSongList(@Query("tinguid") tinguid: String,
                           @Query("artistid") artistid: String,
-                          @Query("offset") offset : Int,
+                          @Query("offset") offset: Int,
                           @Query("limits") limits: Int = PAGESIZE)
             : Observable<ArtistSongListResp>
 
     @GET(V1_TING + "?method=" + GET_ARTISTALUBMLIST)
     fun getArtistAlbumList(@Query("tinguid") tinguid: String,
                            @Query("artistid") artistid: String,
-                           @Query("offset") offset : Int,
+                           @Query("offset") offset: Int,
                            @Query("limits") limits: Int = PAGESIZE)
             : Observable<ArtistAlbumListResp>
+
+    @GET(V1_TING + "?method=" + GET_PLAY_MV)
+    fun getPlayMv(@Query("song_id") songId: String): Observable<PlayMvResp>
 }

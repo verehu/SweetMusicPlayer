@@ -152,6 +152,14 @@ public class Song extends AbstractMusic implements IQueryReuslt {
         return null;
     }
 
+    public boolean hasMobileMv() {
+        return has_mv_mobile == 1;
+    }
+
+    public boolean hasMv() {
+        return has_mv == 1;
+    }
+
     @Override
     public int blurValueOfPlaying() {
         return 80;
