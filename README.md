@@ -3,7 +3,7 @@
 [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-**SweetMusicPlayer**是一款基于百度音乐API的在线音乐播放器。拥有播放本地、在线音乐以及mv等功能，采用 MVP + RxJava + Retrofit 架构的项目。
+**SweetMusicPlayer**是一款基于百度音乐API的在线音乐播放器。拥有播放本地、在线音乐以及mv等功能，采用 MVP + RxJava + Retrofit 架构的项目, 使用Java和Kotlin混合开发。
 更多请看[博客](http://blog.csdn.net/column/details/sweetmusicplayer.html)。
 
 ## Features  
