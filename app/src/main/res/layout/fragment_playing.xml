@@ -2,19 +2,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black01">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_playing_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:src="@color/black01"
         android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black_08"
         android:orientation="vertical">
 
         <com.huwei.sweetmusicplayer.ui.views.StatusBarView

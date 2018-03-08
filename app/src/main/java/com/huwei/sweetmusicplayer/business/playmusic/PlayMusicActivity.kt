@@ -25,6 +25,10 @@ class PlayMusicActivity : BaseActivity() {
         return false
     }
 
+    override fun isNeedWindowBGTransparent(): Boolean {
+        return true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playing)

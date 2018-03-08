@@ -42,6 +42,10 @@ public class BaseActivity extends AppCompatActivity {
         if (isActivityNeedBus()) {
             RxBus.get().register(this);
         }
+
+        if (isNeedWindowBGTransparent()) {
+            getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
     }
 
     @Override
@@ -51,6 +55,10 @@ public class BaseActivity extends AppCompatActivity {
         if (isActivityNeedBus()) {
             RxBus.get().unregister(this);
         }
+    }
+
+    protected boolean isNeedWindowBGTransparent() {
+        return false;
     }
 
     public int getStatusBarColor() {

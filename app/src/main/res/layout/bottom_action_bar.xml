@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:layout_gravity="bottom"
-    android:background="@color/_2c"
     android:clickable="false"
     android:descendantFocusability="afterDescendants"
     android:focusable="true"
@@ -29,6 +28,7 @@
             android:id="@+id/blurBgView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:src="@color/_2c"
             android:scaleType="centerCrop"/>
 
         <LinearLayout
